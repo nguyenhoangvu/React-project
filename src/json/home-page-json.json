@@ -1,0 +1,50 @@
+{
+  "TNDS_xe_may": [
+    {
+      "product_info": "Thông tin sản phẩm",
+      "product_info_content": "Bảo hiểm trách nhiệm dân sự bắt buộc của chủ xe mô tô – xe máy đối với bên thứ ba là loại hình bảo hiểm mà tất cả các cá nhân tổ chức (bao gồm người nước ngoài) sở hữu xe mô tô – xe máy tại Việt Nam đều phải tham gia theo quy định của nhà nước, nhằm đảm bảo quyền lợi cho bên thứ ba trong trường hợp nếu chẳng may chủ xe, lái xe gây thiệt hại cho họ.",
+      "insurance_type": "Các loại hình bảo hiểm mô tô, xe máy",
+      "insurance_type_content": [
+        {
+          "value": "Bảo hiểm bắt buộc trách nhiệm dân sự của chủ xe mô tô - xe máy"
+        },
+        {
+          "value": "Bảo hiểm Tai nạn người ngồi trên xe"
+        }
+      ],
+      "insurance_services": [
+        {
+          "value": "Khai báo tổn thất xe trực tuyến 24/24"
+        },
+        {
+          "value": "Tra cứu thông tin Giấy chứng nhận, tra cứu bồi thường, mạng lưới Gara bảo lãnh trực tuyến"
+        },
+        {
+          "value": "Tổng đài giải đáp thắc mắc qua đường dây nóng 19001566"
+        }
+      ]
+    },
+    {
+      "insurance_interest": "Quyền lợi bảo hiểm",
+      "civil_liability": [
+        {
+          "value": "Thiệt hại ngoài hợp đồng về thân thể, tính mạng và tài sản đối với bên thứ ba do xe mô tô – xe máy gây ra."
+        },
+        {
+          "value": "Thiệt hại về thân thể và tính mạng của hành khách theo hợp đồng vận chuyển hành khách do xe mô tô – xe máy gây ra."
+        }
+      ],
+      "other": [
+        {
+          "value": "Thiệt hại thân thể do tai nạn khi đang ở trên xe, lên xuống xe trong quá trình xe đang tham gia giao thông."
+        },
+        {
+          "value": "Thiệt hại về thân thể do tai nạn liên quan trực tiếp đến việc sử dụng chiếc xe đó."
+        }
+      ]
+    },
+    {
+      "footer": "Những thông tin trên chỉ mang tính chất giới thiệu chung. Để biết thêm thông tin chi tiết Quý khách vui lòng tham khảo thêm tại giao diện Mua hàng hoặc liên hệ Hotline 19001566 để được tư vấn."
+    }
+  ]
+}
