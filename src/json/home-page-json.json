@@ -12,7 +12,8 @@
           "value": "Bảo hiểm Tai nạn người ngồi trên xe"
         }
       ],
-      "insurance_services": [
+      "insurance_services": "Những dịch vụ tiện ích",
+      "insurance_services_content": [
         {
           "value": "Khai báo tổn thất xe trực tuyến 24/24"
         },
@@ -25,8 +26,9 @@
       ]
     },
     {
-      "insurance_interest": "Quyền lợi bảo hiểm",
-      "civil_liability": [
+      "product_info": "Quyền lợi bảo hiểm",
+      "insurance_type": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe mô tô - xe máy",
+      "insurance_type_content": [
         {
           "value": "Thiệt hại ngoài hợp đồng về thân thể, tính mạng và tài sản đối với bên thứ ba do xe mô tô – xe máy gây ra."
         },
@@ -34,7 +36,8 @@
           "value": "Thiệt hại về thân thể và tính mạng của hành khách theo hợp đồng vận chuyển hành khách do xe mô tô – xe máy gây ra."
         }
       ],
-      "other": [
+      "insurance_services": "Bảo hiểm tai nạn người ngồi trên xe",
+      "insurance_services_content": [
         {
           "value": "Thiệt hại thân thể do tai nạn khi đang ở trên xe, lên xuống xe trong quá trình xe đang tham gia giao thông."
         },
