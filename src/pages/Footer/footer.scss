@@ -1,0 +1,8 @@
+@import "../../common/color.scss";
+
+.tel {
+  @include color-a;
+  outline: none;
+  text-decoration: none;
+  font-weight: bold;
+}
