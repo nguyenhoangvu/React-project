@@ -8,6 +8,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import HrLine from "../../components/HrLine";
 import Footer from "../Footer";
 import ButtonBuy from "../../components/ButtonBuy";
+import FormXeMay from "./Form";
 
 import "./index.scss";
 
@@ -24,7 +25,12 @@ const Page = styled.section<PageProps>`
   display: ${(props) => (props.pageDisplay === true ? "none" : "block")};
 `;
 
-const Form = styled.section``;
+interface FormProps {
+  formDisplay: boolean;
+}
+const Form = styled.section<FormProps>`
+  display: ${(props) => (props.formDisplay === true ? "block" : "none")};
+`;
 
 const ProductInfo = () => {
   const ProductInfo = data.TNDS_xe_may.map((obj, i) => (
@@ -86,7 +92,9 @@ const WebviewXeMay = () => {
         <HrLine />
         <ButtonBuy handleClickBuyButton={handleClickBuyButton} />
       </Page>
-      <Form></Form>
+      <Form formDisplay={buttonBuyClick}>
+        <FormXeMay />
+      </Form>
     </div>
   );
 };
