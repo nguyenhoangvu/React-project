@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./global-css.css";
-import HomePage from "./pages/WebviewXeMay/HomePage";
+import WebviewXeMay from "./pages/WebviewXeMay";
 import reportWebVitals from "./reportWebVitals";
+import "bootstrap/dist/css/bootstrap.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomePage />
+    <WebviewXeMay />
   </React.StrictMode>,
   document.getElementById("root")
 );

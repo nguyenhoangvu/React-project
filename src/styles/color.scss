@@ -1,0 +1,21 @@
+$blue-45: #039be5;
+$blue-28: #005790;
+
+@mixin color-a {
+  color: $blue-45;
+}
+
+@mixin text {
+  color: $blue-28;
+  font-size: 0.875rem;
+}
+
+@mixin circle-button {
+  background-color: #005790;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
