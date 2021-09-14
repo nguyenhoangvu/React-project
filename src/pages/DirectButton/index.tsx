@@ -19,17 +19,37 @@ const ButtonWrapper = styled.div`
   height: 56px;
 `;
 
+const UL = styled.ul`
+  display: flex;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  text-align: center;
+  position: absolute;
+  margin: 0;
+  padding-left: 0;
+`;
+
+const LI = styled.li`
+  flex: 1;
+  display: inline-block;
+  margin: 0;
+  height: 100%;
+`;
+
 const DirectButton = () => {
   return (
     <ButtonWrapper>
-      <ul>
-        <li>
+      <UL>
+        <LI>
           <ButtonBack />
-        </li>
-        <li>
+        </LI>
+        <LI>
           <ButtonNext />
-        </li>
-      </ul>
+        </LI>
+      </UL>
     </ButtonWrapper>
   );
 };
