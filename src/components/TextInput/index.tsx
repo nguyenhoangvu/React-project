@@ -1,36 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
-interface Required {
-  required: boolean;
-}
-
-const RequireIcon = styled.span<Required>`
-  display: ${(props) => (props.required === true ? "inline-block" : "none")};
-  color: #f44336;
-`;
-
-interface ILabel {
-  active: string;
-}
-const InputLable = styled.label<ILabel>`
-  position: absolute;
-  top: 0;
-  color: ${(props) => (props.active === "active" ? "#005790" : "#9e9e9e")};
-  height: 100%;
-  font-size: 1rem;
-  cursor: text;
-  transition: transform 0.2s ease-out;
-  -webkit-transform 0.2s ease-out;
-  transform-origin: ${(props) =>
-    props.active === "active" ? "0 0" : "0 100%"};
-  text-align: initial;
-  transform: ${(props) =>
-    props.active === "active"
-      ? "translateY(-14px) scale(0.8)"
-      : "translateY(12px)"};
-  pointer-events: none;
-`;
+import Label from "../Label";
 
 interface IInput {
   focus: boolean;
@@ -77,26 +47,36 @@ const TextInput: React.FC<Props> = ({
   labelName,
   required,
 }) => {
-  const [active, setActive] = useState("");
-  const [focus, setFocus] = useState(false);
+  const [inputActive, setInputActive] = useState("");
+  const [focusInput, setFocusInput] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const handleFocusInput = () => {
-    setActive("active");
-    setFocus(true);
+    setInputActive("active");
+    setFocusInput(true);
   };
 
   const handleBlurInput = () => {
-    setActive("");
-    setFocus(false);
+    if (inputValue !== "") setInputActive("active");
+    else setInputActive("");
+    setFocusInput(false);
+  };
+
+  const onInputChange = (event: any) => {
+    setInputValue(event.target.value);
   };
 
   return (
     <InputWrapper>
-      <InputLable active={active} htmlFor={inputId}>
-        {labelName} <RequireIcon required={required}>*</RequireIcon>
-      </InputLable>
+      <Label
+        inputId={inputId}
+        focusInput={focusInput}
+        inputActive={inputActive}
+        labelName={labelName}
+        required={required}
+      />
       <InputComponent
-        focus={focus}
+        focus={focusInput}
         type={inputType}
         className="style-input"
         id={inputId}
@@ -105,6 +85,8 @@ const TextInput: React.FC<Props> = ({
         maxLength={inputLength}
         onFocus={handleFocusInput}
         onBlur={handleBlurInput}
+        onChange={onInputChange}
+        value={inputValue}
       />
     </InputWrapper>
   );
