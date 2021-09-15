@@ -8,16 +8,18 @@ interface IInput {
 const InputComponent = styled.input<IInput>`
   border: none;
   border-bottom: ${(props) =>
-    props.focus === true ? "1px solid #005790" : "1px solid #9e9e9e"};
+    props.focus === true
+      ? "0.0625rem solid #005790"
+      : "0.0625rem solid #9e9e9e"};
   border-radius: 0;
   outline: none;
   height: 3rem;
   width: 100%;
   font-size: 1rem;
-  margin: 0 0 20px 0;
+  margin: 0 0 1.25rem 0;
   padding: 0;
   box-shadow: ${(props) =>
-    props.focus === true ? "0 1px 0 0 #005790" : "none"};
+    props.focus === true ? "0 0.0625rem 0 0 #005790" : "none"};
   transition: all 0.3s;
   box-sizing: content-box;
   background-color: transparent;
@@ -36,6 +38,10 @@ type Props = {
   inputName: string;
   labelName: string;
   required: boolean;
+  readonly?: boolean;
+  handleShowDropdown?: (clicked: boolean | undefined) => void;
+  isShowDropdown?: boolean;
+  inputValueFromProp?: string;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -46,10 +52,15 @@ const TextInput: React.FC<Props> = ({
   inputName,
   labelName,
   required,
+  readonly,
+  handleShowDropdown,
+  isShowDropdown,
+  inputValueFromProp,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
 
   const handleFocusInput = () => {
     setInputActive("active");
@@ -65,6 +76,33 @@ const TextInput: React.FC<Props> = ({
   const onInputChange = (event: any) => {
     setInputValue(event.target.value);
   };
+
+  const handleInputClick = () => {
+    switch (inputId) {
+      case "bh_nhom_kh":
+        setShowDropdown(!showDropdown);
+        break;
+
+      default:
+        setShowDropdown(showDropdown);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (inputValueFromProp !== undefined) {
+      setInputValue(inputValueFromProp);
+      setInputActive("active");
+    }
+  }, [inputValueFromProp]);
+
+  useEffect(() => {
+    setShowDropdown(isShowDropdown);
+  }, [isShowDropdown]);
+
+  useEffect(() => {
+    handleShowDropdown ? handleShowDropdown(showDropdown) : {};
+  }, [showDropdown]);
 
   return (
     <InputWrapper>
@@ -86,7 +124,9 @@ const TextInput: React.FC<Props> = ({
         onFocus={handleFocusInput}
         onBlur={handleBlurInput}
         onChange={onInputChange}
+        onClick={handleInputClick}
         value={inputValue}
+        readOnly={readonly}
       />
     </InputWrapper>
   );

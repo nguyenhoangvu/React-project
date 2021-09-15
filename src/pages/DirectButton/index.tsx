@@ -16,7 +16,7 @@ const ButtonWrapper = styled.div`
   z-index: 997;
   background-color: #005790;
   padding: 0;
-  height: 56px;
+  height: 3.5rem;
 `;
 
 const UL = styled.ul`

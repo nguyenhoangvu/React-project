@@ -18,15 +18,15 @@
           font-weight: normal;
           list-style: none;
           position: relative;
-          padding: 0 0 0 20px;
+          padding: 0 0 0 1.25rem;
           &::before {
             content: "";
             position: absolute;
             left: 0;
-            top: 9px;
-            width: 8px;
+            top: 0.5625rem;
+            width: 0.5rem;
             display: block;
-            border-top: 2px solid;
+            border-top: 0.125rem solid;
           }
         }
       }

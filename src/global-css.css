@@ -7,3 +7,11 @@ body {
   margin: 0;
   font-size: 16px;
 }
+
+h5 {
+  font-size: 1.435rem !important;
+  line-height: 110%;
+  margin-top: 1rem !important;
+  margin-bottom: 0.75rem !important;
+  color: #005790;
+}

@@ -36,7 +36,7 @@ const InputLable = styled.label<ILabel>`
         ? "#005790"
         : "#9e9e9e"};
     height: 100%;
-    font-size: 1rem;
+    font-size: 0.875rem;
     cursor: text;
     transition: transform 0.2s ease-out;
     -webkit-transform 0.2s ease-out;
@@ -45,8 +45,8 @@ const InputLable = styled.label<ILabel>`
     text-align: initial;
     transform: ${(props) =>
       props.active === "active"
-        ? "translateY(-14px) scale(0.8)"
-        : "translateY(12px)"};
+        ? "translateY(-0.875rem) scale(0.8)"
+        : "translateY(0.75rem)"};
     pointer-events: none;
   `;
 

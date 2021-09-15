@@ -12,7 +12,7 @@ const A = styled.a`
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
-  line-height: 56px;
+  line-height: 3.5rem;
   z-index: 1;
   display: flex;
   justify-content: space-evenly;
@@ -21,7 +21,7 @@ const A = styled.a`
 const SPAN = styled.span`
   float: left;
   color: #fff;
-  line-height: 56px;
+  line-height: 3.5rem;
 `;
 
 const ButtonBack = () => {
@@ -31,7 +31,7 @@ const ButtonBack = () => {
         icon={faChevronLeft}
         size="2x"
         className="back-icon"
-        style={{ height: "56px" }}
+        style={{ height: "3.5rem" }}
       />
       <SPAN className="left">Quay lại</SPAN>
     </A>
