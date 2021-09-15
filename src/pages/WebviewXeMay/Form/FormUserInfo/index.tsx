@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import styled from "styled-components";
+
+type Props = {
+  handleButtonClick: (clicked: string) => void;
+};
 
 interface INhom {
   nhom_kh: string;
@@ -18,13 +22,22 @@ const FormDN = styled.div<INhom>`
   display: ${(props) => (props.nhom_kh === "DN" ? "block" : "none")};
 `;
 
-const FormUserInfo = () => {
+const FormUserInfo: React.FC<Props> = ({ handleButtonClick }) => {
   const [nhom_kh, setNhom_kh] = useState("");
+  const [displayForm, setDisplayForm] = useState("");
 
   const handleNhomKh = (nhom_kh: string) => {
     if (nhom_kh === "Cá nhân") setNhom_kh("CN");
     else if (nhom_kh === "Doanh nghiệp") setNhom_kh("DN");
   };
+
+  const handleDisplayForm = (buttonClicked: string) => {
+    setDisplayForm(buttonClicked);
+  };
+
+  useEffect(() => {
+    handleButtonClick ? handleButtonClick(displayForm) : {};
+  }, [displayForm]);
 
   return (
     <Container>
@@ -133,7 +146,7 @@ const FormUserInfo = () => {
           </FormDN>
         </Col>
       </Row>
-      <DirectButton />
+      <DirectButton handleButtonClick={handleDisplayForm} />
     </Container>
   );
 };

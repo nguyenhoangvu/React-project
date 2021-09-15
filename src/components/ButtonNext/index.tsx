@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+
+type Props = {
+  handleNextButtonClicked: (clicked: string) => void;
+};
 
 const A = styled.a`
   overflow: hidden;
@@ -24,9 +28,19 @@ const SPAN = styled.span`
   line-height: 3.5rem;
 `;
 
-const ButtonNext = () => {
+const ButtonNext: React.FC<Props> = ({ handleNextButtonClicked }) => {
+  const [buttonClicked, setButtonClicked] = useState("");
+
+  const onClickBackButton = () => {
+    setButtonClicked("next");
+  };
+
+  useEffect(() => {
+    handleNextButtonClicked ? handleNextButtonClicked(buttonClicked) : {};
+  }, [buttonClicked]);
+
   return (
-    <A className="">
+    <A className="" onClick={onClickBackButton}>
       <SPAN className="right">Tiếp tục</SPAN>
       <FontAwesomeIcon
         icon={faChevronRight}

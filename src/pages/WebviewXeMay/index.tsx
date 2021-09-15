@@ -80,6 +80,12 @@ const WebviewXeMay = () => {
     setButtonBuyClick(click);
   };
 
+  const handleDirectButtonClick = (buttonClicked: string) => {
+    if (buttonClicked === "back") {
+      setButtonBuyClick(false);
+    }
+  };
+
   return (
     <div className="WebviewTNDSXeMay">
       <Page pageDisplay={buttonBuyClick}>
@@ -93,7 +99,7 @@ const WebviewXeMay = () => {
         <ButtonBuy handleClickBuyButton={handleClickBuyButton} />
       </Page>
       <Form formDisplay={buttonBuyClick}>
-        <FormXeMay />
+        <FormXeMay handleDirectButtonClick={handleDirectButtonClick} />
       </Form>
     </div>
   );

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import ButtonBack from "../../components/ButtonBack";
 import ButtonNext from "../../components/ButtonNext";
+
+type Props = {
+  handleButtonClick: (clicked: string) => void;
+};
 
 const ButtonWrapper = styled.div`
   position: fixed;
@@ -39,15 +43,25 @@ const LI = styled.li`
   height: 100%;
 `;
 
-const DirectButton = () => {
+const DirectButton: React.FC<Props> = ({ handleButtonClick }) => {
+  const [clickButton, setClickButton] = useState("");
+
+  const handleButtonClicked = (clicked: string) => {
+    setClickButton(clicked);
+  };
+
+  useEffect(() => {
+    handleButtonClick ? handleButtonClick(clickButton) : {};
+  }, [clickButton]);
+
   return (
     <ButtonWrapper>
       <UL>
         <LI>
-          <ButtonBack />
+          <ButtonBack handleBackButtonClicked={handleButtonClicked} />
         </LI>
         <LI>
-          <ButtonNext />
+          <ButtonNext handleNextButtonClicked={handleButtonClicked} />
         </LI>
       </UL>
     </ButtonWrapper>

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+
+type Props = {
+  handleBackButtonClicked: (clicked: string) => void;
+};
 
 const A = styled.a`
   overflow: hidden;
@@ -24,9 +28,19 @@ const SPAN = styled.span`
   line-height: 3.5rem;
 `;
 
-const ButtonBack = () => {
+const ButtonBack: React.FC<Props> = ({ handleBackButtonClicked }) => {
+  const [buttonClicked, setButtonClicked] = useState("");
+
+  const onClickBackButton = () => {
+    setButtonClicked("back");
+  };
+
+  useEffect(() => {
+    handleBackButtonClicked ? handleBackButtonClicked(buttonClicked) : {};
+  }, [buttonClicked]);
+
   return (
-    <A className="">
+    <A className="" onClick={onClickBackButton}>
       <FontAwesomeIcon
         icon={faChevronLeft}
         size="2x"
