@@ -1,7 +1,7 @@
 import React from "react";
 
-const TextInput = () => {
+const DateInput = () => {
   return <div>Hello World!!</div>;
 };
 
-export default TextInput;
+export default DateInput;

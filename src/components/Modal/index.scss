@@ -1,0 +1,17 @@
+.btn-close {
+  background-color: #fff;
+  color: #f44336;
+  border: none;
+}
+
+.search-wrapper {
+  position: relative;
+  .icon-search {
+    position: absolute;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+    top: 20px;
+    right: 0;
+    color: #005790;
+  }
+}

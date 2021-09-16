@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
+import DistrictInput from "../../../../components/DistrictInput";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -79,7 +80,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               />
             </Col>
           </Row>
-          <TextInput
+          <DistrictInput
             inputType="text"
             inputId="bh_xe_may_tinh_thanh_gcn_tnds"
             inputName="tinh_thanh"

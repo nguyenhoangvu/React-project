@@ -42,6 +42,7 @@ type Props = {
   handleShowDropdown?: (clicked: boolean | undefined) => void;
   isShowDropdown?: boolean;
   inputValueFromProp?: string;
+  placeHolder?: string;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -56,6 +57,7 @@ const TextInput: React.FC<Props> = ({
   handleShowDropdown,
   isShowDropdown,
   inputValueFromProp,
+  placeHolder,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
@@ -85,7 +87,9 @@ const TextInput: React.FC<Props> = ({
       case "bh_xe_may_dung_tich_xe":
         setShowDropdown(!showDropdown);
         break;
-
+      case "bh_xe_may_tinh_thanh_gcn_tnds":
+        setShowDropdown(!showDropdown);
+        break;
       default:
         setShowDropdown(showDropdown);
         break;
@@ -130,6 +134,7 @@ const TextInput: React.FC<Props> = ({
         onClick={handleInputClick}
         value={inputValue}
         readOnly={readonly}
+        placeholder={placeHolder}
       />
     </InputWrapper>
   );
