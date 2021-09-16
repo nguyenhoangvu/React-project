@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 type Props = {
   handleNextButtonClicked: (clicked: string) => void;
+  buttonCallback: string;
 };
 
 const A = styled.a`
@@ -28,7 +29,10 @@ const SPAN = styled.span`
   line-height: 3.5rem;
 `;
 
-const ButtonNext: React.FC<Props> = ({ handleNextButtonClicked }) => {
+const ButtonNext: React.FC<Props> = ({
+  handleNextButtonClicked,
+  buttonCallback,
+}) => {
   const [buttonClicked, setButtonClicked] = useState("");
 
   const onClickBackButton = () => {
@@ -38,6 +42,10 @@ const ButtonNext: React.FC<Props> = ({ handleNextButtonClicked }) => {
   useEffect(() => {
     handleNextButtonClicked ? handleNextButtonClicked(buttonClicked) : {};
   }, [buttonClicked]);
+
+  useEffect(() => {
+    setButtonClicked(buttonCallback);
+  }, [buttonCallback]);
 
   return (
     <A className="" onClick={onClickBackButton}>

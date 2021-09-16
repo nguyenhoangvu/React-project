@@ -4,18 +4,22 @@ import styled from "styled-components";
 import FormUserInfo from "./FormUserInfo";
 
 interface IFormUserInfo {
-  showForm: boolean;
+  hideForm: boolean;
 }
 
 const FormUserInfoWrapper = styled.div<IFormUserInfo>`
-  display: ${(props) => (props.showForm === true ? "block" : "none")};
+  display: ${(props) => (props.hideForm === true ? "none" : "block")};
 `;
 
 type Props = {
   handleDirectButtonClick: (clicked: string) => void;
+  pageCallback: boolean;
 };
 
-const FormXeMay: React.FC<Props> = ({ handleDirectButtonClick }) => {
+const FormXeMay: React.FC<Props> = ({
+  handleDirectButtonClick,
+  pageCallback,
+}) => {
   const [buttonFormUserInfoClicked, setButtonFormUserInfoClicked] =
     useState("");
 
@@ -29,15 +33,21 @@ const FormXeMay: React.FC<Props> = ({ handleDirectButtonClick }) => {
       : {};
   }, [buttonFormUserInfoClicked]);
 
+  useEffect(() => {
+    if (pageCallback === true) setButtonFormUserInfoClicked("");
+  }, [pageCallback]);
+
   return (
     <form>
       <FormUserInfoWrapper
-        showForm={
-          buttonFormUserInfoClicked !== "" &&
-          buttonFormUserInfoClicked !== undefined
+        hideForm={
+          buttonFormUserInfoClicked !== "" && buttonFormUserInfoClicked !== null
         }
       >
-        <FormUserInfo handleButtonClick={handleButtonClick}></FormUserInfo>
+        <FormUserInfo
+          handleButtonClick={handleButtonClick}
+          pageCallback={buttonFormUserInfoClicked}
+        ></FormUserInfo>
       </FormUserInfoWrapper>
     </form>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import data from "../../json/home-page-json.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -96,10 +96,16 @@ const WebviewXeMay = () => {
         <ProductInfo />
         <Footer />
         <HrLine />
-        <ButtonBuy handleClickBuyButton={handleClickBuyButton} />
+        <ButtonBuy
+          handleClickBuyButton={handleClickBuyButton}
+          pageCallback={buttonBuyClick}
+        />
       </Page>
       <Form formDisplay={buttonBuyClick}>
-        <FormXeMay handleDirectButtonClick={handleDirectButtonClick} />
+        <FormXeMay
+          handleDirectButtonClick={handleDirectButtonClick}
+          pageCallback={buttonBuyClick}
+        />
       </Form>
     </div>
   );

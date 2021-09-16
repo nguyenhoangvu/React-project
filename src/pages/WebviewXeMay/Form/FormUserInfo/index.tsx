@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
+  pageCallback: string;
 };
 
 interface INhom {
@@ -22,7 +23,7 @@ const FormDN = styled.div<INhom>`
   display: ${(props) => (props.nhom_kh === "DN" ? "block" : "none")};
 `;
 
-const FormUserInfo: React.FC<Props> = ({ handleButtonClick }) => {
+const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   const [nhom_kh, setNhom_kh] = useState("");
   const [displayForm, setDisplayForm] = useState("");
 
@@ -38,6 +39,10 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick }) => {
   useEffect(() => {
     handleButtonClick ? handleButtonClick(displayForm) : {};
   }, [displayForm]);
+
+  useEffect(() => {
+    setDisplayForm(pageCallback);
+  }, [pageCallback]);
 
   return (
     <Container>
@@ -146,7 +151,10 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick }) => {
           </FormDN>
         </Col>
       </Row>
-      <DirectButton handleButtonClick={handleDisplayForm} />
+      <DirectButton
+        handleButtonClick={handleDisplayForm}
+        buttonCallback={displayForm}
+      />
     </Container>
   );
 };

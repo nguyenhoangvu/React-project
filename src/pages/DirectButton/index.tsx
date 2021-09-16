@@ -6,6 +6,7 @@ import ButtonNext from "../../components/ButtonNext";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
+  buttonCallback: string;
 };
 
 const ButtonWrapper = styled.div`
@@ -43,7 +44,10 @@ const LI = styled.li`
   height: 100%;
 `;
 
-const DirectButton: React.FC<Props> = ({ handleButtonClick }) => {
+const DirectButton: React.FC<Props> = ({
+  handleButtonClick,
+  buttonCallback,
+}) => {
   const [clickButton, setClickButton] = useState("");
 
   const handleButtonClicked = (clicked: string) => {
@@ -54,14 +58,24 @@ const DirectButton: React.FC<Props> = ({ handleButtonClick }) => {
     handleButtonClick ? handleButtonClick(clickButton) : {};
   }, [clickButton]);
 
+  useEffect(() => {
+    setClickButton(buttonCallback);
+  }, [buttonCallback]);
+
   return (
     <ButtonWrapper>
       <UL>
         <LI>
-          <ButtonBack handleBackButtonClicked={handleButtonClicked} />
+          <ButtonBack
+            handleBackButtonClicked={handleButtonClicked}
+            buttonCallback={clickButton}
+          />
         </LI>
         <LI>
-          <ButtonNext handleNextButtonClicked={handleButtonClicked} />
+          <ButtonNext
+            handleNextButtonClicked={handleButtonClicked}
+            buttonCallback={clickButton}
+          />
         </LI>
       </UL>
     </ButtonWrapper>

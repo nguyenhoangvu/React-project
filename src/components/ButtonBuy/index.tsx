@@ -6,9 +6,10 @@ import "./index.scss";
 
 type Props = {
   handleClickBuyButton: (clicked: boolean) => void;
+  pageCallback: boolean;
 };
 
-const ButtonBuy: React.FC<Props> = ({ handleClickBuyButton }) => {
+const ButtonBuy: React.FC<Props> = ({ handleClickBuyButton, pageCallback }) => {
   const [buttonClicked, setButtonClick] = useState(false);
 
   const handleClick = () => {
@@ -18,6 +19,10 @@ const ButtonBuy: React.FC<Props> = ({ handleClickBuyButton }) => {
   useEffect(() => {
     handleClickBuyButton ? handleClickBuyButton(buttonClicked) : {};
   }, [buttonClicked]);
+
+  useEffect(() => {
+    setButtonClick(pageCallback);
+  }, [pageCallback]);
 
   return (
     <div
