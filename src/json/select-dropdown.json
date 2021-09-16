@@ -8,5 +8,15 @@
       "key": "DN",
       "value": "Doanh nghiệp"
     }
+  ],
+  "Loai_xe": [
+    {
+      "key": "2",
+      "value": "Trên 50cc"
+    },
+    {
+      "key": "1",
+      "value": "Duới 50cc"
+    }
   ]
 }

@@ -82,6 +82,9 @@ const TextInput: React.FC<Props> = ({
       case "bh_nhom_kh":
         setShowDropdown(!showDropdown);
         break;
+      case "bh_xe_may_dung_tich_xe":
+        setShowDropdown(!showDropdown);
+        break;
 
       default:
         setShowDropdown(showDropdown);
@@ -90,7 +93,7 @@ const TextInput: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (inputValueFromProp !== undefined) {
+    if (inputValueFromProp !== undefined && inputValueFromProp !== "") {
       setInputValue(inputValueFromProp);
       setInputActive("active");
     }

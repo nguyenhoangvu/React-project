@@ -94,6 +94,9 @@ const SelectDropdown: React.FC<Props> = ({
         setData(data.Nhom_KH);
         setInputValue(data.Nhom_KH[0].value);
         break;
+      case "bh_xe_may_dung_tich_xe":
+        setData(data.Loai_xe);
+        break;
 
       default:
         break;
@@ -101,13 +104,13 @@ const SelectDropdown: React.FC<Props> = ({
   }, []);
 
   const RenderOptionNhomKH = () => {
-    const NhomKH = dataDropdown?.map((obj: any) => (
+    const ContentDropdown = dataDropdown?.map((obj: any) => (
       <LI onClick={handleSetInputValue} key={obj.key}>
         {obj.value}
       </LI>
     ));
 
-    return <UL showDropdown={showDropdown}>{NhomKH}</UL>;
+    return <UL showDropdown={showDropdown}>{ContentDropdown}</UL>;
   };
 
   const handleShowDropdown = (showDropdown: boolean | undefined) => {

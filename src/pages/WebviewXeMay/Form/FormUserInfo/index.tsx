@@ -25,7 +25,7 @@ const FormDN = styled.div<INhom>`
 
 const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   const [nhom_kh, setNhom_kh] = useState("");
-  const [displayForm, setDisplayForm] = useState("");
+  const [buttonClick, setButtonClick] = useState("");
 
   const handleNhomKh = (nhom_kh: string) => {
     if (nhom_kh === "Cá nhân") setNhom_kh("CN");
@@ -33,15 +33,15 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   };
 
   const handleDisplayForm = (buttonClicked: string) => {
-    setDisplayForm(buttonClicked);
+    setButtonClick(buttonClicked);
   };
 
   useEffect(() => {
-    handleButtonClick ? handleButtonClick(displayForm) : {};
-  }, [displayForm]);
+    handleButtonClick ? handleButtonClick(buttonClick) : {};
+  }, [buttonClick]);
 
   useEffect(() => {
-    setDisplayForm(pageCallback);
+    setButtonClick(pageCallback);
   }, [pageCallback]);
 
   return (
@@ -153,7 +153,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
       </Row>
       <DirectButton
         handleButtonClick={handleDisplayForm}
-        buttonCallback={displayForm}
+        buttonCallback={buttonClick}
       />
     </Container>
   );
