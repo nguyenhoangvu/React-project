@@ -97,6 +97,10 @@ const SelectDropdown: React.FC<Props> = ({
       case "bh_xe_may_dung_tich_xe":
         setData(data.Loai_xe);
         break;
+      case "bh_xe_may_tnds_thoi_han":
+        setData(data.Thoi_han_bh);
+        setInputValue(data.Thoi_han_bh[0].value);
+        break;
 
       default:
         break;

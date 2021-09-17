@@ -90,6 +90,12 @@ const TextInput: React.FC<Props> = ({
       case "bh_xe_may_tinh_thanh_gcn_tnds":
         setShowDropdown(!showDropdown);
         break;
+      case "bh_xe_may_tnds_ngay_hl":
+        setShowDropdown(!showDropdown);
+        break;
+      case "bh_xe_may_tnds_thoi_han":
+        setShowDropdown(!showDropdown);
+        break;
       default:
         setShowDropdown(showDropdown);
         break;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { Col, Container, Row } from "react-bootstrap";
 
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
-import styled from "styled-components";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;

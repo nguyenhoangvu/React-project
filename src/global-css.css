@@ -15,3 +15,10 @@ h5 {
   margin-bottom: 0.75rem !important;
   color: #005790;
 }
+
+h6 {
+  color: #2196f3 !important;
+  font-size: 0.875rem !important;
+  line-height: 110%;
+  margin: 0.5rem 0 0.4rem 0 !important;
+}
