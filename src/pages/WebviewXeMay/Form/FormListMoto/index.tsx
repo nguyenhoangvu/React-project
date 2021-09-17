@@ -3,7 +3,6 @@ import { Col, Container, Row } from "react-bootstrap";
 
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
-import SelectDropdown from "../../../../components/SelectDropdown";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -25,15 +24,19 @@ const FormListMoto: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
   return (
-    <div>
-      list moto!!
+    <Container>
+      <Row>
+        <Col xs="12">
+          <h5>Danh sách xe được bảo hiểm</h5>
+        </Col>
+      </Row>
       <DirectButton
         handleButtonClick={handleDisplayForm}
         buttonCallback={buttonClick}
         isPay={false}
         isSummaryPage={false}
       />
-    </div>
+    </Container>
   );
 };
 

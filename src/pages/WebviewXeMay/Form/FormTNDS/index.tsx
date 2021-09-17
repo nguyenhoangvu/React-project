@@ -109,7 +109,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputTitle="phi_tnds"
             labelName="Phí bảo hiểm (đã gồm VAT)"
             required={false}
-            readonly={false}
+            readonly={true}
           />
           <div
             style={{ width: "100%", height: "20px", position: "absolute" }}
