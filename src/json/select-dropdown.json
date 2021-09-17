@@ -18,5 +18,19 @@
       "key": "1",
       "value": "Duới 50cc"
     }
+  ],
+  "Thoi_han_bh": [
+    {
+      "key": "1",
+      "value": "1 năm"
+    },
+    {
+      "key": "2",
+      "value": "2 năm"
+    },
+    {
+      "key": "3",
+      "value": "3 năm"
+    }
   ]
 }
