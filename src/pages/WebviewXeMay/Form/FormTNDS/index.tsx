@@ -30,6 +30,8 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
       <DirectButton
         handleButtonClick={handleDisplayForm}
         buttonCallback={buttonClick}
+        isPay={false}
+        isSummaryPage={false}
       />
     </div>
   );

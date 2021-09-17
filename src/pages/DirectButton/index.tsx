@@ -7,6 +7,8 @@ import ButtonNext from "../../components/ButtonNext";
 type Props = {
   handleButtonClick: (clicked: string) => void;
   buttonCallback: string;
+  isPay?: boolean;
+  isSummaryPage?: boolean;
 };
 
 const ButtonWrapper = styled.div`
@@ -47,6 +49,8 @@ const LI = styled.li`
 const DirectButton: React.FC<Props> = ({
   handleButtonClick,
   buttonCallback,
+  isPay,
+  isSummaryPage,
 }) => {
   const [clickButton, setClickButton] = useState("");
 
@@ -75,6 +79,8 @@ const DirectButton: React.FC<Props> = ({
           <ButtonNext
             handleNextButtonClicked={handleButtonClicked}
             buttonCallback={clickButton}
+            isPay={isPay}
+            isSummaryPage={isSummaryPage}
           />
         </LI>
       </UL>

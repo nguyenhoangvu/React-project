@@ -101,6 +101,8 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
         <DirectButton
           handleButtonClick={handleDisplayForm}
           buttonCallback={buttonClick}
+          isPay={false}
+          isSummaryPage={false}
         />
       </Row>
     </Container>

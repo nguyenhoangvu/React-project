@@ -30,6 +30,8 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
       <DirectButton
         handleButtonClick={handleDisplayForm}
         buttonCallback={buttonClick}
+        isPay={true}
+        isSummaryPage={true}
       />
     </div>
   );

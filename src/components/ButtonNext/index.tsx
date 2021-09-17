@@ -6,6 +6,8 @@ import styled from "styled-components";
 type Props = {
   handleNextButtonClicked: (clicked: string) => void;
   buttonCallback: string;
+  isPay?: boolean;
+  isSummaryPage?: boolean;
 };
 
 const A = styled.a`
@@ -32,8 +34,11 @@ const SPAN = styled.span`
 const ButtonNext: React.FC<Props> = ({
   handleNextButtonClicked,
   buttonCallback,
+  isPay,
+  isSummaryPage,
 }) => {
   const [buttonClicked, setButtonClicked] = useState("");
+  const [buttonTitle, setButtonTitle] = useState("Tiếp tục");
 
   const onClickBackButton = () => {
     setButtonClicked("next");
@@ -47,15 +52,23 @@ const ButtonNext: React.FC<Props> = ({
     setButtonClicked(buttonCallback);
   }, [buttonCallback]);
 
+  useEffect(() => {
+    if (isPay === true) setButtonTitle("Thanh Toán");
+  }, [isPay]);
+
   return (
     <A className="" onClick={onClickBackButton}>
-      <SPAN className="right">Tiếp tục</SPAN>
-      <FontAwesomeIcon
-        icon={faChevronRight}
-        size="2x"
-        className="next-icon"
-        style={{ height: "3.5rem" }}
-      />
+      {isPay === false && isSummaryPage === false && (
+        <SPAN className="right">{buttonTitle}</SPAN>
+      )}
+      {isPay === false && isSummaryPage === false && (
+        <FontAwesomeIcon
+          icon={faChevronRight}
+          size="2x"
+          className="next-icon"
+          style={{ height: "3.5rem" }}
+        />
+      )}
     </A>
   );
 };
