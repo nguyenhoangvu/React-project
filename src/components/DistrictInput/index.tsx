@@ -29,19 +29,17 @@ const DistrictInput: React.FC<Props> = ({
 }) => {
   const [showModal, setShowModal] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState("");
-  const [dataDropdown, setData] = useState<any>();
 
   const handleShowDropdown = (showModal: boolean | undefined) => {
     setShowModal(showModal);
   };
 
-  //   const handleClickOutsideRef = useOnclickOutside(() => {
-  //     setShowDropdown(false);
-  //   });
+  const handleSetInputValue = (inputValue: string) => {
+    setInputValue(inputValue);
+  };
 
-  const handleSetInputValue = (event: any) => {
-    setInputValue(event.target.innerText);
-    setShowModal(false);
+  const handleModalClose = (showModal: boolean | undefined) => {
+    setShowModal(showModal);
   };
 
   return (
@@ -58,7 +56,11 @@ const DistrictInput: React.FC<Props> = ({
         isShowDropdown={showModal}
         inputValueFromProp={inputValue}
       />
-      <ModalInput onShow={showModal} />
+      <ModalInput
+        onShow={showModal}
+        handleInputValue={handleSetInputValue}
+        handleModalClose={handleModalClose}
+      />
     </div>
   );
 };

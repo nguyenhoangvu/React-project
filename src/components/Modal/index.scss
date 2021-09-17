@@ -1,17 +1,22 @@
 .btn-close {
-  background-color: #fff;
-  color: #f44336;
-  border: none;
+  background-color: #fff !important;
+  color: #f44336 !important;
+  border: none !important;
 }
-
-.search-wrapper {
-  position: relative;
-  .icon-search {
-    position: absolute;
-    -webkit-transition: color 0.2s;
-    transition: color 0.2s;
-    top: 20px;
-    right: 0;
-    color: #005790;
+.modal {
+  .modal-dialog {
+    top: 10%;
+    margin: 0.75rem 2.5rem;
+    .search-wrapper {
+      position: relative;
+      .icon-search {
+        position: absolute;
+        -webkit-transition: color 0.2s;
+        transition: color 0.2s;
+        top: 20px;
+        right: 0;
+        color: #005790;
+      }
+    }
   }
 }
