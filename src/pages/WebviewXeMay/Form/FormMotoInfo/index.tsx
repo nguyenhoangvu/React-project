@@ -34,7 +34,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <TextInput
             inputType="text"
             inputId="bh_xe_may_hoten_cx"
-            inputName="hoten"
+            inputName="cx_name"
             inputTitle="tên chủ xe"
             labelName="Họ và tên chủ xe"
             required={true}
@@ -42,7 +42,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <TextInput
             inputType="text"
             inputId="bh_xe_may_diachi_cx"
-            inputName="diachi"
+            inputName="cx_address"
             inputTitle="địa chỉ"
             labelName="Địa chỉ"
             required={true}
@@ -50,7 +50,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <TextInput
             inputType="tel"
             inputId="bh_xe_may_dienthoai_dd_cx"
-            inputName="dienthoai_dd"
+            inputName="cx_phone"
             inputTitle="điện thoại"
             labelName="Điện thoại"
             required={true}
@@ -62,7 +62,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               <TextInput
                 inputType="text"
                 inputId="bh_xe_may_bien_xe"
-                inputName="bien_xe"
+                inputName="moto_plate"
                 inputTitle="Biển xe"
                 labelName="Biển xe"
                 required={true}
@@ -72,7 +72,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               <SelectDropdown
                 inputType="text"
                 inputId="bh_xe_may_dung_tich_xe"
-                inputName="dung_tich_xe"
+                inputName="moto_volumn"
                 inputTitle="Dung tích xe"
                 labelName="Loại xe"
                 required={true}
@@ -83,7 +83,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <DistrictInput
             inputType="text"
             inputId="bh_xe_may_tinh_thanh_gcn_tnds"
-            inputName="tinh_thanh"
+            inputName="gcn_recieve_city"
             inputTitle="Tỉnh thành nhận GCN TNDS"
             labelName="Tỉnh thành, quận huyện nhận GCN TNDS"
             required={true}
@@ -92,7 +92,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <TextInput
             inputType="text"
             inputId="bh_xe_may_dchi_gcn_tnds"
-            inputName="dia_chi_nhan"
+            inputName="gcn_recieve_address"
             inputTitle="Địa chỉ nhận GCN TNDS"
             labelName="Địa chỉ, số điện thoại cụ thể"
             required={true}

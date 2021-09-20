@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Col, Container, Row } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
@@ -63,7 +64,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="text"
               inputId="bh_xe_may_hoten"
-              inputName="hoten"
+              inputName="user_name"
               inputTitle="tên chủ xe"
               labelName="Họ và tên"
               required={true}
@@ -71,7 +72,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="text"
               inputId="bh_xe_may_diachi"
-              inputName="diachi"
+              inputName="user_diachi"
               inputTitle="địa chỉ"
               labelName="Địa chỉ"
               required={true}
@@ -79,7 +80,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="tel"
               inputId="bh_xe_may_dienthoai_dd"
-              inputName="dienthoai_dd"
+              inputName="user_phone"
               inputTitle="điện thoại"
               labelName="Điện thoại"
               required={true}
@@ -87,7 +88,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="email"
               inputId="bh_xe_may_email"
-              inputName="email"
+              inputName="user_email"
               inputTitle="Email"
               labelName="Email"
               required={true}
@@ -97,7 +98,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="text"
               inputId="bh_xe_may_hoten_dn"
-              inputName="hoten"
+              inputName="enterprise_name"
               inputTitle="tên doanh nghiêp"
               labelName="Tên doanh nghiệp"
               required={true}
@@ -105,7 +106,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="text"
               inputId="bh_xe_may_diachi_dn"
-              inputName="diachi"
+              inputName="enterprise_address"
               inputTitle="địa chỉ doanh nghiệp"
               labelName="Địa chỉ"
               required={true}
@@ -113,7 +114,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="text"
               inputId="bh_xe_may_dn_hoten_ddien"
-              inputName="hoten"
+              inputName="enterprise_represent"
               inputTitle="tên người đại diện"
               labelName="Địa chỉ"
               required={true}
@@ -123,7 +124,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 <TextInput
                   inputType="text"
                   inputId="bh_xe_may_dn_cvu_dn"
-                  inputName="chucvu"
+                  inputName="enterprise_represent_role"
                   inputTitle="chức vụ người đại diện"
                   labelName="Chức vụ người đại diện"
                   required={true}
@@ -133,7 +134,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 <TextInput
                   inputType="tel"
                   inputId="bh_xe_may_dienthoai_dd"
-                  inputName="dienthoai_dd"
+                  inputName="enterprise_represent_phone"
                   inputTitle="điện thoại"
                   labelName="Điện thoại"
                   required={true}
@@ -143,7 +144,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             <TextInput
               inputType="email"
               inputId="bh_xe_may_dn_mst"
-              inputName="mst"
+              inputName="enterprise_tax"
               inputTitle="Mã số thuế"
               labelName="Mã số thuế"
               required={true}

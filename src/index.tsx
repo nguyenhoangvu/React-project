@@ -4,11 +4,16 @@ import "./global-css.css";
 import WebviewXeMay from "./pages/WebviewXeMay";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
+import { Provider } from "react-redux";
+
+import store from "./redux/store/index";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <WebviewXeMay />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <WebviewXeMay />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById("root")
 );
 
