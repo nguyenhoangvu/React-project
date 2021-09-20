@@ -28,6 +28,8 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   const [nhom_kh, setNhom_kh] = useState("");
   const [buttonClick, setButtonClick] = useState("");
 
+  const dataRedux = useSelector((state) => state.listProducts);
+
   const handleNhomKh = (nhom_kh: string) => {
     if (nhom_kh === "Cá nhân") setNhom_kh("CN");
     else if (nhom_kh === "Doanh nghiệp") setNhom_kh("DN");

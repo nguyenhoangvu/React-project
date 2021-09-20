@@ -2,7 +2,7 @@ import { INCREASE, DECREASE, ADDINSURANCEDATA, ADDUSERINFO } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
 
-const INITIAL_STATE = {
+export const initialState = {
   count: 0,
   ma_dv: data.ma_dvi,
   ma_nsd: data.ma_nsd,
@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   },
 };
 
-const reducers = (state = INITIAL_STATE, action: ActionTypes) => {
+const reducers = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case INCREASE:
       return {

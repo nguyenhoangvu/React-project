@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Label from "../Label";
+import { useSelector, useDispatch } from "react-redux";
+import { ADDUSERINFO } from "../../redux/types";
 
 interface IInput {
   focus: boolean;
@@ -64,14 +66,24 @@ const TextInput: React.FC<Props> = ({
   const [inputValue, setInputValue] = useState("");
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
 
+  const dispatch = useDispatch();
+
   const handleFocusInput = () => {
     setInputActive("active");
     setFocusInput(true);
   };
 
   const handleBlurInput = () => {
-    if (inputValue !== "") setInputActive("active");
-    else setInputActive("");
+    if (inputValue !== "") {
+      setInputActive("active");
+      dispatch({
+        type: ADDUSERINFO,
+        data: {
+          key: inputName,
+          value: inputValue,
+        },
+      });
+    } else setInputActive("");
     setFocusInput(false);
   };
 
