@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../../redux/store/rootReducer";
 
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
@@ -28,7 +29,11 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   const [nhom_kh, setNhom_kh] = useState("");
   const [buttonClick, setButtonClick] = useState("");
 
-  const dataRedux = useSelector((state) => state.listProducts);
+  const dataRedux = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    console.log("vu dataRedux: ", dataRedux);
+  }, [dataRedux]);
 
   const handleNhomKh = (nhom_kh: string) => {
     if (nhom_kh === "Cá nhân") setNhom_kh("CN");

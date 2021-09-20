@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Label from "../Label";
 import { useSelector, useDispatch } from "react-redux";
 import { ADDUSERINFO } from "../../redux/types";
+// import {addUserInfo} from '../../redux'
 
 interface IInput {
   focus: boolean;

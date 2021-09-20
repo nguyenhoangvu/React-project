@@ -35,6 +35,8 @@ export const addInsuranceData = (data: Array<object>): ADDINSURANCEDATA => {
 };
 
 export const addUserInfo = (data: object): ADDUSERINFO => {
+  console.log('vu here');
+  
   return {
     type: constants.ADDUSERINFO,
     data,

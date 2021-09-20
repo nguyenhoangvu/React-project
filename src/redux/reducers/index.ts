@@ -38,4 +38,6 @@ const reducers = (state = initialState, action: ActionTypes) => {
   }
 };
 
+// https://www.softkraft.co/how-to-setup-redux-with-redux-toolkit/
+
 export default reducers;
