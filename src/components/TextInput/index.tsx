@@ -44,7 +44,7 @@ type Props = {
   readonly?: boolean;
   handleShowDropdown?: (clicked: boolean | undefined) => void;
   isShowDropdown?: boolean;
-  inputValueFromProp?: string;
+  inputValueFromProp?: string | number;
   placeHolder?: string;
 };
 
@@ -64,7 +64,7 @@ const TextInput: React.FC<Props> = ({
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string | number>("");
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
 
   const dispatch = useDispatch();
@@ -77,13 +77,15 @@ const TextInput: React.FC<Props> = ({
   const handleBlurInput = () => {
     if (inputValue !== "") {
       setInputActive("active");
-      dispatch({
-        type: ADDUSERINFO,
-        data: {
-          key: inputName,
-          value: inputValue,
-        },
-      });
+      if (inputName.startsWith("user")) {
+        dispatch({
+          type: ADDUSERINFO,
+          payload: {
+            key: inputName,
+            value: inputValue,
+          },
+        });
+      }
     } else setInputActive("");
     setFocusInput(false);
   };

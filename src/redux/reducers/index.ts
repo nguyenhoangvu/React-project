@@ -1,37 +1,36 @@
-import { INCREASE, DECREASE, ADDINSURANCEDATA, ADDUSERINFO } from "../types";
+import { ADDINSURANCEDATA, ADDUSERINFO } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
 
-export const initialState = {
-  count: 0,
+interface USERINFOR {
+  key: string;
+  value: string | number;
+}
+
+interface InitialStateType {
+  ma_dv: string;
+  ma_nsd: string;
+  token: string;
+  ma_nhom_doi_tac: string;
+  userInfo: Array<USERINFOR>;
+  // listProducts: Array<object>;
+}
+
+export const initialState: InitialStateType = {
   ma_dv: data.ma_dvi,
   ma_nsd: data.ma_nsd,
   token: data.token,
   ma_nhom_doi_tac: data.ma_nhom_doi_tac,
-  listProducts: {
-    userInfo: {},
-    products: [],
-  },
+  userInfo: [],
+  // listProducts: [],
 };
 
 const reducers = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
-    case INCREASE:
-      return {
-        ...state,
-        count: state.count + 1,
-      };
-
-    case DECREASE:
-      return {
-        ...state,
-        count: state.count - 1,
-      };
-
     case ADDUSERINFO:
       return {
         ...state,
-        userInfo: { ...state.listProducts.userInfo, ...action.data },
+        userInfo: [...state.userInfo, action.payload],
       };
     default:
       return state;

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../../redux/store/rootReducer";
 
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
@@ -13,6 +15,7 @@ type Props = {
 
 const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   const [buttonClick, setButtonClick] = useState("");
+  const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
 
   const handleDisplayForm = (buttonClicked: string) => {
     setButtonClick(buttonClicked);
@@ -26,6 +29,11 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
 
+  useEffect(() => {
+    let test = dataRedux.find((elem: any) => elem.key === "user_name")?.value;
+    console.log("vu test: ", test);
+  }, [dataRedux]);
+
   return (
     <Container>
       <Row>
@@ -38,6 +46,9 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputTitle="tên chủ xe"
             labelName="Họ và tên chủ xe"
             required={true}
+            inputValueFromProp={
+              dataRedux.find((elem: any) => elem.key === "user_name")?.value
+            }
           />
           <TextInput
             inputType="text"
@@ -46,6 +57,9 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputTitle="địa chỉ"
             labelName="Địa chỉ"
             required={true}
+            inputValueFromProp={
+              dataRedux.find((elem: any) => elem.key === "user_diachi")?.value
+            }
           />
           <TextInput
             inputType="tel"
@@ -54,6 +68,9 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputTitle="điện thoại"
             labelName="Điện thoại"
             required={true}
+            inputValueFromProp={
+              dataRedux.find((elem: any) => elem.key === "user_phone")?.value
+            }
           />
 
           <h5>Thông tin mô tô, xe máy</h5>

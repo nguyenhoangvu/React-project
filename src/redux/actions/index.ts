@@ -1,50 +1,31 @@
 import * as constants from "../types";
 
-export interface INCREMENT {
-  type: constants.INCREMENT;
+interface USERINFOR {
+  key: string;
+  value: string | number;
 }
-export interface DECREMENT {
-  type: constants.DECREMENT;
-}
+
 export interface ADDINSURANCEDATA {
   type: constants.INSURANCEDATA;
-  data: Array<object>;
+  payload: Array<object>;
 }
 export interface ADDUSERINFO {
   type: constants.USERINFO;
-  data: Object;
+  payload: USERINFOR;
 }
 
-export const increaseCounter = (): INCREMENT => {
-  return {
-    type: constants.INCREASE,
-  };
-};
-
-export const decreaseCounter = (): DECREMENT => {
-  return {
-    type: constants.DECREASE,
-  };
-};
-
-export const addInsuranceData = (data: Array<object>): ADDINSURANCEDATA => {
+export const addInsuranceData = (payload: Array<object>): ADDINSURANCEDATA => {
   return {
     type: constants.ADDINSURANCEDATA,
-    data,
+    payload,
   };
 };
 
-export const addUserInfo = (data: object): ADDUSERINFO => {
-  console.log('vu here');
-  
+export const addUserInfo = (payload: USERINFOR): ADDUSERINFO => {
   return {
     type: constants.ADDUSERINFO,
-    data,
+    payload,
   };
 };
 
-export type ActionTypes =
-  | INCREMENT
-  | DECREMENT
-  | ADDINSURANCEDATA
-  | ADDUSERINFO;
+export type ActionTypes = ADDINSURANCEDATA | ADDUSERINFO;
