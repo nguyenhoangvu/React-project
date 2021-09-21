@@ -27,6 +27,7 @@ const CalendarWrapper = styled.div<ICalendarWrapper>`
   display: ${(props) => (props.showCalendar === true ? "block" : "none")};
   border: 1px solid #777777;
   box-shadow: 0 12px 36px 16px rgb(0 0 0 / 24%);
+  z-index: 1;
 `;
 
 const DateInput: React.FC<Props> = ({

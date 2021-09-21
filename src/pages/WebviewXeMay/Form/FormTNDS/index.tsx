@@ -39,7 +39,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               <DateInput
                 inputType="text"
                 inputId="bh_xe_may_tnds_ngay_hl"
-                inputName="tnds_from_date"
+                inputName="from_date_tnds"
                 inputTitle="hieu_luc"
                 labelName="Hiệu lực từ ngày"
                 required={true}
@@ -51,7 +51,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               <SelectDropdown
                 inputType="text"
                 inputId="bh_xe_may_tnds_thoi_han"
-                inputName="tnds_expired_time"
+                inputName="expired_time_tnds"
                 inputTitle="Thời hạn"
                 labelName="Thời hạn"
                 required={true}
@@ -62,7 +62,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <TextInput
             inputType="time"
             inputId="frm_bh_xe_may_gio_hl"
-            inputName="tnds_from_time"
+            inputName="from_time_tnds"
             inputTitle="gio_hl"
             labelName="Giờ hiệu lực"
             required={true}

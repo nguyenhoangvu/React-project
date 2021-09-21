@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Label from "../Label";
 import { useSelector, useDispatch } from "react-redux";
-import { ADDUSERINFO } from "../../redux/types";
+import { ADDUSERINFO, ADDPRODUCTINFORS } from "../../redux/types";
 // import {addUserInfo} from '../../redux'
 
 interface IInput {
@@ -66,6 +66,7 @@ const TextInput: React.FC<Props> = ({
   const [focusInput, setFocusInput] = useState(false);
   const [inputValue, setInputValue] = useState<string | number>("");
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
+  const [productIndex, setProductIndex] = useState("product_1");
 
   const dispatch = useDispatch();
 
@@ -83,6 +84,15 @@ const TextInput: React.FC<Props> = ({
           payload: {
             key: inputName,
             value: inputValue,
+          },
+        });
+      } else {
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: inputName,
+            value: inputValue,
+            productName: productIndex,
           },
         });
       }
@@ -121,6 +131,15 @@ const TextInput: React.FC<Props> = ({
     if (inputValueFromProp !== undefined && inputValueFromProp !== "") {
       setInputValue(inputValueFromProp);
       setInputActive("active");
+      if (!(inputName.startsWith("tnds") || inputName === "phi_tnds"))
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: inputName,
+            value: inputValueFromProp,
+            productName: productIndex,
+          },
+        });
     }
   }, [inputValueFromProp]);
 
