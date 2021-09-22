@@ -6,6 +6,7 @@ import {
 } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
+import { calculateFeeMoto } from "./calculateFeeMoto";
 
 interface USERINFOR {
   key: string;
@@ -28,6 +29,7 @@ interface InitialStateType {
   ma_nsd: string;
   token: string;
   ma_nhom_doi_tac: string;
+  nv: string;
   userInfo: Array<USERINFOR>;
   listProducts: Array<PRODUCTINFOR>;
 }
@@ -38,6 +40,7 @@ export const initialState: InitialStateType = {
   ma_nsd: data.ma_nsd,
   token: data.token,
   ma_nhom_doi_tac: data.ma_nhom_doi_tac,
+  nv: data.nv,
   userInfo: [],
   listProducts: [],
 };
@@ -73,25 +76,12 @@ const reducers = (state = initialState, action: ActionTypes) => {
         cloneState.listProducts[index] = action.payload;
       } else cloneState.listProducts.push(action.payload);
 
-      let motoVolumn = cloneState.listProducts.find(
-        (o) =>
-          o.key === "moto_volumn" &&
-          o.productName === action.payload.productName
-      );
-      if (motoVolumn !== undefined) {
-        let motoFee = 0;
-        let fee = 0;
-        switch (motoVolumn.value) {
-          case "1":
-            motoFee = 55000;
-            break;
-          case "2":
-            motoFee = 60000;
-            break;
-          case "3":
-            motoFee = 290000;
-            break;
-        }
+      if (state.nv === "XE") {
+        let motoVolumn = cloneState.listProducts.find(
+          (o) =>
+            o.key === "moto_volumn" &&
+            o.productName === action.payload.productName
+        );
         let expiredTime = cloneState.listProducts.find(
           (o) =>
             o.key === "expired_time_tnds" &&
@@ -102,24 +92,22 @@ const reducers = (state = initialState, action: ActionTypes) => {
             o.key === "nguoi_t3_tnds" &&
             o.productName === action.payload.productName
         );
-        if (expiredTime?.value !== undefined) {
-          if (nguoiT3?.value === "checked")
-            fee = (motoFee * 1.1 + 20000) * parseInt(expiredTime.value);
-          else fee = motoFee * 1.1 * parseInt(expiredTime.value);
-        }
-        let obj = {
-          key: "tong_phi_tnds",
-          value: fee.toString(),
-          productName: action.payload.productName,
-        };
-        let index = cloneState.listProducts.findIndex(
-          (o) =>
-            o.key === "tong_phi_tnds" &&
-            o.productName === action.payload.productName
+        let test = calculateFeeMoto(
+          motoVolumn,
+          expiredTime,
+          nguoiT3,
+          action.payload.productName
         );
-        if (index >= 0) {
-          cloneState.listProducts[index] = obj;
-        } else cloneState.listProducts.push(obj);
+        if (test.key !== "") {
+          let index = cloneState.listProducts.findIndex(
+            (o) =>
+              o.key === "tong_phi_tnds" &&
+              o.productName === action.payload.productName
+          );
+          if (index >= 0) {
+            cloneState.listProducts[index] = test;
+          } else cloneState.listProducts.push(test);
+        }
       }
 
       return cloneState;
