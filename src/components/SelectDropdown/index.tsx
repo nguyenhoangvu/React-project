@@ -17,6 +17,7 @@ type Props = {
   required: boolean;
   readonly?: boolean;
   handleNhomKh?: (nhom: string) => void;
+  productName: string;
 };
 
 interface IconProps {}
@@ -83,6 +84,7 @@ const SelectDropdown: React.FC<Props> = ({
   required,
   readonly,
   handleNhomKh,
+  productName,
 }) => {
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState("");
@@ -147,6 +149,7 @@ const SelectDropdown: React.FC<Props> = ({
         handleShowDropdown={handleShowDropdown}
         isShowDropdown={showDropdown}
         inputValueFromProp={inputValue}
+        productName={productName}
       />
       <StyledIcon icon={faSortDown} />
       <div ref={handleClickOutsideRef}>

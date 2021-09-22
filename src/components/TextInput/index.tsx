@@ -46,6 +46,7 @@ type Props = {
   isShowDropdown?: boolean;
   inputValueFromProp?: string | number;
   placeHolder?: string;
+  productName: string;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -61,12 +62,12 @@ const TextInput: React.FC<Props> = ({
   isShowDropdown,
   inputValueFromProp,
   placeHolder,
+  productName,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
   const [inputValue, setInputValue] = useState<string | number>("");
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
-  const [productIndex, setProductIndex] = useState("product_1");
 
   const dispatch = useDispatch();
 
@@ -92,7 +93,7 @@ const TextInput: React.FC<Props> = ({
           payload: {
             key: inputName,
             value: inputValue,
-            productName: productIndex,
+            productName: productName,
           },
         });
       }
@@ -137,7 +138,7 @@ const TextInput: React.FC<Props> = ({
           payload: {
             key: inputName,
             value: inputValueFromProp,
-            productName: productIndex,
+            productName: productName,
           },
         });
     }

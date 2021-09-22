@@ -13,9 +13,14 @@ import moment from "moment";
 type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
+  productName: string;
 };
 
-const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
+const FormTNDS: React.FC<Props> = ({
+  handleButtonClick,
+  pageCallback,
+  productName,
+}) => {
   const [buttonClick, setButtonClick] = useState("");
 
   const handleDisplayForm = (buttonClicked: string) => {
@@ -29,6 +34,10 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   useEffect(() => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
+
+  useEffect(() => {
+    console.log("vu productName: ", productName);
+  }, [productName]);
   return (
     <Container>
       <Row>
@@ -45,6 +54,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 required={true}
                 readonly={true}
                 defaultToday={true}
+                productName={productName}
               />
             </Col>
             <Col xs="6">
@@ -56,6 +66,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 labelName="Thời hạn"
                 required={true}
                 readonly={true}
+                productName={productName}
               />
             </Col>
           </Row>
@@ -67,6 +78,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             labelName="Giờ hiệu lực"
             required={true}
             inputValueFromProp={moment().format("HH:mm")}
+            productName={productName}
           />
           <h6>Trách nhiệm dân sự bắt buộc về người</h6>
           <TextInput
@@ -78,6 +90,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             required={false}
             readonly={true}
             inputValueFromProp="150.000.000/ 1 người/ 1 vụ"
+            productName={productName}
           />
           <h6>Trách nhiệm dân sự bắt buộc về tài sản</h6>
           <TextInput
@@ -89,6 +102,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             required={false}
             readonly={true}
             inputValueFromProp="50.000.000/ 1 vụ tai nạn"
+            productName={productName}
           />
           <CheckBox checkboxText="Tai nạn người ngồi trên xe" />
           <TextInput
@@ -100,6 +114,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             required={false}
             readonly={true}
             inputValueFromProp="10.000.000/ 1 người/ 1 vụ"
+            productName={productName}
           />
 
           <TextInput
@@ -110,6 +125,7 @@ const FormTNDS: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             labelName="Phí bảo hiểm (đã gồm VAT)"
             required={false}
             readonly={true}
+            productName={productName}
           />
           <div
             style={{ width: "100%", height: "20px", position: "absolute" }}

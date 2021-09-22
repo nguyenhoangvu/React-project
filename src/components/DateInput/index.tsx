@@ -16,6 +16,7 @@ type Props = {
   required: boolean;
   readonly?: boolean;
   defaultToday?: boolean;
+  productName: string;
 };
 
 interface ICalendarWrapper {
@@ -39,6 +40,7 @@ const DateInput: React.FC<Props> = ({
   required,
   readonly,
   defaultToday,
+  productName,
 }) => {
   const [calendarValue, onChange] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState<boolean | undefined>(false);
@@ -74,6 +76,7 @@ const DateInput: React.FC<Props> = ({
         handleShowDropdown={handleShowCalendar}
         isShowDropdown={showCalendar}
         inputValueFromProp={inputValue}
+        productName={productName}
       />
       <CalendarWrapper showCalendar={showCalendar}>
         <Calendar

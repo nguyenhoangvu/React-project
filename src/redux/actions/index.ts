@@ -15,9 +15,20 @@ export interface ADDPRODUCTINFORS {
   type: constants.PRODUCTINFORS;
   payload: PRODUCTINFORS;
 }
+
 export interface ADDUSERINFO {
   type: constants.USERINFO;
   payload: USERINFOR;
+}
+
+export interface ADDPRODUCT {
+  type: constants.PRODUCT;
+  payload: number;
+}
+
+export interface REMOVEPRODUCT {
+  type: constants.SUBTRACTPRODUCT;
+  payload: number;
 }
 
 // export const addInsuranceData = (
@@ -37,4 +48,8 @@ export interface ADDUSERINFO {
 //   };
 // };
 
-export type ActionTypes = ADDPRODUCTINFORS | ADDUSERINFO;
+export type ActionTypes =
+  | ADDPRODUCTINFORS
+  | ADDUSERINFO
+  | ADDPRODUCT
+  | REMOVEPRODUCT;

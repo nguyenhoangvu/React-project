@@ -16,6 +16,7 @@ type Props = {
   labelName: string;
   required: boolean;
   readonly?: boolean;
+  productName: string;
 };
 
 const DistrictInput: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const DistrictInput: React.FC<Props> = ({
   labelName,
   required,
   readonly,
+  productName,
 }) => {
   const [showModal, setShowModal] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState("");
@@ -55,6 +57,7 @@ const DistrictInput: React.FC<Props> = ({
         handleShowDropdown={handleShowDropdown}
         isShowDropdown={showModal}
         inputValueFromProp={inputValue}
+        productName={productName}
       />
       <ModalInput
         onShow={showModal}

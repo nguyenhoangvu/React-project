@@ -11,6 +11,7 @@ import SelectDropdown from "../../../../components/SelectDropdown";
 type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
+  productName: string;
 };
 
 interface INhom {
@@ -25,7 +26,11 @@ const FormDN = styled.div<INhom>`
   display: ${(props) => (props.nhom_kh === "DN" ? "block" : "none")};
 `;
 
-const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
+const FormUserInfo: React.FC<Props> = ({
+  handleButtonClick,
+  pageCallback,
+  productName,
+}) => {
   const [nhom_kh, setNhom_kh] = useState("");
   const [buttonClick, setButtonClick] = useState("");
 
@@ -66,6 +71,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             required={false}
             readonly={true}
             handleNhomKh={handleNhomKh}
+            productName={productName}
           />
           <FormCN nhom_kh={nhom_kh}>
             <TextInput
@@ -75,6 +81,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="tên chủ xe"
               labelName="Họ và tên"
               required={true}
+              productName={productName}
             />
             <TextInput
               inputType="text"
@@ -83,6 +90,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="địa chỉ"
               labelName="Địa chỉ"
               required={true}
+              productName={productName}
             />
             <TextInput
               inputType="tel"
@@ -91,6 +99,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="điện thoại"
               labelName="Điện thoại"
               required={true}
+              productName={productName}
             />
             <TextInput
               inputType="email"
@@ -99,6 +108,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="Email"
               labelName="Email"
               required={true}
+              productName={productName}
             />
           </FormCN>
           <FormDN nhom_kh={nhom_kh}>
@@ -109,6 +119,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="tên doanh nghiêp"
               labelName="Tên doanh nghiệp"
               required={true}
+              productName={productName}
             />
             <TextInput
               inputType="text"
@@ -117,6 +128,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="địa chỉ doanh nghiệp"
               labelName="Địa chỉ"
               required={true}
+              productName={productName}
             />
             <TextInput
               inputType="text"
@@ -125,6 +137,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="tên người đại diện"
               labelName="Địa chỉ"
               required={true}
+              productName={productName}
             />
             <Row>
               <Col xs="6">
@@ -135,6 +148,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                   inputTitle="chức vụ người đại diện"
                   labelName="Chức vụ người đại diện"
                   required={true}
+                  productName={productName}
                 />
               </Col>
               <Col xs="6">
@@ -145,6 +159,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                   inputTitle="điện thoại"
                   labelName="Điện thoại"
                   required={true}
+                  productName={productName}
                 />
               </Col>
             </Row>
@@ -155,6 +170,7 @@ const FormUserInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               inputTitle="Mã số thuế"
               labelName="Mã số thuế"
               required={true}
+              productName={productName}
             />
           </FormDN>
         </Col>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../redux/store/rootReducer";
+
 import FormUserInfo from "./FormUserInfo";
 import FormMotoInfo from "./FormMotoInfo";
 import FormTNDS from "./FormTNDS";
@@ -70,6 +73,16 @@ const FormXeMay: React.FC<Props> = ({
   const [showFormTNDS, setShowFormTNDS] = useState(false);
   const [showFormListMoto, setShowFormListMoto] = useState(false);
   const [showFormSummary, setShowFormSummary] = useState(false);
+
+  const [productName, setProductName] = useState("product_1");
+
+  const totalProductFromRoot = useSelector(
+    (state: RootState) => state.reducer.total_product
+  );
+
+  useEffect(() => {
+    setProductName("product_" + totalProductFromRoot);
+  }, [totalProductFromRoot]);
 
   // show hide form user info
   const handleButtonClick = (buttonClicked: string) => {
@@ -159,18 +172,21 @@ const FormXeMay: React.FC<Props> = ({
         <FormUserInfo
           handleButtonClick={handleButtonClick}
           pageCallback={buttonFormUserInfoClicked}
+          productName={productName}
         />
       </FormUserInfoWrapper>
       <FormMotoInfoWrapper showForm={showFormMotoInfo}>
         <FormMotoInfo
           handleButtonClick={handleDisplayFormMotoInfo}
           pageCallback={buttonFormMotoInfoClicked}
+          productName={productName}
         />
       </FormMotoInfoWrapper>
       <FormTNDSWrapper showForm={showFormTNDS}>
         <FormTNDS
           handleButtonClick={handleDisplayFormTNDS}
           pageCallback={buttonFormTNDSClicked}
+          productName={productName}
         />
       </FormTNDSWrapper>
       <FormListMotoWrapper showForm={showFormListMoto}>

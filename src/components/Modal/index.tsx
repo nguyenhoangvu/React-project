@@ -134,6 +134,7 @@ const ModalInput: React.FC<Props> = ({
               labelName=""
               required={false}
               placeHolder={placeHolder}
+              productName=""
             />
             <FontAwesomeIcon
               icon={faSearch}

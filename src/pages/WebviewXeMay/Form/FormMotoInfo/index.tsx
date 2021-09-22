@@ -11,9 +11,14 @@ import DistrictInput from "../../../../components/DistrictInput";
 type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
+  productName: string;
 };
 
-const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
+const FormMotoInfo: React.FC<Props> = ({
+  handleButtonClick,
+  pageCallback,
+  productName,
+}) => {
   const [buttonClick, setButtonClick] = useState("");
   const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
 
@@ -49,6 +54,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_name")?.value
             }
+            productName={productName}
           />
           <TextInput
             inputType="text"
@@ -60,6 +66,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_diachi")?.value
             }
+            productName={productName}
           />
           <TextInput
             inputType="tel"
@@ -71,6 +78,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_phone")?.value
             }
+            productName={productName}
           />
 
           <h5>Thông tin mô tô, xe máy</h5>
@@ -83,6 +91,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 inputTitle="Biển xe"
                 labelName="Biển xe"
                 required={true}
+                productName={productName}
               />
             </Col>
             <Col xs="6">
@@ -94,6 +103,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 labelName="Loại xe"
                 required={true}
                 readonly={true}
+                productName={productName}
               />
             </Col>
           </Row>
@@ -105,6 +115,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             labelName="Tỉnh thành, quận huyện nhận GCN TNDS"
             required={true}
             readonly={true}
+            productName={productName}
           />
           <TextInput
             inputType="text"
@@ -113,6 +124,7 @@ const FormMotoInfo: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
             inputTitle="Địa chỉ nhận GCN TNDS"
             labelName="Địa chỉ, số điện thoại cụ thể"
             required={true}
+            productName={productName}
           />
         </Col>
         <DirectButton

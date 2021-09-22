@@ -3,3 +3,9 @@ export type PRODUCTINFORS = typeof ADDPRODUCTINFORS;
 
 export const ADDUSERINFO = "ADDUSERINFO";
 export type USERINFO = typeof ADDUSERINFO;
+
+export const ADDPRODUCT = "ADDPRODUCT";
+export type PRODUCT = typeof ADDPRODUCT;
+
+export const REMOVEPRODUCT = "REMOVEPRODUCT";
+export type SUBTRACTPRODUCT = typeof REMOVEPRODUCT;

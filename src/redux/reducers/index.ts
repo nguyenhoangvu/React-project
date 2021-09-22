@@ -1,4 +1,9 @@
-import { ADDPRODUCTINFORS, ADDUSERINFO } from "../types";
+import {
+  ADDPRODUCTINFORS,
+  ADDUSERINFO,
+  ADDPRODUCT,
+  REMOVEPRODUCT,
+} from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
 
@@ -18,6 +23,7 @@ interface PRODUCTINFOR {
 // }
 
 interface InitialStateType {
+  total_product: number;
   ma_dv: string;
   ma_nsd: string;
   token: string;
@@ -27,6 +33,7 @@ interface InitialStateType {
 }
 
 export const initialState: InitialStateType = {
+  total_product: 1,
   ma_dv: data.ma_dvi,
   ma_nsd: data.ma_nsd,
   token: data.token,
@@ -37,6 +44,19 @@ export const initialState: InitialStateType = {
 
 const reducers = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
+    case ADDPRODUCT:
+      return {
+        ...state,
+        total_product: state.total_product + 1,
+      };
+    case REMOVEPRODUCT:
+      const newState = { ...state };
+      let product_name = "product_" + action.payload;
+      newState.total_product -= 1;
+      newState.listProducts = newState.listProducts.filter(
+        (item) => item.productName !== product_name
+      );
+      return newState;
     case ADDUSERINFO:
       return {
         ...state,
