@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store/rootReducer";
 
 import FormUserInfo from "./FormUserInfo";
@@ -79,6 +79,12 @@ const FormXeMay: React.FC<Props> = ({
   const totalProductFromRoot = useSelector(
     (state: RootState) => state.reducer.total_product
   );
+
+  const listProductFromRoot = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    console.log("vu listProductFromRoot: ", listProductFromRoot);
+  }, [listProductFromRoot]);
 
   useEffect(() => {
     setProductName("product_" + totalProductFromRoot);

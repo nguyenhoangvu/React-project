@@ -50,6 +50,7 @@ type Props = {
   inputValueFromProp?: string | number;
   placeHolder?: string;
   productName: string;
+  dropdownKey?: string;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -66,6 +67,7 @@ const TextInput: React.FC<Props> = ({
   inputValueFromProp,
   placeHolder,
   productName,
+  dropdownKey,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
@@ -90,7 +92,7 @@ const TextInput: React.FC<Props> = ({
             value: inputValue,
           },
         });
-      } else {
+      } else if (inputName !== "nhom_kh" && inputName !== "expired_time_tnds") {
         dispatch({
           type: ADDPRODUCTINFORS,
           payload: {
@@ -135,15 +137,16 @@ const TextInput: React.FC<Props> = ({
     if (inputValueFromProp !== undefined && inputValueFromProp !== "") {
       setInputValue(inputValueFromProp);
       setInputActive("active");
-      if (!(inputName.startsWith("tnds") || inputName === "phi_tnds"))
+      if (!(inputName.startsWith("tnds") || inputName === "phi_tnds")) {
         dispatch({
           type: ADDPRODUCTINFORS,
           payload: {
             key: inputName,
-            value: inputValueFromProp,
+            value: dropdownKey ? dropdownKey : inputValueFromProp,
             productName: productName,
           },
         });
+      }
     }
   }, [inputValueFromProp]);
 

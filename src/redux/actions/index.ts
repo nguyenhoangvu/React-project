@@ -7,7 +7,7 @@ interface USERINFOR {
 
 interface PRODUCTINFORS {
   key: string;
-  value: string | number;
+  value: string;
   productName: string;
 }
 

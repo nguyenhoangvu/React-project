@@ -88,6 +88,7 @@ const SelectDropdown: React.FC<Props> = ({
 }) => {
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState("");
+  const [dropdownKey, setDropdownKey] = useState("");
   const [dataDropdown, setData] = useState<any>();
 
   useEffect(() => {
@@ -95,12 +96,14 @@ const SelectDropdown: React.FC<Props> = ({
       case "bh_nhom_kh":
         setData(data.Nhom_KH);
         setInputValue(data.Nhom_KH[0].value);
+        setDropdownKey(data.Nhom_KH[0].key);
         break;
       case "bh_xe_may_dung_tich_xe":
         setData(data.Loai_xe);
         break;
       case "bh_xe_may_tnds_thoi_han":
         setData(data.Thoi_han_bh);
+        setDropdownKey(data.Thoi_han_bh[0].key);
         setInputValue(data.Thoi_han_bh[0].value);
         break;
 
@@ -111,7 +114,7 @@ const SelectDropdown: React.FC<Props> = ({
 
   const RenderOptionNhomKH = () => {
     const ContentDropdown = dataDropdown?.map((obj: any) => (
-      <LI onClick={handleSetInputValue} key={obj.key}>
+      <LI onClick={handleSetInputValue} data-index={obj.key} key={obj.key}>
         {obj.value}
       </LI>
     ));
@@ -128,6 +131,8 @@ const SelectDropdown: React.FC<Props> = ({
   });
 
   const handleSetInputValue = (event: any) => {
+    event.preventDefault();
+    setDropdownKey(event.target.getAttribute("data-index"));
     setInputValue(event.target.innerText);
     setShowDropdown(false);
   };
@@ -148,6 +153,7 @@ const SelectDropdown: React.FC<Props> = ({
         readonly={readonly}
         handleShowDropdown={handleShowDropdown}
         isShowDropdown={showDropdown}
+        dropdownKey={dropdownKey}
         inputValueFromProp={inputValue}
         productName={productName}
       />

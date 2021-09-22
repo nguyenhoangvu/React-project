@@ -14,7 +14,7 @@ interface USERINFOR {
 
 interface PRODUCTINFOR {
   key: string;
-  value: string | number;
+  value: string;
   productName: string;
 }
 
@@ -64,26 +64,65 @@ const reducers = (state = initialState, action: ActionTypes) => {
       };
     case ADDPRODUCTINFORS:
       const cloneState = { ...state };
-      let test = cloneState.listProducts.findIndex(
+      let index = cloneState.listProducts.findIndex(
         (o) =>
           o.key === action.payload.key &&
           o.productName === action.payload.productName
       );
-      if (test >= 0) {
-        cloneState.listProducts[test] = action.payload;
+      if (index >= 0) {
+        cloneState.listProducts[index] = action.payload;
       } else cloneState.listProducts.push(action.payload);
 
+      let motoVolumn = cloneState.listProducts.find(
+        (o) =>
+          o.key === "moto_volumn" &&
+          o.productName === action.payload.productName
+      );
+      if (motoVolumn !== undefined) {
+        let motoFee = 0;
+        let fee = 0;
+        switch (motoVolumn.value) {
+          case "1":
+            motoFee = 55000;
+            break;
+          case "2":
+            motoFee = 60000;
+            break;
+          case "3":
+            motoFee = 290000;
+            break;
+        }
+        let expiredTime = cloneState.listProducts.find(
+          (o) =>
+            o.key === "expired_time_tnds" &&
+            o.productName === action.payload.productName
+        );
+        let nguoiT3 = cloneState.listProducts.find(
+          (o) =>
+            o.key === "nguoi_t3_tnds" &&
+            o.productName === action.payload.productName
+        );
+        if (expiredTime?.value !== undefined) {
+          if (nguoiT3?.value === "checked")
+            fee = (motoFee * 1.1 + 20000) * parseInt(expiredTime.value);
+          else fee = motoFee * 1.1 * parseInt(expiredTime.value);
+        }
+        let obj = {
+          key: "tong_phi_tnds",
+          value: fee.toString(),
+          productName: action.payload.productName,
+        };
+        let index = cloneState.listProducts.findIndex(
+          (o) =>
+            o.key === "tong_phi_tnds" &&
+            o.productName === action.payload.productName
+        );
+        if (index >= 0) {
+          cloneState.listProducts[index] = obj;
+        } else cloneState.listProducts.push(obj);
+      }
+
       return cloneState;
-    // return {
-    //   ...state,
-    //   listProducts: {
-    //     ...state.listProducts,
-    //     [productName]: [
-    //       ...state.listProducts[action.index]?.product,
-    //       action.payload,
-    //     ],
-    //   },
-    // };
     default:
       return state;
   }

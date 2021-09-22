@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
+import { RootState } from "../../../../redux/store/rootReducer";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
@@ -21,6 +23,9 @@ const FormTNDS: React.FC<Props> = ({
   productName,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
+  const dataRedux = useSelector(
+    (state: RootState) => state.reducer.listProducts
+  );
 
   const handleDisplayForm = (buttonClicked: string) => {
     setButtonClick(buttonClicked);
@@ -99,7 +104,11 @@ const FormTNDS: React.FC<Props> = ({
             inputValueFromProp="50.000.000/ 1 vụ tai nạn"
             productName={productName}
           />
-          <CheckBox checkboxText="Tai nạn người ngồi trên xe" />
+          <CheckBox
+            checkboxId="nguoi_t3_tnds"
+            checkboxText="Tai nạn người ngồi trên xe"
+            productName={productName}
+          />
           <TextInput
             inputType="text"
             inputId="bh_xe_may_tien_xebb"
@@ -115,12 +124,19 @@ const FormTNDS: React.FC<Props> = ({
           <TextInput
             inputType="text"
             inputId="bh_xe_may_phi_nguoibb"
-            inputName="phi_tnds"
-            inputTitle="phi_tnds"
+            inputName="tong_phi_tnds"
+            inputTitle="tong_phi_tnds"
             labelName="Phí bảo hiểm (đã gồm VAT)"
             required={false}
             readonly={true}
             productName={productName}
+            inputValueFromProp={
+              dataRedux.find(
+                (elem: any) =>
+                  elem.key === "tong_phi_tnds" &&
+                  elem.productName === productName
+              )?.value
+            }
           />
           <div
             style={{ width: "100%", height: "20px", position: "absolute" }}
