@@ -137,7 +137,13 @@ const TextInput: React.FC<Props> = ({
     if (inputValueFromProp !== undefined && inputValueFromProp !== "") {
       setInputValue(inputValueFromProp);
       setInputActive("active");
-      if (!(inputName.startsWith("tnds") || inputName === "phi_tnds")) {
+      if (
+        !(
+          inputName.startsWith("tnds") ||
+          inputName.startsWith("sum") ||
+          inputName === "phi_tnds"
+        )
+      ) {
         dispatch({
           type: ADDPRODUCTINFORS,
           payload: {
