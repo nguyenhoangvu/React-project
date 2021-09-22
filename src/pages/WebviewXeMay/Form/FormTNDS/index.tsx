@@ -8,7 +8,6 @@ import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
 
 import "react-calendar/dist/Calendar.css";
-import moment from "moment";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -35,9 +34,6 @@ const FormTNDS: React.FC<Props> = ({
     setButtonClick(pageCallback);
   }, [pageCallback]);
 
-  useEffect(() => {
-    console.log("vu productName: ", productName);
-  }, [productName]);
   return (
     <Container>
       <Row>
@@ -77,7 +73,6 @@ const FormTNDS: React.FC<Props> = ({
             inputTitle="gio_hl"
             labelName="Giờ hiệu lực"
             required={true}
-            inputValueFromProp={moment().format("HH:mm")}
             productName={productName}
           />
           <h6>Trách nhiệm dân sự bắt buộc về người</h6>

@@ -34,11 +34,6 @@ const FormMotoInfo: React.FC<Props> = ({
     setButtonClick(pageCallback);
   }, [pageCallback]);
 
-  useEffect(() => {
-    let test = dataRedux.find((elem: any) => elem.key === "user_name")?.value;
-    console.log("vu test: ", test);
-  }, [dataRedux]);
-
   return (
     <Container>
       <Row>

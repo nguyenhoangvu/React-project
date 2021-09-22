@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import Label from "../Label";
 import { useSelector, useDispatch } from "react-redux";
 import { ADDUSERINFO, ADDPRODUCTINFORS } from "../../redux/types";
+import { inputNumberOnly } from "./helper";
+import moment from "moment";
 // import {addUserInfo} from '../../redux'
 
 interface IInput {
@@ -151,6 +154,21 @@ const TextInput: React.FC<Props> = ({
   useEffect(() => {
     handleShowDropdown ? handleShowDropdown(showDropdown) : {};
   }, [showDropdown]);
+
+  useEffect(() => {
+    if (inputName === "from_time_tnds") {
+      setInputValue(moment().format("HH:mm"));
+      setInputActive("active");
+      dispatch({
+        type: ADDPRODUCTINFORS,
+        payload: {
+          key: inputName,
+          value: moment().format("HH:mm"),
+          productName: productName,
+        },
+      });
+    }
+  }, []);
 
   return (
     <InputWrapper>

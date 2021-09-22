@@ -63,10 +63,17 @@ const reducers = (state = initialState, action: ActionTypes) => {
         userInfo: [...state.userInfo, action.payload],
       };
     case ADDPRODUCTINFORS:
-      return {
-        ...state,
-        listProducts: [...state.listProducts, action.payload],
-      };
+      const cloneState = { ...state };
+      let test = cloneState.listProducts.findIndex(
+        (o) =>
+          o.key === action.payload.key &&
+          o.productName === action.payload.productName
+      );
+      if (test >= 0) {
+        cloneState.listProducts[test] = action.payload;
+      } else cloneState.listProducts.push(action.payload);
+
+      return cloneState;
     // return {
     //   ...state,
     //   listProducts: {
