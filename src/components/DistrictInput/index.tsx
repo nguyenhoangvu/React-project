@@ -17,6 +17,7 @@ type Props = {
   required: boolean;
   readonly?: boolean;
   productName: string;
+  isResetValue?: boolean;
 };
 
 const DistrictInput: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const DistrictInput: React.FC<Props> = ({
   required,
   readonly,
   productName,
+  isResetValue,
 }) => {
   const [showModal, setShowModal] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState("");
@@ -44,6 +46,10 @@ const DistrictInput: React.FC<Props> = ({
     setShowModal(showModal);
   };
 
+  useEffect(() => {
+    if (isResetValue === true) setInputValue("");
+  }, [isResetValue]);
+
   return (
     <div>
       <TextInput
@@ -58,11 +64,13 @@ const DistrictInput: React.FC<Props> = ({
         isShowDropdown={showModal}
         inputValueFromProp={inputValue}
         productName={productName}
+        isResetValue={isResetValue}
       />
       <ModalInput
         onShow={showModal}
         handleInputValue={handleSetInputValue}
         handleModalClose={handleModalClose}
+        isResetValue={isResetValue}
       />
     </div>
   );

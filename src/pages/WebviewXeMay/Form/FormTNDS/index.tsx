@@ -16,12 +16,14 @@ type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
   productName: string;
+  isAddProductButtonClicked?: boolean;
 };
 
 const FormTNDS: React.FC<Props> = ({
   handleButtonClick,
   pageCallback,
   productName,
+  isAddProductButtonClicked,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
   const [feeInsurance, setFeeInsurance] = useState("");
@@ -69,6 +71,7 @@ const FormTNDS: React.FC<Props> = ({
                 readonly={true}
                 defaultToday={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
               />
             </Col>
             <Col xs="6">
@@ -81,6 +84,7 @@ const FormTNDS: React.FC<Props> = ({
                 required={true}
                 readonly={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
               />
             </Col>
           </Row>
@@ -92,6 +96,7 @@ const FormTNDS: React.FC<Props> = ({
             labelName="Giờ hiệu lực"
             required={true}
             productName={productName}
+            isResetValue={isAddProductButtonClicked}
           />
           <h6>Trách nhiệm dân sự bắt buộc về người</h6>
           <TextInput
@@ -121,6 +126,7 @@ const FormTNDS: React.FC<Props> = ({
             checkboxId="nguoi_t3_tnds"
             checkboxText="Tai nạn người ngồi trên xe"
             productName={productName}
+            isResetValue={isAddProductButtonClicked}
           />
           <TextInput
             inputType="text"
@@ -144,6 +150,7 @@ const FormTNDS: React.FC<Props> = ({
             readonly={true}
             productName={productName}
             inputValueFromProp={feeInsurance}
+            isResetValue={isAddProductButtonClicked}
           />
           <div
             style={{ width: "100%", height: "20px", position: "absolute" }}

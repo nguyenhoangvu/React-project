@@ -12,12 +12,14 @@ type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
   productName: string;
+  isAddProductButtonClicked: boolean;
 };
 
 const FormMotoInfo: React.FC<Props> = ({
   handleButtonClick,
   pageCallback,
   productName,
+  isAddProductButtonClicked,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
   const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
@@ -87,6 +89,7 @@ const FormMotoInfo: React.FC<Props> = ({
                 labelName="Biển xe"
                 required={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
               />
             </Col>
             <Col xs="6">
@@ -99,6 +102,7 @@ const FormMotoInfo: React.FC<Props> = ({
                 required={true}
                 readonly={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
               />
             </Col>
           </Row>
@@ -111,6 +115,7 @@ const FormMotoInfo: React.FC<Props> = ({
             required={true}
             readonly={true}
             productName={productName}
+            isResetValue={isAddProductButtonClicked}
           />
           <TextInput
             inputType="text"
@@ -120,6 +125,7 @@ const FormMotoInfo: React.FC<Props> = ({
             labelName="Địa chỉ, số điện thoại cụ thể"
             required={true}
             productName={productName}
+            isResetValue={isAddProductButtonClicked}
           />
         </Col>
         <DirectButton

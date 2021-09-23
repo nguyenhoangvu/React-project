@@ -23,7 +23,6 @@ export interface ADDUSERINFO {
 
 export interface ADDPRODUCT {
   type: constants.PRODUCT;
-  payload: number;
 }
 
 export interface REMOVEPRODUCT {

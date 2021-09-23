@@ -106,7 +106,7 @@ const FormUserInfo: React.FC<Props> = ({
               productName={productName}
             />
             <ButtonBuy
-              handleClickBuyButton={handleClickCameraButton}
+              handleClickButton={handleClickCameraButton}
               pageCallback={false}
               buttonIcon="camera"
             />

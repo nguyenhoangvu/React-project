@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Label from "../Label";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ADDUSERINFO, ADDPRODUCTINFORS } from "../../redux/types";
 import { inputNumberOnly } from "./helper";
 import moment from "moment";
@@ -59,6 +59,7 @@ type Props = {
   productName: string;
   dropdownKey?: string;
   summaryText?: boolean;
+  isResetValue?: boolean;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -77,6 +78,7 @@ const TextInput: React.FC<Props> = ({
   productName,
   dropdownKey,
   summaryText,
+  isResetValue,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
@@ -172,6 +174,27 @@ const TextInput: React.FC<Props> = ({
   useEffect(() => {
     handleShowDropdown ? handleShowDropdown(showDropdown) : {};
   }, [showDropdown]);
+
+  useEffect(() => {
+    if (isResetValue === true) {
+      if (inputName === "from_time_tnds") {
+        setInputValue(moment().format("HH:mm"));
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: inputName,
+            value: moment().format("HH:mm"),
+            productName: productName,
+          },
+        });
+      } else if (
+        inputName !== "from_date_tnds" &&
+        inputName !== "expired_time_tnds"
+      ) {
+        setInputValue("");
+      }
+    }
+  }, [isResetValue]);
 
   useEffect(() => {
     if (inputName === "from_time_tnds") {

@@ -76,7 +76,7 @@ const ProductInfo = () => {
 const WebviewXeMay = () => {
   const [buttonBuyClick, setButtonBuyClick] = useState(false);
 
-  const handleClickBuyButton = (click: boolean) => {
+  const handleClickButton = (click: boolean) => {
     setButtonBuyClick(click);
   };
 
@@ -97,7 +97,7 @@ const WebviewXeMay = () => {
         <Footer />
         <HrLine />
         <ButtonBuy
-          handleClickBuyButton={handleClickBuyButton}
+          handleClickButton={handleClickButton}
           pageCallback={buttonBuyClick}
           buttonIcon="buy"
         />

@@ -73,7 +73,8 @@ const FormXeMay: React.FC<Props> = ({
   const [showFormTNDS, setShowFormTNDS] = useState(false);
   const [showFormListMoto, setShowFormListMoto] = useState(false);
   const [showFormSummary, setShowFormSummary] = useState(false);
-
+  const [addProductButtonCallback, setaddProductButtonCallback] =
+    useState(false);
   const [productName, setProductName] = useState("product_1");
 
   const totalProductFromRoot = useSelector(
@@ -134,6 +135,7 @@ const FormXeMay: React.FC<Props> = ({
       } else if (buttonClicked === "next") {
         setShowFormListMoto(true);
         setButtonFormListMotoClicked("");
+        setaddProductButtonCallback(false);
       }
     }
   };
@@ -168,6 +170,20 @@ const FormXeMay: React.FC<Props> = ({
     }
   };
 
+  // add more product
+  const handleAddMoreProduct = (isAddMore: boolean) => {
+    if (isAddMore === true) {
+      setShowFormMotoInfo(isAddMore);
+      setShowFormTNDS(!isAddMore);
+      setShowFormListMoto(!isAddMore);
+      setButtonFormMotoInfoClicked("");
+      setaddProductButtonCallback(isAddMore);
+    }
+  };
+
+  // modify product
+  const handleModifyProduct = () => {};
+
   return (
     <form>
       <FormUserInfoWrapper
@@ -186,6 +202,7 @@ const FormXeMay: React.FC<Props> = ({
           handleButtonClick={handleDisplayFormMotoInfo}
           pageCallback={buttonFormMotoInfoClicked}
           productName={productName}
+          isAddProductButtonClicked={addProductButtonCallback}
         />
       </FormMotoInfoWrapper>
       <FormTNDSWrapper showForm={showFormTNDS}>
@@ -193,12 +210,15 @@ const FormXeMay: React.FC<Props> = ({
           handleButtonClick={handleDisplayFormTNDS}
           pageCallback={buttonFormTNDSClicked}
           productName={productName}
+          isAddProductButtonClicked={addProductButtonCallback}
         />
       </FormTNDSWrapper>
       <FormListMotoWrapper showForm={showFormListMoto}>
         <FormListMoto
           handleButtonClick={handleDisplayFormListMoto}
           pageCallback={buttonFormListMotoClicked}
+          handleAddMoreProduct={handleAddMoreProduct}
+          buttonAddProductCallback={addProductButtonCallback}
         />
       </FormListMotoWrapper>
       <FormSummaryWrapper showForm={showFormSummary}>

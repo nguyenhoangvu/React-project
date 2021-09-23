@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+
+import { ADDPRODUCT } from "../../redux/types";
+
 import {
   faShoppingCart,
   faCamera,
@@ -10,10 +14,11 @@ import {
 import "./index.scss";
 
 type Props = {
-  handleClickBuyButton: (clicked: boolean) => void;
+  handleClickButton: (clicked: boolean) => void;
   pageCallback: boolean;
   buttonIcon: string;
   buttonLable?: string;
+  buttonPlusCallBack?: boolean;
 };
 
 interface IActionButton {
@@ -51,24 +56,42 @@ const SPAN = styled.span`
 `;
 
 const ButtonBuy: React.FC<Props> = ({
-  handleClickBuyButton,
+  handleClickButton,
   pageCallback,
   buttonIcon,
   buttonLable,
+  buttonPlusCallBack,
 }) => {
   const [buttonClicked, setButtonClick] = useState(false);
+  const [buttonAddProductClicked, setButtonAddProductClick] = useState(false);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     setButtonClick(!buttonClicked);
+    if (buttonIcon === "plus") {
+      setButtonAddProductClick(!buttonAddProductClicked);
+      dispatch({
+        type: ADDPRODUCT,
+      });
+    }
   };
 
   useEffect(() => {
-    handleClickBuyButton ? handleClickBuyButton(buttonClicked) : {};
+    handleClickButton ? handleClickButton(buttonClicked) : {};
   }, [buttonClicked]);
+
+  useEffect(() => {
+    handleClickButton ? handleClickButton(buttonAddProductClicked) : {};
+  }, [buttonAddProductClicked]);
 
   useEffect(() => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
+
+  useEffect(() => {
+    if (buttonPlusCallBack !== undefined)
+      setButtonAddProductClick(buttonPlusCallBack);
+  }, [buttonPlusCallBack]);
 
   return (
     <ActionButton onClick={handleClick} buttonIcon={buttonIcon}>

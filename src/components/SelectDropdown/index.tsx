@@ -18,6 +18,7 @@ type Props = {
   readonly?: boolean;
   handleNhomKh?: (nhom: string) => void;
   productName: string;
+  isResetValue?: boolean;
 };
 
 interface IconProps {}
@@ -85,6 +86,7 @@ const SelectDropdown: React.FC<Props> = ({
   readonly,
   handleNhomKh,
   productName,
+  isResetValue,
 }) => {
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState("");
@@ -111,6 +113,22 @@ const SelectDropdown: React.FC<Props> = ({
         break;
     }
   }, []);
+
+  useEffect(() => {
+    switch (inputId) {
+      case "bh_xe_may_dung_tich_xe":
+        setDropdownKey("");
+        setInputValue("");
+        break;
+      case "bh_xe_may_tnds_thoi_han":
+        setDropdownKey(data.Thoi_han_bh[0].key);
+        setInputValue(data.Thoi_han_bh[0].value);
+        break;
+
+      default:
+        break;
+    }
+  }, [isResetValue]);
 
   const RenderOptionNhomKH = () => {
     const ContentDropdown = dataDropdown?.map((obj: any) => (
@@ -156,6 +174,7 @@ const SelectDropdown: React.FC<Props> = ({
         dropdownKey={dropdownKey}
         inputValueFromProp={inputValue}
         productName={productName}
+        isResetValue={isResetValue}
       />
       <StyledIcon icon={faSortDown} />
       <div ref={handleClickOutsideRef}>

@@ -17,6 +17,7 @@ type Props = {
   readonly?: boolean;
   defaultToday?: boolean;
   productName: string;
+  isResetValue?: boolean;
 };
 
 interface ICalendarWrapper {
@@ -41,6 +42,7 @@ const DateInput: React.FC<Props> = ({
   readonly,
   defaultToday,
   productName,
+  isResetValue,
 }) => {
   const [calendarValue, onChange] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState<boolean | undefined>(false);
@@ -52,8 +54,7 @@ const DateInput: React.FC<Props> = ({
 
   useEffect(() => {
     if (defaultToday) {
-      let today = moment().format("DD/MM/YYYY");
-      setInputValue(today);
+      setInputValue(moment().format("DD/MM/YYYY"));
     }
   }, []);
 
@@ -62,6 +63,12 @@ const DateInput: React.FC<Props> = ({
     setInputValue(datePicked);
     setShowCalendar(false);
   }, [calendarValue]);
+
+  useEffect(() => {
+    if (isResetValue === true) {
+      setInputValue(moment().format("DD/MM/YYYY"));
+    }
+  }, [isResetValue]);
 
   return (
     <div>
@@ -77,6 +84,7 @@ const DateInput: React.FC<Props> = ({
         isShowDropdown={showCalendar}
         inputValueFromProp={inputValue}
         productName={productName}
+        isResetValue={isResetValue}
       />
       <CalendarWrapper showCalendar={showCalendar}>
         <Calendar

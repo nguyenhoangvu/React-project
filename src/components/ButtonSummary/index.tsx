@@ -15,7 +15,8 @@ const A = styled.a`
 `;
 
 const ButtonSummary: React.FC<Props> = ({ buttonTitle }) => {
-  return <A>{buttonTitle}</A>;
+  const handleClick = () => {};
+  return <A onClick={handleClick}>{buttonTitle}</A>;
 };
 
 export default ButtonSummary;

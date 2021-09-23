@@ -14,14 +14,22 @@ import { formatFee } from "../../../../common/formatFee";
 type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
+  handleAddMoreProduct?: (add: boolean) => void;
+  buttonAddProductCallback: boolean;
 };
 
 const TotalFeeStyle = styled.div`
   color: #2196f3;
 `;
 
-const FormListMoto: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
+const FormListMoto: React.FC<Props> = ({
+  handleButtonClick,
+  pageCallback,
+  handleAddMoreProduct,
+  buttonAddProductCallback,
+}) => {
   const [buttonClick, setButtonClick] = useState("");
+  const [buttonAddProductClick, setButtonAddProductClick] = useState(false);
   const [totalFee, setTotalFee] = useState("");
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
@@ -41,14 +49,20 @@ const FormListMoto: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
 
+  const handleClickAddProductButton = (clicked: boolean) => {
+    setButtonAddProductClick(clicked);
+  };
+
+  useEffect(() => {
+    handleAddMoreProduct ? handleAddMoreProduct(buttonAddProductClick) : {};
+  }, [buttonAddProductClick]);
+
   useEffect(() => {
     if (totalFeeFromRoot !== undefined) {
       let fee = formatFee(totalFeeFromRoot.value);
       setTotalFee(fee);
     }
   }, [totalFeeFromRoot]);
-
-  const handleClickPlusButton = () => {};
 
   const RenderTotalProducts = () => {
     let ListProducts = [];
@@ -142,10 +156,11 @@ const FormListMoto: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <RenderTotalProducts />
           <TotalFeeStyle>Tổng phí: {totalFee} VNĐ</TotalFeeStyle>
           <ButtonBuy
-            handleClickBuyButton={handleClickPlusButton}
+            handleClickButton={handleClickAddProductButton}
             pageCallback={false}
             buttonIcon="plus"
             buttonLable="Thêm Xe BH"
+            buttonPlusCallBack={buttonAddProductCallback}
           />
         </Col>
       </Row>

@@ -9,6 +9,7 @@ type Props = {
   checkboxText: string;
   checkboxId: string;
   productName: string;
+  isResetValue?: boolean;
 };
 
 const SPAN = styled.span`
@@ -25,6 +26,7 @@ const CheckBox: React.FC<Props> = ({
   checkboxText,
   checkboxId,
   productName,
+  isResetValue,
 }) => {
   const [checkboxChecked, setCheckboxChecked] = useState(true);
   const dispatch = useDispatch();
@@ -39,6 +41,20 @@ const CheckBox: React.FC<Props> = ({
       },
     });
   }, [checkboxChecked]);
+
+  useEffect(() => {
+    if (isResetValue === true) {
+      setCheckboxChecked(true);
+      dispatch({
+        type: ADDPRODUCTINFORS,
+        payload: {
+          key: checkboxId,
+          value: "checked",
+          productName: productName,
+        },
+      });
+    }
+  }, [isResetValue]);
 
   return (
     <div onClick={() => setCheckboxChecked(!checkboxChecked)}>
