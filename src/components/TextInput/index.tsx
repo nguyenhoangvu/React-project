@@ -103,7 +103,11 @@ const TextInput: React.FC<Props> = ({
             value: inputValue,
           },
         });
-      } else if (inputName !== "nhom_kh" && inputName !== "expired_time_tnds") {
+      } else if (
+        inputName !== "nhom_kh" &&
+        inputName !== "expired_time_tnds" &&
+        inputName !== "moto_volumn"
+      ) {
         dispatch({
           type: ADDPRODUCTINFORS,
           payload: {

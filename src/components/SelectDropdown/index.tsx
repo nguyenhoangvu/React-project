@@ -149,7 +149,6 @@ const SelectDropdown: React.FC<Props> = ({
   });
 
   const handleSetInputValue = (event: any) => {
-    event.preventDefault();
     setDropdownKey(event.target.getAttribute("data-index"));
     setInputValue(event.target.innerText);
     setShowDropdown(false);
