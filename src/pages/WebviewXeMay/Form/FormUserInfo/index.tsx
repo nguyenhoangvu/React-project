@@ -5,6 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
+import ButtonBuy from "../../../../components/ButtonBuy";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -40,6 +41,8 @@ const FormUserInfo: React.FC<Props> = ({
   const handleDisplayForm = (buttonClicked: string) => {
     setButtonClick(buttonClicked);
   };
+
+  const handleClickCameraButton = () => {};
 
   useEffect(() => {
     handleButtonClick ? handleButtonClick(buttonClick) : {};
@@ -101,6 +104,11 @@ const FormUserInfo: React.FC<Props> = ({
               labelName="Email"
               required={true}
               productName={productName}
+            />
+            <ButtonBuy
+              handleClickBuyButton={handleClickCameraButton}
+              pageCallback={false}
+              buttonIcon="camera"
             />
           </FormCN>
           <FormDN nhom_kh={nhom_kh}>

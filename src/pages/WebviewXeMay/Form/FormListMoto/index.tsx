@@ -48,6 +48,8 @@ const FormListMoto: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
     const ContentMotos = ListProducts.map((obj: any) => (
       <div data-index={obj.index} key={obj.index}>
         {obj.motoPlate} , {obj.fromDate} , {obj.fee}
+        <button>Sửa</button>
+        <button>Xóa</button>
       </div>
     ));
 

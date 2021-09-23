@@ -99,6 +99,7 @@ const WebviewXeMay = () => {
         <ButtonBuy
           handleClickBuyButton={handleClickBuyButton}
           pageCallback={buttonBuyClick}
+          buttonIcon="buy"
         />
       </Page>
       <Form formDisplay={buttonBuyClick}>
