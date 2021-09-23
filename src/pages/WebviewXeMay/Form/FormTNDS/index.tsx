@@ -23,13 +23,25 @@ const FormTNDS: React.FC<Props> = ({
   productName,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
+  const [feeInsurance, setFeeInsurance] = useState("");
   const dataRedux = useSelector(
     (state: RootState) => state.reducer.listProducts
+  );
+
+  let fee = dataRedux.find(
+    (elem) => elem.key === "phi_bh_tnds" && elem.productName === productName
   );
 
   const handleDisplayForm = (buttonClicked: string) => {
     setButtonClick(buttonClicked);
   };
+
+  useEffect(() => {
+    if (fee !== undefined) {
+      let formatFee = new Intl.NumberFormat().format(parseInt(fee.value));
+      setFeeInsurance(formatFee);
+    }
+  }, [fee]);
 
   useEffect(() => {
     handleButtonClick ? handleButtonClick(buttonClick) : {};
@@ -124,19 +136,13 @@ const FormTNDS: React.FC<Props> = ({
           <TextInput
             inputType="text"
             inputId="bh_xe_may_phi_nguoibb"
-            inputName="tong_phi_tnds"
-            inputTitle="tong_phi_tnds"
+            inputName="phi_bh_tnds"
+            inputTitle="phi_bh_tnds"
             labelName="Phí bảo hiểm (đã gồm VAT)"
             required={false}
             readonly={true}
             productName={productName}
-            inputValueFromProp={
-              dataRedux.find(
-                (elem: any) =>
-                  elem.key === "tong_phi_tnds" &&
-                  elem.productName === productName
-              )?.value
-            }
+            inputValueFromProp={feeInsurance}
           />
           <div
             style={{ width: "100%", height: "20px", position: "absolute" }}

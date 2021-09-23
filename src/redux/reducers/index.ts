@@ -7,6 +7,7 @@ import {
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
 import { calculateFeeMoto } from "./calculateFeeMoto";
+import { totalFeeMoto } from "./calculateTotalFee";
 
 interface USERINFOR {
   key: string;
@@ -92,21 +93,33 @@ const reducers = (state = initialState, action: ActionTypes) => {
             o.key === "nguoi_t3_tnds" &&
             o.productName === action.payload.productName
         );
-        let test = calculateFeeMoto(
+        let phi_bh = calculateFeeMoto(
           motoVolumn,
           expiredTime,
           nguoiT3,
           action.payload.productName
         );
-        if (test.key !== "") {
+        if (phi_bh.key !== "") {
           let index = cloneState.listProducts.findIndex(
             (o) =>
-              o.key === "tong_phi_tnds" &&
+              o.key === "phi_bh_tnds" &&
               o.productName === action.payload.productName
           );
           if (index >= 0) {
-            cloneState.listProducts[index] = test;
-          } else cloneState.listProducts.push(test);
+            cloneState.listProducts[index] = phi_bh;
+          } else cloneState.listProducts.push(phi_bh);
+        }
+        let listFee = cloneState.listProducts.filter(
+          (o) => o.key === "phi_bh_tnds"
+        );
+        let totalFee = totalFeeMoto(listFee);
+        if (totalFee.key !== "" && totalFee.key !== undefined) {
+          let index = cloneState.listProducts.findIndex(
+            (o) => o.key === "total_fee_tnds"
+          );
+          if (index >= 0) {
+            cloneState.listProducts[index] = totalFee;
+          } else cloneState.listProducts.push(totalFee);
         }
       }
 

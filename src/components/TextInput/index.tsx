@@ -10,6 +10,7 @@ import moment from "moment";
 
 interface IInput {
   focus: boolean;
+  summaryText?: boolean;
 }
 const InputComponent = styled.input<IInput>`
   border: none;
@@ -29,6 +30,12 @@ const InputComponent = styled.input<IInput>`
   transition: all 0.3s;
   box-sizing: content-box;
   background-color: transparent;
+  ${({ summaryText }) =>
+    summaryText &&
+    `
+    border-bottom: none;
+    margin: -0.3125rem 0 0.625rem 0;
+  `}
 `;
 
 const InputWrapper = styled.div`
@@ -51,6 +58,7 @@ type Props = {
   placeHolder?: string;
   productName: string;
   dropdownKey?: string;
+  summaryText?: boolean;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -68,6 +76,7 @@ const TextInput: React.FC<Props> = ({
   placeHolder,
   productName,
   dropdownKey,
+  summaryText,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
@@ -190,6 +199,7 @@ const TextInput: React.FC<Props> = ({
       />
       <InputComponent
         focus={focusInput}
+        summaryText={summaryText}
         type={inputType}
         className="style-input"
         id={inputId}

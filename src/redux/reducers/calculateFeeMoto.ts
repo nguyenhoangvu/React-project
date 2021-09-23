@@ -1,9 +1,3 @@
-interface TYPEOBJECT {
-  key: string;
-  value: string;
-  productName: string;
-}
-
 export const calculateFeeMoto = (
   motoVolumn: any,
   expiredTime: any,
@@ -36,7 +30,7 @@ export const calculateFeeMoto = (
       else fee = motoFee * 1.1 * parseInt(expiredTime.value);
     }
     obj = {
-      key: "tong_phi_tnds",
+      key: "phi_bh_tnds",
       value: fee.toString(),
       productName: productName,
     };
