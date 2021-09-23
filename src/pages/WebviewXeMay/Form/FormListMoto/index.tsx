@@ -9,6 +9,7 @@ import TextInput from "../../../../components/TextInput";
 import ButtonSummary from "../../../../components/ButtonSummary";
 import HrLine from "../../../../components/HrLine";
 import ButtonBuy from "../../../../components/ButtonBuy";
+import { formatFee } from "../../../../common/formatFee";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -42,9 +43,7 @@ const FormListMoto: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
 
   useEffect(() => {
     if (totalFeeFromRoot !== undefined) {
-      let fee = new Intl.NumberFormat().format(
-        parseInt(totalFeeFromRoot.value)
-      );
+      let fee = formatFee(totalFeeFromRoot.value);
       setTotalFee(fee);
     }
   }, [totalFeeFromRoot]);
@@ -63,7 +62,7 @@ const FormListMoto: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
       let fromDate = product.find((o) => o.key === "from_date_tnds");
       let fee = product.find((o) => o.key === "phi_bh_tnds");
       if (fee !== undefined) {
-        product_fee = new Intl.NumberFormat().format(parseInt(fee.value));
+        product_fee = formatFee(fee.value);
       }
       let obj = {
         motoPlate: motoPlate?.value,

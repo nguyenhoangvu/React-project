@@ -8,6 +8,7 @@ import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
+import { formatFee } from "../../../../common/formatFee";
 
 import "react-calendar/dist/Calendar.css";
 
@@ -38,8 +39,8 @@ const FormTNDS: React.FC<Props> = ({
 
   useEffect(() => {
     if (fee !== undefined) {
-      let formatFee = new Intl.NumberFormat().format(parseInt(fee.value));
-      setFeeInsurance(formatFee);
+      let test = formatFee(fee.value);
+      setFeeInsurance(test);
     }
   }, [fee]);
 
