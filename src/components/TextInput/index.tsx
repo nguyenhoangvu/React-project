@@ -169,7 +169,7 @@ const TextInput: React.FC<Props> = ({
         });
       }
     }
-  }, [inputValueFromProp]);
+  }, [inputValueFromProp, dropdownKey]);
 
   useEffect(() => {
     setShowDropdown(isShowDropdown);
