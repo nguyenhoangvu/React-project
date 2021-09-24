@@ -25,15 +25,20 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
   return (
-    <div>
-      summary!!
-      <DirectButton
-        handleButtonClick={handleDisplayForm}
-        buttonCallback={buttonClick}
-        isPay={true}
-        isSummaryPage={true}
-      />
-    </div>
+    <Container>
+      <Row>
+        <Col xs="12">
+          <h5>Thông tin đơn bảo hiểm</h5>
+          <div></div>
+          <DirectButton
+            handleButtonClick={handleDisplayForm}
+            buttonCallback={buttonClick}
+            isPay={true}
+            isSummaryPage={true}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

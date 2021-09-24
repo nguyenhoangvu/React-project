@@ -1,3 +1,5 @@
+import { formatFee } from "../../common/formatFee";
+
 export const totalFeeMoto = (listFee: any) => {
   let totalFee = 0;
   let obj = {
@@ -10,6 +12,7 @@ export const totalFeeMoto = (listFee: any) => {
       totalFee += parseInt(o.value);
     }
   });
-  obj.value = totalFee.toString();
+  let test = formatFee(totalFee.toString());
+  obj.value = test;
   return obj;
 };

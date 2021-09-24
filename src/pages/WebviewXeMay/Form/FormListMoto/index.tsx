@@ -33,8 +33,6 @@ const FormListMoto: React.FC<Props> = ({
   const [buttonClick, setButtonClick] = useState("");
   const [buttonAddProductClick, setButtonAddProductClick] = useState(false);
   const [totalFee, setTotalFee] = useState("");
-  const [isModifyProduct, setIsModifyProduct] = useState(false);
-  const [productIndex, setProductIndex] = useState(0);
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   let totalFeeFromRoot = dataRedux.listProducts.find(
@@ -63,8 +61,7 @@ const FormListMoto: React.FC<Props> = ({
 
   useEffect(() => {
     if (totalFeeFromRoot !== undefined) {
-      let fee = formatFee(totalFeeFromRoot.value);
-      setTotalFee(fee);
+      setTotalFee(totalFeeFromRoot.value);
     }
   }, [totalFeeFromRoot]);
 
