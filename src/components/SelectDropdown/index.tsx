@@ -115,18 +115,20 @@ const SelectDropdown: React.FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    switch (inputId) {
-      case "bh_xe_may_dung_tich_xe":
-        setDropdownKey("");
-        setInputValue("");
-        break;
-      case "bh_xe_may_tnds_thoi_han":
-        setDropdownKey(data.Thoi_han_bh[0].key);
-        setInputValue(data.Thoi_han_bh[0].value);
-        break;
+    if (isResetValue === true) {
+      switch (inputId) {
+        case "bh_xe_may_dung_tich_xe":
+          setDropdownKey("");
+          setInputValue("");
+          break;
+        case "bh_xe_may_tnds_thoi_han":
+          setDropdownKey(data.Thoi_han_bh[0].key);
+          setInputValue(data.Thoi_han_bh[0].value);
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
     }
   }, [isResetValue]);
 
