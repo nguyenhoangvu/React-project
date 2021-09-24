@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store/rootReducer";
 import { ADDUSERINFO, ADDPRODUCTINFORS } from "../../redux/types";
 import { inputNumberOnly } from "./helper";
+import data from "../../json/select-dropdown.json";
 import moment from "moment";
 // import {addUserInfo} from '../../redux'
 
@@ -209,7 +210,16 @@ const TextInput: React.FC<Props> = ({
           o.key === inputName &&
           o.productName === "product_" + dataRedux.modify_product
       );
-      if (test !== undefined) setInputValue(test.value);
+      if (test !== undefined) {
+        let value = test.value;
+        if (test.key === "moto_volumn") {
+          let motoType = data.Loai_xe.find((o) => o.key == value);
+          motoType !== undefined && setInputValue(motoType.value);
+        } else if (test.key === "expired_time_tnds") {
+          let time = data.Thoi_han_bh.find((o) => o.key == value);
+          time !== undefined && setInputValue(time.value);
+        } else setInputValue(test.value);
+      }
     }
   }, [dataRedux.modify_product]);
 
