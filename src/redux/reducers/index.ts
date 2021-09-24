@@ -56,10 +56,27 @@ const reducers = (state = initialState, action: ActionTypes) => {
     case REMOVEPRODUCT:
       const newState = { ...state };
       let product_name = "product_" + action.payload;
-      newState.total_product -= 1;
       newState.listProducts = newState.listProducts.filter(
         (item) => item.productName !== product_name
       );
+      for (let i = action.payload + 1; i <= newState.total_product; i++) {
+        newState.listProducts.map((o) => {
+          if (o.productName === "product_" + i) {
+            o.productName = "product_" + (i - 1);
+          }
+        });
+      }
+      let listFee = newState.listProducts.filter(
+        (o) => o.key === "phi_bh_tnds"
+      );
+      let totalFee = totalFeeMoto(listFee);
+      let i = newState.listProducts.findIndex(
+        (o) => o.key === "total_fee_tnds"
+      );
+      if (i >= 0) {
+        newState.listProducts[i] = totalFee;
+      }
+      newState.total_product -= 1;
       return newState;
     case ADDUSERINFO:
       return {

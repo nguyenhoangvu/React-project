@@ -123,41 +123,30 @@ const ModalInput: React.FC<Props> = ({
   }, [isResetValue]);
 
   return (
-    <div>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        animation={false}
-        className="modal"
-      >
-        <Modal.Body>
-          <div className="search-wrapper">
-            <TextInput
-              inputId="txtSearchBank"
-              inputName=""
-              inputTitle=""
-              inputType="text"
-              labelName=""
-              required={false}
-              placeHolder={placeHolder}
-              productName=""
-            />
-            <FontAwesomeIcon
-              icon={faSearch}
-              size="1x"
-              className="icon-search"
-            />
-          </div>
-          {renderCities && <RenderCities />}
-          {renderDistrict && <RenderDistricts />}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleClose} className="btn-close">
-            THOÁT
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+    <Modal show={show} onHide={handleClose} animation={false} className="modal">
+      <Modal.Body>
+        <div className="search-wrapper">
+          <TextInput
+            inputId="txtSearchBank"
+            inputName=""
+            inputTitle=""
+            inputType="text"
+            labelName=""
+            required={false}
+            placeHolder={placeHolder}
+            productName=""
+          />
+          <FontAwesomeIcon icon={faSearch} size="1x" className="icon-search" />
+        </div>
+        {renderCities && <RenderCities />}
+        {renderDistrict && <RenderDistricts />}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={handleClose} className="btn-close">
+          THOÁT
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

@@ -15,6 +15,7 @@ type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
   handleAddMoreProduct?: (add: boolean) => void;
+  handleRemoveProduct?: (add: boolean) => void;
   buttonAddProductCallback: boolean;
 };
 
@@ -27,6 +28,7 @@ const FormListMoto: React.FC<Props> = ({
   pageCallback,
   handleAddMoreProduct,
   buttonAddProductCallback,
+  handleRemoveProduct,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
   const [buttonAddProductClick, setButtonAddProductClick] = useState(false);
@@ -133,10 +135,10 @@ const FormListMoto: React.FC<Props> = ({
                 />
               </Col>
               <Col xs="6" style={{ textAlign: "center" }}>
-                <ButtonSummary buttonTitle="Sửa" />
+                <ButtonSummary productIndex={obj.index} buttonTitle="Sửa" />
               </Col>
               <Col xs="6" style={{ textAlign: "center" }}>
-                <ButtonSummary buttonTitle="Xóa" />
+                <ButtonSummary productIndex={obj.index} buttonTitle="Xóa" />
               </Col>
             </Row>
           </Col>
