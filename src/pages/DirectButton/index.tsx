@@ -9,6 +9,7 @@ type Props = {
   buttonCallback: string;
   isPay?: boolean;
   isSummaryPage?: boolean;
+  isCheckTerm?: boolean;
 };
 
 const ButtonWrapper = styled.div`
@@ -51,6 +52,7 @@ const DirectButton: React.FC<Props> = ({
   buttonCallback,
   isPay,
   isSummaryPage,
+  isCheckTerm,
 }) => {
   const [clickButton, setClickButton] = useState("");
 
@@ -81,6 +83,7 @@ const DirectButton: React.FC<Props> = ({
             buttonCallback={clickButton}
             isPay={isPay}
             isSummaryPage={isSummaryPage}
+            isCheckTerm={isCheckTerm}
           />
         </LI>
       </UL>
