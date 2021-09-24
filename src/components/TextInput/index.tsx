@@ -150,6 +150,9 @@ const TextInput: React.FC<Props> = ({
 
   useEffect(() => {
     if (inputValueFromProp !== undefined && inputValueFromProp !== "") {
+      if (productName === "product_2")
+        console.log("vu inputValueFromProp: ", inputValueFromProp);
+
       setInputValue(inputValueFromProp);
       setInputActive("active");
       if (
@@ -169,7 +172,7 @@ const TextInput: React.FC<Props> = ({
         });
       }
     }
-  }, [inputValueFromProp, dropdownKey]);
+  }, [inputValueFromProp, dropdownKey, productName]);
 
   useEffect(() => {
     setShowDropdown(isShowDropdown);
