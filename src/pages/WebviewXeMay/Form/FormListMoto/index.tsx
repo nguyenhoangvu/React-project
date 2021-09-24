@@ -15,7 +15,7 @@ type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
   handleAddMoreProduct?: (add: boolean) => void;
-  handleRemoveProduct?: (add: boolean) => void;
+  handleModifyProduct?: (modify: boolean, productIndex: number) => void;
   buttonAddProductCallback: boolean;
 };
 
@@ -28,11 +28,13 @@ const FormListMoto: React.FC<Props> = ({
   pageCallback,
   handleAddMoreProduct,
   buttonAddProductCallback,
-  handleRemoveProduct,
+  handleModifyProduct,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
   const [buttonAddProductClick, setButtonAddProductClick] = useState(false);
   const [totalFee, setTotalFee] = useState("");
+  const [isModifyProduct, setIsModifyProduct] = useState(false);
+  const [productIndex, setProductIndex] = useState(0);
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   let totalFeeFromRoot = dataRedux.listProducts.find(
@@ -65,6 +67,10 @@ const FormListMoto: React.FC<Props> = ({
       setTotalFee(fee);
     }
   }, [totalFeeFromRoot]);
+
+  const handleIsUpdateProduct = (isModify: boolean, productIndex: number) => {
+    handleModifyProduct ? handleModifyProduct(isModify, productIndex) : {};
+  };
 
   const RenderTotalProducts = () => {
     let ListProducts = [];
@@ -135,7 +141,11 @@ const FormListMoto: React.FC<Props> = ({
                 />
               </Col>
               <Col xs="6" style={{ textAlign: "center" }}>
-                <ButtonSummary productIndex={obj.index} buttonTitle="Sửa" />
+                <ButtonSummary
+                  productIndex={obj.index}
+                  buttonTitle="Sửa"
+                  handleIsUpdateProduct={handleIsUpdateProduct}
+                />
               </Col>
               <Col xs="6" style={{ textAlign: "center" }}>
                 <ButtonSummary productIndex={obj.index} buttonTitle="Xóa" />

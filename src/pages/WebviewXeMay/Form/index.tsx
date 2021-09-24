@@ -182,7 +182,14 @@ const FormXeMay: React.FC<Props> = ({
   };
 
   // modify product
-  const handleModifyProduct = () => {};
+  const handleModifyProduct = (isModify: boolean, productIndex: number) => {
+    if (isModify && productIndex) {
+      setShowFormMotoInfo(isModify);
+      setShowFormTNDS(!isModify);
+      setShowFormListMoto(!isModify);
+      setButtonFormMotoInfoClicked("");
+    }
+  };
 
   return (
     <form>
@@ -219,6 +226,7 @@ const FormXeMay: React.FC<Props> = ({
           pageCallback={buttonFormListMotoClicked}
           handleAddMoreProduct={handleAddMoreProduct}
           buttonAddProductCallback={addProductButtonCallback}
+          handleModifyProduct={handleModifyProduct}
         />
       </FormListMotoWrapper>
       <FormSummaryWrapper showForm={showFormSummary}>

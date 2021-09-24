@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Label from "../Label";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store/rootReducer";
 import { ADDUSERINFO, ADDPRODUCTINFORS } from "../../redux/types";
 import { inputNumberOnly } from "./helper";
 import moment from "moment";
@@ -86,6 +87,7 @@ const TextInput: React.FC<Props> = ({
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
 
   const dispatch = useDispatch();
+  const dataRedux = useSelector((state: RootState) => state.reducer);
 
   const handleFocusInput = () => {
     setInputActive("active");
@@ -199,6 +201,17 @@ const TextInput: React.FC<Props> = ({
       }
     }
   }, [isResetValue]);
+
+  useEffect(() => {
+    if (dataRedux.modify_product !== 0) {
+      let test = dataRedux.listProducts.find(
+        (o) =>
+          o.key === inputName &&
+          o.productName === "product_" + dataRedux.modify_product
+      );
+      if (test !== undefined) setInputValue(test.value);
+    }
+  }, [dataRedux.modify_product]);
 
   useEffect(() => {
     if (inputName === "from_time_tnds") {

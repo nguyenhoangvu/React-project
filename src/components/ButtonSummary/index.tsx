@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
-import { REMOVEPRODUCT } from "../../redux/types";
+import { REMOVEPRODUCT, MODIFYPRODUCT } from "../../redux/types";
 import { RootState } from "../../redux/store/rootReducer";
 
 type Props = {
   buttonTitle: string;
   productIndex: number;
+  handleIsUpdateProduct?: (isModify: boolean, productIndex: number) => void;
 };
 
 const A = styled.a`
@@ -20,13 +21,21 @@ const A = styled.a`
   text-decoration: none;
 `;
 
-const ButtonSummary: React.FC<Props> = ({ buttonTitle, productIndex }) => {
+const ButtonSummary: React.FC<Props> = ({
+  buttonTitle,
+  productIndex,
+  handleIsUpdateProduct,
+}) => {
   const dispatch = useDispatch();
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   const handleClick = () => {
     if (buttonTitle === "Sửa") {
-      console.log("vu productIndex: ", productIndex);
+      handleIsUpdateProduct ? handleIsUpdateProduct(true, productIndex) : {};
+      dispatch({
+        type: MODIFYPRODUCT,
+        payload: productIndex,
+      });
     } else if (buttonTitle === "Xóa") {
       if (dataRedux.total_product === 1) return;
       dispatch({

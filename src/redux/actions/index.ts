@@ -30,6 +30,11 @@ export interface REMOVEPRODUCT {
   payload: number;
 }
 
+export interface MODIFYPRODUCT {
+  type: constants.UPDATEPRODUCT;
+  payload: number;
+}
+
 // export const addInsuranceData = (
 //   payload: Array<PRODUCTINFORS>
 // ): ADDPRODUCTINFORS => {
@@ -51,4 +56,5 @@ export type ActionTypes =
   | ADDPRODUCTINFORS
   | ADDUSERINFO
   | ADDPRODUCT
-  | REMOVEPRODUCT;
+  | REMOVEPRODUCT
+  | MODIFYPRODUCT;

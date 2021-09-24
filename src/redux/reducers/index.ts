@@ -3,6 +3,7 @@ import {
   ADDUSERINFO,
   ADDPRODUCT,
   REMOVEPRODUCT,
+  MODIFYPRODUCT,
 } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
@@ -26,6 +27,7 @@ interface PRODUCTINFOR {
 
 interface InitialStateType {
   total_product: number;
+  modify_product: number;
   ma_dv: string;
   ma_nsd: string;
   token: string;
@@ -37,6 +39,7 @@ interface InitialStateType {
 
 export const initialState: InitialStateType = {
   total_product: 1,
+  modify_product: 0,
   ma_dv: data.ma_dvi,
   ma_nsd: data.ma_nsd,
   token: data.token,
@@ -52,6 +55,11 @@ const reducers = (state = initialState, action: ActionTypes) => {
       return {
         ...state,
         total_product: state.total_product + 1,
+      };
+    case MODIFYPRODUCT:
+      return {
+        ...state,
+        modify_product: action.payload,
       };
     case REMOVEPRODUCT:
       const newState = { ...state };

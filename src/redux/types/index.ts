@@ -9,3 +9,6 @@ export type PRODUCT = typeof ADDPRODUCT;
 
 export const REMOVEPRODUCT = "REMOVEPRODUCT";
 export type SUBTRACTPRODUCT = typeof REMOVEPRODUCT;
+
+export const MODIFYPRODUCT = "MODIFYPRODUCT";
+export type UPDATEPRODUCT = typeof MODIFYPRODUCT;
