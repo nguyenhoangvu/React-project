@@ -115,7 +115,6 @@ const FormMotoInfo: React.FC<Props> = ({
             required={true}
             readonly={true}
             productName={productName}
-            isResetValue={isAddProductButtonClicked}
           />
           <TextInput
             inputType="text"
@@ -125,7 +124,7 @@ const FormMotoInfo: React.FC<Props> = ({
             labelName="Địa chỉ, số điện thoại cụ thể"
             required={true}
             productName={productName}
-            isResetValue={isAddProductButtonClicked}
+            isResetValue={false}
           />
         </Col>
         <DirectButton

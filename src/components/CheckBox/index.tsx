@@ -12,7 +12,11 @@ type Props = {
   isResetValue?: boolean;
 };
 
-const SPAN = styled.span`
+interface ISpan {
+  checkboxId: string;
+}
+
+const SPAN = styled.span<ISpan>`
   padding-left: 15px;
   cursor: pointer;
   height: 25px;
@@ -20,6 +24,11 @@ const SPAN = styled.span`
   font-size: 0.875rem;
   color: #2196f3;
   font-weight: 500;
+  ${({ checkboxId }) =>
+    checkboxId === "check_dieu_khoan" &&
+    `
+    color: #9e9e9e;
+  `}
 `;
 
 const CheckBox: React.FC<Props> = ({
@@ -31,15 +40,22 @@ const CheckBox: React.FC<Props> = ({
   const [checkboxChecked, setCheckboxChecked] = useState(true);
   const dispatch = useDispatch();
 
+  const viewDK = () => {
+    window.location.href =
+      "https://portal.evbi.vn/TaiLieu/vbi_quy_tac_bao_hiem_xe_co_gioi.pdf";
+  };
+
   useEffect(() => {
-    dispatch({
-      type: ADDPRODUCTINFORS,
-      payload: {
-        key: checkboxId,
-        value: checkboxChecked === true ? "checked" : "uncheck",
-        productName: productName,
-      },
-    });
+    if (checkboxId !== "check_dieu_khoan") {
+      dispatch({
+        type: ADDPRODUCTINFORS,
+        payload: {
+          key: checkboxId,
+          value: checkboxChecked === true ? "checked" : "uncheck",
+          productName: productName,
+        },
+      });
+    }
   }, [checkboxChecked]);
 
   useEffect(() => {
@@ -64,7 +80,12 @@ const CheckBox: React.FC<Props> = ({
         checked={checkboxChecked}
         onChange={() => setCheckboxChecked(!checkboxChecked)}
       />
-      <SPAN>{checkboxText}</SPAN>
+      <SPAN checkboxId={checkboxId}>{checkboxText}</SPAN>
+      {checkboxId === "check_dieu_khoan" && (
+        <span onClick={viewDK} style={{ color: "#039be5" }}>
+          điều kiện, điều khoản, quy tắc của VBI.
+        </span>
+      )}
     </div>
   );
 };

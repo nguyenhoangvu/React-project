@@ -12,7 +12,6 @@ type Props = {
   onShow: boolean | undefined;
   handleInputValue: (input: string) => void;
   handleModalClose: (close: boolean | undefined) => void;
-  isResetValue?: boolean;
 };
 
 const ModalContentWrapper = styled.div`
@@ -42,7 +41,6 @@ const ModalInput: React.FC<Props> = ({
   onShow,
   handleInputValue,
   handleModalClose,
-  isResetValue,
 }) => {
   const [show, setShow] = useState<boolean | undefined>(false);
   const [placeHolder, setPlaceHolder] = useState("Tìm tỉnh thành");
@@ -117,10 +115,6 @@ const ModalInput: React.FC<Props> = ({
   useEffect(() => {
     handleModalClose ? handleModalClose(show) : {};
   }, [show]);
-
-  useEffect(() => {
-    setInputValue("");
-  }, [isResetValue]);
 
   return (
     <Modal show={show} onHide={handleClose} animation={false} className="modal">
