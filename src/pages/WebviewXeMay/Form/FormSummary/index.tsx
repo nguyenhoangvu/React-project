@@ -200,6 +200,8 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <ModalCheck
             onShow={showModalCheck}
             handleModalClose={handleModalCheckClose}
+            modalContent="Thông tin đơn bảo hiểm mô tô, xe máy sẽ không thể sửa đổi khi Quý
+            khách tiếp tục. Quý khách có muốn tiếp tục?"
           />
           <DirectButton
             handleButtonClick={handleDisplayForm}
