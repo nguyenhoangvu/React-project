@@ -48,6 +48,12 @@ const CheckBox: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    if (checkboxId === "check_dieu_khoan") {
+      setCheckboxChecked(false);
+    }
+  }, []);
+
+  useEffect(() => {
     if (checkboxId !== "check_dieu_khoan") {
       dispatch({
         type: ADDPRODUCTINFORS,

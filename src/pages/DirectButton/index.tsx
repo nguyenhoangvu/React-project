@@ -10,6 +10,8 @@ type Props = {
   isPay?: boolean;
   isSummaryPage?: boolean;
   isCheckTerm?: boolean;
+  handlePayment?: (pay: boolean) => void;
+  buttonPaymentCallback?: boolean;
 };
 
 const ButtonWrapper = styled.div`
@@ -53,11 +55,18 @@ const DirectButton: React.FC<Props> = ({
   isPay,
   isSummaryPage,
   isCheckTerm,
+  handlePayment,
+  buttonPaymentCallback,
 }) => {
   const [clickButton, setClickButton] = useState("");
+  const [paymentClicked, setPaymentClicked] = useState(false);
 
   const handleButtonClicked = (clicked: string) => {
     setClickButton(clicked);
+  };
+
+  const handlePaymentClicked = (paymentClicked: boolean) => {
+    setPaymentClicked(paymentClicked);
   };
 
   useEffect(() => {
@@ -67,6 +76,10 @@ const DirectButton: React.FC<Props> = ({
   useEffect(() => {
     setClickButton(buttonCallback);
   }, [buttonCallback]);
+
+  useEffect(() => {
+    handlePayment ? handlePayment(paymentClicked) : {};
+  }, [paymentClicked]);
 
   return (
     <ButtonWrapper>
@@ -84,6 +97,8 @@ const DirectButton: React.FC<Props> = ({
             isPay={isPay}
             isSummaryPage={isSummaryPage}
             isCheckTerm={isCheckTerm}
+            handlePaymentClicked={handlePaymentClicked}
+            buttonPaymentCallback={buttonPaymentCallback}
           />
         </LI>
       </UL>

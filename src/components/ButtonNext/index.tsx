@@ -8,6 +8,9 @@ type Props = {
   buttonCallback: string;
   isPay?: boolean;
   isSummaryPage?: boolean;
+  isCheckTerm?: boolean;
+  handlePaymentClicked?: (clicked: boolean) => void;
+  buttonPaymentCallback?: boolean;
 };
 
 const A = styled.a`
@@ -36,12 +39,20 @@ const ButtonNext: React.FC<Props> = ({
   buttonCallback,
   isPay,
   isSummaryPage,
+  isCheckTerm,
+  handlePaymentClicked,
+  buttonPaymentCallback,
 }) => {
   const [buttonClicked, setButtonClicked] = useState("");
+  const [buttonPaymentClicked, setButtonPaymentClicked] = useState(false);
   const [buttonTitle, setButtonTitle] = useState("Tiếp tục");
 
   const onClickBackButton = () => {
     setButtonClicked("next");
+  };
+
+  const onClickPayment = () => {
+    setButtonPaymentClicked(!buttonPaymentClicked);
   };
 
   useEffect(() => {
@@ -49,27 +60,47 @@ const ButtonNext: React.FC<Props> = ({
   }, [buttonClicked]);
 
   useEffect(() => {
+    handlePaymentClicked ? handlePaymentClicked(buttonPaymentClicked) : {};
+  }, [buttonPaymentClicked]);
+
+  useEffect(() => {
     setButtonClicked(buttonCallback);
   }, [buttonCallback]);
+
+  useEffect(() => {
+    if (buttonPaymentCallback !== undefined)
+      setButtonPaymentClicked(buttonPaymentCallback);
+  }, [buttonPaymentCallback]);
 
   useEffect(() => {
     if (isPay === true) setButtonTitle("Thanh Toán");
   }, [isPay]);
 
   return (
-    <A className="" onClick={onClickBackButton}>
+    <>
       {isPay === false && isSummaryPage === false && (
-        <SPAN className="right">{buttonTitle}</SPAN>
+        <A className="" onClick={onClickBackButton}>
+          <SPAN className="right">{buttonTitle}</SPAN>
+          <FontAwesomeIcon
+            icon={faChevronRight}
+            size="2x"
+            className="next-icon"
+            style={{ height: "3.5rem" }}
+          />
+        </A>
       )}
-      {isPay === false && isSummaryPage === false && (
-        <FontAwesomeIcon
-          icon={faChevronRight}
-          size="2x"
-          className="next-icon"
-          style={{ height: "3.5rem" }}
-        />
+      {isCheckTerm === true && isPay === true && isSummaryPage === true && (
+        <A className="" onClick={onClickPayment}>
+          <SPAN className="right">{buttonTitle}</SPAN>
+          <FontAwesomeIcon
+            icon={faChevronRight}
+            size="2x"
+            className="next-icon"
+            style={{ height: "3.5rem" }}
+          />
+        </A>
       )}
-    </A>
+    </>
   );
 };
 

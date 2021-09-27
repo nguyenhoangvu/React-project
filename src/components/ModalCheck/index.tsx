@@ -8,25 +8,24 @@ import "./index.scss";
 
 type Props = {
   onShow: boolean | undefined;
-  handleModalClose: (close: boolean | undefined) => void;
+  handleModalClose: (close: boolean) => void;
 };
 
 const ModalCheck: React.FC<Props> = ({ onShow, handleModalClose }) => {
   const [show, setShow] = useState<boolean | undefined>(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    handleModalClose ? handleModalClose(false) : {};
+  };
 
   useEffect(() => {
     setShow(onShow);
   }, [onShow]);
 
-  useEffect(() => {
-    handleModalClose ? handleModalClose(show) : {};
-  }, [show]);
-
   return (
     <Modal show={show} onHide={handleClose} animation={false} className="modal">
-      <Modal.Body></Modal.Body>
+      <Modal.Body>hello</Modal.Body>
       <Modal.Footer>
         <Button onClick={handleClose} className="btn-close">
           Hủy

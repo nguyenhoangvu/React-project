@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { RootState } from "../../../../redux/store/rootReducer";
 import DirectButton from "../../../DirectButton";
 import CheckBox from "../../../../components/CheckBox";
+import ModalCheck from "../../../../components/ModalCheck";
 import HrLine from "../../../../components/HrLine";
 import data from "../../../../json/select-dropdown.json";
 
@@ -49,6 +50,8 @@ const CheckTerm = styled.div`
 
 const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   const [buttonClick, setButtonClick] = useState("");
+  const [checkTerm, setCheckTerm] = useState(false);
+  const [showModalCheck, setShowModalCheck] = useState(false);
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   const handleDisplayForm = (buttonClicked: string) => {
@@ -62,6 +65,18 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   useEffect(() => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
+
+  const handleCheckboxChecked = (checked: boolean) => {
+    setCheckTerm(checked);
+  };
+
+  const handlePayment = (isPaymentClicked: boolean) => {
+    setShowModalCheck(isPaymentClicked);
+  };
+
+  const handleModalCheckClose = (closes: boolean) => {
+    setShowModalCheck(closes);
+  };
 
   const RenderListProduct = () => {
     let listProducts = [];
@@ -176,16 +191,24 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
               đồng ý với các
               "
                 productName=""
+                handleCheckboxChecked={handleCheckboxChecked}
               />
             </CheckTerm>
 
             <div style={{ height: "150px" }}></div>
           </div>
+          <ModalCheck
+            onShow={showModalCheck}
+            handleModalClose={handleModalCheckClose}
+          />
           <DirectButton
             handleButtonClick={handleDisplayForm}
             buttonCallback={buttonClick}
             isPay={true}
             isSummaryPage={true}
+            isCheckTerm={checkTerm}
+            handlePayment={handlePayment}
+            buttonPaymentCallback={showModalCheck}
           />
         </Col>
       </Row>
