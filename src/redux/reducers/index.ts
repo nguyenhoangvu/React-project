@@ -4,6 +4,7 @@ import {
   ADDPRODUCT,
   REMOVEPRODUCT,
   MODIFYPRODUCT,
+  ADDINPUTNAMEMUSTVALIDATE,
 } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
@@ -35,6 +36,7 @@ interface InitialStateType {
   nv: string;
   userInfo: Array<USERINFOR>;
   listProducts: Array<PRODUCTINFOR>;
+  listInputMustValidate: Array<string>;
 }
 
 export const initialState: InitialStateType = {
@@ -47,6 +49,7 @@ export const initialState: InitialStateType = {
   nv: data.nv,
   userInfo: [],
   listProducts: [],
+  listInputMustValidate: [],
 };
 
 const reducers = (state = initialState, action: ActionTypes) => {
@@ -60,6 +63,11 @@ const reducers = (state = initialState, action: ActionTypes) => {
       return {
         ...state,
         modify_product: action.payload,
+      };
+    case ADDINPUTNAMEMUSTVALIDATE:
+      return {
+        ...state,
+        listInputMustValidate: [...state.listInputMustValidate, action.payload],
       };
     case REMOVEPRODUCT:
       const newState = { ...state };

@@ -4,7 +4,11 @@ import styled from "styled-components";
 import Label from "../Label";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store/rootReducer";
-import { ADDUSERINFO, ADDPRODUCTINFORS } from "../../redux/types";
+import {
+  ADDUSERINFO,
+  ADDPRODUCTINFORS,
+  ADDINPUTNAMEMUSTVALIDATE,
+} from "../../redux/types";
 import { inputNumberOnly } from "./helper";
 import data from "../../json/select-dropdown.json";
 import moment from "moment";
@@ -151,6 +155,12 @@ const TextInput: React.FC<Props> = ({
     }
   };
 
+  const onlyNumberKey = (event: any) => {
+    if (inputName === "user_phone") {
+      inputNumberOnly(event);
+    }
+  };
+
   useEffect(() => {
     if (inputValueFromProp !== undefined && inputValueFromProp !== "") {
       setInputValue(inputValueFromProp);
@@ -238,6 +248,15 @@ const TextInput: React.FC<Props> = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (inputName !== undefined && required === true) {
+      dispatch({
+        type: ADDINPUTNAMEMUSTVALIDATE,
+        payload: inputName,
+      });
+    }
+  }, []);
+
   return (
     <InputWrapper>
       <Label
@@ -260,6 +279,9 @@ const TextInput: React.FC<Props> = ({
         onBlur={handleBlurInput}
         onChange={onInputChange}
         onClick={handleInputClick}
+        onKeyPress={(event) => {
+          onlyNumberKey(event);
+        }}
         value={inputValue}
         readOnly={readonly}
         placeholder={placeHolder}

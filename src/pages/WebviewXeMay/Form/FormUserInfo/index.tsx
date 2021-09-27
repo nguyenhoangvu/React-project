@@ -6,6 +6,7 @@ import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import ButtonBuy from "../../../../components/ButtonBuy";
+import Error from "../../../../components/Error";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -181,6 +182,7 @@ const FormUserInfo: React.FC<Props> = ({
         isPay={false}
         isSummaryPage={false}
       />
+      <Error errorContent="test" />
     </Container>
   );
 };

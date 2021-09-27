@@ -35,26 +35,15 @@ export interface MODIFYPRODUCT {
   payload: number;
 }
 
-// export const addInsuranceData = (
-//   payload: Array<PRODUCTINFORS>
-// ): ADDPRODUCTINFORS => {
-//   return {
-//     type: constants.ADDPRODUCTINFORS,
-//     payload,
-//     productName
-//   };
-// };
-
-// export const addUserInfo = (payload: USERINFOR): ADDUSERINFO => {
-//   return {
-//     type: constants.ADDUSERINFO,
-//     payload,
-//   };
-// };
+export interface ADDINPUTNAMEMUSTVALIDATE {
+  type: constants.INPUTNAMEMUSTVALIDATE;
+  payload: string;
+}
 
 export type ActionTypes =
   | ADDPRODUCTINFORS
   | ADDUSERINFO
   | ADDPRODUCT
   | REMOVEPRODUCT
-  | MODIFYPRODUCT;
+  | MODIFYPRODUCT
+  | ADDINPUTNAMEMUSTVALIDATE;
