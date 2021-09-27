@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Col, Container, Row } from "react-bootstrap";
 
+import { RootState } from "../../../../redux/store/rootReducer";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import ButtonBuy from "../../../../components/ButtonBuy";
-import Error from "../../../../components/Error";
+import { validate } from "../../../../common/validateInfor";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -34,6 +36,12 @@ const FormUserInfo: React.FC<Props> = ({
   const [nhom_kh, setNhom_kh] = useState("");
   const [buttonClick, setButtonClick] = useState("");
 
+  const listInputMustValidate = useSelector(
+    (state: RootState) => state.reducer.listInputMustValidate
+  );
+
+  const userInfo = useSelector((state: RootState) => state.reducer.userInfo);
+
   const handleNhomKh = (nhom_kh: string) => {
     if (nhom_kh === "Cá nhân") setNhom_kh("CN");
     else if (nhom_kh === "Doanh nghiệp") setNhom_kh("DN");
@@ -41,6 +49,15 @@ const FormUserInfo: React.FC<Props> = ({
 
   const handleDisplayForm = (buttonClicked: string) => {
     setButtonClick(buttonClicked);
+    if (buttonClicked === "next") {
+      if (nhom_kh === "CN") {
+        let listInput = listInputMustValidate.filter((o) =>
+          o.startsWith("user")
+        );
+        let test = validate(listInput, userInfo);
+      } else if (nhom_kh === "DN") {
+      }
+    }
   };
 
   const handleClickCameraButton = () => {};
@@ -182,7 +199,6 @@ const FormUserInfo: React.FC<Props> = ({
         isPay={false}
         isSummaryPage={false}
       />
-      <Error errorContent="test" />
     </Container>
   );
 };

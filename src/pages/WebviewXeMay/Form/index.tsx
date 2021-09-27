@@ -9,6 +9,7 @@ import FormMotoInfo from "./FormMotoInfo";
 import FormTNDS from "./FormTNDS";
 import FormListMoto from "./FormListMoto";
 import FormSummary from "./FormSummary";
+import Error from "../../../components/Error";
 
 interface IFormUserInfo {
   hideForm: boolean;
@@ -235,6 +236,7 @@ const FormXeMay: React.FC<Props> = ({
           pageCallback={buttonFormSummaryClicked}
         />
       </FormSummaryWrapper>
+      <Error isShowError={false} errorContent="test" />
     </form>
   );
 };

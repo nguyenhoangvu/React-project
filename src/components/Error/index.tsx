@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 type Props = {
   errorContent: string;
+  isShowError: boolean;
 };
 
 const animation = keyframes`
@@ -39,11 +40,15 @@ const ErrorStyleWrapper = styled.div<IErrorStyleWrapper>`
   animation: 1s ${animation} ease-in;
 `;
 
-const Error: React.FC<Props> = ({ errorContent }) => {
-  const [show, setShow] = useState(true);
+const Error: React.FC<Props> = ({ errorContent, isShowError }) => {
+  const [show, setShow] = useState(isShowError);
 
   useEffect(() => {
-    let timer1 = setTimeout(() => setShow(false), 5000);
+    let timer1: any;
+    if (show === true) {
+      timer1 = setTimeout(() => setShow(!show), 5000);
+    }
+
     return () => {
       clearTimeout(timer1);
     };
