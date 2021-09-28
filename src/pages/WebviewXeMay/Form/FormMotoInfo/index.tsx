@@ -23,9 +23,20 @@ const FormMotoInfo: React.FC<Props> = ({
 }) => {
   const [buttonClick, setButtonClick] = useState("");
   const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
+  const listInputMustValidate = useSelector(
+    (state: RootState) => state.reducer.listInputMustValidate
+  );
+  const listProduct = useSelector(
+    (state: RootState) => state.reducer.listProducts
+  );
 
   const handleDisplayForm = (buttonClicked: string) => {
-    setButtonClick(buttonClicked);
+    if (buttonClicked === "back") setButtonClick(buttonClicked);
+    else if (buttonClicked === "next") {
+      let listInput = listInputMustValidate.filter((o) =>
+        o.key.startsWith("moto")
+      );
+    }
   };
 
   useEffect(() => {

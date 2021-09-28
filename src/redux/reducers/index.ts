@@ -96,10 +96,14 @@ const reducers = (state = initialState, action: ActionTypes) => {
       newState.total_product -= 1;
       return newState;
     case ADDUSERINFO:
-      return {
-        ...state,
-        userInfo: [...state.userInfo, action.payload],
-      };
+      const userInfoState = { ...state };
+      let infoIndex = userInfoState.userInfo.findIndex(
+        (o) => o.key === action.payload.key
+      );
+      if (infoIndex >= 0) {
+        userInfoState.userInfo[infoIndex] = action.payload;
+      } else userInfoState.userInfo.push(action.payload);
+      return userInfoState;
     case ADDPRODUCTINFORS:
       const cloneState = { ...state };
       let index = cloneState.listProducts.findIndex(

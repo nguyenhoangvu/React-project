@@ -55,18 +55,21 @@ const FormUserInfo: React.FC<Props> = ({
     // setButtonClick(buttonClicked);
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
+      let key = "";
       if (nhom_kh === "CN") {
-        let listInput = listInputMustValidate.filter((o) =>
-          o.key.startsWith("user")
-        );
-        let test = validate(listInput, userInfo);
-        if (test !== "") {
-          setIsShowError(!isShowError);
-          setErrorMsg(test);
-        } else {
-          setButtonClick(buttonClicked);
-        }
+        key = "user";
       } else if (nhom_kh === "DN") {
+        key = "enterprise";
+      }
+      let listInput = listInputMustValidate.filter((o) =>
+        o.key.startsWith(key)
+      );
+      let test = validate(listInput, userInfo);
+      if (test !== "") {
+        setIsShowError(!isShowError);
+        setErrorMsg(test);
+      } else {
+        setButtonClick(buttonClicked);
       }
     }
   };

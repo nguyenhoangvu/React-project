@@ -100,30 +100,31 @@ const TextInput: React.FC<Props> = ({
   };
 
   const handleBlurInput = () => {
+    console.log("vu inputValue: ", inputValue);
+    if (inputName.startsWith("user")) {
+      dispatch({
+        type: ADDUSERINFO,
+        payload: {
+          key: inputName,
+          value: inputValue,
+        },
+      });
+    } else if (
+      inputName !== "nhom_kh" &&
+      inputName !== "expired_time_tnds" &&
+      inputName !== "moto_volumn"
+    ) {
+      dispatch({
+        type: ADDPRODUCTINFORS,
+        payload: {
+          key: inputName,
+          value: inputValue,
+          productName: productName,
+        },
+      });
+    }
     if (inputValue !== "") {
       setInputActive("active");
-      if (inputName.startsWith("user")) {
-        dispatch({
-          type: ADDUSERINFO,
-          payload: {
-            key: inputName,
-            value: inputValue,
-          },
-        });
-      } else if (
-        inputName !== "nhom_kh" &&
-        inputName !== "expired_time_tnds" &&
-        inputName !== "moto_volumn"
-      ) {
-        dispatch({
-          type: ADDPRODUCTINFORS,
-          payload: {
-            key: inputName,
-            value: inputValue,
-            productName: productName,
-          },
-        });
-      }
     } else setInputActive("");
     setFocusInput(false);
   };
