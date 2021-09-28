@@ -11,6 +11,11 @@ interface PRODUCTINFORS {
   productName: string;
 }
 
+interface INPUTMUSTVALIDATE {
+  key: string;
+  name: string;
+}
+
 export interface ADDPRODUCTINFORS {
   type: constants.PRODUCTINFORS;
   payload: PRODUCTINFORS;
@@ -37,7 +42,7 @@ export interface MODIFYPRODUCT {
 
 export interface ADDINPUTNAMEMUSTVALIDATE {
   type: constants.INPUTNAMEMUSTVALIDATE;
-  payload: string;
+  payload: INPUTMUSTVALIDATE;
 }
 
 export type ActionTypes =

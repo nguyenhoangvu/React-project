@@ -22,9 +22,10 @@ interface PRODUCTINFOR {
   productName: string;
 }
 
-// interface LISTPRODUCTS {
-//   product: Array<PRODUCTINFOR>;
-// }
+interface INPUTMUSTVALIDATE {
+  key: string;
+  name: string;
+}
 
 interface InitialStateType {
   total_product: number;
@@ -36,7 +37,7 @@ interface InitialStateType {
   nv: string;
   userInfo: Array<USERINFOR>;
   listProducts: Array<PRODUCTINFOR>;
-  listInputMustValidate: Array<string>;
+  listInputMustValidate: Array<INPUTMUSTVALIDATE>;
 }
 
 export const initialState: InitialStateType = {

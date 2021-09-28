@@ -11,6 +11,7 @@ type Props = {
   isCheckTerm?: boolean;
   handlePaymentClicked?: (clicked: boolean) => void;
   buttonPaymentCallback?: boolean;
+  isValidateFalse?: boolean;
 };
 
 const A = styled.a`
@@ -42,6 +43,7 @@ const ButtonNext: React.FC<Props> = ({
   isCheckTerm,
   handlePaymentClicked,
   buttonPaymentCallback,
+  isValidateFalse,
 }) => {
   const [buttonClicked, setButtonClicked] = useState("");
   const [buttonPaymentClicked, setButtonPaymentClicked] = useState(false);
@@ -66,6 +68,10 @@ const ButtonNext: React.FC<Props> = ({
   useEffect(() => {
     setButtonClicked(buttonCallback);
   }, [buttonCallback]);
+
+  useEffect(() => {
+    if (isValidateFalse === true) setButtonClicked("");
+  }, [isValidateFalse]);
 
   useEffect(() => {
     if (buttonPaymentCallback !== undefined)

@@ -37,23 +37,29 @@ const ErrorStyleWrapper = styled.div<IErrorStyleWrapper>`
   font-weight: 300;
   color: #fff;
   z-index: 11111111111;
-  animation: 1s ${animation} ease-in;
+  animation: 0.5s ${animation} ease-in;
 `;
 
 const Error: React.FC<Props> = ({ errorContent, isShowError }) => {
-  const [show, setShow] = useState(isShowError);
+  const [show, setShow] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    setShow(isShowError);
+    setErrorMsg(errorContent);
+  }, [isShowError, errorContent]);
 
   useEffect(() => {
     let timer1: any;
     if (show === true) {
-      timer1 = setTimeout(() => setShow(!show), 5000);
+      timer1 = setTimeout(() => setShow(!show), 3000);
     }
 
     return () => {
       clearTimeout(timer1);
     };
   }, [show]);
-  return <ErrorStyleWrapper isShow={show}>{errorContent}</ErrorStyleWrapper>;
+  return <ErrorStyleWrapper isShow={show}>{errorMsg}</ErrorStyleWrapper>;
 };
 
 export default Error;

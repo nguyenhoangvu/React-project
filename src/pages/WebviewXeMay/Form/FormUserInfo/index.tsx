@@ -14,6 +14,7 @@ type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
   productName: string;
+  handleShowError: (isError: boolean, errorMsg: string) => void;
 };
 
 interface INhom {
@@ -32,9 +33,12 @@ const FormUserInfo: React.FC<Props> = ({
   handleButtonClick,
   pageCallback,
   productName,
+  handleShowError,
 }) => {
   const [nhom_kh, setNhom_kh] = useState("");
   const [buttonClick, setButtonClick] = useState("");
+  const [isShowError, setIsShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const listInputMustValidate = useSelector(
     (state: RootState) => state.reducer.listInputMustValidate
@@ -48,13 +52,20 @@ const FormUserInfo: React.FC<Props> = ({
   };
 
   const handleDisplayForm = (buttonClicked: string) => {
-    setButtonClick(buttonClicked);
-    if (buttonClicked === "next") {
+    // setButtonClick(buttonClicked);
+    if (buttonClicked === "back") setButtonClick(buttonClicked);
+    else if (buttonClicked === "next") {
       if (nhom_kh === "CN") {
         let listInput = listInputMustValidate.filter((o) =>
-          o.startsWith("user")
+          o.key.startsWith("user")
         );
         let test = validate(listInput, userInfo);
+        if (test !== "") {
+          setIsShowError(!isShowError);
+          setErrorMsg(test);
+        } else {
+          setButtonClick(buttonClicked);
+        }
       } else if (nhom_kh === "DN") {
       }
     }
@@ -69,6 +80,18 @@ const FormUserInfo: React.FC<Props> = ({
   useEffect(() => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
+
+  useEffect(() => {
+    handleShowError ? handleShowError(isShowError, errorMsg) : {};
+    let timer1: any;
+    if (isShowError === true) {
+      timer1 = setTimeout(() => setIsShowError(!isShowError), 3000);
+    }
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, [isShowError, errorMsg]);
 
   return (
     <Container>
@@ -198,6 +221,7 @@ const FormUserInfo: React.FC<Props> = ({
         buttonCallback={buttonClick}
         isPay={false}
         isSummaryPage={false}
+        isValidateFalse={isShowError}
       />
     </Container>
   );

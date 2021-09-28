@@ -77,6 +77,8 @@ const FormXeMay: React.FC<Props> = ({
   const [addProductButtonCallback, setaddProductButtonCallback] =
     useState(false);
   const [productName, setProductName] = useState("product_1");
+  const [isShowError, setIsShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const totalProductFromRoot = useSelector(
     (state: RootState) => state.reducer.total_product
@@ -192,6 +194,12 @@ const FormXeMay: React.FC<Props> = ({
     }
   };
 
+  // validate
+  const handleValidateFormUser = (isError: boolean, errorMsg: string) => {
+    setIsShowError(isError);
+    setErrorMsg(errorMsg);
+  };
+
   return (
     <form>
       <FormUserInfoWrapper
@@ -203,6 +211,7 @@ const FormXeMay: React.FC<Props> = ({
           handleButtonClick={handleButtonClick}
           pageCallback={buttonFormUserInfoClicked}
           productName={productName}
+          handleShowError={handleValidateFormUser}
         />
       </FormUserInfoWrapper>
       <FormMotoInfoWrapper showForm={showFormMotoInfo}>
@@ -236,7 +245,7 @@ const FormXeMay: React.FC<Props> = ({
           pageCallback={buttonFormSummaryClicked}
         />
       </FormSummaryWrapper>
-      <Error isShowError={false} errorContent="test" />
+      <Error isShowError={isShowError} errorContent={errorMsg} />
     </form>
   );
 };

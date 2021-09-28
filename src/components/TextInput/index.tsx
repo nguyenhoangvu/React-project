@@ -252,7 +252,10 @@ const TextInput: React.FC<Props> = ({
     if (inputName !== undefined && required === true) {
       dispatch({
         type: ADDINPUTNAMEMUSTVALIDATE,
-        payload: inputName,
+        payload: {
+          key: inputName,
+          name: labelName,
+        },
       });
     }
   }, []);

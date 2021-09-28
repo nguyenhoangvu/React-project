@@ -12,6 +12,7 @@ type Props = {
   isCheckTerm?: boolean;
   handlePayment?: (pay: boolean) => void;
   buttonPaymentCallback?: boolean;
+  isValidateFalse?: boolean;
 };
 
 const ButtonWrapper = styled.div`
@@ -57,6 +58,7 @@ const DirectButton: React.FC<Props> = ({
   isCheckTerm,
   handlePayment,
   buttonPaymentCallback,
+  isValidateFalse,
 }) => {
   const [clickButton, setClickButton] = useState("");
   const [paymentClicked, setPaymentClicked] = useState(false);
@@ -99,6 +101,7 @@ const DirectButton: React.FC<Props> = ({
             isCheckTerm={isCheckTerm}
             handlePaymentClicked={handlePaymentClicked}
             buttonPaymentCallback={buttonPaymentCallback}
+            isValidateFalse={isValidateFalse}
           />
         </LI>
       </UL>
