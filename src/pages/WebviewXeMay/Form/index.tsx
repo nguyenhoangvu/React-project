@@ -229,6 +229,7 @@ const FormXeMay: React.FC<Props> = ({
           pageCallback={buttonFormTNDSClicked}
           productName={productName}
           isAddProductButtonClicked={addProductButtonCallback}
+          handleShowError={handleValidate}
         />
       </FormTNDSWrapper>
       <FormListMotoWrapper showForm={showFormListMoto}>

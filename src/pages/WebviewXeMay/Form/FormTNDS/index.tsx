@@ -9,7 +9,7 @@ import SelectDropdown from "../../../../components/SelectDropdown";
 import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
-
+import { validate } from "../../../../common/validateInfor";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -17,6 +17,7 @@ type Props = {
   pageCallback: string;
   productName: string;
   isAddProductButtonClicked?: boolean;
+  handleShowError: (isError: boolean, errorMsg: string) => void;
 };
 
 const FormTNDS: React.FC<Props> = ({
@@ -24,9 +25,13 @@ const FormTNDS: React.FC<Props> = ({
   pageCallback,
   productName,
   isAddProductButtonClicked,
+  handleShowError,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
   const [feeInsurance, setFeeInsurance] = useState("");
+  const [isShowError, setIsShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   const dataRedux = useSelector(
     (state: RootState) => state.reducer.listProducts
   );
@@ -35,8 +40,27 @@ const FormTNDS: React.FC<Props> = ({
     (elem) => elem.key === "phi_bh_tnds" && elem.productName === productName
   );
 
+  const listInputMustValidate = useSelector(
+    (state: RootState) => state.reducer.listInputMustValidate
+  );
+  const listProduct = useSelector(
+    (state: RootState) => state.reducer.listProducts
+  );
+
   const handleDisplayForm = (buttonClicked: string) => {
-    setButtonClick(buttonClicked);
+    if (buttonClicked === "back") setButtonClick(buttonClicked);
+    else if (buttonClicked === "next") {
+      let listInput = listInputMustValidate.filter((o) =>
+        o.key.includes("tnds")
+      );
+      let test = validate(listInput, listProduct);
+      if (test !== "") {
+        setIsShowError(!isShowError);
+        setErrorMsg(test);
+      } else {
+        setButtonClick(buttonClicked);
+      }
+    }
   };
 
   useEffect(() => {
@@ -53,6 +77,18 @@ const FormTNDS: React.FC<Props> = ({
   useEffect(() => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
+
+  useEffect(() => {
+    handleShowError ? handleShowError(isShowError, errorMsg) : {};
+    let timer1: any;
+    if (isShowError === true) {
+      timer1 = setTimeout(() => setIsShowError(!isShowError), 3000);
+    }
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, [isShowError, errorMsg]);
 
   return (
     <Container>
@@ -162,6 +198,7 @@ const FormTNDS: React.FC<Props> = ({
         buttonCallback={buttonClick}
         isPay={false}
         isSummaryPage={false}
+        isValidateFalse={isShowError}
       />
     </Container>
   );
