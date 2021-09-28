@@ -5,13 +5,13 @@ import WebviewXeMay from "./pages/WebviewXeMay";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
-
 import store from "./redux/store/index";
+import data from "../src/json/partner-info.json";
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <WebviewXeMay />
+      {data.nv === "XC.1.1" && <WebviewXeMay />}
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")

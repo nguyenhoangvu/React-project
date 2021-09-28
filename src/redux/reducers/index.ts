@@ -28,6 +28,7 @@ interface INPUTMUSTVALIDATE {
 }
 
 interface InitialStateType {
+  so_id: number;
   total_product: number;
   modify_product: number;
   ma_dv: string;
@@ -41,6 +42,7 @@ interface InitialStateType {
 }
 
 export const initialState: InitialStateType = {
+  so_id: 0,
   total_product: 1,
   modify_product: 0,
   ma_dv: data.ma_dvi,
@@ -115,7 +117,7 @@ const reducers = (state = initialState, action: ActionTypes) => {
         cloneState.listProducts[index] = action.payload;
       } else cloneState.listProducts.push(action.payload);
 
-      if (state.nv === "XE") {
+      if (state.nv === "XC.1.1") {
         let motoVolumn = cloneState.listProducts.find(
           (o) =>
             o.key === "moto_volumn" &&

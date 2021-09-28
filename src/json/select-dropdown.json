@@ -12,11 +12,13 @@
   "Loai_xe": [
     {
       "key": "2",
-      "value": "Trên 50cc"
+      "value": "Trên 50cc",
+      "type": "50"
     },
     {
       "key": "1",
-      "value": "Duới 50cc"
+      "value": "Duới 50cc",
+      "type": "0"
     }
   ],
   "Thoi_han_bh": [
