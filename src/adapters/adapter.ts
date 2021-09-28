@@ -71,8 +71,9 @@ let dataFromRedux = useSelector((state: RootState) => state.reducer);
 
 export const sendMotoInfo = () => {
   let GCN = [];
+  let id = Math.random();
   let motoInfo = {
-    so_id_dt: "",
+    so_id_dt: id,
     ten: "",
     dchi: "",
     cmt: "",
@@ -90,22 +91,32 @@ export const sendMotoInfo = () => {
     nguoi_huong_ten: "",
     nguoi_huong_dchi: "",
     nguoi_huong_mst: "",
-    TTIN_PHI: [],
+    TTIN_PHI: [{}],
   };
 
   let total_product = dataFromRedux.total_product;
   for (let i = 1; i <= total_product; i++) {
+    let id = Math.random();
     let productName = "product_" + i;
     let productInfo = dataFromRedux.listProducts.filter(
       (o) => o.productName === productName
     );
     if (productInfo !== undefined) {
-      let thirdPerson = productInfo.find(
-        (o) => o.key === "nguoi_t3_tnds" && o.productName === productName
-      );
-
-      if (thirdPerson !== undefined) {
-        let fee = feeMoto(thirdPerson.value === "checked");
+      let thirdPerson = productInfo.find((o) => o.key === "nguoi_t3_tnds");
+      let expired_time = productInfo.find((o) => o.key === "expired_time_tnds");
+      let moto_volumn = productInfo.find((o) => o.key === "moto_volumn");
+      // let;
+      if (
+        thirdPerson !== undefined &&
+        expired_time !== undefined &&
+        moto_volumn !== undefined
+      ) {
+        let fee = feeMoto(
+          thirdPerson.value === "checked",
+          moto_volumn.value,
+          expired_time.value
+        );
+        motoInfo.TTIN_PHI = fee;
       }
     }
   }
