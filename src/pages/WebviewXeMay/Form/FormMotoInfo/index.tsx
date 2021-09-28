@@ -7,12 +7,14 @@ import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import DistrictInput from "../../../../components/DistrictInput";
+import { validate } from "../../../../common/validateInfor";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
   pageCallback: string;
   productName: string;
   isAddProductButtonClicked: boolean;
+  handleShowError: (isError: boolean, errorMsg: string) => void;
 };
 
 const FormMotoInfo: React.FC<Props> = ({
@@ -20,8 +22,12 @@ const FormMotoInfo: React.FC<Props> = ({
   pageCallback,
   productName,
   isAddProductButtonClicked,
+  handleShowError,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
+  const [isShowError, setIsShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
   const listInputMustValidate = useSelector(
     (state: RootState) => state.reducer.listInputMustValidate
@@ -33,9 +39,19 @@ const FormMotoInfo: React.FC<Props> = ({
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
-      let listInput = listInputMustValidate.filter((o) =>
-        o.key.startsWith("moto")
+      let listInput = listInputMustValidate.filter(
+        (o) =>
+          o.key.startsWith("moto") ||
+          o.key.startsWith("gcn") ||
+          o.key.startsWith("cx")
       );
+      let test = validate(listInput, listProduct);
+      if (test !== "") {
+        setIsShowError(!isShowError);
+        setErrorMsg(test);
+      } else {
+        setButtonClick(buttonClicked);
+      }
     }
   };
 
@@ -46,6 +62,18 @@ const FormMotoInfo: React.FC<Props> = ({
   useEffect(() => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
+
+  useEffect(() => {
+    handleShowError ? handleShowError(isShowError, errorMsg) : {};
+    let timer1: any;
+    if (isShowError === true) {
+      timer1 = setTimeout(() => setIsShowError(!isShowError), 3000);
+    }
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, [isShowError, errorMsg]);
 
   return (
     <Container>
@@ -143,6 +171,7 @@ const FormMotoInfo: React.FC<Props> = ({
           buttonCallback={buttonClick}
           isPay={false}
           isSummaryPage={false}
+          isValidateFalse={isShowError}
         />
       </Row>
     </Container>

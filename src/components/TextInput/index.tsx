@@ -100,7 +100,6 @@ const TextInput: React.FC<Props> = ({
   };
 
   const handleBlurInput = () => {
-    console.log("vu inputValue: ", inputValue);
     if (inputName.startsWith("user")) {
       dispatch({
         type: ADDUSERINFO,

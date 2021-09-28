@@ -195,7 +195,7 @@ const FormXeMay: React.FC<Props> = ({
   };
 
   // validate
-  const handleValidateFormUser = (isError: boolean, errorMsg: string) => {
+  const handleValidate = (isError: boolean, errorMsg: string) => {
     setIsShowError(isError);
     setErrorMsg(errorMsg);
   };
@@ -211,7 +211,7 @@ const FormXeMay: React.FC<Props> = ({
           handleButtonClick={handleButtonClick}
           pageCallback={buttonFormUserInfoClicked}
           productName={productName}
-          handleShowError={handleValidateFormUser}
+          handleShowError={handleValidate}
         />
       </FormUserInfoWrapper>
       <FormMotoInfoWrapper showForm={showFormMotoInfo}>
@@ -220,6 +220,7 @@ const FormXeMay: React.FC<Props> = ({
           pageCallback={buttonFormMotoInfoClicked}
           productName={productName}
           isAddProductButtonClicked={addProductButtonCallback}
+          handleShowError={handleValidate}
         />
       </FormMotoInfoWrapper>
       <FormTNDSWrapper showForm={showFormTNDS}>
