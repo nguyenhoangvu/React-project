@@ -89,6 +89,8 @@ const FormMotoInfo: React.FC<Props> = ({
             required={true}
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_name")?.value
+                ? dataRedux.find((elem: any) => elem.key === "user_name")?.value
+                : ""
             }
             productName={productName}
           />
@@ -101,6 +103,9 @@ const FormMotoInfo: React.FC<Props> = ({
             required={true}
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_diachi")?.value
+                ? dataRedux.find((elem: any) => elem.key === "user_diachi")
+                    ?.value
+                : ""
             }
             productName={productName}
           />
@@ -113,6 +118,9 @@ const FormMotoInfo: React.FC<Props> = ({
             required={true}
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_phone")?.value
+                ? dataRedux.find((elem: any) => elem.key === "user_phone")
+                    ?.value
+                : ""
             }
             productName={productName}
           />

@@ -179,7 +179,7 @@ const FormUserInfo: React.FC<Props> = ({
               inputId="bh_xe_may_dn_hoten_ddien"
               inputName="enterprise_represent"
               inputTitle="tên người đại diện"
-              labelName="Địa chỉ"
+              labelName="Tên người đại diện"
               required={true}
               productName={productName}
             />

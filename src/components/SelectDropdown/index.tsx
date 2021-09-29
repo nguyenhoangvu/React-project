@@ -89,7 +89,7 @@ const SelectDropdown: React.FC<Props> = ({
   isResetValue,
 }) => {
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string | undefined>(undefined);
   const [dropdownKey, setDropdownKey] = useState("");
   const [dataDropdown, setData] = useState<any>();
 
@@ -102,6 +102,7 @@ const SelectDropdown: React.FC<Props> = ({
         break;
       case "bh_xe_may_dung_tich_xe":
         setData(data.Loai_xe);
+        setInputValue(undefined);
         break;
       case "bh_xe_may_tnds_thoi_han":
         setData(data.Thoi_han_bh);
@@ -157,7 +158,7 @@ const SelectDropdown: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    handleNhomKh ? handleNhomKh(inputValue) : {};
+    if (inputValue) handleNhomKh ? handleNhomKh(inputValue) : {};
   }, [inputValue]);
 
   return (

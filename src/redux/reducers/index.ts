@@ -99,6 +99,19 @@ const reducers = (state = initialState, action: ActionTypes) => {
       return newState;
     case ADDUSERINFO:
       const userInfoState = { ...state };
+      let nhom_kh = userInfoState.listProducts.find((o) => o.key === "nhom_kh");
+      if (nhom_kh?.value === "CN") {
+        userInfoState.userInfo = userInfoState.userInfo.filter((item) =>
+          item.key.startsWith("user")
+        );
+      } else if (nhom_kh?.value === "DN") {
+        userInfoState.userInfo = userInfoState.userInfo.filter((item) =>
+          item.key.startsWith("enterprise")
+        );
+        userInfoState.listProducts = userInfoState.listProducts.filter(
+          (item) => !item.key.startsWith("cx")
+        );
+      }
       let infoIndex = userInfoState.userInfo.findIndex(
         (o) => o.key === action.payload.key
       );

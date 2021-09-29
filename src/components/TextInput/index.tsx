@@ -100,7 +100,7 @@ const TextInput: React.FC<Props> = ({
   };
 
   const handleBlurInput = () => {
-    if (inputName.startsWith("user")) {
+    if (inputName.startsWith("user") || inputName.startsWith("enterprise")) {
       dispatch({
         type: ADDUSERINFO,
         payload: {
@@ -162,7 +162,7 @@ const TextInput: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (inputValueFromProp !== undefined && inputValueFromProp !== "") {
+    if (inputValueFromProp !== undefined) {
       setInputValue(inputValueFromProp);
       setInputActive("active");
       if (
