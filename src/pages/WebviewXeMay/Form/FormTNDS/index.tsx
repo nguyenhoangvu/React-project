@@ -10,7 +10,7 @@ import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
-import { motoInfo } from "../../../../adapters/objectMoto";
+import { sendMotoInfo } from "../../../../adapters/adapter";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -61,7 +61,7 @@ const FormTNDS: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        let data = motoInfo(allDataFromRedux);
+        let data = sendMotoInfo(allDataFromRedux);
         setButtonClick(buttonClicked);
       }
     }
