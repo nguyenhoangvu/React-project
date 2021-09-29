@@ -171,6 +171,15 @@ const FormMotoInfo: React.FC<Props> = ({
             labelName="Địa chỉ, số điện thoại cụ thể"
             required={true}
             productName={productName}
+            inputValueFromProp={
+              listProduct.find(
+                (elem: any) => elem.key === "gcn_recieve_address"
+              )?.value
+                ? listProduct.find(
+                    (elem: any) => elem.key === "gcn_recieve_address"
+                  )?.value
+                : ""
+            }
             isResetValue={false}
           />
         </Col>

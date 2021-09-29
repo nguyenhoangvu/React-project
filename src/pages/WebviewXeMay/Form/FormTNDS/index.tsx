@@ -10,6 +10,7 @@ import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
+import { sendMotoInfo } from "../../../../adapters/adapter";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -31,6 +32,8 @@ const FormTNDS: React.FC<Props> = ({
   const [feeInsurance, setFeeInsurance] = useState("");
   const [isShowError, setIsShowError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  const allDataFromRedux = useSelector((state: RootState) => state.reducer);
 
   const dataRedux = useSelector(
     (state: RootState) => state.reducer.listProducts
@@ -58,6 +61,7 @@ const FormTNDS: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
+        let data = sendMotoInfo(allDataFromRedux);
         setButtonClick(buttonClicked);
       }
     }

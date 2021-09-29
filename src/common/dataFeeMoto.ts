@@ -1,7 +1,8 @@
 export const feeMoto = (
   thirdPerson: boolean,
   volumn: string,
-  expiredTime: string
+  expiredTime: string,
+  fromTime: string
 ) => {
   let data = [];
   let initialFee = 0;
@@ -21,7 +22,7 @@ export const feeMoto = (
         tl_phi: 1,
         phi: initialFee * parseInt(expiredTime),
         thue: initialFee * 0.1 * parseInt(expiredTime),
-        gio_hl: expiredTime,
+        gio_hl: fromTime,
       },
       {
         gcn_s: "",
@@ -30,7 +31,7 @@ export const feeMoto = (
         tl_phi: 1,
         phi: 20000 * parseInt(expiredTime),
         thue: 0,
-        gio_hl: "",
+        gio_hl: fromTime,
       },
     ];
   } else {
