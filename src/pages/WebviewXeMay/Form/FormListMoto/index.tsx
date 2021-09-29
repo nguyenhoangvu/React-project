@@ -171,6 +171,7 @@ const FormListMoto: React.FC<Props> = ({
             buttonLable="Thêm Xe BH"
             buttonPlusCallBack={buttonAddProductCallback}
           />
+          <div style={{ width: "100%", height: "150px" }}></div>
         </Col>
       </Row>
       <DirectButton
