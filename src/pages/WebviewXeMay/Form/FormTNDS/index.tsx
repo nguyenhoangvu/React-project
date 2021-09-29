@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 import { RootState } from "../../../../redux/store/rootReducer";
 import DirectButton from "../../../DirectButton";
@@ -10,7 +11,8 @@ import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
-import { sendMotoInfo } from "../../../../adapters/adapter";
+import { motoInfo } from "../../../../adapters/objectMoto";
+// import { client } from "../../../../adapters/adapter";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -46,9 +48,6 @@ const FormTNDS: React.FC<Props> = ({
   const listInputMustValidate = useSelector(
     (state: RootState) => state.reducer.listInputMustValidate
   );
-  const listProduct = useSelector(
-    (state: RootState) => state.reducer.listProducts
-  );
 
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
@@ -56,12 +55,32 @@ const FormTNDS: React.FC<Props> = ({
       let listInput = listInputMustValidate.filter((o) =>
         o.key.includes("tnds")
       );
-      let test = validate(listInput, listProduct);
+      let test = validate(listInput, dataRedux);
       if (test !== "") {
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        let data = sendMotoInfo(allDataFromRedux);
+        let url = "https://apitest1.evbi.vn/api/xe/moto_nhap";
+        let token = allDataFromRedux.ma_nsd + "-" + allDataFromRedux.token;
+        let productInfos = motoInfo(allDataFromRedux);
+        console.log("vu productInfos: ", productInfos);
+
+        // axios({
+        //   method: "post",
+        //   url: url,
+        //   data: productInfos,
+        //   timeout: 12000,
+        //   headers: {
+        //     Accept: "application/json",
+        //     Authority: token,
+        //   },
+        // })
+        //   .then((response) => {
+        //     console.log("vu res: ", response.data);
+        //   })
+        //   .catch((err) => {
+        //     console.log("vu err: ", err);
+        //   });
         setButtonClick(buttonClicked);
       }
     }
