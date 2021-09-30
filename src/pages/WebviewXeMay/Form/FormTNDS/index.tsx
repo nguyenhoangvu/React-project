@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
+import { MODIFYORDERID } from "../../../../redux/types";
 import { RootState } from "../../../../redux/store/rootReducer";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
@@ -11,9 +11,6 @@ import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
-import { motoInfo } from "../../../../utils/objectMoto";
-import { generateSignature } from "../../../../adapters/apis/commonAPIs";
-import { createMotoContract } from "../../../../adapters/apis/motoAPIs";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -35,9 +32,6 @@ const FormTNDS: React.FC<Props> = ({
   const [feeInsurance, setFeeInsurance] = useState("");
   const [isShowError, setIsShowError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [orderId, setOrderId] = useState(0);
-
-  const allDataFromRedux = useSelector((state: RootState) => state.reducer);
 
   const dataRedux = useSelector(
     (state: RootState) => state.reducer.listProducts
@@ -62,32 +56,10 @@ const FormTNDS: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        let productInfos = motoInfo(allDataFromRedux);
-
-        generateSignature(productInfos)
-          .then((res: any) => {
-            productInfos.signature = res.result.signature;
-            createMotoContract(productInfos)
-              .then((response: any) => {
-                setOrderId(response.result.orderId);
-              })
-              .catch((err) => {
-                setIsShowError(true);
-                setErrorMsg("Lỗi tính phí");
-              });
-          })
-          .catch((err) => {
-            setIsShowError(true);
-            setErrorMsg("Lỗi tính phí");
-          });
         setButtonClick(buttonClicked);
       }
     }
   };
-
-  useEffect(() => {
-    console.log("vu orderId: ", orderId);
-  }, [orderId]);
 
   useEffect(() => {
     if (fee !== undefined) {
