@@ -1,5 +1,3 @@
-import { calculateEndTime } from "../common/calculateTimeEnd";
-import { feeMoto } from "../common/dataFeeMoto";
 import { motoType } from "../common/typeProduct";
 
 export const motoInfo = (dataFromRedux: any) => {
@@ -17,8 +15,8 @@ export const motoInfo = (dataFromRedux: any) => {
       dataFromRedux.userInfo.find((o: any) => o.key === "user_diachi")?.value ||
       dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_address")
         ?.value, // Địa chỉ người mua (bắt buộc)
-    customerDob: "", // Ngày sinh người mua (định dạng dd/MM/yyyy)
-    customerGender: "", // Giới tính người mua (NAM / NU)
+    customerDob: "31/10/1995", // Ngày sinh người mua (định dạng dd/MM/yyyy)
+    customerGender: "NAM", // Giới tính người mua (NAM / NU)
     customerIdentifyCard: "", // Số CMT người mua
     customerPhone:
       dataFromRedux.userInfo.find((o: any) => o.key === "user_phone")?.value ||
@@ -63,7 +61,7 @@ export const motoInfo = (dataFromRedux: any) => {
       typeMoto: "", // Loại xe ("50" : trên 50cc; "0" : dưới 50cc, "D" : xe điện, "3b" : Xe 3 bánh) (bắt buộc)
       startHour: "", // Giờ hiệu lực (định dạng HH:mm) ( bắt buộc )
       startDate: "", // Ngày hiệu lực (định dạng dd/MM/yyyy) ( bắt buộc )
-      yearProduce: "", // Năm sản xuất
+      yearProduce: 10000, // Năm sản xuất
       motoValue: 0, // Giá trị xe (chỉ bắt buộc khi có mua vật chất xe)
       insuranceTerm: 0, // Thời hạn bảo hiểm (từ 1 đến 3 năm)
       typeMotoInsured: [

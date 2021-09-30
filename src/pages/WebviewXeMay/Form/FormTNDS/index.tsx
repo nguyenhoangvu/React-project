@@ -11,8 +11,8 @@ import DateInput from "../../../../components/DateInput";
 import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
-import { motoInfo } from "../../../../adapters/objectMoto";
-// import { client } from "../../../../adapters/adapter";
+import { motoInfo } from "../../../../utils/objectMoto";
+import { generateSignature } from "../../../../adapters/apis/commonAPIs";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -60,10 +60,11 @@ const FormTNDS: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        let url = "https://apitest1.evbi.vn/api/xe/moto_nhap";
-        let token = allDataFromRedux.ma_nsd + "-" + allDataFromRedux.token;
+        // let url = "https://vbiapitest.evbi.vn/api/Utilities/generate-signature";
+        // let token =
+        //   "Basic a2QwMUBhYmFuay52bjpFMzRKRDE5NTNFMTIyTDg3MFY0NTMyODExMUwwOTQzNFA=";
         let productInfos = motoInfo(allDataFromRedux);
-        console.log("vu productInfos: ", productInfos);
+        // console.log("vu productInfos: ", productInfos);
 
         // axios({
         //   method: "post",
@@ -72,7 +73,7 @@ const FormTNDS: React.FC<Props> = ({
         //   timeout: 12000,
         //   headers: {
         //     Accept: "application/json",
-        //     Authority: token,
+        //     Authorization: token,
         //   },
         // })
         //   .then((response) => {
@@ -81,6 +82,9 @@ const FormTNDS: React.FC<Props> = ({
         //   .catch((err) => {
         //     console.log("vu err: ", err);
         //   });
+        generateSignature(productInfos).then((res) => {
+          console.log("vu res: ", res);
+        });
         setButtonClick(buttonClicked);
       }
     }
