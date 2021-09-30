@@ -5,6 +5,7 @@ const TOKEN =
 
 const instance = axios.create({
   baseURL: "https://vbiapitest.evbi.vn/",
+  timeout: 12000,
 });
 
 instance.defaults.headers.common["Authorization"] = TOKEN;

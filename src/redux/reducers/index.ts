@@ -5,6 +5,7 @@ import {
   REMOVEPRODUCT,
   MODIFYPRODUCT,
   ADDINPUTNAMEMUSTVALIDATE,
+  MODIFYORDERID,
 } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
@@ -57,6 +58,11 @@ export const initialState: InitialStateType = {
 
 const reducers = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
+    case MODIFYPRODUCT:
+      return {
+        ...state,
+        so_id: action.payload,
+      };
     case ADDPRODUCT:
       return {
         ...state,
@@ -169,7 +175,5 @@ const reducers = (state = initialState, action: ActionTypes) => {
       return state;
   }
 };
-
-// https://www.softkraft.co/how-to-setup-redux-with-redux-toolkit/
 
 export default reducers;

@@ -13,6 +13,7 @@ import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
 import { motoInfo } from "../../../../utils/objectMoto";
 import { generateSignature } from "../../../../adapters/apis/commonAPIs";
+import { createMotoContract } from "../../../../adapters/apis/motoAPIs";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -34,6 +35,7 @@ const FormTNDS: React.FC<Props> = ({
   const [feeInsurance, setFeeInsurance] = useState("");
   const [isShowError, setIsShowError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [orderId, setOrderId] = useState(0);
 
   const allDataFromRedux = useSelector((state: RootState) => state.reducer);
 
@@ -60,35 +62,32 @@ const FormTNDS: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        // let url = "https://vbiapitest.evbi.vn/api/Utilities/generate-signature";
-        // let token =
-        //   "Basic a2QwMUBhYmFuay52bjpFMzRKRDE5NTNFMTIyTDg3MFY0NTMyODExMUwwOTQzNFA=";
         let productInfos = motoInfo(allDataFromRedux);
-        // console.log("vu productInfos: ", productInfos);
 
-        // axios({
-        //   method: "post",
-        //   url: url,
-        //   data: productInfos,
-        //   timeout: 12000,
-        //   headers: {
-        //     Accept: "application/json",
-        //     Authorization: token,
-        //   },
-        // })
-        //   .then((response) => {
-        //     console.log("vu res: ", response.data);
-        //   })
-        //   .catch((err) => {
-        //     console.log("vu err: ", err);
-        //   });
-        generateSignature(productInfos).then((res) => {
-          console.log("vu res: ", res);
-        });
+        generateSignature(productInfos)
+          .then((res: any) => {
+            productInfos.signature = res.result.signature;
+            createMotoContract(productInfos)
+              .then((response: any) => {
+                setOrderId(response.result.orderId);
+              })
+              .catch((err) => {
+                setIsShowError(true);
+                setErrorMsg("Lỗi tính phí");
+              });
+          })
+          .catch((err) => {
+            setIsShowError(true);
+            setErrorMsg("Lỗi tính phí");
+          });
         setButtonClick(buttonClicked);
       }
     }
   };
+
+  useEffect(() => {
+    console.log("vu orderId: ", orderId);
+  }, [orderId]);
 
   useEffect(() => {
     if (fee !== undefined) {

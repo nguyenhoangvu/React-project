@@ -48,7 +48,7 @@ export const motoInfo = (dataFromRedux: any) => {
   for (let i = 1; i <= total_product; i++) {
     let motoInfo = {
       ownerName: "", // Tên chủ xe (bắt buộc)
-      ownerEmail: "abc@gmail.com", // Email chủ xe (bắt buộc)
+      ownerEmail: "", // Email chủ xe (bắt buộc)
       ownerPhone: "", // Số điện thoại chủ xe (bắt buộc)
       ownerAddress: "", // Địa chỉ chủ xe
       ownerIdentifyCard: "", // CMT chủ xe
@@ -76,6 +76,9 @@ export const motoInfo = (dataFromRedux: any) => {
     );
     let ownerName = moto.find(
       (o: any) => o.key === "cx_name" && o.productName === product_name
+    );
+    let ownerEmail = moto.find(
+      (o: any) => o.key === "cx_email" && o.productName === product_name
     );
     let ownerAddress = moto.find(
       (o: any) => o.key === "cx_address" && o.productName === product_name
@@ -120,6 +123,9 @@ export const motoInfo = (dataFromRedux: any) => {
     ) {
       motoInfo.ownerName = ownerName.value;
       motoInfo.ownerAddress = ownerAddress.value;
+      motoInfo.ownerEmail = ownerEmail?.value
+        ? ownerEmail?.value
+        : "abc@gmail.com";
       motoInfo.ownerPhone = ownerPhone.value;
       motoInfo.numberPlate = numberPlate.value;
       motoInfo.typeMoto = motoType(typeMoto.value);
@@ -128,7 +134,7 @@ export const motoInfo = (dataFromRedux: any) => {
       motoInfo.insuranceTerm = parseInt(insuranceTerm.value);
       motoInfo.receiveAddress = receiveAddress.value;
       if (thirdPerson.value === "checked") {
-        motoInfo.typeMotoInsured.push({ typeInsured: "TN" });
+        motoInfo.typeMotoInsured.push({ typeInsured: "TL" });
       }
       motoInsured.push(motoInfo);
     }
