@@ -55,7 +55,7 @@ const FormTNDS: React.FC<Props> = ({
       let listInput = listInputMustValidate.filter((o) =>
         o.key.includes("tnds")
       );
-      let test = validate(listInput, dataRedux);
+      let test = validate(listInput, dataRedux, productName);
       if (test !== "") {
         setIsShowError(!isShowError);
         setErrorMsg(test);

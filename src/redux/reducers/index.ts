@@ -99,14 +99,14 @@ const reducers = (state = initialState, action: ActionTypes) => {
       return newState;
     case ADDUSERINFO:
       const userInfoState = { ...state };
-      let nhom_kh = userInfoState.listProducts.find((o) => o.key === "nhom_kh");
+      let nhom_kh = userInfoState.userInfo.find((o) => o.key === "nhom_kh");
       if (nhom_kh?.value === "CN") {
-        userInfoState.userInfo = userInfoState.userInfo.filter((item) =>
-          item.key.startsWith("user")
+        userInfoState.userInfo = userInfoState.userInfo.filter(
+          (item) => item.key === "nhom_kh" || item.key.startsWith("user")
         );
       } else if (nhom_kh?.value === "DN") {
-        userInfoState.userInfo = userInfoState.userInfo.filter((item) =>
-          item.key.startsWith("enterprise")
+        userInfoState.userInfo = userInfoState.userInfo.filter(
+          (item) => item.key.startsWith("enterprise") || item.key === "nhom_kh"
         );
         userInfoState.listProducts = userInfoState.listProducts.filter(
           (item) => !item.key.startsWith("cx")
@@ -161,18 +161,6 @@ const reducers = (state = initialState, action: ActionTypes) => {
           if (index >= 0) {
             cloneState.listProducts[index] = phi_bh;
           } else cloneState.listProducts.push(phi_bh);
-        }
-        let listFee = cloneState.listProducts.filter(
-          (o) => o.key === "phi_bh_tnds"
-        );
-        let totalFee = totalFeeMoto(listFee);
-        if (totalFee.key !== "" && totalFee.key !== undefined) {
-          let index = cloneState.listProducts.findIndex(
-            (o) => o.key === "total_fee_tnds"
-          );
-          if (index >= 0) {
-            cloneState.listProducts[index] = totalFee;
-          } else cloneState.listProducts.push(totalFee);
         }
       }
 

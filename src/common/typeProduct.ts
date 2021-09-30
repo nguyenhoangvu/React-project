@@ -1,4 +1,4 @@
-export const typeMoto = (motoType: string) => {
+export const motoType = (motoType: string) => {
   switch (motoType) {
     case "1":
       return "0";

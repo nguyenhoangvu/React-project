@@ -111,7 +111,8 @@ const TextInput: React.FC<Props> = ({
     } else if (
       inputName !== "nhom_kh" &&
       inputName !== "expired_time_tnds" &&
-      inputName !== "moto_volumn"
+      inputName !== "moto_volumn" &&
+      inputName !== "phi_tnds"
     ) {
       dispatch({
         type: ADDPRODUCTINFORS,
@@ -169,7 +170,8 @@ const TextInput: React.FC<Props> = ({
         !(
           inputName.startsWith("tnds") ||
           inputName.startsWith("sum") ||
-          inputName === "phi_tnds"
+          inputName === "phi_tnds" ||
+          inputName === "nhom_kh"
         )
       ) {
         dispatch({
@@ -178,6 +180,14 @@ const TextInput: React.FC<Props> = ({
             key: inputName,
             value: dropdownKey ? dropdownKey : inputValueFromProp,
             productName: productName,
+          },
+        });
+      } else if (inputName === "nhom_kh") {
+        dispatch({
+          type: ADDUSERINFO,
+          payload: {
+            key: inputName,
+            value: dropdownKey ? dropdownKey : inputValueFromProp,
           },
         });
       }

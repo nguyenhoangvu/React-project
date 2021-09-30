@@ -1,164 +1,140 @@
 import { calculateEndTime } from "../common/calculateTimeEnd";
 import { feeMoto } from "../common/dataFeeMoto";
-import { typeMoto } from "../common/typeProduct";
+import { motoType } from "../common/typeProduct";
 
 export const motoInfo = (dataFromRedux: any) => {
-  let GCN = [];
-
-  let data = {
-    dtac_key: "1234567890",
-    so_id_dtac: "",
-    so_id: dataFromRedux.so_id,
-    TVV: "",
-    nsd: dataFromRedux.ma_nsd,
-    ten:
-      dataFromRedux.userInfo.find((o: any) => o.key === "user_name")?.value ||
-      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_name")
-        ?.value,
-    ma_cif: "123123123",
-    dchi:
-      dataFromRedux.userInfo.find((o: any) => o.key === "user_diachi")?.value ||
-      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_address")
-        ?.value,
-    nv: dataFromRedux.nv,
-    ngay_sinh: "",
-    gioi_tinh: "",
-    cmt: "",
-    dien_thoai:
-      dataFromRedux.userInfo.find((o: any) => o.key === "user_phone")?.value ||
-      "",
-    d_thoai:
-      dataFromRedux.userInfo.find((o: any) => o.key === "user_phone")?.value ||
-      "",
-    email:
-      dataFromRedux.userInfo.find((o: any) => o.key === "user_email")?.value ||
-      "",
-    mst:
-      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_tax")
-        ?.value || "",
-    dai_dien:
-      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_represent")
-        ?.value || "",
-    cvu_dai_dien:
-      dataFromRedux.userInfo.find(
-        (o: any) => o.key === "enterprise_represent_role"
-      )?.value || "",
-    ngay_hl:
-      dataFromRedux.listProducts.find((o: any) => o.key === "from_date_tnds")
-        ?.value || "",
-    ngay_kt: calculateEndTime(
-      dataFromRedux.listProducts.find((o: any) => o.key === "from_date_tnds")
-        ?.value,
-      dataFromRedux.listProducts.find((o: any) => o.key === "expired_time_tnds")
-        ?.value
-    ),
-    ctrinh: "",
-    phan_khuc: "cn",
-    nhom_kh: "thuong",
-    trang_thai: "C",
-    trang_thai_tt: "C",
-    GCN: [{}],
-  };
-
-  let motoInfo = {
-    so_id_dt: 0,
-    ten: "",
-    dchi: "",
-    cmt: "",
-    bien_xe: "",
-    so_khung: "",
-    so_may: "",
-    nam_sx: "",
-    hang_xe: "",
-    hieu_xe: "",
-    loai_xe: "", // dưới 50cc : 0; trên 50cc: 50; khác : 3B;
-    ngay_hl: "",
-    gio_hl: "",
-    ngay_kt: "",
-    noi_nhan_tnds: "",
-    nguoi_huong_ten: "",
-    nguoi_huong_dchi: "",
-    nguoi_huong_mst: "",
-    TTIN_PHI: [{}],
-  };
-
+  let motoInsured = [];
   let total_product = dataFromRedux.total_product;
 
+  let data = {
+    contractId: dataFromRedux.so_id, // Số id đơn VBI, mặc định truyền 0
+    partnerContractId: "ABC", // Số id đơn của hệ thống đối tác (bắt buộc)
+    customerName:
+      dataFromRedux.userInfo.find((o: any) => o.key === "user_name")?.value ||
+      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_name")
+        ?.value, // Tên người mua  (bắt buộc)
+    customerAddress:
+      dataFromRedux.userInfo.find((o: any) => o.key === "user_diachi")?.value ||
+      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_address")
+        ?.value, // Địa chỉ người mua (bắt buộc)
+    customerDob: "", // Ngày sinh người mua (định dạng dd/MM/yyyy)
+    customerGender: "", // Giới tính người mua (NAM / NU)
+    customerIdentifyCard: "", // Số CMT người mua
+    customerPhone:
+      dataFromRedux.userInfo.find((o: any) => o.key === "user_phone")?.value ||
+      dataFromRedux.userInfo.find(
+        (o: any) => o.key === "enterprise_represent_phone"
+      )?.value, // Số điện thoại người mua (bắt buộc)
+    customerEmail:
+      dataFromRedux.userInfo.find((o: any) => o.key === "user_email")?.value ||
+      "abc@gmail.com", // Email người mua (bắt buộc)
+    customerTaxCode:
+      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_tax")
+        ?.value || "", // Mã số thuế người mua
+    represent:
+      dataFromRedux.userInfo.find((o: any) => o.key === "enterprise_represent")
+        ?.value || "", // Đại diện tổ chức (đối với khách hàng doanh nghiệp)
+    representPosition:
+      dataFromRedux.userInfo.find(
+        (o: any) => o.key === "enterprise_represent_role"
+      )?.value || "", // Chức vụ đại diện
+    promotion: "", // Mã chương trình khuyến mãi (phục vụ theo chiến dịch cụ thể)
+    customerType: dataFromRedux.userInfo.find((o: any) => o.key === "nhom_kh")
+      ?.value, // Loại khách hàng (CN : cá nhân, DN: Doanh nghiệp)
+    agent: "", // Mã đại lý
+    agencyId: "", // Mã tư vấn viên
+    signature: "",
+    motoInsured: [{}],
+  };
+
   for (let i = 1; i <= total_product; i++) {
-    let id = Math.random();
-    let productName = "product_" + i;
-    let productInfo = dataFromRedux.listProducts.filter(
-      (o: any) => o.productName === productName
+    let motoInfo = {
+      ownerName: "", // Tên chủ xe (bắt buộc)
+      ownerEmail: "abc@gmail.com", // Email chủ xe (bắt buộc)
+      ownerPhone: "", // Số điện thoại chủ xe (bắt buộc)
+      ownerAddress: "", // Địa chỉ chủ xe
+      ownerIdentifyCard: "", // CMT chủ xe
+      receiveAddress: "", // Địa chỉ nhận ấn chỉ
+      numberPlate: "", // Biển số xe ( bắt buộc )
+      chassisNumber: "", // Số khung
+      engineNumber: "", // Số máy
+      brand: "", // Hiệu xe
+      model: "", // Hãng xe
+      typeMoto: "", // Loại xe ("50" : trên 50cc; "0" : dưới 50cc, "D" : xe điện, "3b" : Xe 3 bánh) (bắt buộc)
+      startHour: "", // Giờ hiệu lực (định dạng HH:mm) ( bắt buộc )
+      startDate: "", // Ngày hiệu lực (định dạng dd/MM/yyyy) ( bắt buộc )
+      yearProduce: "", // Năm sản xuất
+      motoValue: 0, // Giá trị xe (chỉ bắt buộc khi có mua vật chất xe)
+      insuranceTerm: 0, // Thời hạn bảo hiểm (từ 1 đến 3 năm)
+      typeMotoInsured: [
+        {
+          typeInsured: "BN",
+        },
+      ],
+    };
+    let product_name = "product_" + i;
+    let moto = dataFromRedux.listProducts.filter(
+      (o: any) => o.productName === product_name
     );
-    console.log("vu productInfo: ", productInfo);
-
-    if (productInfo !== undefined) {
-      let thirdPerson = productInfo.find((o: any) => o.key === "nguoi_t3_tnds");
-      let expired_time = productInfo.find(
-        (o: any) => o.key === "expired_time_tnds"
-      );
-      let moto_volumn = productInfo.find((o: any) => o.key === "moto_volumn");
-      let from_time_tnds = productInfo.find(
-        (o: any) => o.key === "from_time_tnds"
-      );
-      let user_address = dataFromRedux.userInfo.find(
-        (o: any) => o.key === "user_diachi"
-      );
-      let user_name = dataFromRedux.userInfo.find(
-        (o: any) => o.key === "user_name"
-      );
-      let motoOwner_name = productInfo.find((o: any) => o.key === "cx_name");
-      let motoOwner_address = productInfo.find(
-        (o: any) => o.key === "cx_address"
-      );
-      let moto_from_date = productInfo.find(
-        (o: any) => o.key === "from_date_tnds"
-      );
-      let recieve_address = productInfo.find(
-        (o: any) => o.key === "gcn_recieve_address"
-      );
-      let moto_plate = productInfo.find((o: any) => o.key === "moto_plate");
-      if (
-        thirdPerson !== undefined &&
-        expired_time !== undefined &&
-        moto_volumn !== undefined &&
-        user_address !== undefined &&
-        motoOwner_name !== undefined &&
-        motoOwner_address !== undefined &&
-        moto_from_date !== undefined &&
-        recieve_address !== undefined &&
-        moto_plate !== undefined &&
-        user_name !== undefined &&
-        from_time_tnds !== undefined
-      ) {
-        console.log("vu thirdPerson.value: ", thirdPerson.value);
-
-        let fee = feeMoto(
-          thirdPerson.value === "checked",
-          moto_volumn.value,
-          expired_time.value,
-          from_time_tnds.value
-        );
-        let moto_expired_date = calculateEndTime(
-          moto_from_date.value,
-          expired_time.value
-        );
-        motoInfo.so_id_dt = id;
-        motoInfo.ten = user_name.value.toString();
-        motoInfo.dchi = user_address.value.toString();
-        motoInfo.gio_hl = from_time_tnds.value;
-        motoInfo.loai_xe = typeMoto(moto_volumn.value);
-        motoInfo.ngay_hl = moto_from_date.value;
-        motoInfo.ngay_kt = moto_expired_date;
-        motoInfo.nguoi_huong_dchi = motoOwner_address.value;
-        motoInfo.nguoi_huong_ten = motoOwner_name.value;
-        motoInfo.noi_nhan_tnds = recieve_address.value;
-        motoInfo.bien_xe = moto_plate.value;
-        motoInfo.TTIN_PHI = fee;
-        GCN.push(motoInfo);
+    let ownerName = moto.find(
+      (o: any) => o.key === "cx_name" && o.productName === product_name
+    );
+    let ownerAddress = moto.find(
+      (o: any) => o.key === "cx_address" && o.productName === product_name
+    );
+    let ownerPhone = moto.find(
+      (o: any) => o.key === "cx_phone" && o.productName === product_name
+    );
+    let numberPlate = moto.find(
+      (o: any) => o.key === "moto_plate" && o.productName === product_name
+    );
+    let typeMoto = moto.find(
+      (o: any) => o.key === "moto_volumn" && o.productName === product_name
+    );
+    let startHour = moto.find(
+      (o: any) => o.key === "from_time_tnds" && o.productName === product_name
+    );
+    let startDate = moto.find(
+      (o: any) => o.key === "from_date_tnds" && o.productName === product_name
+    );
+    let insuranceTerm = moto.find(
+      (o: any) =>
+        o.key === "expired_time_tnds" && o.productName === product_name
+    );
+    let thirdPerson = moto.find(
+      (o: any) => o.key === "nguoi_t3_tnds" && o.productName === product_name
+    );
+    let receiveAddress = moto.find(
+      (o: any) =>
+        o.key === "gcn_recieve_address" && o.productName === product_name
+    );
+    if (
+      ownerName &&
+      ownerAddress &&
+      ownerPhone &&
+      numberPlate &&
+      typeMoto &&
+      startHour &&
+      startDate &&
+      insuranceTerm &&
+      thirdPerson &&
+      receiveAddress
+    ) {
+      motoInfo.ownerName = ownerName.value;
+      motoInfo.ownerAddress = ownerAddress.value;
+      motoInfo.ownerPhone = ownerPhone.value;
+      motoInfo.numberPlate = numberPlate.value;
+      motoInfo.typeMoto = motoType(typeMoto.value);
+      motoInfo.startHour = startHour.value;
+      motoInfo.startDate = startDate.value;
+      motoInfo.insuranceTerm = parseInt(insuranceTerm.value);
+      motoInfo.receiveAddress = receiveAddress.value;
+      if (thirdPerson.value === "checked") {
+        motoInfo.typeMotoInsured.push({ typeInsured: "TN" });
       }
+      motoInsured.push(motoInfo);
     }
   }
-  data.GCN = GCN;
+  data.motoInsured = motoInsured;
   return data;
 };

@@ -1,13 +1,29 @@
 import moment from "moment";
 
-export const validate = (listInputName: any, listObjectInput: any) => {
+export const validate = (
+  listInputName: any,
+  listObjectInput: any,
+  productName?: string
+) => {
   let errorMsg = "";
   let timeNow = moment().format("HH:mm");
   let today = moment().format("DD/MM/YYYY");
   let timeFromRedux = "";
   let dateFromRedux = "";
   listInputName.forEach((o: any) => {
-    let input = listObjectInput.find((i: any) => i.key === o.key);
+    let input = {
+      key: "",
+      value: "",
+      productName: "",
+    };
+    if (productName !== undefined) {
+      input = listObjectInput.find(
+        (i: any) => i.key === o.key && i.productName === productName
+      );
+    } else {
+      input = listObjectInput.find((i: any) => i.key === o.key);
+    }
+
     if (input === undefined || input.value === "")
       errorMsg = "Bạn chưa nhập " + o.name;
     else {

@@ -45,7 +45,7 @@ const FormMotoInfo: React.FC<Props> = ({
           o.key.startsWith("gcn") ||
           o.key.startsWith("cx")
       );
-      let test = validate(listInput, listProduct);
+      let test = validate(listInput, listProduct, productName);
       if (test !== "") {
         setIsShowError(!isShowError);
         setErrorMsg(test);
