@@ -7,7 +7,8 @@ import "./index.scss";
 type Props = {
   onShow: boolean | undefined;
   handleModalClose: (close: boolean) => void;
-  modalContent: string;
+  major: string;
+  handlePaymentClicked: (isClicked: boolean) => void;
 };
 
 const ModalBodyWrapper = styled.div`
@@ -65,18 +66,106 @@ const ModalBodyContent = styled.div`
 const ModalCheck: React.FC<Props> = ({
   onShow,
   handleModalClose,
-  modalContent,
+  major,
+  handlePaymentClicked,
 }) => {
   const [show, setShow] = useState<boolean | undefined>(false);
+  const [modalContent, setModalContent] = useState<string>("");
 
   const handleClose = () => {
     setShow(false);
     handleModalClose ? handleModalClose(false) : {};
   };
 
+  const handlePayment = () => {
+    handlePaymentClicked ? handlePaymentClicked(true) : {};
+  };
+
   useEffect(() => {
     setShow(onShow);
   }, [onShow]);
+
+  useEffect(() => {
+    switch (major) {
+      case "TS.3":
+        setModalContent(
+          "Thông tin đơn bảo hiểm sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CN.6":
+        setModalContent(
+          "Thông tin đơn bảo hiểm sức khỏe sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CN.9":
+        setModalContent(
+          "Thông tin đơn bảo hiểm sốt xuất huyết sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CN.1.6":
+        setModalContent(
+          "Thông tin đơn bảo hiểm tai nạn con người sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CN.4.3":
+        setModalContent(
+          "Thông tin đơn bảo hiểm du lịch nội địa sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CN.4.1":
+        setModalContent(
+          "Thông tin đơn bảo hiểm du lịch quốc tế sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "XE":
+        setModalContent(
+          "Thông tin đơn bảo hiểm xe cơ giới sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CN.8":
+        setModalContent(
+          "Thông tin đơn bảo hiểm ung thư sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CN.7":
+        setModalContent(
+          "Thông tin đơn bảo hiểm bệnh hiểm nghèo sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "HO.12":
+        setModalContent(
+          "Thông tin đơn bảo hiểm trễ chuyến bay sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "HTVP":
+        setModalContent(
+          "Thông tin đơn bảo hiểm hỗ trợ viện phí sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "TNHGD":
+        setModalContent(
+          "Thông tin đơn bảo hiểm tai nạn hộ gia đình sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "XC.1.1":
+        setModalContent(
+          "Thông tin đơn bảo hiểm mô tô, xe máy sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "CORONA":
+        setModalContent(
+          "Thông tin đơn bảo hiểm Corona Shield sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      case "UTV":
+        setModalContent(
+          "Thông tin đơn bảo hiểm Pink Care sẽ không thể sửa đổi khi Quý khách tiếp tục. Quý khách có muốn tiếp tục?"
+        );
+        break;
+      default:
+        setModalContent("");
+    }
+  }, []);
 
   return (
     <Modal
@@ -99,7 +188,7 @@ const ModalCheck: React.FC<Props> = ({
         >
           Hủy
         </Button>
-        <Button onClick={handleClose} className="modal-check-btn">
+        <Button onClick={handlePayment} className="modal-check-btn">
           Đồng ý
         </Button>
       </Modal.Footer>

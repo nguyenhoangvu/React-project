@@ -2,6 +2,9 @@
   .modal-dialog {
     top: 10%;
     margin: 0.75rem 0.5rem;
+    .modal-footer {
+      justify-content: center;
+    }
     .modal-check-btn {
       padding: 9px 26px;
     }

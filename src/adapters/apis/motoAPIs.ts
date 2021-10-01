@@ -7,3 +7,11 @@ export const createMotoContract = (data: any) => {
     data: data,
   });
 };
+
+export const getDataEpoint = (url: string, params: any) => {
+  return instance({
+    url: url,
+    method: "get",
+    params: params,
+  });
+};

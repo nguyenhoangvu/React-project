@@ -9,6 +9,7 @@ import CheckBox from "../../../../components/CheckBox";
 import ModalCheck from "../../../../components/ModalCheck";
 import HrLine from "../../../../components/HrLine";
 import data from "../../../../json/select-dropdown.json";
+import { payment } from "../../../../common/payment";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -77,6 +78,15 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
 
   const handleModalCheckClose = (closes: boolean) => {
     setShowModalCheck(closes);
+  };
+
+  const handleModalPaymentClicked = (isClicked: boolean) => {
+    if (isClicked === true) {
+      let totalFee = dataRedux.listProducts.find(
+        (o) => o.key === "total_fee_tnds"
+      );
+      if (totalFee) payment(dataRedux, totalFee.value);
+    }
   };
 
   const RenderListProduct = () => {
@@ -201,8 +211,8 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
           <ModalCheck
             onShow={showModalCheck}
             handleModalClose={handleModalCheckClose}
-            modalContent="Thông tin đơn bảo hiểm mô tô, xe máy sẽ không thể sửa đổi khi Quý
-            khách tiếp tục. Quý khách có muốn tiếp tục?"
+            major={dataRedux.nv}
+            handlePaymentClicked={handleModalPaymentClicked}
           />
           <DirectButton
             handleButtonClick={handleDisplayForm}

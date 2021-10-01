@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { RootState } from "../../../../redux/store/rootReducer";
+import { MODIFYORDERID } from "../../../../redux/types";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import ButtonSummary from "../../../../components/ButtonSummary";
@@ -38,9 +39,11 @@ const FormListMoto: React.FC<Props> = ({
   const [buttonClick, setButtonClick] = useState("");
   const [buttonAddProductClick, setButtonAddProductClick] = useState(false);
   const [totalFee, setTotalFee] = useState("");
+  const [orderId, setOrderId] = useState(0);
   const [isShowError, setIsShowError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const dispatch = useDispatch();
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   let totalFeeFromRoot = dataRedux.listProducts.find(
@@ -50,6 +53,7 @@ const FormListMoto: React.FC<Props> = ({
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
+      setButtonClick(buttonClicked);
       let productInfos = motoInfo(dataRedux);
       generateSignature(productInfos)
         .then((res: any) => {
@@ -59,6 +63,7 @@ const FormListMoto: React.FC<Props> = ({
               .then((response: any) => {
                 if (!response.isError && response.result.orderId !== "") {
                   let totalFee = formatFee(response.result.feeAmount);
+                  setOrderId(response.result.orderId);
                   if (totalFeeFromRoot) {
                     if (totalFee.localeCompare(totalFeeFromRoot.value) == 0) {
                       setButtonClick(buttonClicked);
@@ -81,6 +86,13 @@ const FormListMoto: React.FC<Props> = ({
         });
     }
   };
+
+  useEffect(() => {
+    dispatch({
+      type: MODIFYORDERID,
+      payload: orderId,
+    });
+  }, [orderId]);
 
   useEffect(() => {
     handleButtonClick ? handleButtonClick(buttonClick) : {};
