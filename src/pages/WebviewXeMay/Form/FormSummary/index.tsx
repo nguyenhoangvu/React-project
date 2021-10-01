@@ -9,9 +9,6 @@ import CheckBox from "../../../../components/CheckBox";
 import ModalCheck from "../../../../components/ModalCheck";
 import HrLine from "../../../../components/HrLine";
 import data from "../../../../json/select-dropdown.json";
-import { motoInfo } from "../../../../utils/objectMoto";
-import { generateSignature } from "../../../../adapters/apis/commonAPIs";
-import { createMotoContract } from "../../../../adapters/apis/motoAPIs";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -55,33 +52,11 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
   const [buttonClick, setButtonClick] = useState("");
   const [checkTerm, setCheckTerm] = useState(false);
   const [showModalCheck, setShowModalCheck] = useState(false);
-  const [isShowError, setIsShowError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   const handleDisplayForm = (buttonClicked: string) => {
-    if (buttonClicked === "back") setButtonClick(buttonClicked);
-    else if (buttonClicked === "next") {
-      let productInfos = motoInfo(dataRedux);
-      generateSignature(productInfos)
-        .then((res: any) => {
-          productInfos.signature = res.result.signature;
-          console.log("vu res: ", res);
-          setButtonClick(buttonClicked);
-          // createMotoContract(productInfos)
-          //   .then((response: any) => {
-          //     console.log("vu res: ", response.isError);
-          //   })
-          //   .catch((err) => {
-          //     setIsShowError(true);
-          //     setErrorMsg("Lỗi nhập xe");
-          //   });
-        })
-        .catch((err) => {
-          setIsShowError(true);
-          setErrorMsg("Lỗi nhập xe");
-        });
-    }
+    setButtonClick(buttonClicked);
   };
 
   useEffect(() => {

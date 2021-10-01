@@ -239,6 +239,7 @@ const FormXeMay: React.FC<Props> = ({
           handleAddMoreProduct={handleAddMoreProduct}
           buttonAddProductCallback={addProductButtonCallback}
           handleModifyProduct={handleModifyProduct}
+          handleShowError={handleValidate}
         />
       </FormListMotoWrapper>
       <FormSummaryWrapper showForm={showFormSummary}>

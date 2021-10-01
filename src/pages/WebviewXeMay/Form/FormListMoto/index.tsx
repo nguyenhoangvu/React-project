@@ -10,6 +10,9 @@ import ButtonSummary from "../../../../components/ButtonSummary";
 import HrLine from "../../../../components/HrLine";
 import ButtonBuy from "../../../../components/ButtonBuy";
 import { formatFee } from "../../../../common/formatFee";
+import { motoInfo } from "../../../../utils/objectMoto";
+import { generateSignature } from "../../../../adapters/apis/commonAPIs";
+import { createMotoContract } from "../../../../adapters/apis/motoAPIs";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -17,6 +20,7 @@ type Props = {
   handleAddMoreProduct?: (add: boolean) => void;
   handleModifyProduct?: (modify: boolean, productIndex: number) => void;
   buttonAddProductCallback: boolean;
+  handleShowError: (isError: boolean, errorMsg: string) => void;
 };
 
 const TotalFeeStyle = styled.div`
@@ -29,10 +33,14 @@ const FormListMoto: React.FC<Props> = ({
   handleAddMoreProduct,
   buttonAddProductCallback,
   handleModifyProduct,
+  handleShowError,
 }) => {
   const [buttonClick, setButtonClick] = useState("");
   const [buttonAddProductClick, setButtonAddProductClick] = useState(false);
   const [totalFee, setTotalFee] = useState("");
+  const [isShowError, setIsShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   let totalFeeFromRoot = dataRedux.listProducts.find(
@@ -40,7 +48,38 @@ const FormListMoto: React.FC<Props> = ({
   );
 
   const handleDisplayForm = (buttonClicked: string) => {
-    setButtonClick(buttonClicked);
+    if (buttonClicked === "back") setButtonClick(buttonClicked);
+    else if (buttonClicked === "next") {
+      let productInfos = motoInfo(dataRedux);
+      generateSignature(productInfos)
+        .then((res: any) => {
+          if (!res.isError) {
+            productInfos.signature = res.result.signature;
+            createMotoContract(productInfos)
+              .then((response: any) => {
+                if (!response.isError && response.result.orderId !== "") {
+                  let totalFee = formatFee(response.result.feeAmount);
+                  if (totalFeeFromRoot) {
+                    if (totalFee.localeCompare(totalFeeFromRoot.value) == 0) {
+                      setButtonClick(buttonClicked);
+                    } else {
+                      setIsShowError(true);
+                      setErrorMsg("Lỗi tính phí xe");
+                    }
+                  }
+                }
+              })
+              .catch((err) => {
+                setIsShowError(true);
+                setErrorMsg("Lỗi nhập xe");
+              });
+          }
+        })
+        .catch((err) => {
+          setIsShowError(true);
+          setErrorMsg("Lỗi nhập xe");
+        });
+    }
   };
 
   useEffect(() => {
@@ -50,6 +89,18 @@ const FormListMoto: React.FC<Props> = ({
   useEffect(() => {
     setButtonClick(pageCallback);
   }, [pageCallback]);
+
+  useEffect(() => {
+    handleShowError ? handleShowError(isShowError, errorMsg) : {};
+    let timer1: any;
+    if (isShowError === true) {
+      timer1 = setTimeout(() => setIsShowError(!isShowError), 3000);
+    }
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, [isShowError, errorMsg]);
 
   const handleClickAddProductButton = (clicked: boolean) => {
     setButtonAddProductClick(clicked);
@@ -179,6 +230,7 @@ const FormListMoto: React.FC<Props> = ({
         buttonCallback={buttonClick}
         isPay={false}
         isSummaryPage={false}
+        isValidateFalse={isShowError}
       />
     </Container>
   );
