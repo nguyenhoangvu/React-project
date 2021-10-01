@@ -29,6 +29,12 @@ export const validate = (
     else {
       if (input.key.includes("from_time")) timeFromRedux = input.value;
       if (input.key.includes("from_date")) dateFromRedux = input.value;
+      // if (
+      //   !input.key.includes("email") &&
+      //   /[a-zA-Z\<\>\"\/\@]/.test(input.value)
+      // ) {
+      //   errorMsg = o.name + "Không được chứa kí tự đặc biệt";
+      // }
     }
     return errorMsg;
   });
