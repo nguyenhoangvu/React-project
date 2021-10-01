@@ -219,6 +219,7 @@ const FormUserInfo: React.FC<Props> = ({
           </FormDN>
         </Col>
       </Row>
+      <div style={{ height: "10vh" }}></div>
       <DirectButton
         handleButtonClick={handleDisplayForm}
         buttonCallback={buttonClick}

@@ -183,12 +183,7 @@ const FormMotoInfo: React.FC<Props> = ({
             isResetValue={false}
           />
         </Col>
-        <div className="divider" style={{ marginTop: "-5px" }}>
-          {" "}
-        </div>
-        <div className="divider" style={{ marginTop: "-5px" }}>
-          {" "}
-        </div>
+        <div style={{ height: "10vh" }}></div>
         <DirectButton
           handleButtonClick={handleDisplayForm}
           buttonCallback={buttonClick}
