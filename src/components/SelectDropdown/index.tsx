@@ -54,7 +54,6 @@ const UL = styled.ul<IUL>`
   opacity: ${(props) => (props.showDropdown === true ? "1" : "0")};
   position: absolute;
   z-index: 999;
-  will-change: width, height;
   top: 0.625rem;
   left: 0;
   padding: 0;

@@ -149,11 +149,11 @@ const FormUserInfo: React.FC<Props> = ({
               required={true}
               productName={productName}
             />
-            <ButtonBuy
+            {/* <ButtonBuy
               handleClickButton={handleClickCameraButton}
               pageCallback={false}
               buttonIcon="camera"
-            />
+            /> */}
           </FormCN>
           <FormDN nhom_kh={nhom_kh}>
             <TextInput
