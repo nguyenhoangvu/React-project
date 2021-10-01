@@ -24,7 +24,7 @@ const ButtonWrapper = styled.div`
   bottom: 0px;
   left: 0px;
   overflow: hidden;
-  z-index: -1;
+  z-index: 997;
   background-color: #005790;
   padding: 0;
   height: 3.5rem;

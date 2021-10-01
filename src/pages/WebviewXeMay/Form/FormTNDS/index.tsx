@@ -186,9 +186,7 @@ const FormTNDS: React.FC<Props> = ({
             inputValueFromProp={feeInsurance}
             isResetValue={isAddProductButtonClicked}
           />
-          <div
-            style={{ width: "100%", height: "20px", position: "absolute" }}
-          ></div>
+          <div style={{ width: "100%", height: "10vh" }}></div>
         </Col>
       </Row>
       <DirectButton
