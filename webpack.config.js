@@ -7,6 +7,15 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    environment: {
+      arrowFunction: false,
+      bigIntLiteral: false,
+      const: false,
+      destructuring: false,
+      dynamicImport: false,
+      forOf: false,
+      module: false,
+    },
   },
   module: {
     rules: [
@@ -34,7 +43,39 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(s[ac]ss|css)$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { sourceMap: isDev ? true : false },
+          },
+          {
+            loader: "sass-loader",
+            options: { sourceMap: isDev ? true : false },
+          },
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[path][name].[ext]",
+            },
+          },
+        ],
+      },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    alias: {
+      "@": path.resolve("src"),
+      "@@": path.resolve(),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
