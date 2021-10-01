@@ -53,7 +53,6 @@ const FormListMoto: React.FC<Props> = ({
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
-      setButtonClick(buttonClicked);
       let productInfos = motoInfo(dataRedux);
       generateSignature(productInfos)
         .then((res: any) => {
