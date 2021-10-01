@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ButtonWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   transition: transform 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53),
     background-color 0s linear 0.2s;
   text-align: center;
