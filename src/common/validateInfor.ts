@@ -10,6 +10,8 @@ export const validate = (
   let today = moment().format("DD/MM/YYYY");
   let timeFromRedux = "";
   let dateFromRedux = "";
+  const regexCheckSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+  const regexCheckPhone = /(0)+([0-9]{9})\b/;
   listInputName.forEach((o: any) => {
     let input = {
       key: "",
@@ -23,18 +25,22 @@ export const validate = (
     } else {
       input = listObjectInput.find((i: any) => i.key === o.key);
     }
-
     if (input === undefined || input.value === "")
       errorMsg = "Bạn chưa nhập " + o.name;
     else {
       if (input.key.includes("from_time")) timeFromRedux = input.value;
       if (input.key.includes("from_date")) dateFromRedux = input.value;
-      // if (
-      //   !input.key.includes("email") &&
-      //   /[a-zA-Z\<\>\"\/\@]/.test(input.value)
-      // ) {
-      //   errorMsg = o.name + "Không được chứa kí tự đặc biệt";
-      // }
+      if (
+        !input.key.includes("email") &&
+        regexCheckSpecialChar.test(input.value) &&
+        input.key !== "moto_plate" &&
+        !input.key.includes("phone")
+      ) {
+        errorMsg = o.name + " không được chứa kí tự đặc biệt";
+      }
+      if (input.key.includes("phone") && !regexCheckPhone.test(input.value)) {
+        errorMsg = "Nhập đúng định dạng số điện thoại";
+      }
     }
     return errorMsg;
   });
