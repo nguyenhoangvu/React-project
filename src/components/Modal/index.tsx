@@ -4,7 +4,7 @@ import { Button, Modal, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 
-import data from "../../common/json_tinh_thanh_gr_bv.json";
+import data from "../../json/json_tinh_thanh_gr_bv.json";
 import TextInput from "../TextInput";
 import "./index.scss";
 
