@@ -34,7 +34,9 @@ export const validate = (
         !input.key.includes("email") &&
         regexCheckSpecialChar.test(input.value) &&
         input.key !== "moto_plate" &&
-        !input.key.includes("phone")
+        !input.key.includes("phone") &&
+        !input.key.includes("time") &&
+        !input.key.includes("date")
       ) {
         errorMsg = o.name + " không được chứa kí tự đặc biệt";
       }
