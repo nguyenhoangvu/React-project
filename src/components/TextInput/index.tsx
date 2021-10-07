@@ -112,7 +112,8 @@ const TextInput: React.FC<Props> = ({
       inputName !== "nhom_kh" &&
       inputName !== "expired_time_tnds" &&
       inputName !== "moto_volumn" &&
-      inputName !== "phi_tnds"
+      inputName !== "phi_tnds" &&
+      !inputName.startsWith("sum")
     ) {
       dispatch({
         type: ADDPRODUCTINFORS,
