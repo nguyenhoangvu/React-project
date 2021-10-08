@@ -231,15 +231,14 @@ const TextInput: React.FC<Props> = ({
           o.key === inputName &&
           o.productName === "product_" + dataRedux.modify_product
       );
-      if (dataCallback !== undefined) {
+      if (
+        dataCallback !== undefined &&
+        dataCallback.key !== "moto_volumn" &&
+        dataCallback.key !== "expired_time_tnds" &&
+        dataCallback.key !== "from_date_tnds"
+      ) {
         let value = dataCallback.value;
-        if (dataCallback.key === "moto_volumn") {
-          let motoType = data.Loai_xe.find((o) => o.key == value);
-          motoType !== undefined && setInputValue(motoType.value);
-        } else if (dataCallback.key === "expired_time_tnds") {
-          let time = data.Thoi_han_bh.find((o) => o.key == value);
-          time !== undefined && setInputValue(time.value);
-        } else setInputValue(dataCallback.value);
+        setInputValue(dataCallback.value);
       }
     }
   }, [dataRedux.modify_product]);

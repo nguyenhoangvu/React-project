@@ -84,6 +84,10 @@ const FormXeMay: React.FC<Props> = ({
     (state: RootState) => state.reducer.total_product
   );
 
+  const modifyProductFromRoot = useSelector(
+    (state: RootState) => state.reducer.modify_product
+  );
+
   const listProductFromRoot = useSelector((state: RootState) => state);
 
   useEffect(() => {
@@ -91,8 +95,10 @@ const FormXeMay: React.FC<Props> = ({
   }, [listProductFromRoot]);
 
   useEffect(() => {
-    setProductName("product_" + totalProductFromRoot);
-  }, [totalProductFromRoot]);
+    if (modifyProductFromRoot !== 0) {
+      setProductName("product_" + modifyProductFromRoot);
+    } else setProductName("product_" + totalProductFromRoot);
+  }, [totalProductFromRoot, modifyProductFromRoot]);
 
   // show hide form user info
   const handleButtonClick = (buttonClicked: string) => {

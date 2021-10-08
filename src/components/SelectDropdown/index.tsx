@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 import useOnclickOutside from "react-cool-onclickoutside";
 
+import { RootState } from "../../redux/store/rootReducer";
 import TextInput from "../TextInput";
 import data from "../../json/select-dropdown.json";
 
@@ -92,6 +94,8 @@ const SelectDropdown: React.FC<Props> = ({
   const [dropdownKey, setDropdownKey] = useState("");
   const [dataDropdown, setData] = useState<any>();
 
+  const dataRedux = useSelector((state: RootState) => state.reducer);
+
   useEffect(() => {
     switch (inputId) {
       case "bh_nhom_kh":
@@ -131,6 +135,26 @@ const SelectDropdown: React.FC<Props> = ({
       }
     }
   }, [isResetValue]);
+
+  useEffect(() => {
+    if (dataRedux.modify_product !== 0) {
+      let test = dataRedux.listProducts.find(
+        (o) =>
+          o.key === inputName &&
+          o.productName === "product_" + dataRedux.modify_product
+      );
+      if (test !== undefined) {
+        setDropdownKey(test.value);
+        if (inputName.includes("time")) {
+          let time = data.Thoi_han_bh.find((o) => o.key === test?.value);
+          time !== undefined && setInputValue(time.value);
+        } else if (inputName === "moto_volumn") {
+          let motoType = data.Loai_xe.find((o) => o.key === test?.value);
+          motoType !== undefined && setInputValue(motoType.value);
+        }
+      }
+    }
+  }, [dataRedux.modify_product]);
 
   const RenderOptionNhomKH = () => {
     const ContentDropdown = dataDropdown?.map((obj: any) => (

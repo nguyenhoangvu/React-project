@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../../redux/store/rootReducer";
 
+import { MODIFYORDERID } from "../../../../redux/types";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
@@ -27,6 +28,7 @@ const FormMotoInfo: React.FC<Props> = ({
   const [buttonClick, setButtonClick] = useState("");
   const [isShowError, setIsShowError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const dispatch = useDispatch();
 
   const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
   const listInputMustValidate = useSelector(
@@ -34,6 +36,10 @@ const FormMotoInfo: React.FC<Props> = ({
   );
   const listProduct = useSelector(
     (state: RootState) => state.reducer.listProducts
+  );
+
+  const modifyProduct = useSelector(
+    (state: RootState) => state.reducer.modify_product
   );
 
   const handleDisplayForm = (buttonClicked: string) => {
@@ -50,6 +56,12 @@ const FormMotoInfo: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
+        if (modifyProduct !== 0) {
+          dispatch({
+            type: MODIFYORDERID,
+            payload: 0,
+          });
+        }
         setButtonClick(buttonClicked);
       }
     }

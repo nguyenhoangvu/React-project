@@ -2,6 +2,7 @@
 
 .content-page {
   @include text;
+  padding-top: 1.25rem;
 
   &-icons {
     position: absolute;

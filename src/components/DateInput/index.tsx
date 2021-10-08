@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Calendar from "react-calendar";
 import moment from "moment";
 
 import TextInput from "../TextInput";
+import { RootState } from "../../redux/store/rootReducer";
 import "./index.scss";
 
 type Props = {
@@ -48,6 +50,8 @@ const DateInput: React.FC<Props> = ({
   const [showCalendar, setShowCalendar] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState("");
 
+  const dataRedux = useSelector((state: RootState) => state.reducer);
+
   const handleShowCalendar = (showCalendar: boolean | undefined) => {
     setShowCalendar(showCalendar);
   };
@@ -69,6 +73,19 @@ const DateInput: React.FC<Props> = ({
       setInputValue(moment().format("DD/MM/YYYY"));
     }
   }, [isResetValue]);
+
+  useEffect(() => {
+    if (dataRedux.modify_product !== 0) {
+      let test = dataRedux.listProducts.find(
+        (o) =>
+          o.key === inputName &&
+          o.productName === "product_" + dataRedux.modify_product
+      );
+      if (test !== undefined) {
+        setInputValue(test.value);
+      }
+    }
+  }, [dataRedux.modify_product]);
 
   return (
     <div>
