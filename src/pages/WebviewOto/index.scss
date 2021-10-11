@@ -1,0 +1,36 @@
+@import "../../styles/color.scss";
+
+.content-page {
+  @include text;
+  padding-top: 1.25rem;
+
+  &-icons {
+    position: absolute;
+    margin-top: 0.625rem;
+  }
+
+  &-main {
+    margin-left: 2.1875rem;
+    &-description {
+      &-title {
+        font-weight: bold;
+        padding: 0;
+        li {
+          font-weight: normal;
+          list-style: none;
+          position: relative;
+          padding: 0 0 0 1.25rem;
+          &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5625rem;
+            width: 0.5rem;
+            display: block;
+            border-top: 0.125rem solid;
+          }
+        }
+      }
+    }
+  }
+}

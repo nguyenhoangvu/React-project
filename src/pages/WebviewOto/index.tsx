@@ -1,0 +1,153 @@
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import data from "../../json/home-page-json.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { Col, Container, Row } from "react-bootstrap";
+
+import HrLine from "../../components/HrLine";
+import Footer from "../Footer";
+import ButtonBuy from "../../components/ButtonBuy";
+// import FormXeMay from "./Form";
+
+import "./index.scss";
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+interface PageProps {
+  pageDisplay: boolean;
+}
+
+const Page = styled.section<PageProps>`
+  display: ${(props) => (props.pageDisplay === true ? "none" : "block")};
+`;
+
+interface FormProps {
+  formDisplay: boolean;
+}
+const Form = styled.section<FormProps>`
+  display: ${(props) => (props.formDisplay === true ? "block" : "none")};
+`;
+
+const ProductInfo = () => {
+  const ProductInfo = data.TNDS_o_to.map((obj, i) => (
+    <Container key={i}>
+      <Row className="justify-content-md-center">
+        <Col xs="12" className="content-page">
+          <FontAwesomeIcon
+            icon={faCheck}
+            size="1x"
+            className="content-page-icons"
+          />
+          <div className="content-page-main">
+            <h3 className="content-page-main-tiltle" key={i}>
+              {obj.product_intro.key}
+            </h3>
+            <p>{obj.product_intro.value}</p>
+            <div className="content-page-main-description">
+              {obj.product_intro.types_and_services.map((o, i) => (
+                <ul className="content-page-main-description-title" key={i}>
+                  {o.type_title}
+                  {o.types.map((key, j) => (
+                    <li key={j}>{key.value}</li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+            <div className="content-page-main-description">
+              {obj.product_intro.types_and_services.map((o, i) => (
+                <ul className="content-page-main-description-title" key={i}>
+                  {o.service_title}
+                  {o.services.map((key, j) => (
+                    <li key={j}>{key.value}</li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+          </div>
+          <HrLine />
+        </Col>
+      </Row>
+    </Container>
+  ));
+
+  return <div>{ProductInfo}</div>;
+};
+
+const ProductBenefit = () => {
+  const ProductBenefit = data.TNDS_o_to.map((obj, i) => (
+    <Container key={i}>
+      <Row className="justify-content-md-center">
+        <Col xs="12" className="content-page">
+          <FontAwesomeIcon
+            icon={faCheck}
+            size="1x"
+            className="content-page-icons"
+          />
+          <div className="content-page-main">
+            <h3 className="content-page-main-tiltle" key={i}>
+              {obj.insurance_benefits.key}
+            </h3>
+            <div className="content-page-main-description">
+              {obj.insurance_benefits.insurance_benefit_contents.map((o, i) => (
+                <ul className="content-page-main-description-title" key={i}>
+                  {o.insurance_benefits_key}
+                  {o.insurance_benefits_values.map((key, j) => (
+                    <li key={j}>{key.value}</li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+          </div>
+        </Col>
+      </Row>
+    </Container>
+  ));
+
+  return <div>{ProductBenefit}</div>;
+};
+
+const WebviewOto = () => {
+  const [buttonBuyClick, setButtonBuyClick] = useState(false);
+
+  const handleClickButton = (click: boolean) => {
+    setButtonBuyClick(click);
+  };
+
+  const handleDirectButtonClick = (buttonClicked: string) => {
+    if (buttonClicked === "back") {
+      setButtonBuyClick(false);
+    }
+  };
+
+  return (
+    <div className="WebviewTNDSXeMay">
+      <Page pageDisplay={buttonBuyClick}>
+        <Image
+          src="	https://api.evbi.vn/images/oto_files/VBI-bao-hiem-o-to.png"
+          alt="Bảo hiểm TNDS ô tô"
+        />
+        <ProductInfo />
+        <ProductBenefit />
+        <Footer />
+        <HrLine />
+        <ButtonBuy
+          handleClickButton={handleClickButton}
+          pageCallback={buttonBuyClick}
+          buttonIcon="buy"
+        />
+      </Page>
+      {/* <Form formDisplay={buttonBuyClick}>
+        <FormXeMay
+          handleDirectButtonClick={handleDirectButtonClick}
+          pageCallback={buttonBuyClick}
+        />
+      </Form> */}
+    </div>
+  );
+};
+
+export default WebviewOto;

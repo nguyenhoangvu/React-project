@@ -27,7 +27,6 @@ instance.interceptors.request.use(
             }
           } else {
             url += part + encodeURIComponent(value) + "&";
-            console.log("vu url: ", url);
           }
         }
       }

@@ -46,5 +46,97 @@
         }
       ]
     }
+  ],
+  "TNDS_o_to": [
+    {
+      "product_intro": {
+        "key": "Thông tin sản phẩm",
+        "value": "Bảo hiểm VietinBank tự tin là người bạn đồng hành, luôn chăm sóc và bảo vệ tới chiếc xe của bạn trên mọi chặng hành trình. Với chi phí hợp lý, phạm vi bảo hiểm toàn diện và dịch vụ giải quyết bồi thường nhanh chóng, hiện đại, chuyên nghiệp, Bảo hiểm Xe ôtô của Bảo hiểm VietinBank cam kết đáp ứng mọi nhu cầu của khách hàng.",
+        "types_and_services": [
+          {
+            "type_title": "Các loại hình bảo hiểm mô tô, xe máy:",
+            "types": [
+              {
+                "value": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe ô tô."
+              },
+              {
+                "value": "Bảo hiểm tự nguyện Vật chất xe."
+              },
+              {
+                "value": "Bảo hiểm Tai nạn lái phụ xe và người ngồi trên xe."
+              },
+              {
+                "value": "Bảo hiểm Trách nhiệm dân sự của chủ xe đối với hàng hóa vận chuyển trên xe."
+              }
+            ],
+            "service_title": "Những dịch vụ tiện ích:",
+            "services": [
+              {
+                "value": "Khai báo tổn thất xe trực tuyến 24/24."
+              },
+              {
+                "value": "Tra cứu thông tin Giấy chứng nhận, tra cứu bồi thường, mạng lưới Gara bảo lãnh trực tuyến."
+              },
+              {
+                "value": "Tổng đài giải đáp thắc mắc qua đường dây nóng 19001566"
+              }
+            ]
+          }
+        ]
+      },
+
+      "insurance_benefits": {
+        "key": "Quyền lợi bảo hiểm",
+        "insurance_benefit_contents": [
+          {
+            "insurance_benefits_key": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe ô tô:",
+            "insurance_benefits_values": [
+              {
+                "value": "Thiệt hại ngoài hợp đồng về thân thể, tính mạng và tài sản đối với bên thứ ba do xe cơ giới gây ra."
+              },
+              {
+                "value": "Thiệt hại về thân thể và tính mạng của hành khách theo hợp đồng vận chuyển hành khách do xe cơ giới gây ra."
+              }
+            ]
+          },
+          {
+            "insurance_benefits_key": "Bảo hiểm tự nguyện Vật chất xe:",
+            "insurance_benefits_values": [
+              {
+                "value": "Doanh nghiệp bảo hiểm chịu trách nhiệm bồi thường cho chủ xe những thiệt hại vật chất do thiên tai, tai nạn bất ngờ, không lường trước được trong những trường hợp sau: Đâm, va, lật, đổ, chìm, rơi toàn bộ xe, bị các vật thể khác rơi vào."
+              },
+              {
+                "value": "Hỏa hoạn, cháy, nổ; Những tai họa bất khả kháng do thiên nhiên gây ra; Mất toàn bộ xe do trộm, cướp; Hành động ác ý, cố tình gây thiệt hại không phải của chủ xe, người điều khiển xe và những người có quyền lợi liên quan đến sở hữu, khai thác và sử dụng xe."
+              },
+              {
+                "value": "Ngoài số tiền bồi thường, doanh nghiệp bảo hiểm còn bồi thường cho chủ xe những chi phí cần thiết và hợp lý theo thỏa thuận tại Hợp đồng bảo hiểm để thực hiện các công việc."
+              }
+            ]
+          },
+          {
+            "insurance_benefits_key": "Bảo hiểm tai nạn lái phụ xe và người ngồi trên xe:",
+            "insurance_benefits_values": [
+              {
+                "value": "Tai nạn đối với người được chở trên xe: Thiệt hại thân thể do tai nạn khi đang ở trên xe, lên xuống xe trong quá trình xe đang tham gia giao thông."
+              },
+              {
+                "value": "Tai nạn đối với lái, phụ xe: Thiệt hại về thân thể do tai nạn liên quan trực tiếp đến việc sử dụng chiếc xe đó."
+              }
+            ]
+          },
+          {
+            "insurance_benefits_key": "Bảo hiểm Trách nhiệm dân sự của chủ xe đối với hàng hóa vận chuyển trên xe:",
+            "insurance_benefits_values": [
+              {
+                "value": "VBI nhận bảo hiểm trách nhiệm dân sự của Chủ xe đối với hàng hoá trong quá trình vận chuyển theo hợp đồng vận chuyển giữa Chủ xe và Chủ hàng trong phạm vi lãnh thổ nước Cộng hoà xã hội chủ nghĩa Việt Nam. Trong phạm vi mức trách nhiệm bảo hiểm ghi trên Giấy chứng nhận bảo hiểm/Hợp đồng bảo hiểm, VBI sẽ thanh toán cho Chủ xe số tiền mà Chủ xe phải bồi thường theo quy định của Bộ Luật dân sự trong những trường hợp xe đang chở hàng bị: Đâm va, lật, đổ, rơi; chìm; hỏa hoạn, cháy, nổ; bị các vật thể rơi vào, va chạm vào; Những tai họa bất khả kháng do thiên nhiên (Bão, lũ lụt, sụt lở, ngập, sét đánh, động đất, mưa đá, sóng thần)."
+              },
+              {
+                "value": "Ngoài ra, VBI còn thanh toán cho Chủ xe các chi phí cần thiết và hợp lý nhằm: Ngăn ngừa, giảm nhẹ tổn thất cho hàng hoá; Bảo quản, xếp dỡ, lưu kho, lưu bãi hàng hoá trong quá trình vận chuyển do hậu quả của tai nạn; Giám định tổn thất thuộc trách nhiệm của VBI."
+              }
+            ]
+          }
+        ]
+      }
+    }
   ]
 }

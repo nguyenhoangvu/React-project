@@ -237,7 +237,6 @@ const TextInput: React.FC<Props> = ({
         dataCallback.key !== "expired_time_tnds" &&
         dataCallback.key !== "from_date_tnds"
       ) {
-        let value = dataCallback.value;
         setInputValue(dataCallback.value);
       }
     }
