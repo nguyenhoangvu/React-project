@@ -34,5 +34,33 @@
       "key": "3",
       "value": "3 năm"
     }
+  ],
+  "Gioi_tinh": [
+    {
+      "key": "0",
+      "value": "-- Chọn --"
+    },
+    {
+      "key": "NAM",
+      "value": "Nam"
+    },
+    {
+      "key": "NU",
+      "value": "Nữ"
+    }
+  ],
+  "Muc_dich": [
+    {
+      "key": "0",
+      "value": "-- Chọn --"
+    },
+    {
+      "key": "C",
+      "value": "Kinh doanh"
+    },
+    {
+      "key": "K",
+      "value": "Không kinh doanh"
+    }
   ]
 }

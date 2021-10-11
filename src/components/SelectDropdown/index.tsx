@@ -8,6 +8,8 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import { RootState } from "../../redux/store/rootReducer";
 import TextInput from "../TextInput";
 import data from "../../json/select-dropdown.json";
+import { getYearProduce } from "../../common/getYearProduce";
+import { getListGroupCar } from "../../adapters/apis/carAPIs";
 
 type Props = {
   inputType: string;
@@ -97,17 +99,17 @@ const SelectDropdown: React.FC<Props> = ({
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
   useEffect(() => {
-    switch (inputId) {
-      case "bh_nhom_kh":
+    switch (inputName) {
+      case "nhom_kh":
         setData(data.Nhom_KH);
         setInputValue(data.Nhom_KH[0].value);
         setDropdownKey(data.Nhom_KH[0].key);
         break;
-      case "bh_xe_may_dung_tich_xe":
+      case "moto_volumn":
         setData(data.Loai_xe);
         setInputValue(undefined);
         break;
-      case "bh_xe_may_tnds_thoi_han":
+      case "expired_time_tnds":
         setData(data.Thoi_han_bh);
         setDropdownKey(data.Thoi_han_bh[0].key);
         setInputValue(data.Thoi_han_bh[0].value);
@@ -120,12 +122,12 @@ const SelectDropdown: React.FC<Props> = ({
 
   useEffect(() => {
     if (isResetValue === true) {
-      switch (inputId) {
-        case "bh_xe_may_dung_tich_xe":
+      switch (inputName) {
+        case "moto_volumn":
           setDropdownKey("");
           setInputValue("");
           break;
-        case "bh_xe_may_tnds_thoi_han":
+        case "expired_time_tnds":
           setDropdownKey(data.Thoi_han_bh[0].key);
           setInputValue(data.Thoi_han_bh[0].value);
           break;
