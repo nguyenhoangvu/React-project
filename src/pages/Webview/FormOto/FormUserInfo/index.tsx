@@ -73,8 +73,6 @@ const FormUserInfo: React.FC<Props> = ({
     }
   };
 
-  const handleClickCameraButton = () => {};
-
   useEffect(() => {
     handleButtonClick ? handleButtonClick(buttonClick) : {};
   }, [buttonClick]);

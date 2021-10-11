@@ -11,6 +11,7 @@ import images from "../../common/pageImage";
 import Footer from "../Footer";
 import ButtonBuy from "../../components/ButtonBuy";
 import FormXeMay from "./FormXeMay";
+import FormOto from "./FormOto";
 import "./index.scss";
 
 const Image = styled.img`
@@ -165,10 +166,18 @@ const Webview = () => {
         />
       </Page>
       <Form formDisplay={buttonBuyClick}>
-        <FormXeMay
-          handleDirectButtonClick={handleDirectButtonClick}
-          pageCallback={buttonBuyClick}
-        />
+        {partnerData.nv === "XC.1.1" && (
+          <FormXeMay
+            handleDirectButtonClick={handleDirectButtonClick}
+            pageCallback={buttonBuyClick}
+          />
+        )}
+        {partnerData.nv === "XC.2.1" && (
+          <FormOto
+            handleDirectButtonClick={handleDirectButtonClick}
+            pageCallback={buttonBuyClick}
+          />
+        )}
       </Form>
     </div>
   );
