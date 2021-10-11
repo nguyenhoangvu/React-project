@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./global-css.css";
-import WebviewXeMay from "./pages/WebviewXeMay";
+import Webview from "./pages/Webview";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
@@ -11,7 +11,7 @@ import data from "../src/json/partner-info.json";
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <WebviewXeMay />
+      <Webview />
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")

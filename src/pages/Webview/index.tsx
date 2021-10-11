@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import data from "../../json/home-page-json.json";
 import partnerData from "../../json/partner-info.json";
@@ -10,8 +10,7 @@ import HrLine from "../../components/HrLine";
 import images from "../../common/pageImage";
 import Footer from "../Footer";
 import ButtonBuy from "../../components/ButtonBuy";
-import FormXeMay from "./Form";
-import img from "../../images/VBI-bao-hiem-mo-to.png";
+import FormXeMay from "./FormXeMay";
 import "./index.scss";
 
 const Image = styled.img`
@@ -34,7 +33,7 @@ const Form = styled.section<FormProps>`
   display: ${(props) => (props.formDisplay === true ? "block" : "none")};
 `;
 
-const WebviewXeMay = () => {
+const Webview = () => {
   const [buttonBuyClick, setButtonBuyClick] = useState(false);
   const [dataPage, setData] = useState<any>();
 
@@ -175,4 +174,4 @@ const WebviewXeMay = () => {
   );
 };
 
-export default WebviewXeMay;
+export default Webview;
