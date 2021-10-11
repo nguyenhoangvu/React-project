@@ -98,6 +98,8 @@ const SelectDropdown: React.FC<Props> = ({
 
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     switch (inputName) {
       case "nhom_kh":
@@ -123,6 +125,36 @@ const SelectDropdown: React.FC<Props> = ({
         setData(data.Muc_dich);
         setDropdownKey(data.Muc_dich[0].key);
         setInputValue(data.Muc_dich[0].value);
+        break;
+      case "oto_yearProduce":
+        let arr = getYearProduce();
+        setData(arr);
+        setDropdownKey(arr[0].key);
+        setInputValue(arr[0].value);
+        break;
+      case "oto_type":
+        getListGroupCar()
+          .then((res: any) => {
+            if (!res.isError) {
+              let arr = [
+                {
+                  key: "0",
+                  value: "--Chọn--",
+                },
+              ];
+              res.result.map((o: any) => {
+                let obj = {
+                  key: o.groupCar,
+                  value: o.groupCarName,
+                };
+                arr.push(obj);
+              });
+              setData(arr);
+              setDropdownKey(arr[0].key);
+              setInputValue(arr[0].value);
+            }
+          })
+          .catch((err) => {});
         break;
       default:
         break;

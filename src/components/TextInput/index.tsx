@@ -114,13 +114,9 @@ const TextInput: React.FC<Props> = ({
         },
       });
     } else if (
-      inputName !== "nhom_kh" &&
-      inputName !== "expired_time_tnds" &&
-      inputName !== "moto_volumn" &&
+      isShowDropdown !== true &&
       inputName !== "phi_tnds" &&
-      !inputName.startsWith("sum") &&
-      inputName !== "user_sex" &&
-      inputName !== "user_birthday"
+      !inputName.startsWith("sum")
     ) {
       dispatch({
         type: ADDPRODUCTINFORS,

@@ -6,3 +6,19 @@ export const getListGroupCar = () => {
     method: "get",
   });
 };
+
+export const calculateFeeCar = (data: any) => {
+  return instance({
+    url: "/api/CarInsurance/calculate-fee-car",
+    method: "post",
+    data: data,
+  });
+};
+
+export const createCarContract = (data: any) => {
+  return instance({
+    url: "/api/CarInsurance/create-car-contract",
+    method: "post",
+    data: data,
+  });
+};

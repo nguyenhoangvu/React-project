@@ -3,12 +3,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../../redux/store/rootReducer";
 
-import { MODIFYORDERID } from "../../../../redux/types";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
-import DistrictInput from "../../../../components/DistrictInput";
 import { validate } from "../../../../common/validateInfor";
+import { calculateFeeCar } from "../../../../adapters/apis/carAPIs";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -28,7 +27,7 @@ const FormCarInfo: React.FC<Props> = ({
   const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
 
-  const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
+  const dataRedux = useSelector((state: RootState) => state.reducer);
   const listInputMustValidate = useSelector(
     (state: RootState) => state.reducer.listInputMustValidate
   );
@@ -36,30 +35,17 @@ const FormCarInfo: React.FC<Props> = ({
     (state: RootState) => state.reducer.listProducts
   );
 
-  const modifyProduct = useSelector(
-    (state: RootState) => state.reducer.modify_product
-  );
-
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
-      let listInput = listInputMustValidate.filter(
-        (o) =>
-          o.key.startsWith("moto") ||
-          o.key.startsWith("gcn") ||
-          o.key.startsWith("cx")
+      let listInput = listInputMustValidate.filter((o) =>
+        o.key.startsWith("moto")
       );
       let test = validate(listInput, listProduct, productName);
       if (test !== "") {
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        if (modifyProduct !== 0) {
-          dispatch({
-            type: MODIFYORDERID,
-            payload: 0,
-          });
-        }
         setButtonClick(buttonClicked);
       }
     }
