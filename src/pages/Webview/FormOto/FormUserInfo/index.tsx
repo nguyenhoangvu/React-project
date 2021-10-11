@@ -7,6 +7,7 @@ import { RootState } from "../../../../redux/store/rootReducer";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
+import DateInput from "../../../../components/DateInput";
 import { validate } from "../../../../common/validateInfor";
 
 type Props = {
@@ -128,15 +129,58 @@ const FormUserInfo: React.FC<Props> = ({
               required={true}
               productName={productName}
             />
-            <TextInput
-              inputType="tel"
-              inputId="bh_xe_may_dienthoai_dd"
-              inputName="user_phone"
-              inputTitle="điện thoại"
-              labelName="Điện thoại"
-              required={true}
-              productName={productName}
-            />
+            <Row>
+              <Col xs="6">
+                <DateInput
+                  inputType="text"
+                  inputId="bh_oto_ngay_sinh"
+                  inputName="user_birthday"
+                  inputTitle="ngay_sinh"
+                  labelName="Ngày sinh"
+                  required={true}
+                  readonly={true}
+                  defaultToday={false}
+                  limitDate={false}
+                  productName={productName}
+                />
+              </Col>
+              <Col xs="6">
+                <SelectDropdown
+                  inputType="text"
+                  inputId="bh_oto_gioi_tinh"
+                  inputName="user_sex"
+                  inputTitle="Giới tính"
+                  labelName="Giới tính"
+                  required={false}
+                  readonly={true}
+                  productName={productName}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="6">
+                <TextInput
+                  inputType="tel"
+                  inputId="bh_oto_cmt"
+                  inputName="user_indentity"
+                  inputTitle="CMT/Thẻ CC/Hộ chiếu"
+                  labelName="CMND/Hộ chiếu"
+                  required={true}
+                  productName={productName}
+                />
+              </Col>
+              <Col xs="6">
+                <TextInput
+                  inputType="tel"
+                  inputId="bh_oto_dienthoai_dd"
+                  inputName="user_phone"
+                  inputTitle="điện thoại"
+                  labelName="Điện thoại"
+                  required={true}
+                  productName={productName}
+                />
+              </Col>
+            </Row>
             <TextInput
               inputType="email"
               inputId="bh_xe_may_email"
@@ -146,11 +190,6 @@ const FormUserInfo: React.FC<Props> = ({
               required={true}
               productName={productName}
             />
-            {/* <ButtonBuy
-              handleClickButton={handleClickCameraButton}
-              pageCallback={false}
-              buttonIcon="camera"
-            /> */}
           </FormCN>
           <FormDN nhom_kh={nhom_kh}>
             <TextInput

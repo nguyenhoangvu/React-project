@@ -100,7 +100,12 @@ const TextInput: React.FC<Props> = ({
   };
 
   const handleBlurInput = () => {
-    if (inputName.startsWith("user") || inputName.startsWith("enterprise")) {
+    if (
+      (inputName.startsWith("user") &&
+        inputName !== "user_sex" &&
+        inputName !== "user_birthday") ||
+      inputName.startsWith("enterprise")
+    ) {
       dispatch({
         type: ADDUSERINFO,
         payload: {
@@ -113,7 +118,9 @@ const TextInput: React.FC<Props> = ({
       inputName !== "expired_time_tnds" &&
       inputName !== "moto_volumn" &&
       inputName !== "phi_tnds" &&
-      !inputName.startsWith("sum")
+      !inputName.startsWith("sum") &&
+      inputName !== "user_sex" &&
+      inputName !== "user_birthday"
     ) {
       dispatch({
         type: ADDPRODUCTINFORS,
@@ -135,20 +142,35 @@ const TextInput: React.FC<Props> = ({
   };
 
   const handleInputClick = () => {
-    switch (inputId) {
-      case "bh_nhom_kh":
+    switch (inputName) {
+      case "nhom_kh":
         setShowDropdown(!showDropdown);
         break;
-      case "bh_xe_may_dung_tich_xe":
+      case "moto_volumn":
         setShowDropdown(!showDropdown);
         break;
-      case "bh_xe_may_tinh_thanh_gcn_tnds":
+      case "gcn_recieve_city":
         setShowDropdown(!showDropdown);
         break;
-      case "bh_xe_may_tnds_ngay_hl":
+      case "from_date_tnds":
         setShowDropdown(!showDropdown);
         break;
-      case "bh_xe_may_tnds_thoi_han":
+      case "expired_time_tnds":
+        setShowDropdown(!showDropdown);
+        break;
+      case "user_birthday":
+        setShowDropdown(!showDropdown);
+        break;
+      case "user_sex":
+        setShowDropdown(!showDropdown);
+        break;
+      case "oto_intendedUse":
+        setShowDropdown(!showDropdown);
+        break;
+      case "oto_yearProduce":
+        setShowDropdown(!showDropdown);
+        break;
+      case "oto_type":
         setShowDropdown(!showDropdown);
         break;
       default:
@@ -166,13 +188,14 @@ const TextInput: React.FC<Props> = ({
   useEffect(() => {
     if (inputValueFromProp !== undefined) {
       setInputValue(inputValueFromProp);
-      setInputActive("active");
+      inputValueFromProp !== "" && setInputActive("active");
       if (
         !(
           inputName.startsWith("tnds") ||
           inputName.startsWith("sum") ||
           inputName === "phi_tnds" ||
-          inputName === "nhom_kh"
+          inputName === "nhom_kh" ||
+          inputName.startsWith("user")
         )
       ) {
         dispatch({
@@ -183,7 +206,7 @@ const TextInput: React.FC<Props> = ({
             productName: productName,
           },
         });
-      } else if (inputName === "nhom_kh") {
+      } else if (inputName === "nhom_kh" || inputName.startsWith("user")) {
         dispatch({
           type: ADDUSERINFO,
           payload: {

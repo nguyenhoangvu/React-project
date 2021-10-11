@@ -114,7 +114,16 @@ const SelectDropdown: React.FC<Props> = ({
         setDropdownKey(data.Thoi_han_bh[0].key);
         setInputValue(data.Thoi_han_bh[0].value);
         break;
-
+      case "user_sex":
+        setData(data.Gioi_tinh);
+        setDropdownKey(data.Gioi_tinh[0].key);
+        setInputValue(data.Gioi_tinh[0].value);
+        break;
+      case "oto_intendedUse":
+        setData(data.Muc_dich);
+        setDropdownKey(data.Muc_dich[0].key);
+        setInputValue(data.Muc_dich[0].value);
+        break;
       default:
         break;
     }

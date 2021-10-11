@@ -20,6 +20,7 @@ type Props = {
   defaultToday?: boolean;
   productName: string;
   isResetValue?: boolean;
+  limitDate?: boolean;
 };
 
 interface ICalendarWrapper {
@@ -45,6 +46,7 @@ const DateInput: React.FC<Props> = ({
   defaultToday,
   productName,
   isResetValue,
+  limitDate,
 }) => {
   const [calendarValue, onChange] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState<boolean | undefined>(false);
@@ -57,15 +59,20 @@ const DateInput: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (defaultToday) {
+    if (defaultToday && inputName !== "user_birthday") {
       setInputValue(moment().format("DD/MM/YYYY"));
     }
   }, []);
 
   useEffect(() => {
+    let today = moment(new Date()).format("DD/MM/YYYY");
     let datePicked = moment(calendarValue).format("DD/MM/YYYY");
-    setInputValue(datePicked);
-    setShowCalendar(false);
+    if (inputName === "user_birthday" && today === datePicked) {
+      return;
+    } else {
+      setInputValue(datePicked);
+      setShowCalendar(false);
+    }
   }, [calendarValue]);
 
   useEffect(() => {
@@ -108,12 +115,8 @@ const DateInput: React.FC<Props> = ({
           onChange={onChange}
           value={calendarValue}
           className="custom-calendar"
-          minDate={moment().toDate()}
+          minDate={limitDate === false ? undefined : moment().toDate()}
         />
-        {/* <div>
-          <button>Hôm nay</button>
-          <button>Thoát</button>
-        </div> */}
       </CalendarWrapper>
     </div>
   );
