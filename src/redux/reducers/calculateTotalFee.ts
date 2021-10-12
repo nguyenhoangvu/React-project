@@ -16,3 +16,14 @@ export const totalFeeMoto = (listFee: any) => {
   obj.value = fee;
   return obj;
 };
+
+export const totalFeeCar = (fee: string, expiredTime: string) => {
+  let totalFee = 0;
+  totalFee = parseInt(fee) * parseInt(expiredTime);
+  let obj = {
+    key: "phi_total_tnds",
+    value: formatFee(totalFee.toString()),
+    productName: "all",
+  };
+  return obj;
+};

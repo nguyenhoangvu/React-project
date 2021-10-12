@@ -10,7 +10,7 @@ import {
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
 import { calculateFeeMoto } from "./calculateFeeMoto";
-import { totalFeeMoto } from "./calculateTotalFee";
+import { totalFeeMoto, totalFeeCar } from "./calculateTotalFee";
 
 interface USERINFOR {
   key: string;
@@ -175,6 +175,26 @@ const reducers = (state = initialState, action: ActionTypes) => {
         if (totalFee.key !== "" && totalFee.key !== undefined) {
           let index = cloneState.listProducts.findIndex(
             (o) => o.key === "total_fee_tnds"
+          );
+          if (index >= 0) {
+            cloneState.listProducts[index] = totalFee;
+          } else cloneState.listProducts.push(totalFee);
+        }
+      } else if (state.nv === "XC.2.1") {
+        let feeTNDS = cloneState.listProducts.find(
+          (o) =>
+            o.key === "phi_bh_tnds" &&
+            o.productName === action.payload.productName
+        );
+        let expiredTime = cloneState.listProducts.find(
+          (o) =>
+            o.key === "expired_time_tnds" &&
+            o.productName === action.payload.productName
+        );
+        if (feeTNDS && expiredTime) {
+          let totalFee = totalFeeCar(feeTNDS.value, expiredTime.value);
+          let index = cloneState.listProducts.findIndex(
+            (o) => o.key === "phi_total_tnds"
           );
           if (index >= 0) {
             cloneState.listProducts[index] = totalFee;
