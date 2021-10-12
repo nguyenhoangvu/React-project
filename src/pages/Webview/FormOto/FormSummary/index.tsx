@@ -8,8 +8,8 @@ import DirectButton from "../../../DirectButton";
 import CheckBox from "../../../../components/CheckBox";
 import ModalCheck from "../../../../components/ModalCheck";
 import HrLine from "../../../../components/HrLine";
-import data from "../../../../json/select-dropdown.json";
 import { payment } from "../../../../common/payment";
+import { formatFee } from "../../../../common/formatFee";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -93,17 +93,25 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
     let listProducts = [];
     for (let i = 1; i <= dataRedux.total_product; i++) {
       let product_name = "product_" + i;
+      let totalFee = "";
       let product = dataRedux.listProducts.filter(
         (o) => o.productName === product_name
       );
-      let motoPlate = product.find((o) => o.key === "moto_plate");
-      let motoOwner = product.find((o) => o.key === "cx_name");
-      let motoVolumn = product.find((o) => o.key === "moto_volumn");
-      let motoType = data.Loai_xe.find((o) => o.key == motoVolumn?.value);
+      let fromDate = product.find((o) => o.key === "from_date_tnds");
+      let toDate = product.find((o) => o.key === "to_date_tnds");
+      let fee = product.find((o) => o.key === "phi_bh_tnds");
+      let expiredTime = product.find((o) => o.key === "expired_time_tnds");
+      if (fee && expiredTime) {
+        totalFee = (
+          parseInt(fee.value) * parseInt(expiredTime.value)
+        ).toString();
+        totalFee = formatFee(totalFee);
+      }
+
       let obj = {
-        motoOwner: motoOwner?.value,
-        motoPlate: motoPlate?.value,
-        motoType: motoType?.value,
+        toDate: toDate?.value,
+        fromDate: fromDate?.value,
+        fee: totalFee,
         index: i,
       };
       listProducts.push(obj);
@@ -111,14 +119,15 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
 
     const ContentMotos = listProducts.map((obj: any) => (
       <div data-index={obj.index} key={obj.index}>
+        <BTitlte>Trách nhiệm dân sự</BTitlte>
         <SummaryInfo>
-          <b>Chủ xe:</b> <span>{obj.motoOwner}</span>
+          <b>Thời hạn:</b>{" "}
+          <span>
+            {obj.fromDate} - {obj.toDate}
+          </span>
         </SummaryInfo>
         <SummaryInfo>
-          <b>Biển kiểm soát:</b> <span>{obj.motoPlate}</span>
-        </SummaryInfo>
-        <SummaryInfo>
-          <b>Loại xe:</b> <span>{obj.motoType}</span>
+          <b>Phí:</b> <span>{obj.fee} VNĐ</span>
         </SummaryInfo>
         <HrLine />
       </div>
@@ -142,6 +151,15 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 </span>
               </SummaryInfo>
               <SummaryInfo>
+                <b>Biển kiểm soát:</b>{" "}
+                <span>
+                  {
+                    dataRedux.listProducts.find((o) => o.key === "oto_plate")
+                      ?.value
+                  }
+                </span>
+              </SummaryInfo>
+              <SummaryInfo>
                 <b>Email:</b>{" "}
                 <span>
                   {
@@ -159,26 +177,15 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                   }
                 </span>
               </SummaryInfo>
-              <SummaryInfo>
-                <b>Địa chỉ nhận:</b>{" "}
-                <span>
-                  {
-                    dataRedux.listProducts.find(
-                      (o) => o.key === "gcn_recieve_address"
-                    )?.value
-                  }
-                </span>
-              </SummaryInfo>
             </SummaryInfoWrapper>
             <SummaryInfoWrapper>
-              <BTitlte>Thông tin mô tô, xe máy</BTitlte>
               <RenderListProduct />
             </SummaryInfoWrapper>
             <TotalFee>
               <BTitlte>Tổng phí thanh toán: </BTitlte>{" "}
               <TotalFeeSpan>
                 {
-                  dataRedux.listProducts.find((o) => o.key === "total_fee_tnds")
+                  dataRedux.listProducts.find((o) => o.key === "phi_total_tnds")
                     ?.value
                 }
               </TotalFeeSpan>{" "}
@@ -190,7 +197,7 @@ const FormSummary: React.FC<Props> = ({ handleButtonClick, pageCallback }) => {
                 ngày 15 tháng 01 năm 2021 của chính phủ về bảo hiểm bắt buộc
                 TNDS của chủ xe cơ giới và thông tư số 04/2021/TT-BTC ngày 15
                 tháng 01 năm 2021 của bộ tài chính quy định chi tiết một số điều
-                của nghị định số 03/2021/NĐ-CP.&nbsp;
+                của nghị định số 03/2021/NĐ-CP
               </TextTerm>
             </div>
             <CheckTerm>
