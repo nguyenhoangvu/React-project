@@ -31,10 +31,10 @@ export const objCalculateFee = (dataRedux: any, typeInsu: string) => {
   if (intended && group && seats && payload && yearProduce && insuranceTerm) {
     data.intendedUse = intended.value;
     data.groupCar = group.value;
-    data.numberOfSeat = seats.value;
-    data.payload = payload.value;
-    data.yearProduce = yearProduce.value;
-    data.insuranceTerm = insuranceTerm.value;
+    data.numberOfSeat = parseInt(seats.value);
+    data.payload = parseInt(payload.value);
+    data.yearProduce = parseInt(yearProduce.value);
+    data.insuranceTerm = parseInt(insuranceTerm.value);
   }
   return data;
 };

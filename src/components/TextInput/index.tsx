@@ -115,7 +115,7 @@ const TextInput: React.FC<Props> = ({
       });
     } else if (
       isShowDropdown !== true &&
-      inputName !== "phi_tnds" &&
+      !inputName.startsWith("phi") &&
       !inputName.startsWith("sum")
     ) {
       dispatch({
@@ -189,7 +189,7 @@ const TextInput: React.FC<Props> = ({
         !(
           inputName.startsWith("tnds") ||
           inputName.startsWith("sum") ||
-          inputName === "phi_tnds" ||
+          inputName.startsWith("phi") ||
           inputName === "nhom_kh" ||
           inputName.startsWith("user")
         )

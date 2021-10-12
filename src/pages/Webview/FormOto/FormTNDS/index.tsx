@@ -63,8 +63,8 @@ const FormTNDS: React.FC<Props> = ({
 
   useEffect(() => {
     if (fee !== undefined) {
-      let test = formatFee(fee.value);
-      setFeeInsurance(test);
+      let feeFormat = formatFee(fee.value);
+      setFeeInsurance(feeFormat);
     }
   }, [fee]);
 

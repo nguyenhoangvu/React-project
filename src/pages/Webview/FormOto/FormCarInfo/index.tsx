@@ -3,11 +3,13 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../../redux/store/rootReducer";
 
+import { ADDPRODUCTINFORS } from "../../../../redux/types";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import { validate } from "../../../../common/validateInfor";
 import { calculateFeeCar } from "../../../../adapters/apis/carAPIs";
+import { objCalculateFee } from "../../../../utils/objectCar";
 
 type Props = {
   handleButtonClick: (clicked: string) => void;
@@ -46,7 +48,28 @@ const FormCarInfo: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        setButtonClick(buttonClicked);
+        let dataFee = objCalculateFee(dataRedux, "BN");
+        calculateFeeCar(dataFee)
+          .then((res: any) => {
+            if (!res.isError && res.resultCode === "00") {
+              dispatch({
+                type: ADDPRODUCTINFORS,
+                payload: {
+                  key: "phi_bh_tnds",
+                  value: res.result.fee.toString(),
+                  productName: productName,
+                },
+              });
+              setButtonClick(buttonClicked);
+            } else {
+              setIsShowError(!isShowError);
+              setErrorMsg("Lỗi tính phí");
+            }
+          })
+          .catch((err) => {
+            setIsShowError(!isShowError);
+            setErrorMsg("Lỗi tính phí");
+          });
       }
     }
   };
@@ -141,7 +164,7 @@ const FormCarInfo: React.FC<Props> = ({
                 inputName="oto_seats"
                 inputTitle="Số chỗ"
                 labelName="Số chỗ"
-                required={false}
+                required={true}
                 productName={productName}
               />
             </Col>

@@ -53,7 +53,7 @@ const UL = styled.ul<IUL>`
   margin: 0;
   display: ${(props) => (props.showDropdown === true ? "block" : "none")};
   min-width: 6.25rem;
-  max-height: 40.625rem;
+  max-height: 30.625rem;
   overflow-y: auto;
   opacity: ${(props) => (props.showDropdown === true ? "1" : "0")};
   position: absolute;
@@ -72,8 +72,7 @@ const LI = styled.li`
   color: #005790;
   cursor: pointer;
   min-height: 3.125rem;
-  line-height: 3.5rem;
-  padding-left: 1.5625rem;
+  padding: 0.75rem 0.1875rem 0.75rem 1.5625rem;
   width: 100%;
   text-align: left;
   text-transform: none;
@@ -181,18 +180,18 @@ const SelectDropdown: React.FC<Props> = ({
 
   useEffect(() => {
     if (dataRedux.modify_product !== 0) {
-      let test = dataRedux.listProducts.find(
+      let modify = dataRedux.listProducts.find(
         (o) =>
           o.key === inputName &&
           o.productName === "product_" + dataRedux.modify_product
       );
-      if (test !== undefined) {
-        setDropdownKey(test.value);
+      if (modify !== undefined) {
+        setDropdownKey(modify.value);
         if (inputName.includes("time")) {
-          let time = data.Thoi_han_bh.find((o) => o.key === test?.value);
+          let time = data.Thoi_han_bh.find((o) => o.key === modify?.value);
           time !== undefined && setInputValue(time.value);
         } else if (inputName === "moto_volumn") {
-          let motoType = data.Loai_xe.find((o) => o.key === test?.value);
+          let motoType = data.Loai_xe.find((o) => o.key === modify?.value);
           motoType !== undefined && setInputValue(motoType.value);
         }
       }

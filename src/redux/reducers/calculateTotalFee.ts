@@ -12,7 +12,7 @@ export const totalFeeMoto = (listFee: any) => {
       totalFee += parseInt(o.value);
     }
   });
-  let test = formatFee(totalFee.toString());
-  obj.value = test;
+  let fee = formatFee(totalFee.toString());
+  obj.value = fee;
   return obj;
 };

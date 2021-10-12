@@ -83,13 +83,13 @@ const DateInput: React.FC<Props> = ({
 
   useEffect(() => {
     if (dataRedux.modify_product !== 0) {
-      let test = dataRedux.listProducts.find(
+      let modify = dataRedux.listProducts.find(
         (o) =>
           o.key === inputName &&
           o.productName === "product_" + dataRedux.modify_product
       );
-      if (test !== undefined) {
-        setInputValue(test.value);
+      if (modify !== undefined) {
+        setInputValue(modify.value);
       }
     }
   }, [dataRedux.modify_product]);
