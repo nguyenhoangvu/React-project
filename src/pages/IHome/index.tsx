@@ -39,6 +39,10 @@ const LinkContent = styled.div`
   width: 70%;
 `;
 
+const IconStyle = styled.i`
+  padding: 0 0.75rem;
+`;
+
 const IHome = () => {
   const listNV = data.list_nv;
 
@@ -53,9 +57,9 @@ const IHome = () => {
         <Link to="">
           <>
             <LinkContentContainer>
-              <i>
+              <IconStyle>
                 <Image src={iconMoto} alt="icon moto" />
-              </i>
+              </IconStyle>
               <LinkContent>Bảo hiểm xe máy</LinkContent>
               <i>
                 <Image src={iconChevon} alt="icon" />
