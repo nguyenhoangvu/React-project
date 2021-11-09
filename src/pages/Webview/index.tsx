@@ -152,7 +152,7 @@ const Webview = () => {
   };
 
   return (
-    <div className="WebviewTNDSXeMay">
+    <>
       <Page pageDisplay={buttonBuyClick}>
         <ImageSelect />
         <ProductInfo />
@@ -179,7 +179,7 @@ const Webview = () => {
           />
         )}
       </Form>
-    </div>
+    </>
   );
 };
 

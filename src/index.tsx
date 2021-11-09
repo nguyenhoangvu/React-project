@@ -2,16 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./global-css.css";
 import Webview from "./pages/Webview";
+import IHome from "./pages/IHome";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import store from "./redux/store/index";
-import data from "../src/json/partner-info.json";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <Webview />
+      <BrowserRouter>
+        <IHome />
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")
