@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import logo from "../../images/bao-hiem.png";
 import iconMoto from "../../images/moto.svg";
 import iconOto from "../../images/dgrr_xe.svg";
@@ -88,7 +88,7 @@ const IHome = () => {
   }, []);
 
   const handleClickRoute = () => {
-    setShow(false);
+    // setShow(false);
   };
 
   const RenderLink = () => {
@@ -115,17 +115,30 @@ const IHome = () => {
     return <>{ListLink}</>;
   };
 
+  const Home = () => {
+    return (
+      <>
+        <LogoContainer isShow={show}>
+          <div style={{ textAlign: "center" }}>
+            <img src={logo} alt="logo" width="300px" />
+          </div>
+        </LogoContainer>
+        <NavContainer>
+          <RenderLink />
+        </NavContainer>
+      </>
+    );
+  };
+
   return (
-    <div id="home">
-      <LogoContainer isShow={show}>
-        <div style={{ textAlign: "center" }}>
-          <img src={logo} alt="logo" width="300px" />
-        </div>
-      </LogoContainer>
-      <NavContainer>
-        <RenderLink />
-      </NavContainer>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/WebviewXeMay" element={<Webview category="XC.1.1" />} />
+        <Route path="/WebviewOto" element={<Webview category="XC.2.1" />} />
+        <Route path="/WebviewSucKhoe" element={<Webview category="CN.6" />} />
+      </Routes>
+    </>
   );
 };
 

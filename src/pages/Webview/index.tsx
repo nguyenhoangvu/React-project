@@ -14,6 +14,10 @@ import FormXeMay from "./FormXeMay";
 import FormOto from "./FormOto";
 import "./index.scss";
 
+type Props = {
+  category: string;
+};
+
 const Image = styled.img`
   width: 100%;
   height: auto;
@@ -34,12 +38,12 @@ const Form = styled.section<FormProps>`
   display: ${(props) => (props.formDisplay === true ? "block" : "none")};
 `;
 
-const Webview = () => {
+const Webview: React.FC<Props> = ({ category }) => {
   const [buttonBuyClick, setButtonBuyClick] = useState(false);
   const [dataPage, setData] = useState<any>();
 
   useEffect(() => {
-    switch (partnerData.nv) {
+    switch (category) {
       case "XC.1.1":
         setData(data.TNDS_xe_may);
         break;
@@ -49,12 +53,12 @@ const Webview = () => {
       default:
         break;
     }
-  }, []);
+  }, [category]);
 
   const ImageSelect = () => {
     const image = images.map(
       ({ id, nv, src, title, description }) =>
-        nv === partnerData.nv && (
+        nv === category && (
           <Image key={id} src={src} title={title} alt={description} />
         )
     );
@@ -166,13 +170,13 @@ const Webview = () => {
         />
       </Page>
       <Form formDisplay={buttonBuyClick}>
-        {partnerData.nv === "XC.1.1" && (
+        {category === "XC.1.1" && (
           <FormXeMay
             handleDirectButtonClick={handleDirectButtonClick}
             pageCallback={buttonBuyClick}
           />
         )}
-        {partnerData.nv === "XC.2.1" && (
+        {category === "XC.2.1" && (
           <FormOto
             handleDirectButtonClick={handleDirectButtonClick}
             pageCallback={buttonBuyClick}
