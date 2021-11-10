@@ -4,5 +4,21 @@
   "token": "79FE68F3564D36EE52152D0F28AB37FE",
   "ma_nhom_doi_tac": "KT_EPOINT",
   "nv": "XC.2.1",
-  "list_nv": ["XC.1.1", "XE", "CN.6"]
+  "list_nv": [
+    {
+      "key": "XC.1.1",
+      "value": "Bảo hiểm xe máy",
+      "route": "/WebviewXeMay"
+    },
+    {
+      "key": "XE",
+      "value": "Bảo hiểm TNDS ô tô",
+      "route": "/WebviewOto"
+    },
+    {
+      "key": "CN.6",
+      "value": "Bảo hiểm sức khỏe",
+      "route": "/WebviewSucKhoe"
+    }
+  ]
 }
