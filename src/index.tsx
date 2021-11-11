@@ -7,14 +7,14 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import store from "./redux/store/index";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <HashRouter>
+      <BrowserRouter basename="/Webview/webview-react">
         <IHome />
-      </HashRouter>
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")
