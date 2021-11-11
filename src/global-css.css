@@ -8,6 +8,10 @@ body {
   font-size: 16px;
 }
 
+h3 {
+  font-size: 1.25rem !important;
+}
+
 h5 {
   font-size: 1.435rem !important;
   line-height: 110%;

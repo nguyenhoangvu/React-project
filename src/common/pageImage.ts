@@ -1,5 +1,6 @@
 import moto from "../images/VBI-bao-hiem-mo-to.png";
 import oto from "../images/VBI-bao-hiem-o-to.png";
+import health from "../images/VBI-Bao-hiem-suc-khoe.png";
 
 const images = [
   {
@@ -15,6 +16,13 @@ const images = [
     src: oto,
     title: "oto",
     description: "Logo TNDS ô tô",
+  },
+  {
+    id: "3",
+    nv: "CN.6",
+    src: health,
+    title: "suc khoe",
+    description: "Logo bảo hiểm sức khỏe",
   },
 ];
 

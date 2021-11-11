@@ -1,155 +1,230 @@
 {
   "TNDS_xe_may": [
     {
-      "product_intro": {
-        "key": "Thông tin sản phẩm",
-        "value": "Bảo hiểm trách nhiệm dân sự bắt buộc của chủ xe mô tô – xe máy đối với bên thứ ba là loại hình bảo hiểm mà tất cả các cá nhân tổ chức (bao gồm người nước ngoài) sở hữu xe mô tô – xe máy tại Việt Nam đều phải tham gia theo quy định của nhà nước, nhằm đảm bảo quyền lợi cho bên thứ ba trong trường hợp nếu chẳng may chủ xe, lái xe gây thiệt hại cho họ.",
-        "types_and_services": [
-          {
-            "type_title": "Các loại hình bảo hiểm mô tô, xe máy:",
-            "types": [
-              {
-                "value": "Bảo hiểm bắt buộc trách nhiệm dân sự của chủ xe mô tô - xe máy."
-              },
-              {
-                "value": "Bảo hiểm Tai nạn người ngồi trên xe."
-              }
-            ],
-            "service_title": "Những dịch vụ tiện ích:",
-            "services": [
-              {
-                "value": "Khai báo tổn thất xe trực tuyến 24/24."
-              },
-              {
-                "value": "Tra cứu thông tin Giấy chứng nhận, tra cứu bồi thường, mạng lưới Gara bảo lãnh trực tuyến."
-              },
-              {
-                "value": "Tổng đài giải đáp thắc mắc qua đường dây nóng 19001566"
-              }
-            ]
-          }
-        ]
-      },
-
-      "insurance_benefits": {
-        "key": "Quyền lợi bảo hiểm",
-        "insurance_benefit_contents": [
-          {
-            "insurance_benefits_key": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe mô tô - xe máy:",
-            "insurance_benefits_values": [
-              {
-                "value": "Thiệt hại ngoài hợp đồng về thân thể, tính mạng và tài sản đối với bên thứ ba do xe mô tô – xe máy gây ra."
-              },
-              {
-                "value": "Thiệt hại về thân thể và tính mạng của hành khách theo hợp đồng vận chuyển hành khách do xe mô tô – xe máy gây ra."
-              }
-            ]
-          },
-          {
-            "insurance_benefits_key": "Bảo hiểm tai nạn người ngồi trên xe:",
-            "insurance_benefits_values": [
-              {
-                "value": "Thiệt hại thân thể do tai nạn khi đang ở trên xe, lên xuống xe trong quá trình xe đang tham gia giao thông."
-              },
-              {
-                "value": "Thiệt hại về thân thể do tai nạn liên quan trực tiếp đến việc sử dụng chiếc xe đó."
-              }
-            ]
-          }
-        ]
-      }
+      "title": "Thông tin sản phẩm",
+      "title_description": "Bảo hiểm trách nhiệm dân sự bắt buộc của chủ xe mô tô – xe máy đối với bên thứ ba là loại hình bảo hiểm mà tất cả các cá nhân tổ chức (bao gồm người nước ngoài) sở hữu xe mô tô – xe máy tại Việt Nam đều phải tham gia theo quy định của nhà nước, nhằm đảm bảo quyền lợi cho bên thứ ba trong trường hợp nếu chẳng may chủ xe, lái xe gây thiệt hại cho họ.",
+      "contents": [
+        {
+          "content_title": "Các loại hình bảo hiểm mô tô, xe máy:",
+          "content_description": [
+            {
+              "value": "Bảo hiểm bắt buộc trách nhiệm dân sự của chủ xe mô tô - xe máy."
+            },
+            {
+              "value": "Bảo hiểm Tai nạn người ngồi trên xe."
+            }
+          ]
+        },
+        {
+          "content_title": "Những dịch vụ tiện ích:",
+          "content_description": [
+            {
+              "value": "Khai báo tổn thất xe trực tuyến 24/24."
+            },
+            {
+              "value": "Tra cứu thông tin Giấy chứng nhận, tra cứu bồi thường, mạng lưới Gara bảo lãnh trực tuyến."
+            },
+            {
+              "value": "Tổng đài giải đáp thắc mắc qua đường dây nóng 19001566"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Quyền lợi bảo hiểm",
+      "contents": [
+        {
+          "content_title": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe mô tô - xe máy:",
+          "content_description": [
+            {
+              "value": "Thiệt hại ngoài hợp đồng về thân thể, tính mạng và tài sản đối với bên thứ ba do xe mô tô – xe máy gây ra."
+            },
+            {
+              "value": "Thiệt hại về thân thể và tính mạng của hành khách theo hợp đồng vận chuyển hành khách do xe mô tô – xe máy gây ra."
+            }
+          ]
+        },
+        {
+          "content_title": "Bảo hiểm tai nạn người ngồi trên xe:",
+          "content_description": [
+            {
+              "value": "Thiệt hại thân thể do tai nạn khi đang ở trên xe, lên xuống xe trong quá trình xe đang tham gia giao thông."
+            },
+            {
+              "value": "Thiệt hại về thân thể do tai nạn liên quan trực tiếp đến việc sử dụng chiếc xe đó."
+            }
+          ]
+        }
+      ]
     }
   ],
   "TNDS_o_to": [
     {
-      "product_intro": {
-        "key": "Thông tin sản phẩm",
-        "value": "Bảo hiểm VietinBank tự tin là người bạn đồng hành, luôn chăm sóc và bảo vệ tới chiếc xe của bạn trên mọi chặng hành trình. Với chi phí hợp lý, phạm vi bảo hiểm toàn diện và dịch vụ giải quyết bồi thường nhanh chóng, hiện đại, chuyên nghiệp, Bảo hiểm Xe ôtô của Bảo hiểm VietinBank cam kết đáp ứng mọi nhu cầu của khách hàng.",
-        "types_and_services": [
-          {
-            "type_title": "Các loại hình bảo hiểm ô tô:",
-            "types": [
-              {
-                "value": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe ô tô."
-              },
-              {
-                "value": "Bảo hiểm tự nguyện Vật chất xe."
-              },
-              {
-                "value": "Bảo hiểm Tai nạn lái phụ xe và người ngồi trên xe."
-              },
-              {
-                "value": "Bảo hiểm Trách nhiệm dân sự của chủ xe đối với hàng hóa vận chuyển trên xe."
-              }
-            ],
-            "service_title": "Những dịch vụ tiện ích:",
-            "services": [
-              {
-                "value": "Khai báo tổn thất xe trực tuyến 24/24."
-              },
-              {
-                "value": "Tra cứu thông tin Giấy chứng nhận, tra cứu bồi thường, mạng lưới Gara bảo lãnh trực tuyến."
-              },
-              {
-                "value": "Tổng đài giải đáp thắc mắc qua đường dây nóng 19001566"
-              }
-            ]
-          }
-        ]
-      },
-
-      "insurance_benefits": {
-        "key": "Quyền lợi bảo hiểm",
-        "insurance_benefit_contents": [
-          {
-            "insurance_benefits_key": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe ô tô:",
-            "insurance_benefits_values": [
-              {
-                "value": "Thiệt hại ngoài hợp đồng về thân thể, tính mạng và tài sản đối với bên thứ ba do xe cơ giới gây ra."
-              },
-              {
-                "value": "Thiệt hại về thân thể và tính mạng của hành khách theo hợp đồng vận chuyển hành khách do xe cơ giới gây ra."
-              }
-            ]
-          },
-          {
-            "insurance_benefits_key": "Bảo hiểm tự nguyện Vật chất xe:",
-            "insurance_benefits_values": [
-              {
-                "value": "Doanh nghiệp bảo hiểm chịu trách nhiệm bồi thường cho chủ xe những thiệt hại vật chất do thiên tai, tai nạn bất ngờ, không lường trước được trong những trường hợp sau: Đâm, va, lật, đổ, chìm, rơi toàn bộ xe, bị các vật thể khác rơi vào."
-              },
-              {
-                "value": "Hỏa hoạn, cháy, nổ; Những tai họa bất khả kháng do thiên nhiên gây ra; Mất toàn bộ xe do trộm, cướp; Hành động ác ý, cố tình gây thiệt hại không phải của chủ xe, người điều khiển xe và những người có quyền lợi liên quan đến sở hữu, khai thác và sử dụng xe."
-              },
-              {
-                "value": "Ngoài số tiền bồi thường, doanh nghiệp bảo hiểm còn bồi thường cho chủ xe những chi phí cần thiết và hợp lý theo thỏa thuận tại Hợp đồng bảo hiểm để thực hiện các công việc."
-              }
-            ]
-          },
-          {
-            "insurance_benefits_key": "Bảo hiểm tai nạn lái phụ xe và người ngồi trên xe:",
-            "insurance_benefits_values": [
-              {
-                "value": "Tai nạn đối với người được chở trên xe: Thiệt hại thân thể do tai nạn khi đang ở trên xe, lên xuống xe trong quá trình xe đang tham gia giao thông."
-              },
-              {
-                "value": "Tai nạn đối với lái, phụ xe: Thiệt hại về thân thể do tai nạn liên quan trực tiếp đến việc sử dụng chiếc xe đó."
-              }
-            ]
-          },
-          {
-            "insurance_benefits_key": "Bảo hiểm Trách nhiệm dân sự của chủ xe đối với hàng hóa vận chuyển trên xe:",
-            "insurance_benefits_values": [
-              {
-                "value": "VBI nhận bảo hiểm trách nhiệm dân sự của Chủ xe đối với hàng hoá trong quá trình vận chuyển theo hợp đồng vận chuyển giữa Chủ xe và Chủ hàng trong phạm vi lãnh thổ nước Cộng hoà xã hội chủ nghĩa Việt Nam. Trong phạm vi mức trách nhiệm bảo hiểm ghi trên Giấy chứng nhận bảo hiểm/Hợp đồng bảo hiểm, VBI sẽ thanh toán cho Chủ xe số tiền mà Chủ xe phải bồi thường theo quy định của Bộ Luật dân sự trong những trường hợp xe đang chở hàng bị: Đâm va, lật, đổ, rơi; chìm; hỏa hoạn, cháy, nổ; bị các vật thể rơi vào, va chạm vào; Những tai họa bất khả kháng do thiên nhiên (Bão, lũ lụt, sụt lở, ngập, sét đánh, động đất, mưa đá, sóng thần)."
-              },
-              {
-                "value": "Ngoài ra, VBI còn thanh toán cho Chủ xe các chi phí cần thiết và hợp lý nhằm: Ngăn ngừa, giảm nhẹ tổn thất cho hàng hoá; Bảo quản, xếp dỡ, lưu kho, lưu bãi hàng hoá trong quá trình vận chuyển do hậu quả của tai nạn; Giám định tổn thất thuộc trách nhiệm của VBI."
-              }
-            ]
-          }
-        ]
-      }
+      "title": "Thông tin sản phẩm",
+      "title_description": "Bảo hiểm VietinBank tự tin là người bạn đồng hành, luôn chăm sóc và bảo vệ tới chiếc xe của bạn trên mọi chặng hành trình. Với chi phí hợp lý, phạm vi bảo hiểm toàn diện và dịch vụ giải quyết bồi thường nhanh chóng, hiện đại, chuyên nghiệp, Bảo hiểm Xe ôtô của Bảo hiểm VietinBank cam kết đáp ứng mọi nhu cầu của khách hàng.",
+      "contents": [
+        {
+          "content_title": "Các loại hình bảo hiểm ô tô:",
+          "content_description": [
+            {
+              "value": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe ô tô."
+            },
+            {
+              "value": "Bảo hiểm tự nguyện Vật chất xe."
+            },
+            {
+              "value": "Bảo hiểm Tai nạn lái phụ xe và người ngồi trên xe."
+            },
+            {
+              "value": "Bảo hiểm Trách nhiệm dân sự của chủ xe đối với hàng hóa vận chuyển trên xe."
+            }
+          ]
+        },
+        {
+          "content_title": "Những dịch vụ tiện ích:",
+          "content_description": [
+            {
+              "value": "Khai báo tổn thất xe trực tuyến 24/24."
+            },
+            {
+              "value": "Tra cứu thông tin Giấy chứng nhận, tra cứu bồi thường, mạng lưới Gara bảo lãnh trực tuyến."
+            },
+            {
+              "value": "Tổng đài giải đáp thắc mắc qua đường dây nóng 19001566"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Quyền lợi bảo hiểm",
+      "contents": [
+        {
+          "content_title": "Bảo hiểm bắt buộc, tự nguyện Trách nhiệm dân sự xe ô tô:",
+          "content_description": [
+            {
+              "value": "Thiệt hại ngoài hợp đồng về thân thể, tính mạng và tài sản đối với bên thứ ba do xe cơ giới gây ra."
+            },
+            {
+              "value": "Thiệt hại về thân thể và tính mạng của hành khách theo hợp đồng vận chuyển hành khách do xe cơ giới gây ra."
+            }
+          ]
+        },
+        {
+          "content_title": "Bảo hiểm tự nguyện Vật chất xe:",
+          "content_description": [
+            {
+              "value": "Doanh nghiệp bảo hiểm chịu trách nhiệm bồi thường cho chủ xe những thiệt hại vật chất do thiên tai, tai nạn bất ngờ, không lường trước được trong những trường hợp sau: Đâm, va, lật, đổ, chìm, rơi toàn bộ xe, bị các vật thể khác rơi vào."
+            },
+            {
+              "value": "Hỏa hoạn, cháy, nổ; Những tai họa bất khả kháng do thiên nhiên gây ra; Mất toàn bộ xe do trộm, cướp; Hành động ác ý, cố tình gây thiệt hại không phải của chủ xe, người điều khiển xe và những người có quyền lợi liên quan đến sở hữu, khai thác và sử dụng xe."
+            },
+            {
+              "value": "Ngoài số tiền bồi thường, doanh nghiệp bảo hiểm còn bồi thường cho chủ xe những chi phí cần thiết và hợp lý theo thỏa thuận tại Hợp đồng bảo hiểm để thực hiện các công việc."
+            }
+          ]
+        },
+        {
+          "content_title": "Bảo hiểm tai nạn lái phụ xe và người ngồi trên xe:",
+          "content_description": [
+            {
+              "value": "Tai nạn đối với người được chở trên xe: Thiệt hại thân thể do tai nạn khi đang ở trên xe, lên xuống xe trong quá trình xe đang tham gia giao thông."
+            },
+            {
+              "value": "Tai nạn đối với lái, phụ xe: Thiệt hại về thân thể do tai nạn liên quan trực tiếp đến việc sử dụng chiếc xe đó."
+            }
+          ]
+        },
+        {
+          "content_title": "Bảo hiểm Trách nhiệm dân sự của chủ xe đối với hàng hóa vận chuyển trên xe:",
+          "content_description": [
+            {
+              "value": "VBI nhận bảo hiểm trách nhiệm dân sự của Chủ xe đối với hàng hoá trong quá trình vận chuyển theo hợp đồng vận chuyển giữa Chủ xe và Chủ hàng trong phạm vi lãnh thổ nước Cộng hoà xã hội chủ nghĩa Việt Nam. Trong phạm vi mức trách nhiệm bảo hiểm ghi trên Giấy chứng nhận bảo hiểm/Hợp đồng bảo hiểm, VBI sẽ thanh toán cho Chủ xe số tiền mà Chủ xe phải bồi thường theo quy định của Bộ Luật dân sự trong những trường hợp xe đang chở hàng bị: Đâm va, lật, đổ, rơi; chìm; hỏa hoạn, cháy, nổ; bị các vật thể rơi vào, va chạm vào; Những tai họa bất khả kháng do thiên nhiên (Bão, lũ lụt, sụt lở, ngập, sét đánh, động đất, mưa đá, sóng thần)."
+            },
+            {
+              "value": "Ngoài ra, VBI còn thanh toán cho Chủ xe các chi phí cần thiết và hợp lý nhằm: Ngăn ngừa, giảm nhẹ tổn thất cho hàng hoá; Bảo quản, xếp dỡ, lưu kho, lưu bãi hàng hoá trong quá trình vận chuyển do hậu quả của tai nạn; Giám định tổn thất thuộc trách nhiệm của VBI."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "BH_suc_khoe": [
+    {
+      "title": "Những ai có thể tham gia bảo hiểm?",
+      "contents": [
+        {
+          "content_description": [
+            {
+              "value": "Tất cả công dân Việt Nam và người nước ngoài sống hợp pháp tại Việt Nam."
+            },
+            {
+              "value": "Độ tuổi được tham gia bảo hiểm từ 60 ngày tuổi đến 65 tuổi."
+            },
+            {
+              "value": "Trẻ em dưới 6 tuổi có thể mua bảo hiểm cùng bố/mẹ (không tăng phí) hoặc mua độc lập (nhưng phí bảo hiểm tăng 30%). Gói bảo hiểm của bố/mẹ là gói có quyền lợi tương đương hoặc cao hơn gói bảo hiểm của con. (Con là con đẻ/ruột, con nuôi hợp pháp)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Bạn sẽ được bảo hiểm trong những trường hợp nào?",
+      "contents": [
+        {
+          "content_description": [
+            {
+              "value": "Gồm các quyền lợi bảo hiểm chính như Điều trị Nội trú; Tử vong, thương tật vĩnh viễn do tai nạn và ốm đau, bệnh tật và có thể lựa chọn mua thêm các quyền lợi bổ sung như Ngoại trú, Nha khoa, Thai sản."
+            },
+            {
+              "value": "Quyền lợi bảo hiểm thai sản toàn diện bao gồm: sinh thường, sinh mổ, bất thường trong quá trình mang thai và các bệnh lý phát sinh trong thai kỳ, tai biến sản khoa."
+            },
+            {
+              "value": "Trẻ em từ 03 tuổi trở xuống: Áp dụng đồng chi trả 50/50 chi phí y tế thuộc phạm vi tại tất cả các cơ sở y tế đối với các sự kiện bảo hiểm phát sinh do nguyên nhân bệnh viêm phổi các loại, viêm phế quản, tiểu phế quản trong thời gian từ 30 ngày đến 90 ngày kể từ ngày bắt đầu thời hạn bảo hiểm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vì sao bạn nên chọn mua bảo hiểm tại VBI?",
+      "contents": [
+        {
+          "content_description": [
+            {
+              "value": "Không yêu cầu khám sức khỏe trước khi đăng kí."
+            },
+            {
+              "value": "Thời gian chờ áp dụng cho các bệnh thông thường chỉ 30 ngày, thai sản chỉ từ 270 ngày."
+            },
+            {
+              "value": "Trẻ em được tham gia độc lập."
+            },
+            {
+              "value": "Khám chữa bệnh tại tất cả các cơ sở y tế hợp pháp tại Việt Nam."
+            },
+            {
+              "value": "Hưởng dịch vụ của các bệnh viện tiêu chuẩn hiện đại trong nước."
+            },
+            {
+              "value": "Khám chữa bệnh tại nước ngoài nếu mua gói Kim Cương."
+            },
+            {
+              "value": "Dịch vụ bảo lãnh viện phí ưu việt 24/7 với hơn 200 cơ sở y tế trên địa bàn cả nước và thường xuyên cập nhật bổ sung trên website https://vbi.vietinbank.vn"
+            },
+            {
+              "value": "Trẻ em được tham gia độc lập.Bồi thường trực tuyến, xử lý bồi thường nhanh, chính xác trong vòng 03-05 ngày làm việc."
+            },
+            {
+              "value": "Phục vụ tư vấn và cấp giấy chứng nhận bảo hiểm điện tử, hóa đơn điện tử mọi lúc mọi nơi."
+            },
+            {
+              "value": "Tổng đài 19001566 chăm sóc khách hàng 24/7 thường xuyên lắng nghe và hỗ trợ giải đáp khách hàng."
+            }
+          ]
+        }
+      ]
     }
   ]
 }

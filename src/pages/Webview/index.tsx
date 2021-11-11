@@ -50,6 +50,9 @@ const Webview: React.FC<Props> = ({ category }) => {
       case "XC.2.1":
         setData(data.TNDS_o_to);
         break;
+      case "CN.6":
+        setData(data.BH_suc_khoe);
+        break;
       default:
         break;
     }
@@ -77,72 +80,28 @@ const Webview: React.FC<Props> = ({ category }) => {
             />
             <div className="content-page-main">
               <h3 className="content-page-main-tiltle" key={i}>
-                {obj.product_intro.key}
+                {obj.title}
               </h3>
-              <p>{obj.product_intro.value}</p>
+              <p>{obj.title_description && obj.title_description}</p>
               <div className="content-page-main-description">
-                {obj.product_intro.types_and_services.map((o: any, i: any) => (
-                  <ul className="content-page-main-description-title" key={i}>
-                    {o.type_title}
-                    {o.types.map((key: any, j: any) => (
-                      <li key={j}>{key.value}</li>
-                    ))}
-                  </ul>
-                ))}
-              </div>
-              <div className="content-page-main-description">
-                {obj.product_intro.types_and_services.map((o: any, i: any) => (
-                  <ul className="content-page-main-description-title" key={i}>
-                    {o.service_title}
-                    {o.services.map((key: any, j: any) => (
-                      <li key={j}>{key.value}</li>
-                    ))}
-                  </ul>
-                ))}
+                {obj.contents &&
+                  obj.contents.map((o: any, i: any) => (
+                    <ul className="content-page-main-description-title" key={i}>
+                      {o.content_title && o.content_title}
+                      {o.content_description &&
+                        o.content_description.map((key: any, j: any) => (
+                          <li key={j}>{key.value}</li>
+                        ))}
+                    </ul>
+                  ))}
               </div>
             </div>
-            <HrLine />
           </Col>
         </Row>
       </Container>
     ));
 
     return <div>{ProductInfo}</div>;
-  };
-
-  const ProductBenefit = () => {
-    const ProductBenefit = dataPage?.map((obj: any, i: any) => (
-      <Container key={i}>
-        <Row className="justify-content-md-center">
-          <Col xs="12" className="content-page">
-            <FontAwesomeIcon
-              icon={faCheck}
-              size="1x"
-              className="content-page-icons"
-            />
-            <div className="content-page-main">
-              <h3 className="content-page-main-tiltle" key={i}>
-                {obj.insurance_benefits.key}
-              </h3>
-              <div className="content-page-main-description">
-                {obj.insurance_benefits.insurance_benefit_contents.map(
-                  (o: any, i: any) => (
-                    <ul className="content-page-main-description-title" key={i}>
-                      {o.insurance_benefits_key}
-                      {o.insurance_benefits_values.map((key: any, j: any) => (
-                        <li key={j}>{key.value}</li>
-                      ))}
-                    </ul>
-                  )
-                )}
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    ));
-
-    return <div>{ProductBenefit}</div>;
   };
 
   const handleClickButton = (click: boolean) => {
@@ -160,7 +119,7 @@ const Webview: React.FC<Props> = ({ category }) => {
       <Page pageDisplay={buttonBuyClick}>
         <ImageSelect />
         <ProductInfo />
-        <ProductBenefit />
+        {/* <ProductBenefit /> */}
         <Footer />
         <HrLine />
         <ButtonBuy
