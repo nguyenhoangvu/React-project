@@ -50,6 +50,11 @@ export interface MODIFYORDERID {
   payload: number;
 }
 
+export interface ADDCATEGORY {
+  type: constants.CATEGORY;
+  payload: string;
+}
+
 export type ActionTypes =
   | ADDPRODUCTINFORS
   | ADDUSERINFO
@@ -57,4 +62,5 @@ export type ActionTypes =
   | REMOVEPRODUCT
   | MODIFYPRODUCT
   | ADDINPUTNAMEMUSTVALIDATE
-  | MODIFYORDERID;
+  | MODIFYORDERID
+  | ADDCATEGORY;

@@ -3,7 +3,6 @@
   "ma_nsd": "admin@kt.vn",
   "token": "79FE68F3564D36EE52152D0F28AB37FE",
   "ma_nhom_doi_tac": "KT_EPOINT",
-  "nv": "XC.2.1",
   "list_nv": [
     {
       "key": "XC.1.1",
@@ -11,7 +10,7 @@
       "route": "/WebviewXeMay"
     },
     {
-      "key": "XE",
+      "key": "XC.2.1",
       "value": "Bảo hiểm TNDS ô tô",
       "route": "/WebviewOto"
     },

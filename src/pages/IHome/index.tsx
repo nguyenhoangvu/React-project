@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ADDCATEGORY } from "../../redux/types";
 import logo from "../../images/bao-hiem.png";
 import iconMoto from "../../images/moto.svg";
 import iconOto from "../../images/dgrr_xe.svg";
@@ -10,12 +12,7 @@ import data from "../../json/partner-info.json";
 import HrLine from "../../components/HrLine";
 import Webview from "../Webview";
 
-interface ILogoContainer {
-  isShow: boolean;
-}
-
-const LogoContainer = styled.div<ILogoContainer>`
-  display: ${(props) => (props.isShow === true ? "block" : "none")};
+const LogoContainer = styled.div`
   position: relative;
   box-shadow: none;
   height: 85px;
@@ -51,9 +48,9 @@ const IconStyle = styled.i`
 `;
 
 const IHome = () => {
-  const [show, setShow] = useState(true);
   const [listIcon, setListIcon] = useState<any>([]);
   const listNV = data.list_nv;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let arr: any[] = [];
@@ -66,7 +63,7 @@ const IHome = () => {
           };
           arr.push(objMoto);
           break;
-        case "XE":
+        case "XC.2.1":
           let objCar = {
             key: element.key,
             icon: iconOto,
@@ -87,13 +84,16 @@ const IHome = () => {
     setListIcon([...arr]);
   }, []);
 
-  const handleClickRoute = () => {
-    // setShow(false);
+  const handleClickRoute = (nv: string) => {
+    dispatch({
+      type: ADDCATEGORY,
+      payload: nv,
+    });
   };
 
   const RenderLink = () => {
     const ListLink = listNV.map((o) => (
-      <Link key={o.key} to={o.route} onClick={handleClickRoute}>
+      <Link key={o.key} to={o.route} onClick={() => handleClickRoute(o.key)}>
         <>
           <LinkContentContainer>
             <IconStyle>
@@ -118,7 +118,7 @@ const IHome = () => {
   const Home = () => {
     return (
       <>
-        <LogoContainer isShow={show}>
+        <LogoContainer>
           <div style={{ textAlign: "center" }}>
             <img src={logo} alt="logo" width="300px" />
           </div>

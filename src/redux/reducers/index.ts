@@ -6,6 +6,7 @@ import {
   MODIFYPRODUCT,
   ADDINPUTNAMEMUSTVALIDATE,
   MODIFYORDERID,
+  ADDCATEGORY,
 } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
@@ -50,7 +51,7 @@ export const initialState: InitialStateType = {
   ma_nsd: data.ma_nsd,
   token: data.token,
   ma_nhom_doi_tac: data.ma_nhom_doi_tac,
-  nv: data.nv,
+  nv: "",
   userInfo: [],
   listProducts: [],
   listInputMustValidate: [],
@@ -58,6 +59,13 @@ export const initialState: InitialStateType = {
 
 const reducers = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
+    case ADDCATEGORY:
+      const categoryState = { ...state };
+      categoryState.nv = action.payload;
+      categoryState.userInfo = [];
+      categoryState.listProducts = [];
+      categoryState.listInputMustValidate = [];
+      return categoryState;
     case MODIFYORDERID:
       return {
         ...state,
