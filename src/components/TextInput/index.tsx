@@ -67,6 +67,7 @@ type Props = {
   summaryText?: boolean;
   isResetValue?: boolean;
   handleModalSearch?: (input: string) => void;
+  resetValue?: boolean;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -87,6 +88,7 @@ const TextInput: React.FC<Props> = ({
   summaryText,
   isResetValue,
   handleModalSearch,
+  resetValue,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
@@ -249,6 +251,10 @@ const TextInput: React.FC<Props> = ({
       }
     }
   }, [isResetValue]);
+
+  useEffect(() => {
+    setInputValue("");
+  }, [resetValue]);
 
   useEffect(() => {
     if (dataRedux.modify_product !== 0) {

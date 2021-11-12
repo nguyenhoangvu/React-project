@@ -51,6 +51,7 @@ const ModalInput: React.FC<Props> = ({
   const [cityName, setCityName] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [listData, setListData] = useState<any>([]);
+  const [resetSearchValue, setResetSearchValue] = useState(false);
 
   useEffect(() => {
     setListData(data.TTQH);
@@ -61,6 +62,7 @@ const ModalInput: React.FC<Props> = ({
   const handleDistrictInCity = (cityCode: string, cityName: string) => {
     setPlaceHolder("Tìm quận huyện");
     setListData(data.TTQH);
+    setResetSearchValue(true);
     setCityCode(cityCode);
     setCityName(cityName);
     setRenderCities(false);
@@ -71,6 +73,7 @@ const ModalInput: React.FC<Props> = ({
     setPlaceHolder("Tìm tỉnh thành");
     setInputValue(districtName + " - " + cityName);
     setListData(data.TTQH);
+    setResetSearchValue(false);
     setShow(false);
     setRenderCities(true);
     setRenderDistrict(false);
@@ -164,6 +167,7 @@ const ModalInput: React.FC<Props> = ({
             placeHolder={placeHolder}
             productName=""
             handleModalSearch={handleModalSearch}
+            resetValue={resetSearchValue}
           />
           <FontAwesomeIcon icon={faSearch} size="1x" className="icon-search" />
         </div>
