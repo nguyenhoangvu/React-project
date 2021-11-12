@@ -27,6 +27,7 @@ const A = styled.a`
   z-index: 1;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 `;
 
 const SPAN = styled.span`
@@ -91,7 +92,7 @@ const ButtonNext: React.FC<Props> = ({
             icon={faChevronRight}
             size="2x"
             className="next-icon"
-            style={{ height: "3.5rem" }}
+            style={{ height: "1rem" }}
           />
         </A>
       )}
@@ -102,7 +103,7 @@ const ButtonNext: React.FC<Props> = ({
             icon={faChevronRight}
             size="2x"
             className="next-icon"
-            style={{ height: "3.5rem" }}
+            style={{ height: "1rem" }}
           />
         </A>
       )}
