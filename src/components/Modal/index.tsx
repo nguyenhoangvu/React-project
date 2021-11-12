@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Button, Modal, Col, Container, Row } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import data from "../../json/json_tinh_thanh_gr_bv.json";
 import TextInput from "../TextInput";
 import "./index.scss";
+import addressIcon from "../../images/address.svg";
 
 type Props = {
   onShow: boolean | undefined;
@@ -49,10 +50,17 @@ const ModalInput: React.FC<Props> = ({
   const [cityCode, setCityCode] = useState("");
   const [cityName, setCityName] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [listData, setListData] = useState<any>([]);
+
+  useEffect(() => {
+    setListData(data.TTQH);
+  }, []);
 
   const handleClose = () => setShow(false);
 
   const handleDistrictInCity = (cityCode: string, cityName: string) => {
+    setPlaceHolder("Tìm quận huyện");
+    setListData(data.TTQH);
     setCityCode(cityCode);
     setCityName(cityName);
     setRenderCities(false);
@@ -60,14 +68,36 @@ const ModalInput: React.FC<Props> = ({
   };
 
   const onDistrictClick = (districtCode: string, districtName: string) => {
+    setPlaceHolder("Tìm tỉnh thành");
     setInputValue(districtName + " - " + cityName);
+    setListData(data.TTQH);
     setShow(false);
     setRenderCities(true);
     setRenderDistrict(false);
   };
 
+  const handleModalSearch = (input: string) => {
+    if (renderCities == true) {
+      let listCities = data.TTQH.filter(
+        (o: any) =>
+          o.Nhom == "TINH_THANH" && o.name.toLowerCase().startsWith(input)
+      );
+      if (listCities && listCities.length > 0 && input.length > 0) {
+        setListData(listCities);
+      } else setListData(data.TTQH);
+    } else if (renderDistrict == true) {
+      let listDistricts = data.TTQH.filter(
+        (o: any) =>
+          o.Nhom == "QUAN_HUYEN" && o.name.toLowerCase().includes(input)
+      );
+      if (listDistricts && listDistricts.length > 0 && input.length > 0) {
+        setListData(listDistricts);
+      } else setListData(data.TTQH);
+    }
+  };
+
   const RenderCities = () => {
-    const ListCities = data.TTQH.map((obj, i) => {
+    const ListCities = listData.map((obj: any, i: any) => {
       if (obj.Nhom === "TINH_THANH") {
         return (
           <ListContentWrapper
@@ -75,7 +105,9 @@ const ModalInput: React.FC<Props> = ({
             key={i}
           >
             <ListContentStyle>
-              <FontAwesomeIcon icon={faMapMarkedAlt} size="2x" />
+              <i>
+                <img src={addressIcon} width="24px" />
+              </i>
               <SPAN>{obj.name}</SPAN>
             </ListContentStyle>
           </ListContentWrapper>
@@ -86,7 +118,7 @@ const ModalInput: React.FC<Props> = ({
   };
 
   const RenderDistricts = () => {
-    const ListDistricts = data.TTQH.map((obj, i) => {
+    const ListDistricts = listData.map((obj: any, i: any) => {
       if (obj.Nhom === "QUAN_HUYEN" && obj.ma_ct === cityCode) {
         return (
           <ListContentWrapper
@@ -94,7 +126,9 @@ const ModalInput: React.FC<Props> = ({
             key={i}
           >
             <ListContentStyle>
-              <FontAwesomeIcon icon={faMapMarkedAlt} size="2x" />
+              <i>
+                <img src={addressIcon} width="24px" />
+              </i>
               <SPAN>{obj.name}</SPAN>
             </ListContentStyle>
           </ListContentWrapper>
@@ -129,6 +163,7 @@ const ModalInput: React.FC<Props> = ({
             required={false}
             placeHolder={placeHolder}
             productName=""
+            handleModalSearch={handleModalSearch}
           />
           <FontAwesomeIcon icon={faSearch} size="1x" className="icon-search" />
         </div>

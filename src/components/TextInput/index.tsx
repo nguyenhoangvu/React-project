@@ -66,6 +66,7 @@ type Props = {
   dropdownKey?: string;
   summaryText?: boolean;
   isResetValue?: boolean;
+  handleModalSearch?: (input: string) => void;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -85,6 +86,7 @@ const TextInput: React.FC<Props> = ({
   dropdownKey,
   summaryText,
   isResetValue,
+  handleModalSearch,
 }) => {
   const [inputActive, setInputActive] = useState("");
   const [focusInput, setFocusInput] = useState(false);
@@ -116,7 +118,8 @@ const TextInput: React.FC<Props> = ({
     } else if (
       isShowDropdown !== true &&
       !inputName.startsWith("phi") &&
-      !inputName.startsWith("sum")
+      !inputName.startsWith("sum") &&
+      inputName != ""
     ) {
       dispatch({
         type: ADDPRODUCTINFORS,
@@ -135,6 +138,10 @@ const TextInput: React.FC<Props> = ({
 
   const onInputChange = (event: any) => {
     setInputValue(event.target.value);
+  };
+
+  const handleKeyUp = (event: any) => {
+    handleModalSearch ? handleModalSearch(event.target.value) : {};
   };
 
   const handleInputClick = () => {
@@ -313,6 +320,7 @@ const TextInput: React.FC<Props> = ({
         onKeyPress={(event) => {
           onlyNumberKey(event);
         }}
+        onKeyUp={(event) => handleKeyUp(event)}
         value={inputValue}
         readOnly={readonly}
         placeholder={placeHolder}
