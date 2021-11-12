@@ -12,6 +12,7 @@ import Footer from "../Footer";
 import ButtonBuy from "../../components/ButtonBuy";
 import FormXeMay from "./FormXeMay";
 import FormOto from "./FormOto";
+import FormSucKhoe from "./FormSucKhoe";
 import "./index.scss";
 
 type Props = {
@@ -137,6 +138,12 @@ const Webview: React.FC<Props> = ({ category }) => {
         )}
         {category === "XC.2.1" && (
           <FormOto
+            handleDirectButtonClick={handleDirectButtonClick}
+            pageCallback={buttonBuyClick}
+          />
+        )}
+        {category === "CN.6" && (
+          <FormSucKhoe
             handleDirectButtonClick={handleDirectButtonClick}
             pageCallback={buttonBuyClick}
           />
