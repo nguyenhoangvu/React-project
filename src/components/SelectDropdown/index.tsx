@@ -97,8 +97,6 @@ const SelectDropdown: React.FC<Props> = ({
 
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     switch (inputName) {
       case "nhom_kh":
@@ -130,6 +128,11 @@ const SelectDropdown: React.FC<Props> = ({
         setData(arr);
         setDropdownKey(arr[0].key);
         setInputValue(arr[0].value);
+        break;
+      case "user_relation":
+        setData(data.User_relation);
+        setDropdownKey(data.User_relation[0].key);
+        setInputValue(data.User_relation[0].value);
         break;
       case "oto_type":
         getListGroupCar()

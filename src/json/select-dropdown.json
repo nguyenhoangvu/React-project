@@ -62,5 +62,35 @@
       "key": "K",
       "value": "Không kinh doanh"
     }
+  ],
+  "User_relation": [
+    {
+      "key": "0",
+      "value": "-- Chọn --"
+    },
+    {
+      "key": "BAN_THAN",
+      "value": "Bản thân"
+    },
+    {
+      "key": "BO_ME",
+      "value": "Bố/mẹ"
+    },
+    {
+      "key": "ANH_CHI",
+      "value": "Anh/chị/em"
+    },
+    {
+      "key": "VO_CHONG",
+      "value": "Vợ/chồng"
+    },
+    {
+      "key": "CON_CAI",
+      "value": "Con cái"
+    },
+    {
+      "key": "KHAC",
+      "value": "Khác"
+    }
   ]
 }

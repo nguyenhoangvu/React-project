@@ -107,7 +107,8 @@ const TextInput: React.FC<Props> = ({
     if (
       (inputName.startsWith("user") &&
         inputName !== "user_sex" &&
-        inputName !== "user_birthday") ||
+        inputName !== "user_birthday" &&
+        inputName !== "user_relation") ||
       inputName.startsWith("enterprise")
     ) {
       dispatch({
@@ -176,6 +177,9 @@ const TextInput: React.FC<Props> = ({
         setShowDropdown(!showDropdown);
         break;
       case "oto_type":
+        setShowDropdown(!showDropdown);
+        break;
+      case "user_relation":
         setShowDropdown(!showDropdown);
         break;
       default:
