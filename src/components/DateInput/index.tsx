@@ -21,6 +21,7 @@ type Props = {
   productName: string;
   isResetValue?: boolean;
   limitDate?: boolean;
+  valueFromRedux?: string;
 };
 
 interface ICalendarWrapper {
@@ -47,6 +48,7 @@ const DateInput: React.FC<Props> = ({
   productName,
   isResetValue,
   limitDate,
+  valueFromRedux,
 }) => {
   const [calendarValue, onChange] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState<boolean | undefined>(false);
@@ -59,7 +61,11 @@ const DateInput: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (defaultToday && inputName !== "user_birthday") {
+    if (
+      defaultToday &&
+      inputName !== "user_birthday" &&
+      inputName !== "insured_birthday"
+    ) {
       setInputValue(moment().format("DD/MM/YYYY"));
     }
   }, []);
@@ -67,7 +73,10 @@ const DateInput: React.FC<Props> = ({
   useEffect(() => {
     let today = moment(new Date()).format("DD/MM/YYYY");
     let datePicked = moment(calendarValue).format("DD/MM/YYYY");
-    if (inputName === "user_birthday" && today === datePicked) {
+    if (
+      (inputName === "user_birthday" || inputName === "insured_birthday") &&
+      today === datePicked
+    ) {
       return;
     } else {
       setInputValue(datePicked);
@@ -93,6 +102,12 @@ const DateInput: React.FC<Props> = ({
       }
     }
   }, [dataRedux.modify_product]);
+
+  useEffect(() => {
+    if (valueFromRedux != undefined) {
+      setInputValue(valueFromRedux);
+    }
+  }, [valueFromRedux]);
 
   return (
     <div>

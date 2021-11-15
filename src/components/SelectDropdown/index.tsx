@@ -21,8 +21,10 @@ type Props = {
   required: boolean;
   readonly?: boolean;
   handleNhomKh?: (nhom: string) => void;
+  handleCustomerRelation?: (type: string) => void;
   productName: string;
   isResetValue?: boolean;
+  valueFromRedux?: string | number;
 };
 
 interface IconProps {}
@@ -89,6 +91,8 @@ const SelectDropdown: React.FC<Props> = ({
   handleNhomKh,
   productName,
   isResetValue,
+  handleCustomerRelation,
+  valueFromRedux,
 }) => {
   const [showDropdown, setShowDropdown] = useState<boolean | undefined>(false);
   const [inputValue, setInputValue] = useState<string | undefined>(undefined);
@@ -129,10 +133,15 @@ const SelectDropdown: React.FC<Props> = ({
         setDropdownKey(arr[0].key);
         setInputValue(arr[0].value);
         break;
-      case "user_relation":
+      case "insured_relation":
         setData(data.User_relation);
         setDropdownKey(data.User_relation[0].key);
         setInputValue(data.User_relation[0].value);
+        break;
+      case "insured_sex":
+        setData(data.Gioi_tinh);
+        setDropdownKey(data.Gioi_tinh[0].key);
+        setInputValue(data.Gioi_tinh[0].value);
         break;
       case "oto_type":
         getListGroupCar()
@@ -226,8 +235,31 @@ const SelectDropdown: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (inputValue) handleNhomKh ? handleNhomKh(inputValue) : {};
+    if (inputName == "nhom_kh" && inputValue) {
+      handleNhomKh ? handleNhomKh(inputValue) : {};
+    } else if (inputName == "insured_relation" && inputValue) {
+      handleCustomerRelation ? handleCustomerRelation(inputValue) : {};
+    }
   }, [inputValue]);
+
+  useEffect(() => {
+    if (valueFromRedux != undefined) {
+      switch (inputName) {
+        case "insured_sex":
+          let gender = data.Gioi_tinh.find((o) => o.key == valueFromRedux);
+          if (gender) {
+            setDropdownKey(gender.key);
+            setInputValue(gender.value);
+          } else {
+            setDropdownKey(data.Gioi_tinh[0].key);
+            setInputValue(data.Gioi_tinh[0].value);
+          }
+          break;
+        default:
+          break;
+      }
+    }
+  }, [valueFromRedux]);
 
   return (
     <DropdownWrapper>

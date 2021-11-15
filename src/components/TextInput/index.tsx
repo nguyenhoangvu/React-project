@@ -108,7 +108,7 @@ const TextInput: React.FC<Props> = ({
       (inputName.startsWith("user") &&
         inputName !== "user_sex" &&
         inputName !== "user_birthday" &&
-        inputName !== "user_relation") ||
+        inputName !== "insured_relation") ||
       inputName.startsWith("enterprise")
     ) {
       dispatch({
@@ -179,7 +179,7 @@ const TextInput: React.FC<Props> = ({
       case "oto_type":
         setShowDropdown(!showDropdown);
         break;
-      case "user_relation":
+      case "insured_relation":
         setShowDropdown(!showDropdown);
         break;
       default:
@@ -196,8 +196,13 @@ const TextInput: React.FC<Props> = ({
 
   useEffect(() => {
     if (inputValueFromProp !== undefined) {
+      if (inputValueFromProp == "") {
+        setFocusInput(false);
+        setInputActive("");
+      } else {
+        setInputActive("active");
+      }
       setInputValue(inputValueFromProp);
-      inputValueFromProp !== "" && setInputActive("active");
       if (
         !(
           inputName.startsWith("tnds") ||

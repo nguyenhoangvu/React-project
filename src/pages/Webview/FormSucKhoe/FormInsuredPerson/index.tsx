@@ -28,6 +28,7 @@ const FormMotoInfo: React.FC<Props> = ({
   const [buttonClick, setButtonClick] = useState("");
   const [isShowError, setIsShowError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [userRelation, setUserRelation] = useState("");
   const dispatch = useDispatch();
 
   const dataRedux = useSelector((state: RootState) => state.reducer.userInfo);
@@ -67,6 +68,10 @@ const FormMotoInfo: React.FC<Props> = ({
     }
   };
 
+  const handleCustomerRelation = (rela: string) => {
+    if (!rela.includes("Chọn")) setUserRelation(rela);
+  };
+
   useEffect(() => {
     handleButtonClick ? handleButtonClick(buttonClick) : {};
   }, [buttonClick]);
@@ -95,12 +100,13 @@ const FormMotoInfo: React.FC<Props> = ({
           <SelectDropdown
             inputType="text"
             inputId="bh_user_relation"
-            inputName="user_relation"
+            inputName="insured_relation"
             inputTitle="quan hệ với người mua"
             labelName="Mối quan hệ với người mua bảo hiểm"
             required={true}
             readonly={true}
             productName={productName}
+            handleCustomerRelation={handleCustomerRelation}
           />
           <TextInput
             inputType="text"
@@ -110,7 +116,8 @@ const FormMotoInfo: React.FC<Props> = ({
             labelName="Tên người được bảo hiểm"
             required={true}
             inputValueFromProp={
-              dataRedux.find((elem: any) => elem.key === "user_name")?.value
+              dataRedux.find((elem: any) => elem.key === "user_name")?.value &&
+              userRelation == "Bản thân"
                 ? dataRedux.find((elem: any) => elem.key === "user_name")?.value
                 : ""
             }
@@ -124,7 +131,8 @@ const FormMotoInfo: React.FC<Props> = ({
             labelName="Địa chỉ"
             required={true}
             inputValueFromProp={
-              dataRedux.find((elem: any) => elem.key === "user_diachi")?.value
+              dataRedux.find((elem: any) => elem.key === "user_diachi")
+                ?.value && userRelation == "Bản thân"
                 ? dataRedux.find((elem: any) => elem.key === "user_diachi")
                     ?.value
                 : ""
@@ -144,6 +152,14 @@ const FormMotoInfo: React.FC<Props> = ({
                 defaultToday={false}
                 limitDate={false}
                 productName={productName}
+                valueFromRedux={
+                  dataRedux.find((elem: any) => elem.key === "user_birthday")
+                    ?.value && userRelation == "Bản thân"
+                    ? dataRedux
+                        .find((elem: any) => elem.key === "user_birthday")
+                        ?.value.toString()
+                    : ""
+                }
               />
             </Col>
             <Col xs="6">
@@ -156,6 +172,14 @@ const FormMotoInfo: React.FC<Props> = ({
                 required={false}
                 readonly={true}
                 productName={productName}
+                valueFromRedux={
+                  dataRedux.find((elem: any) => elem.key === "user_sex")
+                    ?.value && userRelation == "Bản thân"
+                    ? dataRedux
+                        .find((elem: any) => elem.key === "user_sex")
+                        ?.value.toString()
+                    : ""
+                }
               />
             </Col>
           </Row>
@@ -169,6 +193,14 @@ const FormMotoInfo: React.FC<Props> = ({
                 labelName="CMND/Hộ chiếu"
                 required={true}
                 productName={productName}
+                inputValueFromProp={
+                  dataRedux.find((elem: any) => elem.key === "user_indentity")
+                    ?.value && userRelation == "Bản thân"
+                    ? dataRedux.find(
+                        (elem: any) => elem.key === "user_indentity"
+                      )?.value
+                    : ""
+                }
               />
             </Col>
             <Col xs="6">
@@ -180,6 +212,13 @@ const FormMotoInfo: React.FC<Props> = ({
                 labelName="Điện thoại"
                 required={true}
                 productName={productName}
+                inputValueFromProp={
+                  dataRedux.find((elem: any) => elem.key === "user_phone")
+                    ?.value && userRelation == "Bản thân"
+                    ? dataRedux.find((elem: any) => elem.key === "user_phone")
+                        ?.value
+                    : ""
+                }
               />
             </Col>
           </Row>
@@ -191,6 +230,13 @@ const FormMotoInfo: React.FC<Props> = ({
             labelName="Email"
             required={true}
             productName={productName}
+            inputValueFromProp={
+              dataRedux.find((elem: any) => elem.key === "user_email")?.value &&
+              userRelation == "Bản thân"
+                ? dataRedux.find((elem: any) => elem.key === "user_email")
+                    ?.value
+                : ""
+            }
           />
           <Row>
             <Col xs="6">
