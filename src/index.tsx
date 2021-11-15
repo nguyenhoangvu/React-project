@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter basename="/Webview">
+      <BrowserRouter basename="/Webview/webview-react/">
         <IHome />
       </BrowserRouter>
     </React.StrictMode>
