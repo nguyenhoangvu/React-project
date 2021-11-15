@@ -182,6 +182,12 @@ const TextInput: React.FC<Props> = ({
       case "insured_relation":
         setShowDropdown(!showDropdown);
         break;
+      case "insured_birthday":
+        setShowDropdown(!showDropdown);
+        break;
+      case "insured_sex":
+        setShowDropdown(!showDropdown);
+        break;
       default:
         setShowDropdown(showDropdown);
         break;

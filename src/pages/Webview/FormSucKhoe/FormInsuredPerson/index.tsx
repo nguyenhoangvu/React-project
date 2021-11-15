@@ -18,7 +18,7 @@ type Props = {
   handleShowError: (isError: boolean, errorMsg: string) => void;
 };
 
-const FormMotoInfo: React.FC<Props> = ({
+const FormInsuredPerson: React.FC<Props> = ({
   handleButtonClick,
   pageCallback,
   productName,
@@ -46,11 +46,8 @@ const FormMotoInfo: React.FC<Props> = ({
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
-      let listInput = listInputMustValidate.filter(
-        (o) =>
-          o.key.startsWith("moto") ||
-          o.key.startsWith("gcn") ||
-          o.key.startsWith("cx")
+      let listInput = listInputMustValidate.filter((o) =>
+        o.key.startsWith("insured")
       );
       let test = validate(listInput, listProduct, productName);
       if (test !== "") {
@@ -276,4 +273,4 @@ const FormMotoInfo: React.FC<Props> = ({
   );
 };
 
-export default FormMotoInfo;
+export default FormInsuredPerson;
