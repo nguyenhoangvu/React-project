@@ -92,7 +92,7 @@ const FormTNDS: React.FC<Props> = ({
     <Container>
       <Row>
         <Col xs="12">
-          <h5>Trách nhiệm dân sự</h5>
+          <h5>Thông tin người được bảo hiểm</h5>
           <Row>
             <Col xs="6">
               <DateInput

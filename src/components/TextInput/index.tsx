@@ -10,7 +10,6 @@ import {
   ADDINPUTNAMEMUSTVALIDATE,
 } from "../../redux/types";
 import { inputNumberOnly } from "./helper";
-import data from "../../json/select-dropdown.json";
 import moment from "moment";
 // import {addUserInfo} from '../../redux'
 
@@ -201,10 +200,10 @@ const TextInput: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (inputValueFromProp !== undefined) {
+    if (inputValueFromProp != undefined) {
       if (inputValueFromProp == "") {
         setFocusInput(false);
-        setInputActive("");
+        setInputValue("");
       } else {
         setInputActive("active");
       }
@@ -268,7 +267,7 @@ const TextInput: React.FC<Props> = ({
   }, [isResetValue]);
 
   useEffect(() => {
-    setInputValue("");
+    if (resetValue) setInputValue("");
   }, [resetValue]);
 
   useEffect(() => {
