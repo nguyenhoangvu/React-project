@@ -10,6 +10,7 @@ import TextInput from "../TextInput";
 import data from "../../json/select-dropdown.json";
 import { getYearProduce } from "../../common/getYearProduce";
 import { getListGroupCar } from "../../adapters/apis/carAPIs";
+import { getListAdditionalBenefit } from "../../adapters/apis/healthAPIs";
 
 type Props = {
   inputType: string;
@@ -35,7 +36,7 @@ const StyledIcon = styled(({ ...rest }) => (
   color: initial;
   position: absolute;
   right: 0;
-  top: -0.625rem;
+  top: -1.25rem;
   bottom: 0;
   margin: auto 0;
   line-height: 0.625rem;
@@ -166,6 +167,28 @@ const SelectDropdown: React.FC<Props> = ({
             }
           })
           .catch((err) => {});
+        break;
+      case "insured_package":
+        getListAdditionalBenefit("CN.6").then((res: any) => {
+          if (!res.isError) {
+            let arr = [
+              {
+                key: "0",
+                value: "--Chọn--",
+              },
+            ];
+            res.result.map((o: any) => {
+              let obj = {
+                key: o.packageCode,
+                value: o.packageName,
+              };
+              arr.push(obj);
+            });
+            setData(arr);
+            setDropdownKey(arr[0].key);
+            setInputValue(arr[0].value);
+          }
+        });
         break;
       default:
         break;

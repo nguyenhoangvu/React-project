@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 
-import { MODIFYORDERID } from "../../../../redux/types";
+import { MODIFYORDERID, ADDPRODUCTINFORS } from "../../../../redux/types";
 import { RootState } from "../../../../redux/store/rootReducer";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import DateInput from "../../../../components/DateInput";
-import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
+import { calculateEndTime } from "../../../../common/calculateTimeEnd";
+import { calculateFeeHealth } from "../../../../adapters/apis/healthAPIs";
+import { calculateTotalFeeHealth } from "../../../../common/calculateFeeHealth";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -32,13 +34,25 @@ const FormTNDS: React.FC<Props> = ({
   const [feeInsurance, setFeeInsurance] = useState("");
   const [isShowError, setIsShowError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [insuranceToDate, setInsuranceToDate] = useState("");
+  const [data, setData] = useState<any>([]);
+
+  const dispatch = useDispatch();
 
   const dataRedux = useSelector(
     (state: RootState) => state.reducer.listProducts
   );
 
-  let fee = dataRedux.find(
-    (elem) => elem.key === "phi_bh_tnds" && elem.productName === productName
+  const category = useSelector((state: RootState) => state.reducer.nv);
+
+  const insuranceFromDate = dataRedux.find(
+    (o) => o.key === "from_date_tnds" && o.productName === productName
+  );
+  let packageInsurance = dataRedux.find(
+    (o) => o.key === "insured_package" && o.productName === productName
+  );
+  let customerBirthday = dataRedux.find(
+    (o) => o.key === "insured_birthday" && o.productName === productName
   );
 
   const listInputMustValidate = useSelector(
@@ -62,13 +76,6 @@ const FormTNDS: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (fee !== undefined) {
-      let test = formatFee(fee.value);
-      setFeeInsurance(test);
-    }
-  }, [fee]);
-
-  useEffect(() => {
     handleButtonClick ? handleButtonClick(buttonClick) : {};
   }, [buttonClick]);
 
@@ -87,6 +94,45 @@ const FormTNDS: React.FC<Props> = ({
       clearTimeout(timer1);
     };
   }, [isShowError, errorMsg]);
+
+  useEffect(() => {
+    if (insuranceFromDate) {
+      let toDate = calculateEndTime(insuranceFromDate.value, 1);
+      setInsuranceToDate(toDate);
+    }
+  }, [insuranceFromDate]);
+
+  useEffect(() => {
+    if (packageInsurance && customerBirthday) {
+      let pairedPackage = calculateTotalFeeHealth(
+        data,
+        packageInsurance.value,
+        customerBirthday.value
+      );
+      if (pairedPackage) {
+        let fee = formatFee(pairedPackage.fee.toString());
+        setFeeInsurance(fee);
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: "phi_bhsk",
+            value: pairedPackage.fee,
+            productName: productName,
+          },
+        });
+      }
+    }
+  }, [packageInsurance, customerBirthday]);
+
+  useEffect(() => {
+    if (category && category != "") {
+      calculateFeeHealth(category).then((res: any) => {
+        if (!res.isError && res.resultCode == "00") {
+          setData(res.result);
+        }
+      });
+    }
+  }, []);
 
   return (
     <Container>
@@ -109,81 +155,53 @@ const FormTNDS: React.FC<Props> = ({
               />
             </Col>
             <Col xs="6">
+              <TextInput
+                inputType="text"
+                inputId="bh_oto_tnds_ngay_kt"
+                inputName="to_date_tnds"
+                inputTitle="ket_thuc"
+                labelName="Ngày kết thúc"
+                required={true}
+                readonly={true}
+                inputValueFromProp={insuranceToDate}
+                productName={productName}
+              />
+            </Col>
+            <Col xs="6">
               <SelectDropdown
                 inputType="text"
-                inputId="bh_xe_may_tnds_thoi_han"
-                inputName="expired_time_tnds"
-                inputTitle="Thời hạn"
-                labelName="Thời hạn"
+                inputId="frm_bhsk_goi_bh_ndbh"
+                inputName="insured_package"
+                inputTitle="Gói bảo hiểm"
+                labelName="Gói bảo hiểm"
                 required={true}
                 readonly={true}
                 productName={productName}
+              />
+            </Col>
+            <Col xs="6">
+              <TextInput
+                inputType="text"
+                inputId="bh_xe_may_phi_nguoibb"
+                inputName="phi_bh_tnds"
+                inputTitle="phi_bh_tnds"
+                labelName="Phí bảo hiểm"
+                required={true}
+                readonly={true}
+                productName={productName}
+                inputValueFromProp={feeInsurance}
                 isResetValue={isAddProductButtonClicked}
               />
             </Col>
           </Row>
           <TextInput
-            inputType="time"
-            inputId="frm_bh_xe_may_gio_hl"
-            inputName="from_time_tnds"
-            inputTitle="gio_hl"
-            labelName="Giờ hiệu lực"
-            required={true}
-            productName={productName}
-            isResetValue={isAddProductButtonClicked}
-          />
-          <h6>Trách nhiệm dân sự bắt buộc về người</h6>
-          <TextInput
             inputType="text"
-            inputId="bh_xem_may_tien_nguoibb"
-            inputName="phi_tnds"
-            inputTitle="phi_tnds"
-            labelName=""
+            inputId="frm_bhsk_so_hd_cu_ndbh"
+            inputName="insured_oldContract"
+            inputTitle="Số HĐ cũ"
+            labelName="Số HĐ cũ"
             required={false}
-            readonly={true}
-            inputValueFromProp="150.000.000/ 1 người/ 1 vụ"
             productName={productName}
-          />
-          <h6>Trách nhiệm dân sự bắt buộc về tài sản</h6>
-          <TextInput
-            inputType="text"
-            inputId="bh_xe_may_tien_xebb"
-            inputName="phi_tnds"
-            inputTitle="phi_tnds"
-            labelName=""
-            required={false}
-            readonly={true}
-            inputValueFromProp="50.000.000/ 1 vụ tai nạn"
-            productName={productName}
-          />
-          <CheckBox
-            checkboxId="nguoi_t3_tnds"
-            checkboxText="Tai nạn người ngồi trên xe"
-            productName={productName}
-            isResetValue={isAddProductButtonClicked}
-          />
-          <TextInput
-            inputType="text"
-            inputId="bh_xe_may_tien_xebb"
-            inputName="phi_tnds"
-            inputTitle="phi_tnds"
-            labelName=""
-            required={false}
-            readonly={true}
-            inputValueFromProp="10.000.000/ 1 người/ 1 vụ"
-            productName={productName}
-          />
-
-          <TextInput
-            inputType="text"
-            inputId="bh_xe_may_phi_nguoibb"
-            inputName="phi_bh_tnds"
-            inputTitle="phi_bh_tnds"
-            labelName="Phí bảo hiểm (đã gồm VAT)"
-            required={false}
-            readonly={true}
-            productName={productName}
-            inputValueFromProp={feeInsurance}
             isResetValue={isAddProductButtonClicked}
           />
           <div style={{ width: "100%", height: "10vh" }}></div>

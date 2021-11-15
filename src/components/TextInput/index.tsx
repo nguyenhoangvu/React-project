@@ -27,7 +27,7 @@ const InputComponent = styled.input<IInput>`
   outline: none;
   height: 3rem;
   width: 100%;
-  font-size: 1rem;
+  font-size: 0.875rem;
   margin: 0 0 1.25rem 0;
   padding: 0;
   box-shadow: ${(props) =>
@@ -185,6 +185,9 @@ const TextInput: React.FC<Props> = ({
         setShowDropdown(!showDropdown);
         break;
       case "insured_sex":
+        setShowDropdown(!showDropdown);
+        break;
+      case "insured_package":
         setShowDropdown(!showDropdown);
         break;
       default:
