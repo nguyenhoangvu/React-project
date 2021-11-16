@@ -34,6 +34,7 @@ const CalendarWrapper = styled.div<ICalendarWrapper>`
   border: 1px solid #777777;
   box-shadow: 0 12px 36px 16px rgb(0 0 0 / 24%);
   z-index: 1;
+  top: 0;
 `;
 
 const DateInput: React.FC<Props> = ({
@@ -58,6 +59,11 @@ const DateInput: React.FC<Props> = ({
 
   const handleShowCalendar = (showCalendar: boolean | undefined) => {
     setShowCalendar(showCalendar);
+  };
+
+  const handleClickYear = (value: any, event: any) => {
+    console.log("vu value: ", value);
+    console.log("vu event: ", event);
   };
 
   useEffect(() => {
@@ -131,6 +137,7 @@ const DateInput: React.FC<Props> = ({
           value={calendarValue}
           className="custom-calendar"
           minDate={limitDate === false ? undefined : moment().toDate()}
+          onClickYear={handleClickYear}
         />
       </CalendarWrapper>
     </div>

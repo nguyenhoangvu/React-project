@@ -26,9 +26,17 @@ const SPAN = styled.span<ISpan>`
   color: #2196f3;
   font-weight: 500;
   ${({ checkboxId }) =>
-    checkboxId === "check_dieu_khoan" &&
+    (checkboxId === "check_dieu_khoan" || checkboxId.startsWith("insured")) &&
     `
     color: #9e9e9e;
+  `}
+`;
+
+const DIV = styled.div<ISpan>`
+  ${({ checkboxId }) =>
+    checkboxId.startsWith("insured") &&
+    `
+    margin-top: 15px;
   `}
 `;
 
@@ -39,7 +47,7 @@ const CheckBox: React.FC<Props> = ({
   isResetValue,
   handleCheckboxChecked,
 }) => {
-  const [checkboxChecked, setCheckboxChecked] = useState(true);
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
   const dispatch = useDispatch();
 
   const viewDK = () => {
@@ -48,8 +56,8 @@ const CheckBox: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (checkboxId === "check_dieu_khoan") {
-      setCheckboxChecked(false);
+    if (checkboxId != "check_dieu_khoan" && !checkboxId.startsWith("insured")) {
+      setCheckboxChecked(true);
     }
   }, []);
 
@@ -69,20 +77,35 @@ const CheckBox: React.FC<Props> = ({
 
   useEffect(() => {
     if (isResetValue === true) {
-      setCheckboxChecked(true);
-      dispatch({
-        type: ADDPRODUCTINFORS,
-        payload: {
-          key: checkboxId,
-          value: "checked",
-          productName: productName,
-        },
-      });
+      if (!checkboxId.startsWith("insured")) {
+        setCheckboxChecked(true);
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: checkboxId,
+            value: "checked",
+            productName: productName,
+          },
+        });
+      } else {
+        setCheckboxChecked(false);
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: checkboxId,
+            value: "uncheck",
+            productName: productName,
+          },
+        });
+      }
     }
   }, [isResetValue]);
 
   return (
-    <div onClick={() => setCheckboxChecked(!checkboxChecked)}>
+    <DIV
+      checkboxId={checkboxId}
+      onClick={() => setCheckboxChecked(!checkboxChecked)}
+    >
       <input
         id={checkboxId}
         type="checkbox"
@@ -95,7 +118,7 @@ const CheckBox: React.FC<Props> = ({
           điều kiện, điều khoản, quy tắc của VBI.
         </span>
       )}
-    </div>
+    </DIV>
   );
 };
 

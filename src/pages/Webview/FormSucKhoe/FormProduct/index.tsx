@@ -8,11 +8,16 @@ import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import DateInput from "../../../../components/DateInput";
+import NavigateButton from "../../../../components/NavigateButton";
+import CheckBox from "../../../../components/CheckBox";
 import { formatFee } from "../../../../common/formatFee";
 import { validate } from "../../../../common/validateInfor";
 import { calculateEndTime } from "../../../../common/calculateTimeEnd";
 import { calculateFeeHealth } from "../../../../adapters/apis/healthAPIs";
-import { calculateTotalFeeHealth } from "../../../../common/calculateFeeHealth";
+import {
+  calculateTotalFeeHealth,
+  additionalBenefit,
+} from "../../../../common/calculateFeeHealth";
 import "react-calendar/dist/Calendar.css";
 
 type Props = {
@@ -36,6 +41,7 @@ const FormTNDS: React.FC<Props> = ({
   const [errorMsg, setErrorMsg] = useState("");
   const [insuranceToDate, setInsuranceToDate] = useState("");
   const [data, setData] = useState<any>([]);
+  const [insurancePackage, setInsurancePackage] = useState<any>([]);
 
   const dispatch = useDispatch();
 
@@ -48,11 +54,27 @@ const FormTNDS: React.FC<Props> = ({
   const insuranceFromDate = dataRedux.find(
     (o) => o.key === "from_date_tnds" && o.productName === productName
   );
-  let packageInsurance = dataRedux.find(
+  const packageInsurance = dataRedux.find(
     (o) => o.key === "insured_package" && o.productName === productName
   );
-  let customerBirthday = dataRedux.find(
+  const customerBirthday = dataRedux.find(
     (o) => o.key === "insured_birthday" && o.productName === productName
+  );
+
+  const insuredFee = dataRedux.find(
+    (o) => o.key === "phi_bhsk" && o.productName === productName
+  );
+
+  const insuredTC = dataRedux.find(
+    (o) => o.key === "insured_TC" && o.productName === productName
+  );
+
+  const insuredDT = dataRedux.find(
+    (o) => o.key === "insured_DT" && o.productName === productName
+  );
+
+  const insuredCS = dataRedux.find(
+    (o) => o.key === "insured_CS" && o.productName === productName
   );
 
   const listInputMustValidate = useSelector(
@@ -71,6 +93,32 @@ const FormTNDS: React.FC<Props> = ({
         setErrorMsg(test);
       } else {
         setButtonClick(buttonClicked);
+      }
+    }
+  };
+
+  const handleCheckAdditionalBenefit = (
+    additionalID: string,
+    additionalChecked: string
+  ) => {
+    if (insuredFee) {
+      let totalFee = additionalBenefit(
+        insurancePackage,
+        parseInt(insuredFee.value),
+        additionalID,
+        additionalChecked
+      );
+      if (totalFee > 0) {
+        let fee = formatFee(totalFee.toString());
+        setFeeInsurance(fee);
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: "phi_bhsk",
+            value: totalFee,
+            productName: productName,
+          },
+        });
       }
     }
   };
@@ -110,6 +158,9 @@ const FormTNDS: React.FC<Props> = ({
         customerBirthday.value
       );
       if (pairedPackage) {
+        console.log("vu pairedPackage: ", pairedPackage);
+
+        setInsurancePackage(pairedPackage);
         let fee = formatFee(pairedPackage.fee.toString());
         setFeeInsurance(fee);
         dispatch({
@@ -123,6 +174,24 @@ const FormTNDS: React.FC<Props> = ({
       }
     }
   }, [packageInsurance, customerBirthday]);
+
+  useEffect(() => {
+    if (insuredTC) {
+      handleCheckAdditionalBenefit("TC", insuredTC.value);
+    }
+  }, [insuredTC]);
+
+  useEffect(() => {
+    if (insuredDT) {
+      handleCheckAdditionalBenefit("DT", insuredDT.value);
+    }
+  }, [insuredDT]);
+
+  useEffect(() => {
+    if (insuredCS) {
+      handleCheckAdditionalBenefit("CS", insuredCS.value);
+    }
+  }, [insuredCS]);
 
   useEffect(() => {
     if (category && category != "") {
@@ -186,7 +255,7 @@ const FormTNDS: React.FC<Props> = ({
                 inputName="phi_bh_tnds"
                 inputTitle="phi_bh_tnds"
                 labelName="Phí bảo hiểm"
-                required={true}
+                required={false}
                 readonly={true}
                 productName={productName}
                 inputValueFromProp={feeInsurance}
@@ -204,6 +273,30 @@ const FormTNDS: React.FC<Props> = ({
             productName={productName}
             isResetValue={isAddProductButtonClicked}
           />
+          {packageInsurance && packageInsurance.value != "0" && (
+            <div>
+              <h6>Lựa chọn Quyền lợi mở rộng</h6>
+              <CheckBox
+                checkboxId="insured_TC"
+                checkboxText="Trợ cấp nằm viện điều trị tai nạn"
+                productName={productName}
+                isResetValue={isAddProductButtonClicked}
+              />
+              <CheckBox
+                checkboxId="insured_DT"
+                checkboxText="Điều trị ngoại trú"
+                productName={productName}
+                isResetValue={isAddProductButtonClicked}
+              />
+              <CheckBox
+                checkboxId="insured_CS"
+                checkboxText="Chăm sóc và điều trị răng"
+                productName={productName}
+                isResetValue={isAddProductButtonClicked}
+              />
+            </div>
+          )}
+          <NavigateButton btnContent="Xem Q.lợi" />
           <div style={{ width: "100%", height: "10vh" }}></div>
         </Col>
       </Row>

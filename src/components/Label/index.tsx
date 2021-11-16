@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// inputId,
-//     focusInput,
-//     inputActive,
-//     labelName,
-//     required,
-
 type Props = {
   focusInput: boolean;
   inputId: string;
@@ -29,26 +23,23 @@ interface ILabel {
   focus: boolean;
 }
 const InputLable = styled.label<ILabel>`
-    position: absolute;
-    top: 0;
-    color: ${(props) =>
-      props.active === "active" && props.focus === true
-        ? "#005790"
-        : "#9e9e9e"};
-    height: 100%;
-    font-size: 0.875rem;
-    cursor: text;
-    transition: transform 0.2s ease-out;
-    -webkit-transform 0.2s ease-out;
-    transform-origin: ${(props) =>
-      props.active === "active" ? "0 0" : "0 100%"};
-    text-align: initial;
-    transform: ${(props) =>
-      props.active === "active"
-        ? "translateY(-0.875rem) scale(0.8)"
-        : "translateY(0.75rem)"};
-    pointer-events: none;
-  `;
+  position: absolute;
+  top: 0;
+  color: ${(props) =>
+    props.active === "active" && props.focus === true ? "#005790" : "#9e9e9e"};
+  height: 100%;
+  font-size: 0.875rem;
+  cursor: text;
+  transition: transform 0.2s ease-out;
+  transform-origin: ${(props) =>
+    props.active === "active" ? "0 0" : "0 100%"};
+  text-align: initial;
+  transform: ${(props) =>
+    props.active === "active"
+      ? "translateY(-0.875rem) scale(0.8)"
+      : "translateY(0.75rem)"};
+  pointer-events: none;
+`;
 
 const Label: React.FC<Props> = ({
   inputId,
