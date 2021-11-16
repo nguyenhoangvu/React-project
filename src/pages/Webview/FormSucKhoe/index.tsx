@@ -6,7 +6,7 @@ import { RootState } from "../../../redux/store/rootReducer";
 
 import FormUserInfo from "./FormUserInfo";
 import FormInsuredPerson from "./FormInsuredPerson";
-import FormTNDS from "./FormProduct";
+import FormProductInfo from "./FormProduct";
 import FormHealthStatus from "./FormHealthStatus";
 import FormListMoto from "./FormListProducts";
 import FormSummary from "./FormSummary";
@@ -28,11 +28,11 @@ const FormInsuredPersonWrapper = styled.div<IFormInsuredPerson>`
   display: ${(props) => (props.showForm === true ? "block" : "none")};
 `;
 
-interface IFormTNDS {
+interface IFormProductInfo {
   showForm: boolean;
 }
 
-const FormTNDSWrapper = styled.div<IFormTNDS>`
+const FormProductInfoWrapper = styled.div<IFormProductInfo>`
   display: ${(props) => (props.showForm === true ? "block" : "none")};
 `;
 
@@ -66,13 +66,14 @@ const FormSucKhoe: React.FC<Props> = ({
 
   const [buttonFormInsuredPersonClicked, setButtonFormInsuredPersonClicked] =
     useState("");
-  const [buttonFormTNDSClicked, setButtonFormTNDSClicked] = useState("");
+  const [buttonFormProductInfoClicked, setButtonFormProductInfoClicked] =
+    useState("");
   const [buttonFormListMotoClicked, setButtonFormListMotoClicked] =
     useState("");
   const [buttonFormSummaryClicked, setButtonFormSummaryClicked] = useState("");
 
   const [showFormInsuredPerson, setShowFormInsuredPerson] = useState(false);
-  const [showFormTNDS, setShowFormTNDS] = useState(false);
+  const [showFormProductInfo, setShowFormProductInfo] = useState(false);
   const [showFormListMoto, setShowFormListMoto] = useState(false);
   const [showFormSummary, setShowFormSummary] = useState(false);
   const [addProductButtonCallback, setaddProductButtonCallback] =
@@ -120,7 +121,7 @@ const FormSucKhoe: React.FC<Props> = ({
     if (pageCallback === true) setButtonFormUserInfoClicked("");
   }, [pageCallback]);
 
-  // show hide from moto info
+  // show hide from insured person
   const handleDisplayFormInsuredPerson = (buttonClicked: string) => {
     if (buttonClicked) {
       setShowFormInsuredPerson(false);
@@ -128,17 +129,17 @@ const FormSucKhoe: React.FC<Props> = ({
       if (buttonClicked === "back") {
         setButtonFormUserInfoClicked("");
       } else if (buttonClicked === "next") {
-        setShowFormTNDS(true);
-        setButtonFormTNDSClicked("");
+        setShowFormProductInfo(true);
+        setButtonFormProductInfoClicked("");
       }
     }
   };
 
   // show hide from TNDS
-  const handleDisplayFormTNDS = (buttonClicked: string) => {
+  const handleDisplayFormProductInfo = (buttonClicked: string) => {
     if (buttonClicked) {
-      setShowFormTNDS(false);
-      setButtonFormTNDSClicked(buttonClicked);
+      setShowFormProductInfo(false);
+      setButtonFormProductInfoClicked(buttonClicked);
       if (buttonClicked === "back") {
         setButtonFormInsuredPersonClicked("");
         setShowFormInsuredPerson(true);
@@ -156,8 +157,8 @@ const FormSucKhoe: React.FC<Props> = ({
       setShowFormListMoto(false);
       setButtonFormListMotoClicked(buttonClicked);
       if (buttonClicked === "back") {
-        setButtonFormTNDSClicked("");
-        setShowFormTNDS(true);
+        setButtonFormProductInfoClicked("");
+        setShowFormProductInfo(true);
       } else if (buttonClicked === "next") {
         setShowFormSummary(true);
         setButtonFormSummaryClicked("");
@@ -174,8 +175,8 @@ const FormSucKhoe: React.FC<Props> = ({
         setButtonFormListMotoClicked("");
         setShowFormListMoto(true);
       } else if (buttonClicked === "next") {
-        // setShowFormTNDS(true);
-        // setButtonFormTNDSClicked("");
+        // setShowFormProductInfo(true);
+        // setButtonFormProductInfoClicked("");
       }
     }
   };
@@ -184,7 +185,7 @@ const FormSucKhoe: React.FC<Props> = ({
   const handleAddMoreProduct = (isAddMore: boolean) => {
     if (isAddMore === true) {
       setShowFormInsuredPerson(isAddMore);
-      setShowFormTNDS(!isAddMore);
+      setShowFormProductInfo(!isAddMore);
       setShowFormListMoto(!isAddMore);
       setButtonFormInsuredPersonClicked("");
       setaddProductButtonCallback(isAddMore);
@@ -195,7 +196,7 @@ const FormSucKhoe: React.FC<Props> = ({
   const handleModifyProduct = (isModify: boolean, productIndex: number) => {
     if (isModify && productIndex) {
       setShowFormInsuredPerson(isModify);
-      setShowFormTNDS(!isModify);
+      setShowFormProductInfo(!isModify);
       setShowFormListMoto(!isModify);
       setButtonFormInsuredPersonClicked("");
     }
@@ -230,15 +231,15 @@ const FormSucKhoe: React.FC<Props> = ({
           handleShowError={handleValidate}
         />
       </FormInsuredPersonWrapper>
-      <FormTNDSWrapper showForm={showFormTNDS}>
-        <FormTNDS
-          handleButtonClick={handleDisplayFormTNDS}
-          pageCallback={buttonFormTNDSClicked}
+      <FormProductInfoWrapper showForm={showFormProductInfo}>
+        <FormProductInfo
+          handleButtonClick={handleDisplayFormProductInfo}
+          pageCallback={buttonFormProductInfoClicked}
           productName={productName}
           isAddProductButtonClicked={addProductButtonCallback}
           handleShowError={handleValidate}
         />
-      </FormTNDSWrapper>
+      </FormProductInfoWrapper>
       <FormListMotoWrapper showForm={showFormListMoto}>
         <FormListMoto
           handleButtonClick={handleDisplayFormListMoto}

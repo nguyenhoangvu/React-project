@@ -28,7 +28,7 @@ type Props = {
   handleShowError: (isError: boolean, errorMsg: string) => void;
 };
 
-const FormTNDS: React.FC<Props> = ({
+const FormProductInfo: React.FC<Props> = ({
   handleButtonClick,
   pageCallback,
   productName,
@@ -158,8 +158,6 @@ const FormTNDS: React.FC<Props> = ({
         customerBirthday.value
       );
       if (pairedPackage) {
-        console.log("vu pairedPackage: ", pairedPackage);
-
         setInsurancePackage(pairedPackage);
         let fee = formatFee(pairedPackage.fee.toString());
         setFeeInsurance(fee);
@@ -311,4 +309,4 @@ const FormTNDS: React.FC<Props> = ({
   );
 };
 
-export default FormTNDS;
+export default FormProductInfo;
