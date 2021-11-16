@@ -36,6 +36,14 @@ const FormProductInfoWrapper = styled.div<IFormProductInfo>`
   display: ${(props) => (props.showForm === true ? "block" : "none")};
 `;
 
+interface IFormHealthStatus {
+  showForm: boolean;
+}
+
+const FormHealthStatusWrapper = styled.div<IFormHealthStatus>`
+  display: ${(props) => (props.showForm === true ? "block" : "none")};
+`;
+
 interface IFormListMoto {
   showForm: boolean;
 }
@@ -68,12 +76,15 @@ const FormSucKhoe: React.FC<Props> = ({
     useState("");
   const [buttonFormProductInfoClicked, setButtonFormProductInfoClicked] =
     useState("");
+  const [buttonFormHealthStatusClicked, setButtonFormHealthStatusClicked] =
+    useState("");
   const [buttonFormListMotoClicked, setButtonFormListMotoClicked] =
     useState("");
   const [buttonFormSummaryClicked, setButtonFormSummaryClicked] = useState("");
 
   const [showFormInsuredPerson, setShowFormInsuredPerson] = useState(false);
   const [showFormProductInfo, setShowFormProductInfo] = useState(false);
+  const [showFormHealthStatus, setShowFormHealthStatus] = useState(false);
   const [showFormListMoto, setShowFormListMoto] = useState(false);
   const [showFormSummary, setShowFormSummary] = useState(false);
   const [addProductButtonCallback, setaddProductButtonCallback] =
@@ -135,7 +146,7 @@ const FormSucKhoe: React.FC<Props> = ({
     }
   };
 
-  // show hide from TNDS
+  // show hide from product info
   const handleDisplayFormProductInfo = (buttonClicked: string) => {
     if (buttonClicked) {
       setShowFormProductInfo(false);
@@ -144,9 +155,23 @@ const FormSucKhoe: React.FC<Props> = ({
         setButtonFormInsuredPersonClicked("");
         setShowFormInsuredPerson(true);
       } else if (buttonClicked === "next") {
+        setShowFormHealthStatus(true);
+        setButtonFormHealthStatusClicked("");
+        setaddProductButtonCallback(false);
+      }
+    }
+  };
+
+  const handleDisplayFormHealthStatus = (buttonClicked: string) => {
+    if (buttonClicked) {
+      setShowFormHealthStatus(false);
+      setButtonFormHealthStatusClicked(buttonClicked);
+      if (buttonClicked === "back") {
+        setButtonFormProductInfoClicked("");
+        setShowFormProductInfo(true);
+      } else if (buttonClicked === "next") {
         setShowFormListMoto(true);
         setButtonFormListMotoClicked("");
-        setaddProductButtonCallback(false);
       }
     }
   };
@@ -157,8 +182,8 @@ const FormSucKhoe: React.FC<Props> = ({
       setShowFormListMoto(false);
       setButtonFormListMotoClicked(buttonClicked);
       if (buttonClicked === "back") {
-        setButtonFormProductInfoClicked("");
-        setShowFormProductInfo(true);
+        setButtonFormHealthStatusClicked("");
+        setShowFormHealthStatus(true);
       } else if (buttonClicked === "next") {
         setShowFormSummary(true);
         setButtonFormSummaryClicked("");
@@ -240,6 +265,15 @@ const FormSucKhoe: React.FC<Props> = ({
           handleShowError={handleValidate}
         />
       </FormProductInfoWrapper>
+      <FormHealthStatusWrapper showForm={showFormHealthStatus}>
+        <FormHealthStatus
+          handleButtonClick={handleDisplayFormHealthStatus}
+          pageCallback={buttonFormHealthStatusClicked}
+          productName={productName}
+          isAddProductButtonClicked={addProductButtonCallback}
+          handleShowError={handleValidate}
+        />
+      </FormHealthStatusWrapper>
       <FormListMotoWrapper showForm={showFormListMoto}>
         <FormListMoto
           handleButtonClick={handleDisplayFormListMoto}
