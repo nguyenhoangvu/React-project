@@ -55,7 +55,7 @@ const FormProductInfo: React.FC<Props> = ({
     (o) => o.key === "from_date_tnds" && o.productName === productName
   );
   const packageInsurance = dataRedux.find(
-    (o) => o.key === "insured_package" && o.productName === productName
+    (o) => o.key === "package_insurance" && o.productName === productName
   );
   const customerBirthday = dataRedux.find(
     (o) => o.key === "insured_birthday" && o.productName === productName
@@ -84,8 +84,8 @@ const FormProductInfo: React.FC<Props> = ({
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
-      let listInput = listInputMustValidate.filter((o) =>
-        o.key.includes("tnds")
+      let listInput = listInputMustValidate.filter(
+        (o) => o.key.includes("date") || o.key == "package_insurance"
       );
       let test = validate(listInput, dataRedux, productName);
       if (test !== "") {
@@ -238,7 +238,7 @@ const FormProductInfo: React.FC<Props> = ({
               <SelectDropdown
                 inputType="text"
                 inputId="frm_bhsk_goi_bh_ndbh"
-                inputName="insured_package"
+                inputName="package_insurance"
                 inputTitle="Gói bảo hiểm"
                 labelName="Gói bảo hiểm"
                 required={true}
@@ -271,7 +271,7 @@ const FormProductInfo: React.FC<Props> = ({
             productName={productName}
             isResetValue={isAddProductButtonClicked}
           />
-          {packageInsurance && packageInsurance.value != "0" && (
+          {packageInsurance && packageInsurance.value != "Chon" && (
             <div>
               <h6>Lựa chọn Quyền lợi mở rộng</h6>
               <CheckBox

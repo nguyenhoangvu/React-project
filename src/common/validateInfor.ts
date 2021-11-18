@@ -25,7 +25,7 @@ export const validate = (
     } else {
       input = listObjectInput.find((i: any) => i.key === o.key);
     }
-    if (input === undefined || input.value === "")
+    if (input === undefined || input.value === "" || input.value == "Chon")
       errorMsg = "Bạn chưa nhập " + o.name;
     else {
       if (input.key.includes("from_time")) timeFromRedux = input.value;

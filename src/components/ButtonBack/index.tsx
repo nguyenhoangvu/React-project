@@ -20,7 +20,7 @@ const A = styled.a`
   line-height: 3.5rem;
   z-index: 1;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
 `;
 
@@ -28,6 +28,8 @@ const SPAN = styled.span`
   float: left;
   color: #fff;
   line-height: 3.5rem;
+  padding-left: 25px;
+  margin-top: -2px;
 `;
 
 const ButtonBack: React.FC<Props> = ({

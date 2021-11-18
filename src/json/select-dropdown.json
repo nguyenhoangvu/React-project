@@ -37,7 +37,7 @@
   ],
   "Gioi_tinh": [
     {
-      "key": "0",
+      "key": "Chon",
       "value": "-- Chọn --"
     },
     {
@@ -51,7 +51,7 @@
   ],
   "Muc_dich": [
     {
-      "key": "0",
+      "key": "Chon",
       "value": "-- Chọn --"
     },
     {
@@ -65,7 +65,7 @@
   ],
   "User_relation": [
     {
-      "key": "0",
+      "key": "Chon",
       "value": "-- Chọn --"
     },
     {

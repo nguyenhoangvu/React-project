@@ -17,16 +17,17 @@ interface ISpan {
   checkboxId: string;
 }
 
-const SPAN = styled.span<ISpan>`
-  padding-left: 15px;
+const SPAN = styled.label<ISpan>`
+  padding-left: 18px;
   cursor: pointer;
-  height: 25px;
   line-height: 25px;
   font-size: 0.875rem;
   color: #2196f3;
   font-weight: 500;
   ${({ checkboxId }) =>
-    (checkboxId === "check_dieu_khoan" || checkboxId.startsWith("insured")) &&
+    (checkboxId === "check_dieu_khoan" ||
+      checkboxId.startsWith("insured") ||
+      checkboxId.startsWith("health")) &&
     `
     color: #9e9e9e;
   `}
@@ -34,10 +35,16 @@ const SPAN = styled.span<ISpan>`
 
 const DIV = styled.div<ISpan>`
   ${({ checkboxId }) =>
-    checkboxId.startsWith("insured") &&
+    (checkboxId.startsWith("insured") || checkboxId.startsWith("health")) &&
     `
     margin-top: 15px;
   `}
+  ${({ checkboxId }) =>
+    checkboxId.startsWith("health") &&
+    `
+    padding: 0 10px;
+  `}
+  display: flex;
 `;
 
 const CheckBox: React.FC<Props> = ({
@@ -56,7 +63,11 @@ const CheckBox: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (checkboxId != "check_dieu_khoan" && !checkboxId.startsWith("insured")) {
+    if (
+      checkboxId != "check_dieu_khoan" &&
+      !checkboxId.startsWith("insured") &&
+      !checkboxId.startsWith("health")
+    ) {
       setCheckboxChecked(true);
     }
   }, []);

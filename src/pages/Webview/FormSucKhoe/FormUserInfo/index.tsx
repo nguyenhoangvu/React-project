@@ -151,7 +151,7 @@ const FormUserInfo: React.FC<Props> = ({
                   inputName="user_sex"
                   inputTitle="Giới tính"
                   labelName="Giới tính"
-                  required={false}
+                  required={true}
                   readonly={true}
                   productName={productName}
                 />

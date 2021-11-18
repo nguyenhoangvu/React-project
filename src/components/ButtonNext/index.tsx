@@ -12,6 +12,7 @@ type Props = {
   handlePaymentClicked?: (clicked: boolean) => void;
   buttonPaymentCallback?: boolean;
   isValidateFalse?: boolean;
+  isConditionChecked?: boolean;
 };
 
 const A = styled.a`
@@ -26,7 +27,7 @@ const A = styled.a`
   line-height: 3.5rem;
   z-index: 1;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: end;
   align-items: center;
 `;
 
@@ -34,6 +35,8 @@ const SPAN = styled.span`
   float: left;
   color: #fff;
   line-height: 3.5rem;
+  padding-right: 25px;
+  margin-top: -2px;
 `;
 
 const ButtonNext: React.FC<Props> = ({
@@ -45,6 +48,7 @@ const ButtonNext: React.FC<Props> = ({
   handlePaymentClicked,
   buttonPaymentCallback,
   isValidateFalse,
+  isConditionChecked,
 }) => {
   const [buttonClicked, setButtonClicked] = useState("");
   const [buttonPaymentClicked, setButtonPaymentClicked] = useState(false);
@@ -85,17 +89,19 @@ const ButtonNext: React.FC<Props> = ({
 
   return (
     <>
-      {isPay === false && isSummaryPage === false && (
-        <A className="" onClick={onClickBackButton}>
-          <SPAN className="right">{buttonTitle}</SPAN>
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            size="2x"
-            className="next-icon"
-            style={{ height: "1rem" }}
-          />
-        </A>
-      )}
+      {isPay === false &&
+        isSummaryPage === false &&
+        isConditionChecked != true && (
+          <A className="" onClick={onClickBackButton}>
+            <SPAN className="right">{buttonTitle}</SPAN>
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              size="2x"
+              className="next-icon"
+              style={{ height: "1rem" }}
+            />
+          </A>
+        )}
       {isCheckTerm === true && isPay === true && isSummaryPage === true && (
         <A className="" onClick={onClickPayment}>
           <SPAN className="right">{buttonTitle}</SPAN>

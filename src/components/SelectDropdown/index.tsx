@@ -150,7 +150,7 @@ const SelectDropdown: React.FC<Props> = ({
             if (!res.isError) {
               let arr = [
                 {
-                  key: "0",
+                  key: "Chon",
                   value: "--Chọn--",
                 },
               ];
@@ -168,12 +168,12 @@ const SelectDropdown: React.FC<Props> = ({
           })
           .catch((err) => {});
         break;
-      case "insured_package":
+      case "package_insurance":
         getListAdditionalBenefit("CN.6").then((res: any) => {
           if (!res.isError) {
             let arr = [
               {
-                key: "0",
+                key: "Chon",
                 value: "--Chọn--",
               },
             ];

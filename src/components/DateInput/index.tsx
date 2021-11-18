@@ -116,7 +116,7 @@ const DateInput: React.FC<Props> = ({
   }, [valueFromRedux]);
 
   return (
-    <div>
+    <>
       <TextInput
         inputType={inputType}
         inputId={inputId}
@@ -140,7 +140,7 @@ const DateInput: React.FC<Props> = ({
           onClickYear={handleClickYear}
         />
       </CalendarWrapper>
-    </div>
+    </>
   );
 };
 
