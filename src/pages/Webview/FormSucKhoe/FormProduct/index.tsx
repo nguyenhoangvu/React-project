@@ -244,6 +244,7 @@ const FormProductInfo: React.FC<Props> = ({
                 required={true}
                 readonly={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
               />
             </Col>
             <Col xs="6">

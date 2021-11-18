@@ -88,7 +88,10 @@ const CheckBox: React.FC<Props> = ({
 
   useEffect(() => {
     if (isResetValue === true) {
-      if (!checkboxId.startsWith("insured")) {
+      if (
+        !checkboxId.startsWith("insured") &&
+        !checkboxId.startsWith("health_status")
+      ) {
         setCheckboxChecked(true);
         dispatch({
           type: ADDPRODUCTINFORS,

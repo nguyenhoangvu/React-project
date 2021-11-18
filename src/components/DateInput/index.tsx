@@ -61,11 +61,6 @@ const DateInput: React.FC<Props> = ({
     setShowCalendar(showCalendar);
   };
 
-  const handleClickYear = (value: any, event: any) => {
-    console.log("vu value: ", value);
-    console.log("vu event: ", event);
-  };
-
   useEffect(() => {
     if (
       defaultToday &&
@@ -92,7 +87,9 @@ const DateInput: React.FC<Props> = ({
 
   useEffect(() => {
     if (isResetValue === true) {
-      setInputValue(moment().format("DD/MM/YYYY"));
+      if (!inputName.includes("birthday"))
+        setInputValue(moment().format("DD/MM/YYYY"));
+      else setInputValue("");
     }
   }, [isResetValue]);
 
@@ -137,7 +134,6 @@ const DateInput: React.FC<Props> = ({
           value={calendarValue}
           className="custom-calendar"
           minDate={limitDate === false ? undefined : moment().toDate()}
-          onClickYear={handleClickYear}
         />
       </CalendarWrapper>
     </>

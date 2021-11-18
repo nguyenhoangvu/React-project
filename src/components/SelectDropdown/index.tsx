@@ -206,6 +206,18 @@ const SelectDropdown: React.FC<Props> = ({
           setDropdownKey(data.Thoi_han_bh[0].key);
           setInputValue(data.Thoi_han_bh[0].value);
           break;
+        case "insured_relation":
+          setDropdownKey(data.User_relation[0].key);
+          setInputValue(data.User_relation[0].value);
+          break;
+        case "insured_sex":
+          setDropdownKey(data.Gioi_tinh[0].key);
+          setInputValue(data.Gioi_tinh[0].value);
+          break;
+        case "package_insurance":
+          setDropdownKey(dataDropdown[0].key);
+          setInputValue(dataDropdown[0].value);
+          break;
 
         default:
           break;

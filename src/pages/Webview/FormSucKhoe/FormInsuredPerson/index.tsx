@@ -104,6 +104,7 @@ const FormInsuredPerson: React.FC<Props> = ({
             readonly={true}
             productName={productName}
             handleCustomerRelation={handleCustomerRelation}
+            isResetValue={isAddProductButtonClicked}
           />
           <TextInput
             inputType="text"
@@ -119,6 +120,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 : ""
             }
             productName={productName}
+            isResetValue={isAddProductButtonClicked}
           />
           <TextInput
             inputType="text"
@@ -135,6 +137,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 : ""
             }
             productName={productName}
+            isResetValue={isAddProductButtonClicked}
           />
           <Row>
             <Col xs="6">
@@ -149,6 +152,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 defaultToday={false}
                 limitDate={false}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
                 valueFromRedux={
                   dataRedux.find((elem: any) => elem.key === "user_birthday")
                     ?.value && userRelation == "Bản thân"
@@ -169,6 +173,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 required={true}
                 readonly={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
                 valueFromRedux={
                   dataRedux.find((elem: any) => elem.key === "user_sex")
                     ?.value && userRelation == "Bản thân"
@@ -190,6 +195,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 labelName="CMND/Hộ chiếu"
                 required={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
                 inputValueFromProp={
                   dataRedux.find((elem: any) => elem.key === "user_indentity")
                     ?.value && userRelation == "Bản thân"
@@ -209,6 +215,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 labelName="Điện thoại"
                 required={true}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
                 inputValueFromProp={
                   dataRedux.find((elem: any) => elem.key === "user_phone")
                     ?.value && userRelation == "Bản thân"
@@ -227,6 +234,7 @@ const FormInsuredPerson: React.FC<Props> = ({
             labelName="Email"
             required={true}
             productName={productName}
+            isResetValue={isAddProductButtonClicked}
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_email")?.value &&
               userRelation == "Bản thân"
@@ -245,6 +253,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 labelName="Tên người thụ hưởng"
                 required={false}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
               />
             </Col>
             <Col xs="6">
@@ -256,6 +265,7 @@ const FormInsuredPerson: React.FC<Props> = ({
                 labelName="CMT/MST/Thẻ căn cước"
                 required={false}
                 productName={productName}
+                isResetValue={isAddProductButtonClicked}
               />
             </Col>
           </Row>

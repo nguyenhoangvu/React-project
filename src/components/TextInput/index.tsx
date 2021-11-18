@@ -265,6 +265,7 @@ const TextInput: React.FC<Props> = ({
         inputName !== "expired_time_tnds"
       ) {
         setInputValue("");
+        setFocusInput(false);
       }
     }
   }, [isResetValue]);
