@@ -250,7 +250,7 @@ const FormProductInfo: React.FC<Props> = ({
             <Col xs="6">
               <TextInput
                 inputType="text"
-                inputId="bh_xe_may_phi_nguoibb"
+                inputId="bh_sk_phi"
                 inputName="phi_bh_tnds"
                 inputTitle="phi_bh_tnds"
                 labelName="Phí bảo hiểm"

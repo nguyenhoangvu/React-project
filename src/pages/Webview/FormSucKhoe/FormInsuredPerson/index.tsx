@@ -66,7 +66,7 @@ const FormInsuredPerson: React.FC<Props> = ({
   };
 
   const handleCustomerRelation = (rela: string) => {
-    if (!rela.includes("Chọn")) setUserRelation(rela);
+    setUserRelation(rela);
   };
 
   useEffect(() => {

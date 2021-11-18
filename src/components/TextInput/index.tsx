@@ -206,6 +206,7 @@ const TextInput: React.FC<Props> = ({
     if (inputValueFromProp != undefined) {
       if (inputValueFromProp == "") {
         setFocusInput(false);
+        setInputActive("");
         setInputValue("");
       } else {
         setInputActive("active");
