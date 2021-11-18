@@ -1,6 +1,6 @@
 import { formatFee } from "../../common/formatFee";
 
-export const totalFeeMoto = (listFee: any) => {
+export const totalContractFee = (listFee: any) => {
   let totalFee = 0;
   let obj = {
     key: "total_fee_tnds",

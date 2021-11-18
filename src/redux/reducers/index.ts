@@ -11,7 +11,7 @@ import {
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
 import { calculateFeeMoto } from "./calculateFeeMoto";
-import { totalFeeMoto, totalFeeCar } from "./calculateTotalFee";
+import { totalContractFee, totalFeeCar } from "./calculateTotalFee";
 
 interface USERINFOR {
   key: string;
@@ -102,7 +102,7 @@ const reducers = (state = initialState, action: ActionTypes) => {
       let listFee = newState.listProducts.filter(
         (o) => o.key === "phi_bh_tnds"
       );
-      let totalFee = totalFeeMoto(listFee);
+      let totalFee = totalContractFee(listFee);
       let i = newState.listProducts.findIndex(
         (o) => o.key === "total_fee_tnds"
       );
@@ -179,7 +179,7 @@ const reducers = (state = initialState, action: ActionTypes) => {
         let listFee = cloneState.listProducts.filter(
           (o) => o.key === "phi_bh_tnds"
         );
-        let totalFee = totalFeeMoto(listFee);
+        let totalFee = totalContractFee(listFee);
         if (totalFee.key !== "" && totalFee.key !== undefined) {
           let index = cloneState.listProducts.findIndex(
             (o) => o.key === "total_fee_tnds"
@@ -208,8 +208,20 @@ const reducers = (state = initialState, action: ActionTypes) => {
             cloneState.listProducts[index] = totalFee;
           } else cloneState.listProducts.push(totalFee);
         }
+      } else if (state.nv === "CN.6") {
+        let listFee = cloneState.listProducts.filter(
+          (o) => o.key == "phi_bhsk"
+        );
+        let total = totalContractFee(listFee);
+        if (total && total.value != "0") {
+          let index = cloneState.listProducts.findIndex(
+            (o) => o.key === "total_fee_tnds"
+          );
+          if (index >= 0) {
+            cloneState.listProducts[index] = total;
+          } else cloneState.listProducts.push(total);
+        }
       }
-
       return cloneState;
     default:
       return state;

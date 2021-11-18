@@ -8,7 +8,7 @@ import FormUserInfo from "./FormUserInfo";
 import FormInsuredPerson from "./FormInsuredPerson";
 import FormProductInfo from "./FormProduct";
 import FormHealthStatus from "./FormHealthStatus";
-import FormListMoto from "./FormListProducts";
+import FormListProducts from "./FormListProducts";
 import FormSummary from "./FormSummary";
 import Error from "../../../components/Error";
 
@@ -44,11 +44,11 @@ const FormHealthStatusWrapper = styled.div<IFormHealthStatus>`
   display: ${(props) => (props.showForm === true ? "block" : "none")};
 `;
 
-interface IFormListMoto {
+interface IFormListProducts {
   showForm: boolean;
 }
 
-const FormListMotoWrapper = styled.div<IFormListMoto>`
+const FormListProductsWrapper = styled.div<IFormListProducts>`
   display: ${(props) => (props.showForm === true ? "block" : "none")};
 `;
 
@@ -78,14 +78,14 @@ const FormSucKhoe: React.FC<Props> = ({
     useState("");
   const [buttonFormHealthStatusClicked, setButtonFormHealthStatusClicked] =
     useState("");
-  const [buttonFormListMotoClicked, setButtonFormListMotoClicked] =
+  const [buttonFormListProductsClicked, setButtonFormListProductsClicked] =
     useState("");
   const [buttonFormSummaryClicked, setButtonFormSummaryClicked] = useState("");
 
   const [showFormInsuredPerson, setShowFormInsuredPerson] = useState(false);
   const [showFormProductInfo, setShowFormProductInfo] = useState(false);
   const [showFormHealthStatus, setShowFormHealthStatus] = useState(false);
-  const [showFormListMoto, setShowFormListMoto] = useState(false);
+  const [showFormListProducts, setShowFormListProducts] = useState(false);
   const [showFormSummary, setShowFormSummary] = useState(false);
   const [addProductButtonCallback, setaddProductButtonCallback] =
     useState(false);
@@ -170,17 +170,17 @@ const FormSucKhoe: React.FC<Props> = ({
         setButtonFormProductInfoClicked("");
         setShowFormProductInfo(true);
       } else if (buttonClicked === "next") {
-        setShowFormListMoto(true);
-        setButtonFormListMotoClicked("");
+        setShowFormListProducts(true);
+        setButtonFormListProductsClicked("");
       }
     }
   };
 
-  // show hide from ListMoto
-  const handleDisplayFormListMoto = (buttonClicked: string) => {
+  // show hide from ListProducts
+  const handleDisplayFormListProducts = (buttonClicked: string) => {
     if (buttonClicked) {
-      setShowFormListMoto(false);
-      setButtonFormListMotoClicked(buttonClicked);
+      setShowFormListProducts(false);
+      setButtonFormListProductsClicked(buttonClicked);
       if (buttonClicked === "back") {
         setButtonFormHealthStatusClicked("");
         setShowFormHealthStatus(true);
@@ -197,8 +197,8 @@ const FormSucKhoe: React.FC<Props> = ({
       setShowFormSummary(false);
       setButtonFormSummaryClicked(buttonClicked);
       if (buttonClicked === "back") {
-        setButtonFormListMotoClicked("");
-        setShowFormListMoto(true);
+        setButtonFormListProductsClicked("");
+        setShowFormListProducts(true);
       } else if (buttonClicked === "next") {
         // setShowFormProductInfo(true);
         // setButtonFormProductInfoClicked("");
@@ -211,7 +211,7 @@ const FormSucKhoe: React.FC<Props> = ({
     if (isAddMore === true) {
       setShowFormInsuredPerson(isAddMore);
       setShowFormProductInfo(!isAddMore);
-      setShowFormListMoto(!isAddMore);
+      setShowFormListProducts(!isAddMore);
       setButtonFormInsuredPersonClicked("");
       setaddProductButtonCallback(isAddMore);
     }
@@ -222,7 +222,7 @@ const FormSucKhoe: React.FC<Props> = ({
     if (isModify && productIndex) {
       setShowFormInsuredPerson(isModify);
       setShowFormProductInfo(!isModify);
-      setShowFormListMoto(!isModify);
+      setShowFormListProducts(!isModify);
       setButtonFormInsuredPersonClicked("");
     }
   };
@@ -274,16 +274,16 @@ const FormSucKhoe: React.FC<Props> = ({
           handleShowError={handleValidate}
         />
       </FormHealthStatusWrapper>
-      <FormListMotoWrapper showForm={showFormListMoto}>
-        <FormListMoto
-          handleButtonClick={handleDisplayFormListMoto}
-          pageCallback={buttonFormListMotoClicked}
+      <FormListProductsWrapper showForm={showFormListProducts}>
+        <FormListProducts
+          handleButtonClick={handleDisplayFormListProducts}
+          pageCallback={buttonFormListProductsClicked}
           handleAddMoreProduct={handleAddMoreProduct}
           buttonAddProductCallback={addProductButtonCallback}
           handleModifyProduct={handleModifyProduct}
           handleShowError={handleValidate}
         />
-      </FormListMotoWrapper>
+      </FormListProductsWrapper>
       <FormSummaryWrapper showForm={showFormSummary}>
         <FormSummary
           handleButtonClick={handleDisplayFormSummary}

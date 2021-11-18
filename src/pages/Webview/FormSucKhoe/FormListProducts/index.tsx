@@ -28,7 +28,7 @@ const TotalFeeStyle = styled.div`
   color: #2196f3;
 `;
 
-const FormListMoto: React.FC<Props> = ({
+const FormListProducts: React.FC<Props> = ({
   handleButtonClick,
   pageCallback,
   handleAddMoreProduct,
@@ -139,14 +139,20 @@ const FormListMoto: React.FC<Props> = ({
       let product = dataRedux.listProducts.filter(
         (o) => o.productName === product_name
       );
-      let motoPlate = product.find((o) => o.key === "moto_plate");
+      let customerName = product.find((o) => o.key === "insured_name");
+      let customerIndentity = product.find(
+        (o) => o.key === "insured_indentity"
+      );
+      let packageInsurance = product.find((o) => o.key === "package_insurance");
       let fromDate = product.find((o) => o.key === "from_date_tnds");
-      let fee = product.find((o) => o.key === "phi_bh_tnds");
+      let fee = product.find((o) => o.key === "phi_bhsk");
       if (fee !== undefined) {
         product_fee = formatFee(fee.value);
       }
       let obj = {
-        motoPlate: motoPlate?.value,
+        customerName: customerName?.value,
+        customerIndentity: customerIndentity?.value,
+        packageInsurance: packageInsurance?.value,
         fromDate: fromDate?.value,
         fee: product_fee + " VNĐ",
         index: i,
@@ -160,24 +166,38 @@ const FormListMoto: React.FC<Props> = ({
           <Col xs="12">
             <TextInput
               inputType="text"
-              inputId="sum_moto_plate"
-              inputName="sum_moto_plate"
-              inputTitle="Biển số xe"
-              labelName="Biển số xe"
+              inputId="sum_customer_name"
+              inputName="sum_customer_name"
+              inputTitle="Tên khách hàng"
+              labelName="Tên khách hàng"
               required={false}
               readonly={true}
               productName=""
-              inputValueFromProp={obj.motoPlate}
+              inputValueFromProp={obj.customerName}
               summaryText={true}
             />
             <Row>
               <Col xs="6">
                 <TextInput
                   inputType="text"
+                  inputId="sum_customer_identity"
+                  inputName="sum_customer_identity"
+                  inputTitle="CMT/Hộ chiếu"
+                  labelName="CMT/Hộ chiếu"
+                  required={false}
+                  readonly={true}
+                  productName=""
+                  inputValueFromProp={obj.customerIndentity}
+                  summaryText={true}
+                />
+              </Col>
+              <Col xs="6">
+                <TextInput
+                  inputType="text"
                   inputId="sum_from_date"
                   inputName="sum_from_date"
-                  inputTitle="Hiệu lực kể từ"
-                  labelName="Hiệu lực kể từ"
+                  inputTitle="Hiệu lực 1 năm từ"
+                  labelName="Hiệu lực 1 năm từ"
                   required={false}
                   readonly={true}
                   productName=""
@@ -188,8 +208,22 @@ const FormListMoto: React.FC<Props> = ({
               <Col xs="6">
                 <TextInput
                   inputType="text"
-                  inputId="sum_fee"
-                  inputName="sum_fee"
+                  inputId="sum_package_insurance"
+                  inputName="sum_package_insurance"
+                  inputTitle="Gói bảo hiểm"
+                  labelName="Gói bảo hiểm"
+                  required={false}
+                  readonly={true}
+                  productName=""
+                  inputValueFromProp={obj.packageInsurance}
+                  summaryText={true}
+                />
+              </Col>
+              <Col xs="6">
+                <TextInput
+                  inputType="text"
+                  inputId="sum_insurance_fee"
+                  inputName="sum_insurance_fee"
                   inputTitle="Phí bảo hiểm"
                   labelName="Phí bảo hiểm"
                   required={false}
@@ -247,4 +281,4 @@ const FormListMoto: React.FC<Props> = ({
   );
 };
 
-export default FormListMoto;
+export default FormListProducts;
