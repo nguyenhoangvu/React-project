@@ -185,6 +185,7 @@ const SelectDropdown: React.FC<Props> = ({
               arr.push(obj);
             });
             setData(arr);
+            sessionStorage.setItem("Package_insurance", JSON.stringify(arr));
             setDropdownKey(arr[0].key);
             setInputValue(arr[0].value);
           }
@@ -283,12 +284,40 @@ const SelectDropdown: React.FC<Props> = ({
         case "insured_sex":
           let gender = data.Gioi_tinh.find((o) => o.key == valueFromRedux);
           if (gender) {
+            console.log("vu here");
+
             setDropdownKey(gender.key);
             setInputValue(gender.value);
           } else {
             setDropdownKey(data.Gioi_tinh[0].key);
             setInputValue(data.Gioi_tinh[0].value);
           }
+          break;
+        case "insured_relation":
+          let relation = data.User_relation.find(
+            (o) => o.key == valueFromRedux
+          );
+          if (relation) {
+            console.log("vu here 2");
+            setDropdownKey(relation.key);
+            setInputValue(relation.value);
+          } else {
+            setDropdownKey(data.Gioi_tinh[0].key);
+            setInputValue(data.Gioi_tinh[0].value);
+          }
+          break;
+        case "package_insurance":
+          let listPackage = sessionStorage.getItem("Package_insurance");
+          if (listPackage) {
+            let packageInsurance = JSON.parse(listPackage).find(
+              (o: any) => o.key == valueFromRedux
+            );
+            if (packageInsurance) {
+              setDropdownKey(packageInsurance.key);
+              setInputValue(packageInsurance.value);
+            }
+          }
+
           break;
         default:
           break;
