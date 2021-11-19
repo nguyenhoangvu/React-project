@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { RootState } from "../../../../redux/store/rootReducer";
-import { MODIFYORDERID } from "../../../../redux/types";
+import {
+  MODIFYORDERID,
+  UPDATESTATEREMOVEPRODUCT,
+} from "../../../../redux/types";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import ButtonSummary from "../../../../components/ButtonSummary";
@@ -49,6 +52,8 @@ const FormListProducts: React.FC<Props> = ({
   let totalFeeFromRoot = dataRedux.listProducts.find(
     (o) => o.key === "total_fee_tnds"
   );
+
+  const stateRemoveProduct = dataRedux.remove_product;
 
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
@@ -115,6 +120,12 @@ const FormListProducts: React.FC<Props> = ({
 
   const handleClickAddProductButton = (clicked: boolean) => {
     setButtonAddProductClick(clicked);
+    if (stateRemoveProduct == true) {
+      dispatch({
+        type: UPDATESTATEREMOVEPRODUCT,
+        payload: false,
+      });
+    }
   };
 
   useEffect(() => {
@@ -145,7 +156,7 @@ const FormListProducts: React.FC<Props> = ({
       );
       let packageInsurance = product.find((o) => o.key === "package_insurance");
       let fromDate = product.find((o) => o.key === "from_date_tnds");
-      let fee = product.find((o) => o.key === "phi_bhsk");
+      let fee = product.find((o) => o.key === "phi_bh_tnds");
       if (fee !== undefined) {
         product_fee = formatFee(fee.value);
       }

@@ -27,7 +27,7 @@ const A = styled.a`
   line-height: 3.5rem;
   z-index: 1;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 `;
 

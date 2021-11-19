@@ -62,7 +62,7 @@ const FormProductInfo: React.FC<Props> = ({
   );
 
   const insuredFee = dataRedux.find(
-    (o) => o.key === "phi_bhsk" && o.productName === productName
+    (o) => o.key === "phi_bh_tnds" && o.productName === productName
   );
 
   const insuredTC = dataRedux.find(
@@ -114,7 +114,7 @@ const FormProductInfo: React.FC<Props> = ({
         dispatch({
           type: ADDPRODUCTINFORS,
           payload: {
-            key: "phi_bhsk",
+            key: "phi_bh_tnds",
             value: totalFee,
             productName: productName,
           },
@@ -151,7 +151,11 @@ const FormProductInfo: React.FC<Props> = ({
   }, [insuranceFromDate]);
 
   useEffect(() => {
-    if (packageInsurance && customerBirthday) {
+    if (
+      packageInsurance &&
+      packageInsurance.value != "Chon" &&
+      customerBirthday?.value
+    ) {
       let pairedPackage = calculateTotalFeeHealth(
         data,
         packageInsurance.value,
@@ -164,12 +168,22 @@ const FormProductInfo: React.FC<Props> = ({
         dispatch({
           type: ADDPRODUCTINFORS,
           payload: {
-            key: "phi_bhsk",
+            key: "phi_bh_tnds",
             value: pairedPackage.fee,
             productName: productName,
           },
         });
       }
+    } else {
+      setFeeInsurance("");
+      dispatch({
+        type: ADDPRODUCTINFORS,
+        payload: {
+          key: "phi_bh_tnds",
+          value: "",
+          productName: productName,
+        },
+      });
     }
   }, [packageInsurance, customerBirthday]);
 

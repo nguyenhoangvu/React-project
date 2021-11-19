@@ -7,6 +7,7 @@ import {
   ADDINPUTNAMEMUSTVALIDATE,
   MODIFYORDERID,
   ADDCATEGORY,
+  UPDATESTATEREMOVEPRODUCT,
 } from "../types";
 import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
@@ -33,6 +34,7 @@ interface InitialStateType {
   so_id: number;
   total_product: number;
   modify_product: number;
+  remove_product: boolean;
   ma_dv: string;
   ma_nsd: string;
   token: string;
@@ -47,6 +49,7 @@ export const initialState: InitialStateType = {
   so_id: 0,
   total_product: 1,
   modify_product: 0,
+  remove_product: false,
   ma_dv: data.ma_dvi,
   ma_nsd: data.ma_nsd,
   token: data.token,
@@ -89,6 +92,7 @@ const reducers = (state = initialState, action: ActionTypes) => {
     case REMOVEPRODUCT:
       const newState = { ...state };
       let product_name = "product_" + action.payload;
+      newState.remove_product = true;
       newState.listProducts = newState.listProducts.filter(
         (item) => item.productName !== product_name
       );
@@ -111,6 +115,11 @@ const reducers = (state = initialState, action: ActionTypes) => {
       }
       newState.total_product -= 1;
       return newState;
+    case UPDATESTATEREMOVEPRODUCT:
+      return {
+        ...state,
+        remove_product: action.payload,
+      };
     case ADDUSERINFO:
       const userInfoState = { ...state };
       let nhom_kh = userInfoState.userInfo.find((o) => o.key === "nhom_kh");
@@ -210,13 +219,14 @@ const reducers = (state = initialState, action: ActionTypes) => {
         }
       } else if (state.nv === "CN.6") {
         let listFee = cloneState.listProducts.filter(
-          (o) => o.key == "phi_bhsk"
+          (o) => o.key == "phi_bh_tnds"
         );
         let total = totalContractFee(listFee);
         if (total && total.value != "0") {
           let index = cloneState.listProducts.findIndex(
             (o) => o.key === "total_fee_tnds"
           );
+
           if (index >= 0) {
             cloneState.listProducts[index] = total;
           } else cloneState.listProducts.push(total);

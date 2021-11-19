@@ -55,6 +55,11 @@ export interface ADDCATEGORY {
   payload: string;
 }
 
+export interface UPDATESTATEREMOVEPRODUCT {
+  type: constants.STATEREMOVEPRODUCT;
+  payload: boolean;
+}
+
 export type ActionTypes =
   | ADDPRODUCTINFORS
   | ADDUSERINFO
@@ -63,4 +68,5 @@ export type ActionTypes =
   | MODIFYPRODUCT
   | ADDINPUTNAMEMUSTVALIDATE
   | MODIFYORDERID
-  | ADDCATEGORY;
+  | ADDCATEGORY
+  | UPDATESTATEREMOVEPRODUCT;

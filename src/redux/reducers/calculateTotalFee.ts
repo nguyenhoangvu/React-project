@@ -8,7 +8,7 @@ export const totalContractFee = (listFee: any) => {
     productName: "all",
   };
   listFee.forEach((o: any) => {
-    if (o.value !== undefined) {
+    if (o.value !== undefined && o.value != "") {
       totalFee += parseInt(o.value);
     }
   });

@@ -43,6 +43,10 @@ const FormInsuredPerson: React.FC<Props> = ({
     (state: RootState) => state.reducer.modify_product
   );
 
+  const removeProduct = useSelector(
+    (state: RootState) => state.reducer.remove_product
+  );
+
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
@@ -115,7 +119,7 @@ const FormInsuredPerson: React.FC<Props> = ({
             required={true}
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_name")?.value &&
-              userRelation == "Bản thân"
+              (userRelation == "Bản thân" || removeProduct == true)
                 ? dataRedux.find((elem: any) => elem.key === "user_name")?.value
                 : ""
             }
@@ -131,7 +135,8 @@ const FormInsuredPerson: React.FC<Props> = ({
             required={true}
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_diachi")
-                ?.value && userRelation == "Bản thân"
+                ?.value &&
+              (userRelation == "Bản thân" || removeProduct == true)
                 ? dataRedux.find((elem: any) => elem.key === "user_diachi")
                     ?.value
                 : ""
@@ -155,7 +160,8 @@ const FormInsuredPerson: React.FC<Props> = ({
                 isResetValue={isAddProductButtonClicked}
                 valueFromRedux={
                   dataRedux.find((elem: any) => elem.key === "user_birthday")
-                    ?.value && userRelation == "Bản thân"
+                    ?.value &&
+                  (userRelation == "Bản thân" || removeProduct == true)
                     ? dataRedux
                         .find((elem: any) => elem.key === "user_birthday")
                         ?.value.toString()
@@ -176,7 +182,8 @@ const FormInsuredPerson: React.FC<Props> = ({
                 isResetValue={isAddProductButtonClicked}
                 valueFromRedux={
                   dataRedux.find((elem: any) => elem.key === "user_sex")
-                    ?.value && userRelation == "Bản thân"
+                    ?.value &&
+                  (userRelation == "Bản thân" || removeProduct == true)
                     ? dataRedux
                         .find((elem: any) => elem.key === "user_sex")
                         ?.value.toString()
@@ -198,7 +205,8 @@ const FormInsuredPerson: React.FC<Props> = ({
                 isResetValue={isAddProductButtonClicked}
                 inputValueFromProp={
                   dataRedux.find((elem: any) => elem.key === "user_indentity")
-                    ?.value && userRelation == "Bản thân"
+                    ?.value &&
+                  (userRelation == "Bản thân" || removeProduct == true)
                     ? dataRedux.find(
                         (elem: any) => elem.key === "user_indentity"
                       )?.value
@@ -218,7 +226,8 @@ const FormInsuredPerson: React.FC<Props> = ({
                 isResetValue={isAddProductButtonClicked}
                 inputValueFromProp={
                   dataRedux.find((elem: any) => elem.key === "user_phone")
-                    ?.value && userRelation == "Bản thân"
+                    ?.value &&
+                  (userRelation == "Bản thân" || removeProduct == true)
                     ? dataRedux.find((elem: any) => elem.key === "user_phone")
                         ?.value
                     : ""
@@ -237,7 +246,7 @@ const FormInsuredPerson: React.FC<Props> = ({
             isResetValue={isAddProductButtonClicked}
             inputValueFromProp={
               dataRedux.find((elem: any) => elem.key === "user_email")?.value &&
-              userRelation == "Bản thân"
+              (userRelation == "Bản thân" || removeProduct == true)
                 ? dataRedux.find((elem: any) => elem.key === "user_email")
                     ?.value
                 : ""
