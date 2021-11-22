@@ -102,6 +102,10 @@ const SelectDropdown: React.FC<Props> = ({
 
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
+  let insuredRelation = dataRedux.listProducts.find(
+    (o) => o.key == "insured_relation" && o.productName == productName
+  );
+
   useEffect(() => {
     switch (inputName) {
       case "nhom_kh":
@@ -260,6 +264,36 @@ const SelectDropdown: React.FC<Props> = ({
       }
     }
   }, [dataRedux.modify_product]);
+
+  useEffect(() => {
+    if (insuredRelation && insuredRelation.value == "BAN_THAN") {
+      switch (inputName) {
+        case "insured_sex":
+          let customerGender = dataRedux.userInfo.find(
+            (o) => o.key == "user_sex"
+          );
+          if (customerGender) {
+            setDropdownKey(customerGender.value.toString());
+            let gender = data.Gioi_tinh.find(
+              (o) => o.key == customerGender?.value.toString()
+            );
+            gender !== undefined && setInputValue(gender.value);
+          }
+          break;
+        default:
+          break;
+      }
+    } else if (
+      insuredRelation &&
+      insuredRelation.value !== "BAN_THAN" &&
+      dataRedux.modify_product == 0
+    ) {
+      if (inputName == "insured_sex") {
+        setDropdownKey(data.Gioi_tinh[0].key);
+        setInputValue(data.Gioi_tinh[0].value);
+      }
+    }
+  }, [insuredRelation, dataRedux.modify_product]);
 
   const RenderOptionNhomKH = () => {
     const ContentDropdown = dataDropdown?.map((obj: any) => (

@@ -57,6 +57,10 @@ const DateInput: React.FC<Props> = ({
 
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
+  let insuredRelation = dataRedux.listProducts.find(
+    (o) => o.key == "insured_relation" && o.productName == productName
+  );
+
   const handleShowCalendar = (showCalendar: boolean | undefined) => {
     setShowCalendar(showCalendar);
   };
@@ -94,14 +98,35 @@ const DateInput: React.FC<Props> = ({
   }, [isResetValue]);
 
   useEffect(() => {
+    if (insuredRelation && insuredRelation.value == "BAN_THAN") {
+      switch (inputName) {
+        case "insured_birthday":
+          let customerBirthday = dataRedux.userInfo.find(
+            (o) => o.key == "user_birthday"
+          );
+          customerBirthday && setInputValue(customerBirthday.value.toString());
+          break;
+        default:
+          break;
+      }
+    } else if (
+      insuredRelation &&
+      insuredRelation.value !== "BAN_THAN" &&
+      dataRedux.modify_product == 0
+    ) {
+      if (inputName == "insured_birthday") {
+        setInputValue("");
+      }
+    }
+  }, [insuredRelation, dataRedux.modify_product]);
+
+  useEffect(() => {
     if (dataRedux.modify_product !== 0) {
       let modify = dataRedux.listProducts.find(
         (o) =>
           o.key === inputName &&
           o.productName === "product_" + dataRedux.modify_product
       );
-      console.log("vu modify: ", modify);
-
       modify && setInputValue(modify.value);
     }
   }, [dataRedux.modify_product]);
