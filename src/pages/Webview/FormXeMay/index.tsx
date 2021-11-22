@@ -88,12 +88,6 @@ const FormXeMay: React.FC<Props> = ({
     (state: RootState) => state.reducer.modify_product
   );
 
-  const listProductFromRoot = useSelector((state: RootState) => state);
-
-  useEffect(() => {
-    console.log("vu listProductFromRoot: ", listProductFromRoot);
-  }, [listProductFromRoot]);
-
   useEffect(() => {
     if (modifyProductFromRoot !== 0) {
       setProductName("product_" + modifyProductFromRoot);

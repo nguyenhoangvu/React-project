@@ -189,8 +189,6 @@ const FormProductInfo: React.FC<Props> = ({
 
   useEffect(() => {
     if (insuredTC) {
-      console.log("vu here");
-
       handleCheckAdditionalBenefit("TC", insuredTC.value);
     }
   }, [insuredTC]);

@@ -80,12 +80,6 @@ const FormOto: React.FC<Props> = ({
     (state: RootState) => state.reducer.total_product
   );
 
-  const listProductFromRoot = useSelector((state: RootState) => state);
-
-  useEffect(() => {
-    console.log("vu listProductFromRoot: ", listProductFromRoot);
-  }, [listProductFromRoot]);
-
   useEffect(() => {
     setProductName("product_" + totalProductFromRoot);
   }, [totalProductFromRoot]);
