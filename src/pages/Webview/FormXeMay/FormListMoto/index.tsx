@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { RootState } from "../../../../redux/store/rootReducer";
-import { MODIFYORDERID } from "../../../../redux/types";
+import { MODIFYORDERID, MODIFYPRODUCT } from "../../../../redux/types";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
 import ButtonSummary from "../../../../components/ButtonSummary";
@@ -45,6 +45,10 @@ const FormListMoto: React.FC<Props> = ({
 
   const dispatch = useDispatch();
   const dataRedux = useSelector((state: RootState) => state.reducer);
+
+  const productModified = useSelector(
+    (state: RootState) => state.reducer.modify_product
+  );
 
   let totalFeeFromRoot = dataRedux.listProducts.find(
     (o) => o.key === "total_fee_tnds"
@@ -114,6 +118,12 @@ const FormListMoto: React.FC<Props> = ({
   }, [isShowError, errorMsg]);
 
   const handleClickAddProductButton = (clicked: boolean) => {
+    if (productModified != 0) {
+      dispatch({
+        type: MODIFYPRODUCT,
+        payload: 0,
+      });
+    }
     setButtonAddProductClick(clicked);
   };
 

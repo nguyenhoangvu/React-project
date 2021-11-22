@@ -97,6 +97,10 @@ const TextInput: React.FC<Props> = ({
   const dispatch = useDispatch();
   const dataRedux = useSelector((state: RootState) => state.reducer);
 
+  let insuredRelation = dataRedux.listProducts.find(
+    (o) => o.key == "insured_relation" && o.productName == productName
+  );
+
   const handleFocusInput = () => {
     setInputActive("active");
     setFocusInput(true);
@@ -203,6 +207,135 @@ const TextInput: React.FC<Props> = ({
   };
 
   useEffect(() => {
+    if (insuredRelation && insuredRelation.value == "BAN_THAN") {
+      switch (inputName) {
+        case "insured_name":
+          let customerName = dataRedux.userInfo.find(
+            (o) => o.key == "user_name"
+          );
+          customerName && setInputValue(customerName.value);
+          dispatch({
+            type: ADDPRODUCTINFORS,
+            payload: {
+              key: inputName,
+              value: customerName?.value,
+              productName: productName,
+            },
+          });
+          setInputActive("active");
+          break;
+        case "insured_address":
+          let customerAddress = dataRedux.userInfo.find(
+            (o) => o.key == "user_diachi"
+          );
+          customerAddress && setInputValue(customerAddress.value);
+          dispatch({
+            type: ADDPRODUCTINFORS,
+            payload: {
+              key: inputName,
+              value: customerAddress?.value,
+              productName: productName,
+            },
+          });
+          setInputActive("active");
+          break;
+        case "insured_indentity":
+          let customerIdentity = dataRedux.userInfo.find(
+            (o) => o.key == "user_indentity"
+          );
+          customerIdentity && setInputValue(customerIdentity.value);
+          dispatch({
+            type: ADDPRODUCTINFORS,
+            payload: {
+              key: inputName,
+              value: customerIdentity?.value,
+              productName: productName,
+            },
+          });
+          setInputActive("active");
+          break;
+        case "insured_phone":
+          let customerPhone = dataRedux.userInfo.find(
+            (o) => o.key == "user_phone"
+          );
+          customerPhone && setInputValue(customerPhone.value);
+          dispatch({
+            type: ADDPRODUCTINFORS,
+            payload: {
+              key: inputName,
+              value: customerPhone?.value,
+              productName: productName,
+            },
+          });
+          setInputActive("active");
+          break;
+        case "insured_email":
+          let customerEmail = dataRedux.userInfo.find(
+            (o) => o.key == "user_email"
+          );
+          customerEmail && setInputValue(customerEmail.value);
+          dispatch({
+            type: ADDPRODUCTINFORS,
+            payload: {
+              key: inputName,
+              value: customerEmail?.value,
+              productName: productName,
+            },
+          });
+          setInputActive("active");
+          break;
+        default:
+          break;
+      }
+    } else if (
+      insuredRelation &&
+      insuredRelation.value !== "BAN_THAN" &&
+      dataRedux.modify_product == 0
+    ) {
+      if (
+        inputName == "insured_name" ||
+        inputName == "insured_address" ||
+        inputName == "insured_indentity" ||
+        inputName == "insured_phone" ||
+        inputName == "insured_email"
+      ) {
+        dispatch({
+          type: ADDPRODUCTINFORS,
+          payload: {
+            key: inputName,
+            value: "",
+            productName: productName,
+          },
+        });
+        setInputValue("");
+        setInputActive("");
+        setFocusInput(false);
+      }
+    }
+  }, [insuredRelation, dataRedux.modify_product]);
+
+  useEffect(() => {
+    if (dataRedux.modify_product !== 0) {
+      let dataCallback = dataRedux.listProducts.find(
+        (o) =>
+          o.key === inputName &&
+          o.productName === "product_" + dataRedux.modify_product
+      );
+      if (
+        dataCallback !== undefined &&
+        dataCallback.key !== "moto_volumn" &&
+        dataCallback.key !== "expired_time_tnds" &&
+        dataCallback.key !== "from_date_tnds" &&
+        dataCallback.key !== "insured_relation" &&
+        dataCallback.key !== "insured_birthday" &&
+        dataCallback.key !== "insured_sex"
+      ) {
+        setInputValue(dataCallback.value);
+      }
+    }
+  }, [dataRedux.modify_product]);
+
+  useEffect(() => {
     if (inputValueFromProp != undefined) {
       if (inputValueFromProp == "") {
         setFocusInput(false);
@@ -274,24 +407,6 @@ const TextInput: React.FC<Props> = ({
   useEffect(() => {
     if (resetValue) setInputValue("");
   }, [resetValue]);
-
-  useEffect(() => {
-    if (dataRedux.modify_product !== 0) {
-      let dataCallback = dataRedux.listProducts.find(
-        (o) =>
-          o.key === inputName &&
-          o.productName === "product_" + dataRedux.modify_product
-      );
-      if (
-        dataCallback !== undefined &&
-        dataCallback.key !== "moto_volumn" &&
-        dataCallback.key !== "expired_time_tnds" &&
-        dataCallback.key !== "from_date_tnds"
-      ) {
-        setInputValue(dataCallback.value);
-      }
-    }
-  }, [dataRedux.modify_product]);
 
   useEffect(() => {
     if (inputName === "from_time_tnds") {

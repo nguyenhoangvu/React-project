@@ -7,6 +7,7 @@ import { RootState } from "../../../../redux/store/rootReducer";
 import {
   MODIFYORDERID,
   UPDATESTATEREMOVEPRODUCT,
+  MODIFYPRODUCT,
 } from "../../../../redux/types";
 import DirectButton from "../../../DirectButton";
 import TextInput from "../../../../components/TextInput";
@@ -54,40 +55,42 @@ const FormListProducts: React.FC<Props> = ({
   );
 
   const stateRemoveProduct = dataRedux.remove_product;
+  const productModified = dataRedux.modify_product;
 
   const handleDisplayForm = (buttonClicked: string) => {
     if (buttonClicked === "back") setButtonClick(buttonClicked);
     else if (buttonClicked === "next") {
-      let productInfos = motoInfo(dataRedux);
-      generateSignature(productInfos)
-        .then((res: any) => {
-          if (!res.isError) {
-            productInfos.signature = res.result.signature;
-            createMotoContract(productInfos)
-              .then((response: any) => {
-                if (!response.isError && response.result.orderId !== "") {
-                  let totalFee = formatFee(response.result.feeAmount);
-                  setOrderId(response.result.orderId);
-                  if (totalFeeFromRoot) {
-                    if (totalFee.localeCompare(totalFeeFromRoot.value) == 0) {
-                      setButtonClick(buttonClicked);
-                    } else {
-                      setIsShowError(true);
-                      setErrorMsg("Lỗi tính phí xe");
-                    }
-                  }
-                }
-              })
-              .catch((err) => {
-                setIsShowError(true);
-                setErrorMsg("Lỗi nhập xe");
-              });
-          }
-        })
-        .catch((err) => {
-          setIsShowError(true);
-          setErrorMsg("Lỗi nhập xe");
-        });
+      setButtonClick(buttonClicked);
+      // let productInfos = motoInfo(dataRedux);
+      // generateSignature(productInfos)
+      //   .then((res: any) => {
+      //     if (!res.isError) {
+      //       productInfos.signature = res.result.signature;
+      //       createMotoContract(productInfos)
+      //         .then((response: any) => {
+      //           if (!response.isError && response.result.orderId !== "") {
+      //             let totalFee = formatFee(response.result.feeAmount);
+      //             setOrderId(response.result.orderId);
+      //             if (totalFeeFromRoot) {
+      //               if (totalFee.localeCompare(totalFeeFromRoot.value) == 0) {
+      //                 setButtonClick(buttonClicked);
+      //               } else {
+      //                 setIsShowError(true);
+      //                 setErrorMsg("Lỗi tính phí xe");
+      //               }
+      //             }
+      //           }
+      //         })
+      //         .catch((err) => {
+      //           setIsShowError(true);
+      //           setErrorMsg("Lỗi nhập xe");
+      //         });
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     setIsShowError(true);
+      //     setErrorMsg("Lỗi nhập xe");
+      //   });
     }
   };
 
@@ -119,13 +122,19 @@ const FormListProducts: React.FC<Props> = ({
   }, [isShowError, errorMsg]);
 
   const handleClickAddProductButton = (clicked: boolean) => {
-    setButtonAddProductClick(clicked);
+    if (productModified != 0) {
+      dispatch({
+        type: MODIFYPRODUCT,
+        payload: 0,
+      });
+    }
     if (stateRemoveProduct == true) {
       dispatch({
         type: UPDATESTATEREMOVEPRODUCT,
         payload: false,
       });
     }
+    setButtonAddProductClick(clicked);
   };
 
   useEffect(() => {
@@ -147,6 +156,7 @@ const FormListProducts: React.FC<Props> = ({
     for (let i = 1; i <= dataRedux.total_product; i++) {
       let product_name = "product_" + i;
       let product_fee = "";
+      let pickedPackage = "";
       let product = dataRedux.listProducts.filter(
         (o) => o.productName === product_name
       );
@@ -155,6 +165,14 @@ const FormListProducts: React.FC<Props> = ({
         (o) => o.key === "insured_indentity"
       );
       let packageInsurance = product.find((o) => o.key === "package_insurance");
+      let listPackages = sessionStorage.getItem("Package_insurance");
+      if (listPackages) {
+        let parsePackages = JSON.parse(listPackages);
+        let packagePicked = parsePackages.find(
+          (o: any) => o.key == packageInsurance?.value
+        );
+        if (packagePicked) pickedPackage = packagePicked.value;
+      }
       let fromDate = product.find((o) => o.key === "from_date_tnds");
       let fee = product.find((o) => o.key === "phi_bh_tnds");
       if (fee !== undefined) {
@@ -163,7 +181,7 @@ const FormListProducts: React.FC<Props> = ({
       let obj = {
         customerName: customerName?.value,
         customerIndentity: customerIndentity?.value,
-        packageInsurance: packageInsurance?.value,
+        packageInsurance: pickedPackage,
         fromDate: fromDate?.value,
         fee: product_fee + " VNĐ",
         index: i,

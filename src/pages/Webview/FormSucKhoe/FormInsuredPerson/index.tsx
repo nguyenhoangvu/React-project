@@ -58,12 +58,6 @@ const FormInsuredPerson: React.FC<Props> = ({
         setIsShowError(!isShowError);
         setErrorMsg(test);
       } else {
-        if (modifyProduct !== 0) {
-          dispatch({
-            type: MODIFYORDERID,
-            payload: 0,
-          });
-        }
         setButtonClick(buttonClicked);
       }
     }
@@ -117,12 +111,6 @@ const FormInsuredPerson: React.FC<Props> = ({
             inputTitle="tên người được bảo hiểm"
             labelName="Tên người được bảo hiểm"
             required={true}
-            inputValueFromProp={
-              dataRedux.find((elem: any) => elem.key === "user_name")?.value &&
-              (userRelation == "Bản thân" || removeProduct == true)
-                ? dataRedux.find((elem: any) => elem.key === "user_name")?.value
-                : ""
-            }
             productName={productName}
             isResetValue={isAddProductButtonClicked}
           />
@@ -133,14 +121,6 @@ const FormInsuredPerson: React.FC<Props> = ({
             inputTitle="địa chỉ"
             labelName="Địa chỉ"
             required={true}
-            inputValueFromProp={
-              dataRedux.find((elem: any) => elem.key === "user_diachi")
-                ?.value &&
-              (userRelation == "Bản thân" || removeProduct == true)
-                ? dataRedux.find((elem: any) => elem.key === "user_diachi")
-                    ?.value
-                : ""
-            }
             productName={productName}
             isResetValue={isAddProductButtonClicked}
           />
@@ -203,15 +183,6 @@ const FormInsuredPerson: React.FC<Props> = ({
                 required={true}
                 productName={productName}
                 isResetValue={isAddProductButtonClicked}
-                inputValueFromProp={
-                  dataRedux.find((elem: any) => elem.key === "user_indentity")
-                    ?.value &&
-                  (userRelation == "Bản thân" || removeProduct == true)
-                    ? dataRedux.find(
-                        (elem: any) => elem.key === "user_indentity"
-                      )?.value
-                    : ""
-                }
               />
             </Col>
             <Col xs="6">
@@ -224,14 +195,6 @@ const FormInsuredPerson: React.FC<Props> = ({
                 required={true}
                 productName={productName}
                 isResetValue={isAddProductButtonClicked}
-                inputValueFromProp={
-                  dataRedux.find((elem: any) => elem.key === "user_phone")
-                    ?.value &&
-                  (userRelation == "Bản thân" || removeProduct == true)
-                    ? dataRedux.find((elem: any) => elem.key === "user_phone")
-                        ?.value
-                    : ""
-                }
               />
             </Col>
           </Row>
@@ -244,13 +207,6 @@ const FormInsuredPerson: React.FC<Props> = ({
             required={true}
             productName={productName}
             isResetValue={isAddProductButtonClicked}
-            inputValueFromProp={
-              dataRedux.find((elem: any) => elem.key === "user_email")?.value &&
-              (userRelation == "Bản thân" || removeProduct == true)
-                ? dataRedux.find((elem: any) => elem.key === "user_email")
-                    ?.value
-                : ""
-            }
           />
           <Row>
             <Col xs="6">

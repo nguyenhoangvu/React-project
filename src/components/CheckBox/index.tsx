@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store/rootReducer";
 import { ADDPRODUCTINFORS } from "../../redux/types";
 
 import "./index.scss";
@@ -56,6 +57,9 @@ const CheckBox: React.FC<Props> = ({
 }) => {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const dispatch = useDispatch();
+
+  const dataRedux = useSelector((state: RootState) => state.reducer);
+  const productModified = dataRedux.modify_product;
 
   const viewDK = () => {
     window.location.href =
@@ -114,6 +118,20 @@ const CheckBox: React.FC<Props> = ({
       }
     }
   }, [isResetValue]);
+
+  useEffect(() => {
+    if (productModified != 0) {
+      let modify = dataRedux.listProducts.find(
+        (o) =>
+          o.key === checkboxId &&
+          o.productName === "product_" + dataRedux.modify_product
+      );
+      if (modify) {
+        if (modify.value == "checked") setCheckboxChecked(true);
+        else setCheckboxChecked(false);
+      }
+    }
+  }, [productModified]);
 
   return (
     <DIV

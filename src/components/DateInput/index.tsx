@@ -100,9 +100,9 @@ const DateInput: React.FC<Props> = ({
           o.key === inputName &&
           o.productName === "product_" + dataRedux.modify_product
       );
-      if (modify !== undefined) {
-        setInputValue(modify.value);
-      }
+      console.log("vu modify: ", modify);
+
+      modify && setInputValue(modify.value);
     }
   }, [dataRedux.modify_product]);
 

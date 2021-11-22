@@ -233,7 +233,7 @@ const SelectDropdown: React.FC<Props> = ({
           o.key === inputName &&
           o.productName === "product_" + dataRedux.modify_product
       );
-      if (modify !== undefined) {
+      if (modify) {
         setDropdownKey(modify.value);
         if (inputName.includes("time")) {
           let time = data.Thoi_han_bh.find((o) => o.key === modify?.value);
@@ -241,6 +241,21 @@ const SelectDropdown: React.FC<Props> = ({
         } else if (inputName === "moto_volumn") {
           let motoType = data.Loai_xe.find((o) => o.key === modify?.value);
           motoType !== undefined && setInputValue(motoType.value);
+        } else if (inputName == "insured_relation") {
+          let relation = data.User_relation.find((o) => o.key == modify?.value);
+          relation !== undefined && setInputValue(relation.value);
+        } else if (inputName == "insured_sex") {
+          let gender = data.Gioi_tinh.find((o) => o.key == modify?.value);
+          gender !== undefined && setInputValue(gender.value);
+        } else if (inputName == "package_insurance") {
+          let listPackages = sessionStorage.getItem("Package_insurance");
+          if (listPackages) {
+            let parsePackages = JSON.parse(listPackages);
+            let packagePicked = parsePackages.find(
+              (o: any) => o.key == modify?.value
+            );
+            packagePicked !== undefined && setInputValue(packagePicked.value);
+          }
         }
       }
     }
@@ -284,8 +299,6 @@ const SelectDropdown: React.FC<Props> = ({
         case "insured_sex":
           let gender = data.Gioi_tinh.find((o) => o.key == valueFromRedux);
           if (gender) {
-            console.log("vu here");
-
             setDropdownKey(gender.key);
             setInputValue(gender.value);
           } else {
@@ -293,32 +306,7 @@ const SelectDropdown: React.FC<Props> = ({
             setInputValue(data.Gioi_tinh[0].value);
           }
           break;
-        case "insured_relation":
-          let relation = data.User_relation.find(
-            (o) => o.key == valueFromRedux
-          );
-          if (relation) {
-            console.log("vu here 2");
-            setDropdownKey(relation.key);
-            setInputValue(relation.value);
-          } else {
-            setDropdownKey(data.Gioi_tinh[0].key);
-            setInputValue(data.Gioi_tinh[0].value);
-          }
-          break;
-        case "package_insurance":
-          let listPackage = sessionStorage.getItem("Package_insurance");
-          if (listPackage) {
-            let packageInsurance = JSON.parse(listPackage).find(
-              (o: any) => o.key == valueFromRedux
-            );
-            if (packageInsurance) {
-              setDropdownKey(packageInsurance.key);
-              setInputValue(packageInsurance.value);
-            }
-          }
 
-          break;
         default:
           break;
       }
