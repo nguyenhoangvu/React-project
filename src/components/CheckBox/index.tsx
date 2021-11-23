@@ -12,6 +12,10 @@ type Props = {
   productName: string;
   isResetValue?: boolean;
   handleCheckboxChecked?: (checked: boolean) => void;
+  handleAdditionalBenefitChecked?: (
+    checked: boolean,
+    checkboxId: string
+  ) => void;
 };
 
 interface ISpan {
@@ -54,6 +58,7 @@ const CheckBox: React.FC<Props> = ({
   productName,
   isResetValue,
   handleCheckboxChecked,
+  handleAdditionalBenefitChecked,
 }) => {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const dispatch = useDispatch();
@@ -88,6 +93,9 @@ const CheckBox: React.FC<Props> = ({
       });
     }
     handleCheckboxChecked ? handleCheckboxChecked(checkboxChecked) : {};
+    handleAdditionalBenefitChecked
+      ? handleAdditionalBenefitChecked(checkboxChecked, checkboxId)
+      : {};
   }, [checkboxChecked]);
 
   useEffect(() => {

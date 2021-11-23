@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const calculateTotalFeeHealth = (
+export const getInsurancePackagePaired = (
   data: any,
   packageInsurance: string,
   userDoB: string
@@ -26,21 +26,18 @@ export const calculateTotalFeeHealth = (
   return packageFromData;
 };
 
-export const additionalBenefit = (
-  data: any,
-  totalFee: number,
-  additionalName: string,
-  additionalChecked: string
-) => {
-  let check = data.extraInsuranceBenefit?.find(
-    (o: any) => o.id == additionalName
-  );
-  if (check) {
-    if (additionalChecked == "checked") {
-      totalFee = totalFee + check.feeExtraInsuranceBenefit;
-    } else if (additionalChecked == "uncheck" && totalFee > data.fee) {
-      totalFee = totalFee - check.feeExtraInsuranceBenefit;
+export const additionalBenefit = (data: any, listAddtional: any) => {
+  let totalFee = data.fee;
+  listAddtional.forEach((elem: any) => {
+    if (elem && elem.value == "checked") {
+      let check = data.extraInsuranceBenefit?.find(
+        (o: any) => o.id == elem.key.substring(8, 10)
+      );
+      if (check) {
+        totalFee += check.feeExtraInsuranceBenefit;
+      }
     }
-  }
+  });
+
   return totalFee;
 };

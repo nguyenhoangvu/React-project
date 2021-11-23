@@ -15,7 +15,7 @@ import { validate } from "../../../../common/validateInfor";
 import { calculateEndTime } from "../../../../common/calculateTimeEnd";
 import { calculateFeeHealth } from "../../../../adapters/apis/healthAPIs";
 import {
-  calculateTotalFeeHealth,
+  getInsurancePackagePaired,
   additionalBenefit,
 } from "../../../../common/calculateFeeHealth";
 import "react-calendar/dist/Calendar.css";
@@ -97,31 +97,52 @@ const FormProductInfo: React.FC<Props> = ({
     }
   };
 
-  const handleCheckAdditionalBenefit = (
-    additionalID: string,
-    additionalChecked: string
-  ) => {
-    if (insuredFee) {
-      let totalFee = additionalBenefit(
-        insurancePackage,
-        parseInt(insuredFee.value),
-        additionalID,
-        additionalChecked
-      );
-      if (totalFee > 0) {
-        let fee = formatFee(totalFee.toString());
-        setFeeInsurance(fee);
-        dispatch({
-          type: ADDPRODUCTINFORS,
-          payload: {
-            key: "phi_bh_tnds",
-            value: totalFee,
-            productName: productName,
-          },
-        });
-      }
-    }
+  const handleAdditionalChecked = (checked: boolean, checkboxId: string) => {
+    // if (
+    //   checkboxId == "insured_TC" &&
+    //   insurancePackage.packageCode == packageInsurance?.value
+    // ) {
+    //   handleCheckAdditionalBenefit("TC", checked);
+    // } else if (
+    //   checkboxId == "insured_DT" &&
+    //   insurancePackage.packageCode == packageInsurance?.value
+    // ) {
+    //   handleCheckAdditionalBenefit("DT", checked);
+    // } else if (
+    //   checkboxId == "insured_CS" &&
+    //   insurancePackage.packageCode == packageInsurance?.value
+    // ) {
+    //   handleCheckAdditionalBenefit("CS", checked);
+    // }
   };
+
+  // const handleCheckAdditionalBenefit = (
+  //   additionalID: string,
+  //   additionalChecked: boolean
+  // ) => {
+  //   if (insuredFee) {
+  //     console.log("vu cal");
+
+  //     let totalFee = additionalBenefit(
+  //       insurancePackage,
+  //       parseInt(insuredFee.value),
+  //       additionalID,
+  //       additionalChecked
+  //     );
+  //     if (totalFee > 0) {
+  //       let fee = formatFee(totalFee.toString());
+  //       setFeeInsurance(fee);
+  //       dispatch({
+  //         type: ADDPRODUCTINFORS,
+  //         payload: {
+  //           key: "phi_bh_tnds",
+  //           value: totalFee,
+  //           productName: productName,
+  //         },
+  //       });
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     handleButtonClick ? handleButtonClick(buttonClick) : {};
@@ -156,15 +177,16 @@ const FormProductInfo: React.FC<Props> = ({
       packageInsurance.value != "Chon" &&
       customerBirthday?.value
     ) {
-      let pairedPackage = calculateTotalFeeHealth(
+      let pairedPackage = getInsurancePackagePaired(
         data,
         packageInsurance.value,
         customerBirthday.value
       );
       if (pairedPackage) {
+        console.log("vu pairedPackage: ", pairedPackage);
+
         setInsurancePackage(pairedPackage);
-        let fee = formatFee(pairedPackage.fee.toString());
-        setFeeInsurance(fee);
+
         dispatch({
           type: ADDPRODUCTINFORS,
           payload: {
@@ -175,7 +197,6 @@ const FormProductInfo: React.FC<Props> = ({
         });
       }
     } else {
-      setFeeInsurance("");
       dispatch({
         type: ADDPRODUCTINFORS,
         payload: {
@@ -188,28 +209,10 @@ const FormProductInfo: React.FC<Props> = ({
   }, [packageInsurance, customerBirthday]);
 
   useEffect(() => {
-    if (insuredTC) {
-      handleCheckAdditionalBenefit("TC", insuredTC.value);
-    }
-  }, [insuredTC]);
-
-  useEffect(() => {
-    if (insuredDT) {
-      handleCheckAdditionalBenefit("DT", insuredDT.value);
-    }
-  }, [insuredDT]);
-
-  useEffect(() => {
-    if (insuredCS) {
-      handleCheckAdditionalBenefit("CS", insuredCS.value);
-    }
-  }, [insuredCS]);
-
-  useEffect(() => {
     if (category && category != "") {
       calculateFeeHealth(category).then((res: any) => {
         if (!res.isError && res.resultCode == "00") {
-          setData(res.result);
+          sessionStorage.setItem("All_package", JSON.stringify(res.result));
         }
       });
     }
@@ -271,7 +274,11 @@ const FormProductInfo: React.FC<Props> = ({
                 required={false}
                 readonly={true}
                 productName={productName}
-                inputValueFromProp={feeInsurance}
+                inputValueFromProp={
+                  insuredFee && insuredFee.value
+                    ? formatFee(insuredFee.value.toString())
+                    : ""
+                }
                 isResetValue={isAddProductButtonClicked}
               />
             </Col>
@@ -294,18 +301,21 @@ const FormProductInfo: React.FC<Props> = ({
                 checkboxText="Trợ cấp nằm viện điều trị tai nạn"
                 productName={productName}
                 isResetValue={isAddProductButtonClicked}
+                handleAdditionalBenefitChecked={handleAdditionalChecked}
               />
               <CheckBox
                 checkboxId="insured_DT"
                 checkboxText="Điều trị ngoại trú"
                 productName={productName}
                 isResetValue={isAddProductButtonClicked}
+                handleAdditionalBenefitChecked={handleAdditionalChecked}
               />
               <CheckBox
                 checkboxId="insured_CS"
                 checkboxText="Chăm sóc và điều trị răng"
                 productName={productName}
                 isResetValue={isAddProductButtonClicked}
+                handleAdditionalBenefitChecked={handleAdditionalChecked}
               />
             </div>
           )}

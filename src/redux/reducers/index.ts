@@ -13,6 +13,10 @@ import { ActionTypes } from "../actions";
 import data from "../../json/partner-info.json";
 import { calculateFeeMoto } from "./calculateFeeMoto";
 import { totalContractFee, totalFeeCar } from "./calculateTotalFee";
+import {
+  getInsurancePackagePaired,
+  additionalBenefit,
+} from "../../common/calculateFeeHealth";
 
 interface USERINFOR {
   key: string;
@@ -218,6 +222,68 @@ const reducers = (state = initialState, action: ActionTypes) => {
           } else cloneState.listProducts.push(totalFee);
         }
       } else if (state.nv === "CN.6") {
+        let additionalArr = [];
+        let packageInsurancePicked = cloneState.listProducts.find(
+          (o) =>
+            o.key == "package_insurance" &&
+            o.productName === action.payload.productName
+        );
+        const additionalTC = cloneState.listProducts.find(
+          (o) =>
+            o.key === "insured_TC" &&
+            o.productName === action.payload.productName
+        );
+        const additionalDT = cloneState.listProducts.find(
+          (o) =>
+            o.key === "insured_DT" &&
+            o.productName === action.payload.productName
+        );
+        const additionalCS = cloneState.listProducts.find(
+          (o) =>
+            o.key === "insured_CS" &&
+            o.productName === action.payload.productName
+        );
+        if (packageInsurancePicked && packageInsurancePicked.value != "Chon") {
+          let allPackage = sessionStorage.getItem("All_package");
+          let customerBirthday = cloneState.listProducts.find(
+            (o) =>
+              o.key == "insured_birthday" &&
+              o.productName === action.payload.productName
+          );
+          if (allPackage && customerBirthday) {
+            let obj = {
+              key: "phi_bh_tnds",
+              value: "",
+              productName: action.payload.productName,
+            };
+            let allPackageParse = JSON.parse(allPackage);
+            let pairedPackage = getInsurancePackagePaired(
+              allPackageParse,
+              packageInsurancePicked.value,
+              customerBirthday.value
+            );
+            if (pairedPackage) {
+              obj.value = pairedPackage.fee.toString();
+              let index = cloneState.listProducts.findIndex(
+                (o) =>
+                  o.key === "phi_bh_tnds" &&
+                  o.productName === action.payload.productName
+              );
+              if (index >= 0) {
+                cloneState.listProducts[index] = obj;
+              } else cloneState.listProducts.push(obj);
+
+              additionalArr.push(additionalTC);
+              additionalArr.push(additionalDT);
+              additionalArr.push(additionalCS);
+
+              let test = additionalBenefit(pairedPackage, additionalArr);
+              if (test && index >= 0)
+                cloneState.listProducts[index].value = test.toString();
+            }
+          }
+        }
+
         let listFee = cloneState.listProducts.filter(
           (o) => o.key == "phi_bh_tnds"
         );

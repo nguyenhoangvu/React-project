@@ -138,15 +138,6 @@ const FormInsuredPerson: React.FC<Props> = ({
                 limitDate={false}
                 productName={productName}
                 isResetValue={isAddProductButtonClicked}
-                valueFromRedux={
-                  dataRedux.find((elem: any) => elem.key === "user_birthday")
-                    ?.value &&
-                  (userRelation == "Bản thân" || removeProduct == true)
-                    ? dataRedux
-                        .find((elem: any) => elem.key === "user_birthday")
-                        ?.value.toString()
-                    : ""
-                }
               />
             </Col>
             <Col xs="6">
@@ -160,15 +151,6 @@ const FormInsuredPerson: React.FC<Props> = ({
                 readonly={true}
                 productName={productName}
                 isResetValue={isAddProductButtonClicked}
-                valueFromRedux={
-                  dataRedux.find((elem: any) => elem.key === "user_sex")
-                    ?.value &&
-                  (userRelation == "Bản thân" || removeProduct == true)
-                    ? dataRedux
-                        .find((elem: any) => elem.key === "user_sex")
-                        ?.value.toString()
-                    : ""
-                }
               />
             </Col>
           </Row>
