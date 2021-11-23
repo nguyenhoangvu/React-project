@@ -101,6 +101,8 @@ const TextInput: React.FC<Props> = ({
     (o) => o.key == "insured_relation" && o.productName == productName
   );
 
+  let isRemoveProduct = dataRedux.remove_product;
+
   const handleFocusInput = () => {
     setInputActive("active");
     setFocusInput(true);
@@ -290,7 +292,8 @@ const TextInput: React.FC<Props> = ({
     } else if (
       insuredRelation &&
       insuredRelation.value !== "BAN_THAN" &&
-      dataRedux.modify_product == 0
+      dataRedux.modify_product == 0 &&
+      isRemoveProduct == false
     ) {
       if (
         inputName == "insured_name" ||
@@ -312,7 +315,7 @@ const TextInput: React.FC<Props> = ({
         setFocusInput(false);
       }
     }
-  }, [insuredRelation, dataRedux.modify_product]);
+  }, [insuredRelation, dataRedux.modify_product, isRemoveProduct]);
 
   useEffect(() => {
     if (dataRedux.modify_product !== 0) {
@@ -336,7 +339,7 @@ const TextInput: React.FC<Props> = ({
   }, [dataRedux.modify_product]);
 
   useEffect(() => {
-    if (inputValueFromProp != undefined) {
+    if (inputValueFromProp && isRemoveProduct != true) {
       if (inputValueFromProp == "") {
         setFocusInput(false);
         setInputActive("");
@@ -371,8 +374,13 @@ const TextInput: React.FC<Props> = ({
           },
         });
       }
+    } else if (inputValueFromProp && isRemoveProduct == true) {
+      if (inputName.startsWith("sum")) {
+        setInputValue(inputValueFromProp);
+        setInputActive("active");
+      }
     }
-  }, [inputValueFromProp, dropdownKey, productName]);
+  }, [inputValueFromProp, dropdownKey, productName, isRemoveProduct]);
 
   useEffect(() => {
     setShowDropdown(isShowDropdown);

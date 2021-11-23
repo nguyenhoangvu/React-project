@@ -109,16 +109,12 @@ const DateInput: React.FC<Props> = ({
         default:
           break;
       }
-    } else if (
-      insuredRelation &&
-      insuredRelation.value !== "BAN_THAN" &&
-      dataRedux.modify_product == 0
-    ) {
+    } else if (insuredRelation && insuredRelation.value !== "BAN_THAN") {
       if (inputName == "insured_birthday") {
         setInputValue("");
       }
     }
-  }, [insuredRelation, dataRedux.modify_product]);
+  }, [insuredRelation]);
 
   useEffect(() => {
     if (dataRedux.modify_product !== 0) {
