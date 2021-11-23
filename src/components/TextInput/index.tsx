@@ -339,7 +339,7 @@ const TextInput: React.FC<Props> = ({
   }, [dataRedux.modify_product]);
 
   useEffect(() => {
-    if (inputValueFromProp && isRemoveProduct != true) {
+    if (inputValueFromProp != undefined && isRemoveProduct != true) {
       if (inputValueFromProp == "") {
         setFocusInput(false);
         setInputActive("");
@@ -374,7 +374,7 @@ const TextInput: React.FC<Props> = ({
           },
         });
       }
-    } else if (inputValueFromProp && isRemoveProduct == true) {
+    } else if (inputValueFromProp != undefined && isRemoveProduct == true) {
       if (inputName.startsWith("sum")) {
         setInputValue(inputValueFromProp);
         setInputActive("active");

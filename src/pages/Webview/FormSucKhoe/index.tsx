@@ -117,8 +117,13 @@ const FormSucKhoe: React.FC<Props> = ({
   const handleButtonClick = (buttonClicked: string) => {
     setButtonFormUserInfoClicked(buttonClicked);
     if (buttonClicked === "next") {
-      setShowFormInsuredPerson(true);
-      setButtonFormInsuredPersonClicked("");
+      if (showFormListProducts == true) {
+        setShowFormListProducts(true);
+        setButtonFormListProductsClicked("");
+      } else {
+        setShowFormInsuredPerson(true);
+        setButtonFormInsuredPersonClicked("");
+      }
     }
   };
 
@@ -182,8 +187,7 @@ const FormSucKhoe: React.FC<Props> = ({
       setShowFormListProducts(false);
       setButtonFormListProductsClicked(buttonClicked);
       if (buttonClicked === "back") {
-        setButtonFormHealthStatusClicked("");
-        setShowFormHealthStatus(true);
+        setButtonFormUserInfoClicked("");
       } else if (buttonClicked === "next") {
         setShowFormSummary(true);
         setButtonFormSummaryClicked("");
